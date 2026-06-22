@@ -163,17 +163,18 @@ DEMO_DATA = {
 }
 
 
-def build_html(seed_customer: str) -> str:
+def build_html(seed_customer: str, analyst_id: str) -> str:
     data_json = json.dumps(DEMO_DATA)
     seed_json = json.dumps(seed_customer)
+    analyst_json = json.dumps(analyst_id)
 
-    return f"""
+    template = r"""
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8" />
 <style>
-    :root {{
+    :root {
         --bg: #f5f7fb;
         --panel: #ffffff;
         --ink: #0f172a;
@@ -186,67 +187,67 @@ def build_html(seed_customer: str) -> str:
         --amber: #f59e0b;
         --slate: #94a3b8;
         --shadow: 0 14px 35px rgba(15, 23, 42, 0.10);
-    }}
+    }
 
-    * {{
+    * {
         box-sizing: border-box;
-    }}
+    }
 
-    body {{
+    body {
         margin: 0;
         background: var(--bg);
         color: var(--ink);
         font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         overflow: hidden;
-    }}
+    }
 
-    .app {{
-        height: 820px;
+    .app {
+        height: 850px;
         display: grid;
-        grid-template-columns: minmax(740px, 1fr) 400px;
+        grid-template-columns: minmax(740px, 1fr) 420px;
         gap: 14px;
         padding: 14px;
-    }}
+    }
 
     .canvas-shell,
-    .side-panel {{
+    .side-panel {
         background: var(--panel);
         border: 1px solid #e5e7eb;
         border-radius: 22px;
         box-shadow: var(--shadow);
         overflow: hidden;
-    }}
+    }
 
-    .canvas-header {{
-        height: 84px;
-        padding: 16px 18px;
+    .canvas-header {
+        height: 86px;
+        padding: 15px 18px;
         border-bottom: 1px solid #e5e7eb;
         display: flex;
         justify-content: space-between;
         align-items: center;
         background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    }}
+    }
 
-    .title {{
+    .title {
         font-size: 20px;
         font-weight: 850;
         letter-spacing: -0.03em;
-    }}
+    }
 
-    .subtitle {{
+    .subtitle {
         margin-top: 5px;
         font-size: 13px;
         color: var(--muted);
         line-height: 1.35;
-    }}
+    }
 
-    .toolbar {{
+    .toolbar {
         display: flex;
         gap: 8px;
         align-items: center;
-    }}
+    }
 
-    button {{
+    button {
         border: 0;
         border-radius: 12px;
         padding: 10px 13px;
@@ -255,41 +256,47 @@ def build_html(seed_customer: str) -> str:
         cursor: pointer;
         background: #e2e8f0;
         color: #0f172a;
-    }}
+    }
 
-    button.primary {{
+    button.primary {
         background: var(--blue);
         color: white;
-    }}
+    }
 
-    button:hover {{
+    button.ghost {
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    button:hover {
         filter: brightness(0.97);
-    }}
+    }
 
-    .canvas-wrap {{
+    .canvas-wrap {
         position: relative;
-        height: 736px;
+        height: 764px;
         overflow: auto;
         background:
             radial-gradient(circle at 1px 1px, #e8eef6 1px, transparent 0);
         background-size: 24px 24px;
-    }}
+    }
 
-    .canvas {{
+    .canvas {
         position: relative;
         min-width: 1180px;
         min-height: 720px;
-    }}
+    }
 
-    svg {{
+    svg {
         position: absolute;
         left: 0;
         top: 0;
         z-index: 1;
         pointer-events: none;
-    }}
+    }
 
-    .node {{
+    .node {
         position: absolute;
         z-index: 2;
         width: 190px;
@@ -301,54 +308,54 @@ def build_html(seed_customer: str) -> str:
         box-shadow: 0 10px 25px rgba(15, 23, 42, 0.11);
         cursor: pointer;
         transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
-    }}
+    }
 
-    .node:hover {{
+    .node:hover {
         transform: translateY(-2px);
         box-shadow: 0 18px 35px rgba(15, 23, 42, 0.15);
-    }}
+    }
 
-    .node.selected {{
+    .node.selected {
         outline: 4px solid rgba(37, 99, 235, 0.20);
         box-shadow: 0 18px 38px rgba(37, 99, 235, 0.20);
-    }}
+    }
 
-    .node.seed {{
+    .node.seed {
         border-color: var(--red);
         background: #fff1f2;
-    }}
+    }
 
-    .node.customer {{
+    .node.customer {
         border-color: var(--blue);
         background: #eff6ff;
-    }}
+    }
 
-    .node.risk {{
+    .node.risk {
         border-color: var(--red);
         background: #fee2e2;
-    }}
+    }
 
-    .node.eid {{
+    .node.eid {
         border-color: var(--purple);
         background: #f3e8ff;
-    }}
+    }
 
-    .node.account {{
+    .node.account {
         border-color: var(--green);
         background: #f0fdf4;
-    }}
+    }
 
-    .node.blocked {{
+    .node.blocked {
         border-color: var(--slate);
         background: #f1f5f9;
-    }}
+    }
 
-    .node.evidence {{
+    .node.evidence {
         border-color: var(--amber);
         background: #fffbeb;
-    }}
+    }
 
-    .node-type {{
+    .node-type {
         font-size: 10px;
         line-height: 1;
         font-weight: 850;
@@ -356,9 +363,9 @@ def build_html(seed_customer: str) -> str:
         color: var(--muted);
         text-transform: uppercase;
         margin-bottom: 7px;
-    }}
+    }
 
-    .node-label {{
+    .node-label {
         font-size: 14px;
         line-height: 1.12;
         font-weight: 850;
@@ -366,121 +373,128 @@ def build_html(seed_customer: str) -> str:
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-    }}
+    }
 
-    .node-status {{
+    .node-status {
         margin-top: 6px;
         font-size: 11px;
         color: #475569;
         display: flex;
         gap: 6px;
         align-items: center;
-    }}
+    }
 
-    .dot {{
+    .dot {
         width: 8px;
         height: 8px;
         border-radius: 50%;
         display: inline-block;
         background: #94a3b8;
-    }}
+    }
 
-    .dot.allow {{ background: var(--green); }}
-    .dot.blocked {{ background: var(--slate); }}
-    .dot.risk {{ background: var(--red); }}
-    .dot.evidence {{ background: var(--amber); }}
-    .dot.expanded {{ background: var(--blue); }}
+    .dot.allow { background: var(--green); }
+    .dot.blocked { background: var(--slate); }
+    .dot.risk { background: var(--red); }
+    .dot.evidence { background: var(--amber); }
+    .dot.expanded { background: var(--blue); }
 
-    .side-panel {{
+    .side-panel {
         display: flex;
         flex-direction: column;
-        height: 820px;
-    }}
+        height: 850px;
+    }
 
-    .side-header {{
-        padding: 14px;
+    .side-header {
+        padding: 18px;
         border-bottom: 1px solid #e5e7eb;
         background: #0f172a;
         color: white;
-    }}
+    }
 
-    .side-kicker {{
+    .side-kicker {
         font-size: 11px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         font-weight: 850;
         color: #bfdbfe;
         margin-bottom: 7px;
-    }}
+    }
 
-    .side-title {{
+    .side-title {
         font-size: 20px;
         font-weight: 850;
         line-height: 1.1;
         letter-spacing: -0.03em;
-    }}
+    }
 
-    .side-subtitle {{
+    .side-subtitle {
         margin-top: 8px;
         color: #dbeafe;
         font-size: 13px;
         line-height: 1.4;
-    }}
+    }
 
-    .side-body {{
+    .side-actions {
+        margin-top: 14px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .side-body {
         padding: 14px;
         overflow: auto;
-    }}
+    }
 
-    .section {{
+    .section {
         border: 1px solid #e5e7eb;
-        border-radius: 17px;
+        border-radius: 16px;
         padding: 14px;
         background: white;
         margin-bottom: 12px;
-    }}
+    }
 
-    .section-title {{
+    .section-title {
         font-size: 14px;
         font-weight: 850;
         margin-bottom: 7px;
         color: var(--ink);
-    }}
+    }
 
-    .section-text {{
+    .section-text {
         font-size: 13px;
         line-height: 1.48;
         color: #475569;
-    }}
+    }
 
-    .status-card {{
+    .status-card {
         border-radius: 16px;
         padding: 13px 14px;
         margin-bottom: 12px;
         font-size: 13px;
         line-height: 1.45;
         border: 1px solid #e5e7eb;
-    }}
+    }
 
-    .status-card.good {{
+    .status-card.good {
         background: #f0fdf4;
         border-color: #bbf7d0;
         color: #166534;
-    }}
+    }
 
-    .status-card.warn {{
+    .status-card.warn {
         background: #fffbeb;
         border-color: #fde68a;
         color: #92400e;
-    }}
+    }
 
-    .status-card.bad {{
-        background: #fef2f2;
-        border-color: #fecaca;
-        color: #991b1b;
-    }}
+    .status-card.info {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+        color: #1d4ed8;
+    }
 
-    .badge {{
+    .badge {
         display: inline-flex;
         align-items: center;
         border-radius: 999px;
@@ -488,75 +502,96 @@ def build_html(seed_customer: str) -> str:
         font-size: 11px;
         font-weight: 850;
         margin: 0 5px 5px 0;
-    }}
+    }
 
-    .badge.high {{
+    .badge.high {
         background: #fee2e2;
         color: #991b1b;
-    }}
+    }
 
-    .badge.medium {{
+    .badge.medium {
         background: #ffedd5;
         color: #9a3412;
-    }}
+    }
 
-    .badge.info {{
+    .badge.info {
         background: #e0f2fe;
         color: #075985;
-    }}
+    }
 
-    .mini-grid {{
+    .mini-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
         margin-bottom: 12px;
-    }}
+    }
 
-    .mini {{
+    .mini {
         border: 1px solid #e5e7eb;
         border-radius: 15px;
         padding: 12px;
         background: #f8fafc;
-    }}
+    }
 
-    .mini-label {{
+    .mini-label {
         font-size: 10px;
         color: var(--muted);
         text-transform: uppercase;
         letter-spacing: 0.08em;
         font-weight: 850;
         margin-bottom: 5px;
-    }}
+    }
 
-    .mini-value {{
-        font-size: 20px;
+    .mini-value {
+        font-size: 18px;
         font-weight: 850;
         color: var(--ink);
-    }}
+    }
 
-    .history {{
+    details.section summary {
+        cursor: pointer;
+        list-style: none;
+    }
+
+    details.section summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .history {
         font-size: 12px;
         color: #475569;
         line-height: 1.45;
         padding-left: 18px;
         margin-top: 8px;
-    }}
+    }
 
-    .legend {{
+    .legend {
         display: flex;
         gap: 8px;
         flex-wrap: wrap;
         margin-top: 8px;
-    }}
+    }
 
-    .legend span {{
+    .legend span {
         font-size: 11px;
         color: #475569;
         background: white;
         border: 1px solid #e5e7eb;
         border-radius: 999px;
         padding: 5px 8px;
-    }}
+    }
+
+    .storage-pill {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 4px 8px;
+        background: rgba(255, 255, 255, 0.12);
+        color: #dbeafe;
+        font-size: 11px;
+        font-weight: 750;
+        margin-top: 10px;
+    }
 </style>
 </head>
 
@@ -595,6 +630,11 @@ def build_html(seed_customer: str) -> str:
             <div class="side-subtitle" id="panelSubtitle">
                 Click Start to load the seed customer and immediate connectors.
             </div>
+            <div class="storage-pill" id="storageStatus">Audit trail: not started</div>
+            <div class="side-actions">
+                <button class="ghost" onclick="downloadCaseReport()">Export case JSON</button>
+                <button class="ghost" onclick="clearSavedCase()">Clear saved case</button>
+            </div>
         </div>
         <div class="side-body" id="panelBody"></div>
     </aside>
@@ -603,37 +643,306 @@ def build_html(seed_customer: str) -> str:
 <script>
 const DATA = __DATA_JSON__;
 const SEED = __SEED_JSON__;
+const ANALYST_ID = __ANALYST_JSON__;
 
-const state = {{
-    nodes: {{}},
-    edges: {{}},
+const state = {
+    nodes: {},
+    edges: {},
     selectedNodeId: null,
     history: [],
-    started: false
-}};
+    events: [],
+    started: false,
+    sessionId: null,
+    startedAt: null,
+    analystId: ANALYST_ID
+};
 
-function nodeId(type, key) {{
-    return `${{type}}|${{key}}`;
-}}
+function nowIso() {
+    return new Date().toISOString();
+}
 
-function escapeHtml(value) {{
+function generateSessionId() {
+    const datePart = new Date().toISOString().replace(/[-:.TZ]/g, "").slice(0, 14);
+    const randomPart = Math.random().toString(36).slice(2, 8).toUpperCase();
+    return `CASE-${datePart}-${randomPart}`;
+}
+
+function storageKey() {
+    return `wio_v2_case_${ANALYST_ID}_${SEED}`;
+}
+
+function safeStorageAvailable() {
+    try {
+        const testKey = "__wio_storage_test__";
+        window.localStorage.setItem(testKey, "1");
+        window.localStorage.removeItem(testKey);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+function setStorageStatus(message) {
+    document.getElementById("storageStatus").textContent = message;
+}
+
+function saveCaseState() {
+    if (!safeStorageAvailable()) {
+        setStorageStatus("Audit trail: browser storage unavailable");
+        return;
+    }
+
+    try {
+        window.localStorage.setItem(storageKey(), JSON.stringify(exportPayload()));
+        setStorageStatus(`Audit trail: saved locally · ${state.events.length} event(s)`);
+    } catch (error) {
+        setStorageStatus("Audit trail: save failed");
+    }
+}
+
+function clearSavedCase() {
+    if (safeStorageAvailable()) {
+        window.localStorage.removeItem(storageKey());
+    }
+
+    resetGraph();
+    setStorageStatus("Audit trail: cleared");
+}
+
+function visibleRiskIndicators() {
+    const indicators = [];
+
+    for (const node of Object.values(state.nodes)) {
+        if (node.type === "CUSTOMER") {
+            const riskItems = customerRisk(node.key);
+            for (const risk of riskItems) {
+                indicators.push({
+                    customer_id: node.key,
+                    indicator_name: risk.name,
+                    severity: risk.severity,
+                    description: risk.description
+                });
+            }
+        }
+    }
+
+    return indicators;
+}
+
+function graphSnapshot() {
+    return {
+        visible_node_count: Object.keys(state.nodes).length,
+        visible_edge_count: Object.keys(state.edges).length,
+        visible_nodes: Object.values(state.nodes).map(node => ({
+            id: node.id,
+            type: node.type,
+            key: node.key,
+            label: node.label,
+            role: node.role,
+            policy: node.policy,
+            expanded: node.expanded,
+            risk_count: node.riskCount
+        })),
+        visible_edges: Object.values(state.edges).map(edge => ({
+            id: edge.id,
+            source: edge.source,
+            target: edge.target,
+            label: edge.label,
+            relationship_type: edge.relationshipType
+        })),
+        risk_indicators_visible: visibleRiskIndicators()
+    };
+}
+
+function recordEvent(actionType, message, node = null, details = {}) {
+    if (!state.sessionId) {
+        state.sessionId = generateSessionId();
+    }
+
+    const timestamp = nowIso();
+    const snapshot = graphSnapshot();
+
+    const event = {
+        event_id: `${state.sessionId}-${String(state.events.length + 1).padStart(4, "0")}`,
+        investigation_session_id: state.sessionId,
+        analyst_id: state.analystId,
+        timestamp,
+        seed_customer_id: SEED,
+        action_type: actionType,
+        clicked_node_id: node ? node.id : null,
+        clicked_node_type: node ? node.type : null,
+        clicked_node_key: node ? node.key : null,
+        clicked_node_label: node ? node.label : null,
+        action_result: message,
+        expansion_allowed_flag: details.expansion_allowed_flag ?? null,
+        blocked_reason: details.blocked_reason ?? null,
+        visible_node_count: snapshot.visible_node_count,
+        visible_edge_count: snapshot.visible_edge_count,
+        risk_indicator_count_visible: snapshot.risk_indicators_visible.length,
+        details
+    };
+
+    state.events.push(event);
+    state.history.push({
+        timestamp,
+        action_type: actionType,
+        message
+    });
+
+    saveCaseState();
+}
+
+function exportPayload() {
+    return {
+        investigation_session_id: state.sessionId,
+        analyst_id: state.analystId,
+        seed_customer_id: SEED,
+        started_at: state.startedAt,
+        exported_at: nowIso(),
+        app_version: "v2_browser_canvas_demo",
+        graph_snapshot: graphSnapshot(),
+        investigation_events: state.events,
+        investigation_trail: state.history
+    };
+}
+
+function downloadCaseReport() {
+    const payload = exportPayload();
+
+    if (!payload.investigation_session_id) {
+        alert("Start an investigation before exporting a case report.");
+        return;
+    }
+
+    recordEvent("EXPORT_CASE_REPORT", "Exported case activity JSON.", null, {
+        export_format: "json"
+    });
+
+    const refreshedPayload = exportPayload();
+    const blob = new Blob([JSON.stringify(refreshedPayload, null, 2)], {
+        type: "application/json"
+    });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${state.sessionId}_case_activity.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+}
+
+function restoreSavedCase() {
+    if (!safeStorageAvailable()) {
+        setStorageStatus("Audit trail: browser storage unavailable");
+        return false;
+    }
+
+    const saved = window.localStorage.getItem(storageKey());
+
+    if (!saved) {
+        setStorageStatus("Audit trail: no saved case");
+        return false;
+    }
+
+    try {
+        const payload = JSON.parse(saved);
+
+        state.nodes = {};
+        state.edges = {};
+        state.events = payload.investigation_events || [];
+        state.history = payload.investigation_trail || [];
+        state.sessionId = payload.investigation_session_id || generateSessionId();
+        state.startedAt = payload.started_at || nowIso();
+        state.started = true;
+
+        const snapshot = payload.graph_snapshot || {};
+
+        for (const node of snapshot.visible_nodes || []) {
+            state.nodes[node.id] = {
+                id: node.id,
+                type: node.type,
+                key: node.key,
+                label: node.label,
+                role: node.role,
+                summary: nodeSummaryFromSnapshot(node),
+                expandType: node.type,
+                policy: node.policy,
+                expanded: node.expanded,
+                riskCount: node.risk_count || 0
+            };
+        }
+
+        for (const edge of snapshot.visible_edges || []) {
+            state.edges[edge.id] = {
+                id: edge.id,
+                source: edge.source,
+                target: edge.target,
+                label: edge.label,
+                relationshipType: edge.relationship_type,
+                summary: edge.relationship_type
+            };
+        }
+
+        const seedNode = nodeId("CUSTOMER", SEED);
+        state.selectedNodeId = state.nodes[seedNode] ? seedNode : Object.keys(state.nodes)[0];
+
+        render();
+
+        if (state.selectedNodeId) {
+            renderNodePanel(state.nodes[state.selectedNodeId], {
+                status: "info",
+                message: "Recovered saved investigation state from browser storage."
+            });
+        }
+
+        setStorageStatus(`Audit trail: restored · ${state.events.length} event(s)`);
+        return true;
+    } catch (error) {
+        setStorageStatus("Audit trail: restore failed");
+        return false;
+    }
+}
+
+function nodeSummaryFromSnapshot(node) {
+    if (node.type === "CUSTOMER" && DATA.customers[node.key]) {
+        return DATA.customers[node.key].summary;
+    }
+
+    if (node.type === "ACCOUNT" && DATA.accounts[node.key]) {
+        return DATA.accounts[node.key].summary;
+    }
+
+    if (node.type === "EID" && DATA.eids[node.key]) {
+        return DATA.eids[node.key].summary;
+    }
+
+    return node.label;
+}
+
+function nodeId(type, key) {
+    return `${type}|${key}`;
+}
+
+function escapeHtml(value) {
     return String(value)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
-}}
+}
 
-function customerRisk(customerId) {{
+function customerRisk(customerId) {
     return DATA.customers[customerId]?.risk || [];
-}}
+}
 
-function addNode(type, key, label, role, summary, expandType, policy = "allow") {{
+function addNode(type, key, label, role, summary, expandType, policy = "allow") {
     const id = nodeId(type, key);
-    const existing = state.nodes[id] || {{}};
+    const existing = state.nodes[id] || {};
 
-    state.nodes[id] = {{
+    state.nodes[id] = {
         id,
         type,
         key,
@@ -644,44 +953,44 @@ function addNode(type, key, label, role, summary, expandType, policy = "allow") 
         policy,
         expanded: existing.expanded || false,
         riskCount: type === "CUSTOMER" ? customerRisk(key).length : 0
-    }};
+    };
 
     return id;
-}}
+}
 
-function addEdge(source, target, label, relationshipType, summary) {{
-    const id = `${{source}}->${{target}}|${{relationshipType}}|${{label}}`;
+function addEdge(source, target, label, relationshipType, summary) {
+    const id = `${source}->${target}|${relationshipType}|${label}`;
 
-    state.edges[id] = {{
+    state.edges[id] = {
         id,
         source,
         target,
         label,
         relationshipType,
         summary
-    }};
-}}
+    };
+}
 
-function addCustomer(customerId, role) {{
+function addCustomer(customerId, role) {
     const customer = DATA.customers[customerId];
     const risks = customerRisk(customerId);
-    const riskText = risks.length ? `${{risks.length}} simulated fraud indicators are active.` : "No active simulated fraud indicators.";
+    const riskText = risks.length ? `${risks.length} simulated fraud indicators are active.` : "No active simulated fraud indicators.";
 
     return addNode(
         "CUSTOMER",
         customerId,
         customerId,
         role,
-        `${{customerId}} is a ${{customer.segment}} customer. ${{customer.summary}} ${{riskText}}`,
+        `${customerId} is a ${customer.segment} customer. ${customer.summary} ${riskText}`,
         "CUSTOMER",
         "allow"
     );
-}}
+}
 
-function addCustomerConnectors(customerId) {{
+function addCustomerConnectors(customerId) {
     const customerNode = nodeId("CUSTOMER", customerId);
 
-    for (const eidKey of DATA.customer_eids[customerId] || []) {{
+    for (const eidKey of DATA.customer_eids[customerId] || []) {
         const eid = DATA.eids[eidKey];
         const eidNode = addNode(
             "EID",
@@ -698,11 +1007,11 @@ function addCustomerConnectors(customerId) {{
             eidNode,
             "Emirates ID",
             "ENTITY_HAS_EID",
-            `${{customerId}} is linked to ${{eid.label}}.`
+            `${customerId} is linked to ${eid.label}.`
         );
-    }}
+    }
 
-    for (const link of DATA.customer_accounts[customerId] || []) {{
+    for (const link of DATA.customer_accounts[customerId] || []) {
         const account = DATA.accounts[link.account];
         const accountNode = addNode(
             "ACCOUNT",
@@ -719,16 +1028,19 @@ function addCustomerConnectors(customerId) {{
             accountNode,
             link.direction,
             "ENTITY_USES_ACCOUNT",
-            `${{customerId}} has ${{link.transaction_count}} simulated transaction(s) with ${{account.label}} totalling ${{link.amount.toLocaleString()}}.`
+            `${customerId} has ${link.transaction_count} simulated transaction(s) with ${account.label} totalling ${link.amount.toLocaleString()}.`
         );
-    }}
-}}
+    }
+}
 
-function startInvestigation() {{
-    state.nodes = {{}};
-    state.edges = {{}};
+function startInvestigation() {
+    state.nodes = {};
+    state.edges = {};
     state.history = [];
+    state.events = [];
     state.started = true;
+    state.sessionId = generateSessionId();
+    state.startedAt = nowIso();
 
     const seedNode = addCustomer(SEED, "SEED_CUSTOMER");
     addCustomerConnectors(SEED);
@@ -736,175 +1048,232 @@ function startInvestigation() {{
     state.nodes[seedNode].expanded = true;
     state.selectedNodeId = seedNode;
 
-    state.history.push(`Started from ${{SEED}}. Immediate identity and account connectors are visible.`);
-    render();
-    selectNode(seedNode, false);
-}}
+    recordEvent("START_INVESTIGATION", `Started investigation from ${SEED}.`, state.nodes[seedNode], {
+        expansion_allowed_flag: true
+    });
 
-function resetGraph() {{
-    state.nodes = {{}};
-    state.edges = {{}};
+    render();
+    renderNodePanel(state.nodes[seedNode], {
+        status: "good",
+        message: `Started investigation from ${SEED}. Immediate EID and account connectors are visible.`
+    });
+}
+
+function resetGraph() {
+    state.nodes = {};
+    state.edges = {};
     state.selectedNodeId = null;
     state.history = [];
+    state.events = [];
     state.started = false;
+    state.sessionId = null;
+    state.startedAt = null;
 
     render();
     renderWelcomePanel();
-}}
+    saveCaseState();
+}
 
-function expandNode(id) {{
+function expandNode(id) {
     const node = state.nodes[id];
-    if (!node) return;
+    if (!node) return null;
 
-    if (node.expanded) {{
-        state.history.push(`${{node.label}} was already expanded.`);
-        return {{status: "info", message: `${{node.label}} was already expanded.`}};
-    }}
-
-    if (node.policy === "blocked") {{
-        state.history.push(`${{node.label}} was blocked because it appears high-degree or common.`);
-        return {{
-            status: "warn",
-            message: `${{node.label}} is blocked from default expansion because it appears to be a high-degree/common connector.`
-        }};
-    }}
-
-    if (node.policy === "evidence") {{
-        node.expanded = true;
-        state.history.push(`${{node.label}} was reviewed as evidence-only context.`);
-        return {{
+    if (node.expanded) {
+        return {
             status: "info",
-            message: `${{node.label}} is evidence-only. It provides context but does not create new group-forming links.`
-        }};
-    }}
+            message: `${node.label} is already expanded.`
+        };
+    }
 
-    if (node.expandType === "CUSTOMER") {{
+    if (node.policy === "blocked") {
+        const message = `${node.label} is blocked from default expansion because it appears to be a high-degree/common connector.`;
+
+        recordEvent("BLOCK_COMMON_COUNTERPARTY", message, node, {
+            expansion_allowed_flag: false,
+            blocked_reason: "HIGH_DEGREE_OR_COMMON_COUNTERPARTY"
+        });
+
+        return {
+            status: "warn",
+            message
+        };
+    }
+
+    if (node.policy === "evidence") {
+        node.expanded = true;
+
+        const message = `${node.label} is evidence-only. It provides context but does not create new group-forming links.`;
+
+        recordEvent("REVIEW_EVIDENCE_ONLY_NODE", message, node, {
+            expansion_allowed_flag: false,
+            blocked_reason: "EVIDENCE_ONLY_NOT_GROUP_FORMING"
+        });
+
+        return {
+            status: "info",
+            message
+        };
+    }
+
+    if (node.expandType === "CUSTOMER") {
         addCustomerConnectors(node.key);
         node.expanded = true;
-        state.history.push(`Expanded customer context for ${{node.label}}.`);
-        return {{status: "good", message: `Expanded customer context for ${{node.label}}.`}};
-    }}
 
-    if (node.expandType === "EID") {{
+        const message = `Expanded customer context for ${node.label}.`;
+
+        recordEvent("EXPAND_CUSTOMER", message, node, {
+            expansion_allowed_flag: true
+        });
+
+        return {
+            status: "good",
+            message
+        };
+    }
+
+    if (node.expandType === "EID") {
         const eid = DATA.eids[node.key];
         const added = [];
 
-        for (const customerId of eid.linked_customers || []) {{
+        for (const customerId of eid.linked_customers || []) {
             const customerNode = nodeId("CUSTOMER", customerId);
 
-            if (!state.nodes[customerNode]) {{
+            if (!state.nodes[customerNode]) {
                 addCustomer(customerId, "LINKED_CUSTOMER");
                 added.push(customerId);
-            }}
+            }
 
             addEdge(
                 node.id,
                 customerNode,
                 "Linked entity",
                 "EID_LINKS_CUSTOMER",
-                `${{node.label}} links to ${{customerId}}.`
+                `${node.label} links to ${customerId}.`
             );
-        }}
+        }
 
         node.expanded = true;
+
         const message = added.length
-            ? `Expanded ${{node.label}} and added ${{added.join(", ")}}.`
-            : `Expanded ${{node.label}}. No new customers were added.`;
+            ? `Expanded ${node.label} and added ${added.join(", ")}.`
+            : `Expanded ${node.label}. No new customers were added.`;
 
-        state.history.push(message);
-        return {{status: "good", message}};
-    }}
+        recordEvent("EXPAND_EID", message, node, {
+            expansion_allowed_flag: true,
+            added_customers: added
+        });
 
-    if (node.expandType === "ACCOUNT") {{
+        return {
+            status: "good",
+            message
+        };
+    }
+
+    if (node.expandType === "ACCOUNT") {
         const account = DATA.accounts[node.key];
         const added = [];
 
-        for (const customerId of account.linked_customers || []) {{
+        for (const customerId of account.linked_customers || []) {
             const customerNode = nodeId("CUSTOMER", customerId);
 
-            if (!state.nodes[customerNode]) {{
+            if (!state.nodes[customerNode]) {
                 addCustomer(customerId, "LINKED_CUSTOMER");
                 added.push(customerId);
-            }}
+            }
 
             addEdge(
                 node.id,
                 customerNode,
                 "Linked customer",
                 "ACCOUNT_LINKS_CUSTOMER",
-                `${{node.label}} links to ${{customerId}}.`
+                `${node.label} links to ${customerId}.`
             );
-        }}
+        }
 
         node.expanded = true;
+
         const message = added.length
-            ? `Expanded ${{node.label}} and added ${{added.join(", ")}}.`
-            : `Expanded ${{node.label}}. No new customers were added.`;
+            ? `Expanded ${node.label} and added ${added.join(", ")}.`
+            : `Expanded ${node.label}. No new customers were added.`;
 
-        state.history.push(message);
-        return {{status: "good", message}};
-    }}
+        recordEvent("EXPAND_ACCOUNT", message, node, {
+            expansion_allowed_flag: true,
+            added_customers: added
+        });
 
-    return {{status: "info", message: `${{node.label}} has no expansion action.`}};
-}}
+        return {
+            status: "good",
+            message
+        };
+    }
 
-function selectNode(id, shouldExpand = true) {{
+    return {
+        status: "info",
+        message: `${node.label} has no expansion action.`
+    };
+}
+
+function selectNode(id, shouldExpand = true) {
     const node = state.nodes[id];
     if (!node) return;
 
     state.selectedNodeId = id;
 
+    recordEvent("CLICK_NODE", `Clicked ${node.label}.`, node, {
+        expansion_allowed_flag: node.policy === "allow"
+    });
+
     let result = null;
-    if (shouldExpand) {{
+    if (shouldExpand) {
         result = expandNode(id);
-    }}
+    }
 
     render();
     renderNodePanel(node, result);
-}}
+}
 
-function graphLevels() {{
+function graphLevels() {
     const ids = Object.keys(state.nodes);
     const seed = nodeId("CUSTOMER", SEED);
-    const adjacency = {{}};
+    const adjacency = {};
 
-    for (const edge of Object.values(state.edges)) {{
+    for (const edge of Object.values(state.edges)) {
         if (!adjacency[edge.source]) adjacency[edge.source] = [];
         if (!adjacency[edge.target]) adjacency[edge.target] = [];
         adjacency[edge.source].push(edge.target);
         adjacency[edge.target].push(edge.source);
-    }}
+    }
 
-    const levels = {{}};
+    const levels = {};
     const queue = [];
 
-    if (state.nodes[seed]) {{
+    if (state.nodes[seed]) {
         levels[seed] = 0;
         queue.push(seed);
-    }}
+    }
 
-    while (queue.length) {{
+    while (queue.length) {
         const current = queue.shift();
-        for (const linked of adjacency[current] || []) {{
-            if (levels[linked] === undefined) {{
+        for (const linked of adjacency[current] || []) {
+            if (levels[linked] === undefined) {
                 levels[linked] = levels[current] + 1;
                 queue.push(linked);
-            }}
-        }}
-    }}
+            }
+        }
+    }
 
     let maxLevel = Math.max(0, ...Object.values(levels));
-    for (const id of ids) {{
-        if (levels[id] === undefined) {{
+    for (const id of ids) {
+        if (levels[id] === undefined) {
             maxLevel += 1;
             levels[id] = maxLevel;
-        }}
-    }}
+        }
+    }
 
     return levels;
-}}
+}
 
-function nodeSortValue(node) {{
+function nodeSortValue(node) {
     if (node.role === "SEED_CUSTOMER") return 0;
     if (node.type === "ACCOUNT" && node.policy === "allow") return 1;
     if (node.type === "EID") return 2;
@@ -912,40 +1281,43 @@ function nodeSortValue(node) {{
     if (node.type === "CUSTOMER") return 4;
     if (node.policy === "blocked") return 5;
     return 6;
-}}
+}
 
-function computePositions() {{
+function computePositions() {
     const levels = graphLevels();
-    const grouped = {{}};
+    const grouped = {};
 
-    for (const [id, level] of Object.entries(levels)) {{
+    for (const [id, level] of Object.entries(levels)) {
         if (!grouped[level]) grouped[level] = [];
         grouped[level].push(id);
-    }}
+    }
 
-    const positions = {{}};
+    const positions = {};
 
-    for (const [levelText, ids] of Object.entries(grouped)) {{
+    for (const [levelText, ids] of Object.entries(grouped)) {
         const level = Number(levelText);
-        ids.sort((a, b) => {{
+        ids.sort((a, b) => {
             const nodeA = state.nodes[a];
             const nodeB = state.nodes[b];
             return nodeSortValue(nodeA) - nodeSortValue(nodeB) || nodeA.label.localeCompare(nodeB.label);
-        }});
+        });
 
         const x = 62 + level * 275;
         const totalHeight = (ids.length - 1) * 112;
         const startY = Math.max(42, 310 - totalHeight / 2);
 
-        ids.forEach((id, index) => {{
-            positions[id] = {{x, y: startY + index * 126}};
-        }});
-    }}
+        ids.forEach((id, index) => {
+            positions[id] = {
+                x,
+                y: startY + index * 112
+            };
+        });
+    }
 
     return positions;
-}}
+}
 
-function nodeCss(node) {{
+function nodeCss(node) {
     if (node.role === "SEED_CUSTOMER") return "seed";
     if (node.type === "CUSTOMER" && node.riskCount > 0) return "risk";
     if (node.type === "CUSTOMER") return "customer";
@@ -954,17 +1326,17 @@ function nodeCss(node) {{
     if (node.policy === "evidence") return "evidence";
     if (node.type === "ACCOUNT") return "account";
     return "customer";
-}}
+}
 
-function nodeStatus(node) {{
-    if (node.riskCount > 0) return {{dot: "risk", text: `${{node.riskCount}} indicator(s)`}};
-    if (node.expanded) return {{dot: "expanded", text: "expanded"}};
-    if (node.policy === "blocked") return {{dot: "blocked", text: "blocked"}};
-    if (node.policy === "evidence") return {{dot: "evidence", text: "evidence only"}};
-    return {{dot: "allow", text: "click to expand"}};
-}}
+function nodeStatus(node) {
+    if (node.riskCount > 0) return {dot: "risk", text: `${node.riskCount} indicator(s)`};
+    if (node.expanded) return {dot: "expanded", text: "expanded"};
+    if (node.policy === "blocked") return {dot: "blocked", text: "blocked"};
+    if (node.policy === "evidence") return {dot: "evidence", text: "evidence only"};
+    return {dot: "allow", text: "click to expand"};
+}
 
-function render() {{
+function render() {
     const canvas = document.getElementById("canvas");
     const svg = document.getElementById("edges");
     const positions = computePositions();
@@ -976,13 +1348,13 @@ function render() {{
     const maxX = Math.max(1180, ...Object.values(positions).map(p => p.x + cardW + 90));
     const maxY = Math.max(720, ...Object.values(positions).map(p => p.y + cardH + 90));
 
-    canvas.style.width = `${{maxX}}px`;
-    canvas.style.height = `${{maxY}}px`;
+    canvas.style.width = `${maxX}px`;
+    canvas.style.height = `${maxY}px`;
     svg.setAttribute("width", maxX);
     svg.setAttribute("height", maxY);
     svg.innerHTML = "";
 
-    for (const edge of Object.values(state.edges)) {{
+    for (const edge of Object.values(state.edges)) {
         const source = positions[edge.source];
         const target = positions[edge.target];
         if (!source || !target) continue;
@@ -992,16 +1364,16 @@ function render() {{
         let x2 = target.x;
         let y2 = target.y + cardH / 2;
 
-        if (target.x < source.x) {{
+        if (target.x < source.x) {
             x1 = source.x;
             x2 = target.x + cardW;
-        }}
+        }
 
         const stroke = edge.relationshipType.includes("EID") ? "#7c3aed" : "#16a34a";
         const dash = edge.relationshipType.includes("EID") ? "6 6" : "";
 
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute("d", `M ${{x1}} ${{y1}} C ${{(x1+x2)/2}} ${{y1}}, ${{(x1+x2)/2}} ${{y2}}, ${{x2}} ${{y2}}`);
+        path.setAttribute("d", `M ${x1} ${y1} C ${(x1+x2)/2} ${y1}, ${(x1+x2)/2} ${y2}, ${x2} ${y2}`);
         path.setAttribute("fill", "none");
         path.setAttribute("stroke", stroke);
         path.setAttribute("stroke-width", "2.3");
@@ -1012,33 +1384,33 @@ function render() {{
         title.textContent = edge.summary;
         path.appendChild(title);
         svg.appendChild(path);
-    }}
+    }
 
-    for (const node of Object.values(state.nodes)) {{
+    for (const node of Object.values(state.nodes)) {
         const position = positions[node.id];
         const status = nodeStatus(node);
 
         const div = document.createElement("div");
-        div.className = `node ${{nodeCss(node)}}${{node.id === state.selectedNodeId ? " selected" : ""}}`;
-        div.style.left = `${{position.x}}px`;
-        div.style.top = `${{position.y}}px`;
+        div.className = `node ${nodeCss(node)}${node.id === state.selectedNodeId ? " selected" : ""}`;
+        div.style.left = `${position.x}px`;
+        div.style.top = `${position.y}px`;
         div.title = node.summary;
 
         div.innerHTML = `
-            <div class="node-type">${{escapeHtml(node.type)}}</div>
-            <div class="node-label">${{escapeHtml(node.label)}}</div>
+            <div class="node-type">${escapeHtml(node.type)}</div>
+            <div class="node-label">${escapeHtml(node.label)}</div>
             <div class="node-status">
-                <span class="dot ${{status.dot}}"></span>
-                <span>${{escapeHtml(status.text)}}</span>
+                <span class="dot ${status.dot}"></span>
+                <span>${escapeHtml(status.text)}</span>
             </div>
         `;
 
         div.addEventListener("click", () => selectNode(node.id, true));
         canvas.appendChild(div);
-    }}
-}}
+    }
+}
 
-function renderWelcomePanel() {{
+function renderWelcomePanel() {
     document.getElementById("panelKicker").textContent = "Ready";
     document.getElementById("panelTitle").textContent = "Start the investigation";
     document.getElementById("panelSubtitle").textContent = "Click Start to load the seed customer and immediate connectors.";
@@ -1051,56 +1423,60 @@ function renderWelcomePanel() {{
             </div>
         </div>
         <div class="section">
+            <div class="section-title">Persistent audit trail</div>
+            <div class="section-text">
+                Every click and expansion decision is recorded as a structured case event. In this demo it is saved locally in the browser and can be exported as JSON.
+            </div>
+        </div>
+        <div class="section">
             <div class="section-title">Recommended demo path</div>
             <div class="section-text">
                 Start RETAIL_1, click Account ****2202, then click RETAIL_2. The right panel explains the selected node, expansion result, and relevant risk context.
             </div>
         </div>
     `;
-}}
+}
 
-function statusCard(result) {{
+function statusCard(result) {
     if (!result) return "";
 
-    const css = result.status === "good" ? "good" : result.status === "warn" ? "warn" : "bad";
-
     return `
-        <div class="status-card ${{css}}">
+        <div class="status-card ${result.status}">
             <strong>Click result</strong><br>
-            ${{escapeHtml(result.message)}}
+            ${escapeHtml(result.message)}
         </div>
     `;
-}}
+}
 
-function renderRiskSection(node) {{
+function renderRiskSection(node) {
     if (node.type !== "CUSTOMER") return "";
 
     const risks = customerRisk(node.key);
 
-    if (!risks.length) {{
+    if (!risks.length) {
         return `
             <div class="section">
                 <div class="section-title">Fraud indicator overlay</div>
                 <span class="badge info">No active simulated indicators</span>
             </div>
         `;
-    }}
+    }
 
     return `
         <div class="section">
             <div class="section-title">Fraud indicator overlay</div>
-            ${{risks.map(risk => `
+            ${risks.map(risk => `
                 <div style="margin-bottom: 12px;">
-                    <span class="badge ${{risk.severity === "High" ? "high" : "medium"}}">${{escapeHtml(risk.severity)}}</span>
-                    <strong>${{escapeHtml(risk.name)}}</strong>
-                    <div class="section-text" style="margin-top: 5px;">${{escapeHtml(risk.description)}}</div>
+                    <span class="badge ${risk.severity === "High" ? "high" : "medium"}">${escapeHtml(risk.severity)}</span>
+                    <strong>${escapeHtml(risk.name)}</strong>
+                    <div class="section-text" style="margin-top: 5px;">${escapeHtml(risk.description)}</div>
                 </div>
-            `).join("")}}
+            `).join("")}
         </div>
     `;
-}}
+}
 
-function renderAccountSection(node) {{
+function renderAccountSection(node) {
     if (node.type !== "ACCOUNT") return "";
 
     const account = DATA.accounts[node.key];
@@ -1110,28 +1486,28 @@ function renderAccountSection(node) {{
         <div class="mini-grid">
             <div class="mini">
                 <div class="mini-label">Linked customers</div>
-                <div class="mini-value">${{account.linked_customer_count}}</div>
+                <div class="mini-value">${account.linked_customer_count}</div>
             </div>
             <div class="mini">
                 <div class="mini-label">Policy</div>
-                <div class="mini-value">${{account.policy}}</div>
+                <div class="mini-value">${account.policy}</div>
             </div>
         </div>
 
-        ${{patterns.map(pattern => `
+        ${patterns.map(pattern => `
             <div class="section">
-                <div class="section-title">${{escapeHtml(pattern.title)}}</div>
+                <div class="section-title">${escapeHtml(pattern.title)}</div>
                 <div class="section-text">
-                    ${{escapeHtml(pattern.summary)}}
+                    ${escapeHtml(pattern.summary)}
                     <br><br>
-                    <strong>Analyst guidance:</strong> ${{escapeHtml(pattern.guidance)}}
+                    <strong>Analyst guidance:</strong> ${escapeHtml(pattern.guidance)}
                 </div>
             </div>
-        `).join("")}}
+        `).join("")}
     `;
-}}
+}
 
-function renderIdentitySection(node) {{
+function renderIdentitySection(node) {
     if (node.type !== "EID") return "";
 
     const eid = DATA.eids[node.key];
@@ -1140,77 +1516,70 @@ function renderIdentitySection(node) {{
         <div class="mini-grid">
             <div class="mini">
                 <div class="mini-label">Linked entities</div>
-                <div class="mini-value">${{eid.linked_customers.length}}</div>
+                <div class="mini-value">${eid.linked_customers.length}</div>
             </div>
             <div class="mini">
                 <div class="mini-label">Policy</div>
-                <div class="mini-value">${{eid.policy}}</div>
+                <div class="mini-value">${eid.policy}</div>
             </div>
         </div>
     `;
-}}
+}
 
-function nextBestAction() {{
-    const candidates = Object.values(state.nodes)
-        .filter(node => !node.expanded && node.policy !== "blocked")
-        .sort((a, b) => {{
-            const score = node => {{
-                if (node.type === "ACCOUNT" && node.policy === "allow") return 1;
-                if (node.type === "CUSTOMER" && node.riskCount > 0) return 2;
-                if (node.type === "EID") return 3;
-                if (node.type === "CUSTOMER") return 4;
-                if (node.policy === "evidence") return 5;
-                return 9;
-            }};
-            return score(a) - score(b);
-        }});
-
-    if (!candidates.length) return "";
-
-    const node = candidates[0];
+function renderAuditTrail() {
+    if (!state.history.length) {
+        return "";
+    }
 
     return `
-        <div class="section">
-            <div class="section-title">Suggested next click</div>
-            <div class="section-text">
-                Click <strong>${{escapeHtml(node.label)}}</strong>. ${{escapeHtml(node.summary)}}
-            </div>
-        </div>
+        <details class="section" open>
+            <summary class="section-title">Case activity timeline</summary>
+            <ol class="history">
+                ${state.history.slice(-8).map(item => `
+                    <li>
+                        <strong>${escapeHtml(item.action_type)}</strong><br>
+                        ${escapeHtml(item.message)}
+                    </li>
+                `).join("")}
+            </ol>
+        </details>
     `;
-}}
+}
 
-function renderNodePanel(node, result) {{
+function renderNodePanel(node, result) {
     document.getElementById("panelKicker").textContent = node.type;
     document.getElementById("panelTitle").textContent = node.label;
     document.getElementById("panelSubtitle").textContent = node.summary;
 
     document.getElementById("panelBody").innerHTML = `
-        ${{statusCard(result)}}
+        ${statusCard(result)}
 
         <div class="section">
             <div class="section-title">What this node means</div>
-            <div class="section-text">${{escapeHtml(node.summary)}}</div>
+            <div class="section-text">${escapeHtml(node.summary)}</div>
         </div>
 
-        ${{renderRiskSection(node)}}
-        ${{renderAccountSection(node)}}
-        ${{renderIdentitySection(node)}}
-        ${{nextBestAction()}}
-
-        <div class="section">
-            <div class="section-title">Investigation trail</div>
-            <ol class="history">
-                ${{state.history.slice(-6).map(item => `<li>${{escapeHtml(item)}}</li>`).join("")}}
-            </ol>
-        </div>
+        ${renderRiskSection(node)}
+        ${renderAccountSection(node)}
+        ${renderIdentitySection(node)}
+        ${renderAuditTrail()}
     `;
-}}
+}
 
-renderWelcomePanel();
+if (!restoreSavedCase()) {
+    renderWelcomePanel();
+}
 </script>
 </body>
 </html>
-""".replace("__DATA_JSON__", data_json).replace("__SEED_JSON__", seed_json).replace("{{SEED}}", seed_customer)
+"""
+
+    return (
+        template
+        .replace("__DATA_JSON__", data_json)
+        .replace("__SEED_JSON__", seed_json)
+        .replace("__ANALYST_JSON__", analyst_json)
+    )
 
 
 def main() -> None:
@@ -1243,6 +1612,12 @@ def main() -> None:
         st.title("V2 Explorer")
         st.caption("Clean browser-side investigation canvas")
 
+        analyst_id = st.text_input(
+            "Analyst ID",
+            value="demo_analyst",
+            help="Demo placeholder. In production this would come from login/SSO.",
+        )
+
         seed_customer = st.selectbox(
             "Seed customer",
             options=list(DEMO_DATA["customers"].keys()),
@@ -1254,10 +1629,10 @@ def main() -> None:
         st.caption("1. Start RETAIL_1")
         st.caption("2. Click Account ****2202")
         st.caption("3. Click RETAIL_2")
-        st.caption("4. Review Account ****7788")
+        st.caption("4. Export case JSON")
 
     components.html(
-        build_html(seed_customer),
+        build_html(seed_customer, analyst_id),
         height=900,
         scrolling=False,
     )
