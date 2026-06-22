@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Demo Customer Network Graph</title>
+	<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+	<style>
+		body {
+			margin: 0;
+			font-family: Arial, sans-serif;
+			background: #f7f7f7;
+			color: #222;
+		}
+
+		.header {
+			padding: 16px 20px;
+			background: white;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.header h1 {
+			margin: 0 0 6px 0;
+			font-size: 20px;
+		}
+
+		.header p {
+			margin: 0;
+			font-size: 13px;
+			color: #555;
+		}
+
+		.legend {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			padding: 10px 20px;
+			background: white;
+			border-bottom: 1px solid #ddd;
+			font-size: 13px;
+		}
+
+		.legend-item {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+		}
+
+		.legend-dot {
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			display: inline-block;
+		}
+
+		#network {
+			width: 100vw;
+			height: calc(100vh - 112px);
+			background: #fafafa;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<h1>Demo Customer Network Graph</h1>
+		<p>Interactive combined customer relationship graph. Hover over nodes and edges for details. Drag nodes to rearrange the view.</p>
+	</div>
+
+	<div class="legend">
+		<div class="legend-item"><span class="legend-dot" style="background:#d62728"></span>Original seed</div>
+		<div class="legend-item"><span class="legend-dot" style="background:#ff7f0e"></span>Counterparty expansion start</div>
+		<div class="legend-item"><span class="legend-dot" style="background:#1f77b4"></span>Linked customer/entity</div>
+		<div class="legend-item"><span class="legend-dot" style="background:#9467bd"></span>Emirates ID connector</div>
+		<div class="legend-item"><span class="legend-dot" style="background:#2ca02c"></span>Local counterparty account</div>
+	</div>
+
+	<div id="network"></div>
+
+	<script>
+		const nodes = new vis.DataSet([
+  {
+    "id": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
+    "label": "EID ****1234",
+    "title": "Node ID: EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181\\nType: EMIRATES_ID\\nRole: EMIRATES_ID_CONNECTOR\\nLayers: IDENTITY\\nEmirates ID: ****1234",
+    "group": "emirates_id"
+  },
+  {
+    "id": "ENTITY|SME|CUST_1",
+    "label": "CUST_1",
+    "title": "Node ID: ENTITY|SME|CUST_1\\nType: ENTITY\\nRole: SEED_ENTITY\\nLayers: IDENTITY\\nEntity type: SME\\nCustomer ID: CUST_1",
+    "group": "seed_entity"
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_2",
+    "label": "CUST_2",
+    "title": "Node ID: ENTITY|RETAIL|CUST_2\\nType: ENTITY\\nRole: COUNTERPARTY_EXPANSION_START_ENTITY\\nLayers: IDENTITY|LOCAL_COUNTERPARTY\\nEntity type: RETAIL\\nCustomer ID: CUST_2",
+    "group": "counterparty_expansion_start"
+  },
+  {
+    "id": "ENTITY|SME|CUST_3",
+    "label": "CUST_3",
+    "title": "Node ID: ENTITY|SME|CUST_3\\nType: ENTITY\\nRole: LINKED_ENTITY\\nLayers: LOCAL_COUNTERPARTY\\nEntity type: SME\\nCustomer ID: CUST_3",
+    "group": "linked_entity"
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_4",
+    "label": "CUST_4",
+    "title": "Node ID: ENTITY|RETAIL|CUST_4\\nType: ENTITY\\nRole: LINKED_ENTITY\\nLayers: LOCAL_COUNTERPARTY\\nEntity type: RETAIL\\nCustomer ID: CUST_4",
+    "group": "linked_entity"
+  },
+  {
+    "id": "ENTITY|SME|CUST_5",
+    "label": "CUST_5",
+    "title": "Node ID: ENTITY|SME|CUST_5\\nType: ENTITY\\nRole: LINKED_ENTITY\\nLayers: LOCAL_COUNTERPARTY\\nEntity type: SME\\nCustomer ID: CUST_5",
+    "group": "linked_entity"
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
+    "label": "Account ****OUNT (1D1D8D)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20\\nType: LOCAL_COUNTERPARTY_ACCOUNT\\nRole: COUNTERPARTY_CONNECTOR\\nLayers: LOCAL_COUNTERPARTY\\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account"
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
+    "label": "Account ****OUNT (3395DB)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4\\nType: LOCAL_COUNTERPARTY_ACCOUNT\\nRole: COUNTERPARTY_CONNECTOR\\nLayers: LOCAL_COUNTERPARTY\\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account"
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
+    "label": "Account ****OUNT (7266EE)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B\\nType: LOCAL_COUNTERPARTY_ACCOUNT\\nRole: COUNTERPARTY_CONNECTOR\\nLayers: LOCAL_COUNTERPARTY\\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account"
+  }
+]);
+		const edges = new vis.DataSet([
+  {
+    "from": "ENTITY|RETAIL|CUST_2",
+    "to": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\\nLayer: IDENTITY\\nRole: GROUP_FORMING\\nEmirates ID: ****1234",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "from": "ENTITY|SME|CUST_1",
+    "to": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\\nLayer: IDENTITY\\nRole: GROUP_FORMING\\nEmirates ID: ****1234",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "from": "ENTITY|RETAIL|CUST_2",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: OUTBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 1000.0\\nFirst seen: 2026-01-01 10:00:00\\nLast seen: 2026-01-01 10:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "from": "ENTITY|RETAIL|CUST_4",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: OUTBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 300.0\\nFirst seen: 2026-01-05 14:00:00\\nLast seen: 2026-01-05 14:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "from": "ENTITY|RETAIL|CUST_4",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: INBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 700.0\\nFirst seen: 2026-01-04 13:00:00\\nLast seen: 2026-01-04 13:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "from": "ENTITY|SME|CUST_3",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: INBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 2000.0\\nFirst seen: 2026-01-02 11:00:00\\nLast seen: 2026-01-02 11:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "from": "ENTITY|SME|CUST_3",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: OUTBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 500.0\\nFirst seen: 2026-01-03 12:00:00\\nLast seen: 2026-01-03 12:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "from": "ENTITY|SME|CUST_5",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: INBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 400.0\\nFirst seen: 2026-01-06 15:00:00\\nLast seen: 2026-01-06 15:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  }
+]);
+
+		const container = document.getElementById("network");
+
+		const data = {
+			nodes: nodes,
+			edges: edges
+		};
+
+		const options = {
+			nodes: {
+				shape: "dot",
+				size: 22,
+				font: {
+					size: 14,
+					face: "Arial"
+				},
+				borderWidth: 2
+			},
+			edges: {
+				width: 2,
+				smooth: {
+					type: "continuous"
+				},
+				font: {
+					size: 11,
+					align: "middle"
+				}
+			},
+			groups: {
+				seed_entity: {
+					color: {
+						background: "#d62728",
+						border: "#8c1d1d"
+					},
+					size: 30
+				},
+				counterparty_expansion_start: {
+					color: {
+						background: "#ff7f0e",
+						border: "#a85108"
+					},
+					size: 28
+				},
+				linked_entity: {
+					color: {
+						background: "#1f77b4",
+						border: "#15527d"
+					}
+				},
+				emirates_id: {
+					color: {
+						background: "#9467bd",
+						border: "#5e3f7a"
+					},
+					shape: "diamond",
+					size: 24
+				},
+				local_counterparty_account: {
+					color: {
+						background: "#2ca02c",
+						border: "#1d6b1d"
+					},
+					shape: "square",
+					size: 22
+				}
+			},
+			physics: {
+				enabled: true,
+				solver: "forceAtlas2Based",
+				forceAtlas2Based: {
+					gravitationalConstant: -60,
+					centralGravity: 0.01,
+					springLength: 120,
+					springConstant: 0.08
+				},
+				stabilization: {
+					iterations: 200
+				}
+			},
+			interaction: {
+				hover: true,
+				tooltipDelay: 150,
+				navigationButtons: true,
+				keyboard: true
+			}
+		};
+
+		new vis.Network(container, data, options);
+	</script>
+</body>
+</html>
