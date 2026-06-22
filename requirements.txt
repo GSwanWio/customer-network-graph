@@ -5,3 +5,4 @@ networkx
 pyvis
 streamlit
 pytest
+streamlit-agraph
