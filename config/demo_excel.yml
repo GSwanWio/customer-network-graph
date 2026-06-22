@@ -1,0 +1,6 @@
+excel_path: data/simulated/simulated_customer_network.xlsx
+
+sheets:
+  seed_customers: seed_customers
+  identity_entities: identity_entities
+  local_counterparty_flows: local_counterparty_flows

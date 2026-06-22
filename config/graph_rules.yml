@@ -1,0 +1,9 @@
+counterparty:
+  group_forming_min_linked_entities: 2
+  group_forming_max_linked_entities: 9
+  stopped_min_linked_entities: 10
+  seed_bridge_max_group_forming_counterparties: 20
+  non_seed_bridge_max_group_forming_counterparties: 3
+
+eid:
+  enable_identity_expansion: true

@@ -1,0 +1,7 @@
+pandas
+openpyxl
+pyyaml
+networkx
+pyvis
+streamlit
+pytest
