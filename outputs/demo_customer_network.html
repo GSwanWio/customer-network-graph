@@ -4,7 +4,6 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Demo Customer Network Graph</title>
-	<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 	<style>
 		body {
 			margin: 0;
@@ -53,17 +52,49 @@
 			display: inline-block;
 		}
 
-		#network {
-			width: 100vw;
-			height: calc(100vh - 112px);
+		.canvas-wrapper {
+			overflow: auto;
+			height: calc(100vh - 116px);
 			background: #fafafa;
+		}
+
+		svg {
+			min-width: 100%;
+			background: #fafafa;
+		}
+
+		.node-label {
+			font-size: 13px;
+			font-weight: 700;
+			fill: #222;
+		}
+
+		.node-role {
+			font-size: 9px;
+			fill: #555;
+		}
+
+		.edge-label {
+			font-size: 11px;
+			fill: #555;
+			font-weight: 700;
+			paint-order: stroke;
+			stroke: #fafafa;
+			stroke-width: 4px;
+			stroke-linejoin: round;
+		}
+
+		.node:hover,
+		.edge:hover {
+			cursor: pointer;
+			filter: brightness(1.05);
 		}
 	</style>
 </head>
 <body>
 	<div class="header">
 		<h1>Demo Customer Network Graph</h1>
-		<p>Interactive combined customer relationship graph. Hover over nodes and edges for details. Drag nodes to rearrange the view.</p>
+		<p>Self-contained visual. Hover over nodes and edges for details. No external JavaScript is required.</p>
 	</div>
 
 	<div class="legend">
@@ -74,211 +105,360 @@
 		<div class="legend-item"><span class="legend-dot" style="background:#2ca02c"></span>Local counterparty account</div>
 	</div>
 
-	<div id="network"></div>
-
-	<script>
-		const nodes = new vis.DataSet([
-  {
-    "id": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
-    "label": "EID ****1234",
-    "title": "Node ID: EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181\\nType: EMIRATES_ID\\nRole: EMIRATES_ID_CONNECTOR\\nLayers: IDENTITY\\nEmirates ID: ****1234",
-    "group": "emirates_id"
-  },
-  {
-    "id": "ENTITY|SME|CUST_1",
-    "label": "CUST_1",
-    "title": "Node ID: ENTITY|SME|CUST_1\\nType: ENTITY\\nRole: SEED_ENTITY\\nLayers: IDENTITY\\nEntity type: SME\\nCustomer ID: CUST_1",
-    "group": "seed_entity"
-  },
-  {
-    "id": "ENTITY|RETAIL|CUST_2",
-    "label": "CUST_2",
-    "title": "Node ID: ENTITY|RETAIL|CUST_2\\nType: ENTITY\\nRole: COUNTERPARTY_EXPANSION_START_ENTITY\\nLayers: IDENTITY|LOCAL_COUNTERPARTY\\nEntity type: RETAIL\\nCustomer ID: CUST_2",
-    "group": "counterparty_expansion_start"
-  },
-  {
-    "id": "ENTITY|SME|CUST_3",
-    "label": "CUST_3",
-    "title": "Node ID: ENTITY|SME|CUST_3\\nType: ENTITY\\nRole: LINKED_ENTITY\\nLayers: LOCAL_COUNTERPARTY\\nEntity type: SME\\nCustomer ID: CUST_3",
-    "group": "linked_entity"
-  },
-  {
-    "id": "ENTITY|RETAIL|CUST_4",
-    "label": "CUST_4",
-    "title": "Node ID: ENTITY|RETAIL|CUST_4\\nType: ENTITY\\nRole: LINKED_ENTITY\\nLayers: LOCAL_COUNTERPARTY\\nEntity type: RETAIL\\nCustomer ID: CUST_4",
-    "group": "linked_entity"
-  },
-  {
-    "id": "ENTITY|SME|CUST_5",
-    "label": "CUST_5",
-    "title": "Node ID: ENTITY|SME|CUST_5\\nType: ENTITY\\nRole: LINKED_ENTITY\\nLayers: LOCAL_COUNTERPARTY\\nEntity type: SME\\nCustomer ID: CUST_5",
-    "group": "linked_entity"
-  },
-  {
-    "id": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
-    "label": "Account ****OUNT (1D1D8D)",
-    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20\\nType: LOCAL_COUNTERPARTY_ACCOUNT\\nRole: COUNTERPARTY_CONNECTOR\\nLayers: LOCAL_COUNTERPARTY\\nCounterparty account: ****OUNT",
-    "group": "local_counterparty_account"
-  },
-  {
-    "id": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
-    "label": "Account ****OUNT (3395DB)",
-    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4\\nType: LOCAL_COUNTERPARTY_ACCOUNT\\nRole: COUNTERPARTY_CONNECTOR\\nLayers: LOCAL_COUNTERPARTY\\nCounterparty account: ****OUNT",
-    "group": "local_counterparty_account"
-  },
-  {
-    "id": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
-    "label": "Account ****OUNT (7266EE)",
-    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B\\nType: LOCAL_COUNTERPARTY_ACCOUNT\\nRole: COUNTERPARTY_CONNECTOR\\nLayers: LOCAL_COUNTERPARTY\\nCounterparty account: ****OUNT",
-    "group": "local_counterparty_account"
-  }
-]);
-		const edges = new vis.DataSet([
-  {
-    "from": "ENTITY|RETAIL|CUST_2",
-    "to": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
-    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\\nLayer: IDENTITY\\nRole: GROUP_FORMING\\nEmirates ID: ****1234",
-    "group": "identity",
-    "label": "EID"
-  },
-  {
-    "from": "ENTITY|SME|CUST_1",
-    "to": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
-    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\\nLayer: IDENTITY\\nRole: GROUP_FORMING\\nEmirates ID: ****1234",
-    "group": "identity",
-    "label": "EID"
-  },
-  {
-    "from": "ENTITY|RETAIL|CUST_2",
-    "to": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
-    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: OUTBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 1000.0\\nFirst seen: 2026-01-01 10:00:00\\nLast seen: 2026-01-01 10:00:00",
-    "group": "local_counterparty",
-    "label": "Account"
-  },
-  {
-    "from": "ENTITY|RETAIL|CUST_4",
-    "to": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
-    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: OUTBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 300.0\\nFirst seen: 2026-01-05 14:00:00\\nLast seen: 2026-01-05 14:00:00",
-    "group": "local_counterparty",
-    "label": "Account"
-  },
-  {
-    "from": "ENTITY|RETAIL|CUST_4",
-    "to": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
-    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: INBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 700.0\\nFirst seen: 2026-01-04 13:00:00\\nLast seen: 2026-01-04 13:00:00",
-    "group": "local_counterparty",
-    "label": "Account"
-  },
-  {
-    "from": "ENTITY|SME|CUST_3",
-    "to": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
-    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: INBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 2000.0\\nFirst seen: 2026-01-02 11:00:00\\nLast seen: 2026-01-02 11:00:00",
-    "group": "local_counterparty",
-    "label": "Account"
-  },
-  {
-    "from": "ENTITY|SME|CUST_3",
-    "to": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
-    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: OUTBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 500.0\\nFirst seen: 2026-01-03 12:00:00\\nLast seen: 2026-01-03 12:00:00",
-    "group": "local_counterparty",
-    "label": "Account"
-  },
-  {
-    "from": "ENTITY|SME|CUST_5",
-    "to": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
-    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\\nLayer: LOCAL_COUNTERPARTY_CORE\\nRole: GROUP_FORMING\\nDirection: INBOUND_ONLY\\nTransaction count: 1\\nTransaction amount: 400.0\\nFirst seen: 2026-01-06 15:00:00\\nLast seen: 2026-01-06 15:00:00",
-    "group": "local_counterparty",
-    "label": "Account"
-  }
-]);
-
-		const container = document.getElementById("network");
-
-		const data = {
-			nodes: nodes,
-			edges: edges
-		};
-
-		const options = {
-			nodes: {
-				shape: "dot",
-				size: 22,
-				font: {
-					size: 14,
-					face: "Arial"
-				},
-				borderWidth: 2
-			},
-			edges: {
-				width: 2,
-				smooth: {
-					type: "continuous"
-				},
-				font: {
-					size: 11,
-					align: "middle"
-				}
-			},
-			groups: {
-				seed_entity: {
-					color: {
-						background: "#d62728",
-						border: "#8c1d1d"
-					},
-					size: 30
-				},
-				counterparty_expansion_start: {
-					color: {
-						background: "#ff7f0e",
-						border: "#a85108"
-					},
-					size: 28
-				},
-				linked_entity: {
-					color: {
-						background: "#1f77b4",
-						border: "#15527d"
-					}
-				},
-				emirates_id: {
-					color: {
-						background: "#9467bd",
-						border: "#5e3f7a"
-					},
-					shape: "diamond",
-					size: 24
-				},
-				local_counterparty_account: {
-					color: {
-						background: "#2ca02c",
-						border: "#1d6b1d"
-					},
-					shape: "square",
-					size: 22
-				}
-			},
-			physics: {
-				enabled: true,
-				solver: "forceAtlas2Based",
-				forceAtlas2Based: {
-					gravitationalConstant: -60,
-					centralGravity: 0.01,
-					springLength: 120,
-					springConstant: 0.08
-				},
-				stabilization: {
-					iterations: 200
-				}
-			},
-			interaction: {
-				hover: true,
-				tooltipDelay: 150,
-				navigationButtons: true,
-				keyboard: true
-			}
-		};
-
-		new vis.Network(container, data, options);
-	</script>
+	<div class="canvas-wrapper">
+		<svg width="1180" height="670" viewBox="0 0 1180 670">
+			
+			<g class="edge">
+				<title>Relationship: ENTITY_HAS_EMIRATES_ID
+Layer: IDENTITY
+Role: GROUP_FORMING
+Emirates ID: ****1234</title>
+				<line
+					x1="550"
+					y1="220"
+					x2="330"
+					y2="220"
+					stroke="#9467bd"
+					stroke-width="3"
+					stroke-dasharray="6 4"
+				/>
+				<text x="440.0" y="206.0" text-anchor="middle" class="edge-label">EID</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_HAS_EMIRATES_ID
+Layer: IDENTITY
+Role: GROUP_FORMING
+Emirates ID: ****1234</title>
+				<line
+					x1="110"
+					y1="220"
+					x2="330"
+					y2="220"
+					stroke="#9467bd"
+					stroke-width="3"
+					stroke-dasharray="6 4"
+				/>
+				<text x="220.0" y="206.0" text-anchor="middle" class="edge-label">EID</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: OUTBOUND_ONLY
+Transaction count: 1
+Transaction amount: 1000.0
+First seen: 2026-01-01 10:00:00
+Last seen: 2026-01-01 10:00:00</title>
+				<line
+					x1="550"
+					y1="220"
+					x2="770"
+					y2="220"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="660.0" y="206.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: OUTBOUND_ONLY
+Transaction count: 1
+Transaction amount: 300.0
+First seen: 2026-01-05 14:00:00
+Last seen: 2026-01-05 14:00:00</title>
+				<line
+					x1="770"
+					y1="450"
+					x2="550"
+					y2="450"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="660.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: INBOUND_ONLY
+Transaction count: 1
+Transaction amount: 700.0
+First seen: 2026-01-04 13:00:00
+Last seen: 2026-01-04 13:00:00</title>
+				<line
+					x1="770"
+					y1="450"
+					x2="990"
+					y2="450"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="880.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: INBOUND_ONLY
+Transaction count: 1
+Transaction amount: 2000.0
+First seen: 2026-01-02 11:00:00
+Last seen: 2026-01-02 11:00:00</title>
+				<line
+					x1="990"
+					y1="220"
+					x2="770"
+					y2="220"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="880.0" y="206.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: OUTBOUND_ONLY
+Transaction count: 1
+Transaction amount: 500.0
+First seen: 2026-01-03 12:00:00
+Last seen: 2026-01-03 12:00:00</title>
+				<line
+					x1="990"
+					y1="220"
+					x2="990"
+					y2="450"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="990.0" y="321.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: INBOUND_ONLY
+Transaction count: 1
+Transaction amount: 400.0
+First seen: 2026-01-06 15:00:00
+Last seen: 2026-01-06 15:00:00</title>
+				<line
+					x1="330"
+					y1="450"
+					x2="550"
+					y2="450"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="440.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			
+			<g class="node">
+				<title>Node ID: ENTITY|SME|CUST_1
+Type: ENTITY
+Role: SEED_ENTITY
+Layers: IDENTITY
+Entity type: SME
+Customer ID: CUST_1</title>
+				
+				<circle
+					cx="110"
+					cy="220"
+					r="36"
+					fill="#d62728"
+					stroke="#8c1d1d"
+					stroke-width="3"
+				/>
+			
+				<text x="110" y="276" text-anchor="middle" class="node-label">CUST_1</text>
+				<text x="110" y="294" text-anchor="middle" class="node-role">SEED_ENTITY</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181
+Type: EMIRATES_ID
+Role: EMIRATES_ID_CONNECTOR
+Layers: IDENTITY
+Emirates ID: ****1234</title>
+				
+				<polygon
+					points="330,186 364,220 330,254 296,220"
+					fill="#9467bd"
+					stroke="#5e3f7a"
+					stroke-width="3"
+				/>
+			
+				<text x="330" y="276" text-anchor="middle" class="node-label">EID ****1234</text>
+				<text x="330" y="294" text-anchor="middle" class="node-role">EMIRATES_ID_CONNECTOR</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: ENTITY|RETAIL|CUST_2
+Type: ENTITY
+Role: COUNTERPARTY_EXPANSION_START_ENTITY
+Layers: IDENTITY|LOCAL_COUNTERPARTY
+Entity type: RETAIL
+Customer ID: CUST_2</title>
+				
+				<circle
+					cx="550"
+					cy="220"
+					r="32"
+					fill="#ff7f0e"
+					stroke="#a85108"
+					stroke-width="3"
+				/>
+			
+				<text x="550" y="276" text-anchor="middle" class="node-label">CUST_2</text>
+				<text x="550" y="294" text-anchor="middle" class="node-role">COUNTERPARTY_EXPANSION_START_ENTITY</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20
+Type: LOCAL_COUNTERPARTY_ACCOUNT
+Role: COUNTERPARTY_CONNECTOR
+Layers: LOCAL_COUNTERPARTY
+Counterparty account: ****OUNT</title>
+				
+				<rect
+					x="740"
+					y="190"
+					width="60"
+					height="60"
+					rx="8"
+					fill="#2ca02c"
+					stroke="#1d6b1d"
+					stroke-width="3"
+				/>
+			
+				<text x="770" y="276" text-anchor="middle" class="node-label">Account ****OUNT (1D1D8D)</text>
+				<text x="770" y="294" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: ENTITY|SME|CUST_3
+Type: ENTITY
+Role: LINKED_ENTITY
+Layers: LOCAL_COUNTERPARTY
+Entity type: SME
+Customer ID: CUST_3</title>
+				
+				<circle
+					cx="990"
+					cy="220"
+					r="32"
+					fill="#1f77b4"
+					stroke="#15527d"
+					stroke-width="3"
+				/>
+			
+				<text x="990" y="276" text-anchor="middle" class="node-label">CUST_3</text>
+				<text x="990" y="294" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B
+Type: LOCAL_COUNTERPARTY_ACCOUNT
+Role: COUNTERPARTY_CONNECTOR
+Layers: LOCAL_COUNTERPARTY
+Counterparty account: ****OUNT</title>
+				
+				<rect
+					x="960"
+					y="420"
+					width="60"
+					height="60"
+					rx="8"
+					fill="#2ca02c"
+					stroke="#1d6b1d"
+					stroke-width="3"
+				/>
+			
+				<text x="990" y="506" text-anchor="middle" class="node-label">Account ****OUNT (7266EE)</text>
+				<text x="990" y="524" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: ENTITY|RETAIL|CUST_4
+Type: ENTITY
+Role: LINKED_ENTITY
+Layers: LOCAL_COUNTERPARTY
+Entity type: RETAIL
+Customer ID: CUST_4</title>
+				
+				<circle
+					cx="770"
+					cy="450"
+					r="32"
+					fill="#1f77b4"
+					stroke="#15527d"
+					stroke-width="3"
+				/>
+			
+				<text x="770" y="506" text-anchor="middle" class="node-label">CUST_4</text>
+				<text x="770" y="524" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4
+Type: LOCAL_COUNTERPARTY_ACCOUNT
+Role: COUNTERPARTY_CONNECTOR
+Layers: LOCAL_COUNTERPARTY
+Counterparty account: ****OUNT</title>
+				
+				<rect
+					x="520"
+					y="420"
+					width="60"
+					height="60"
+					rx="8"
+					fill="#2ca02c"
+					stroke="#1d6b1d"
+					stroke-width="3"
+				/>
+			
+				<text x="550" y="506" text-anchor="middle" class="node-label">Account ****OUNT (3395DB)</text>
+				<text x="550" y="524" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: ENTITY|SME|CUST_5
+Type: ENTITY
+Role: LINKED_ENTITY
+Layers: LOCAL_COUNTERPARTY
+Entity type: SME
+Customer ID: CUST_5</title>
+				
+				<circle
+					cx="330"
+					cy="450"
+					r="32"
+					fill="#1f77b4"
+					stroke="#15527d"
+					stroke-width="3"
+				/>
+			
+				<text x="330" y="506" text-anchor="middle" class="node-label">CUST_5</text>
+				<text x="330" y="524" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
+			</g>
+		
+		</svg>
+	</div>
 </body>
 </html>
