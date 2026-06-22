@@ -4,7 +4,6 @@ from collections import deque
 
 import streamlit as st
 import streamlit.components.v1 as components
-from streamlit_agraph import agraph, Config, Edge, Node
 
 
 CUSTOMERS = {
@@ -324,8 +323,6 @@ def reset_state() -> None:
     st.session_state.v2_edges = {}
     st.session_state.v2_history = []
     st.session_state.v2_seed = None
-    st.session_state.v2_last_selected_node = None
-    st.session_state.v2_selected_node_id = None
 
 
 def ensure_state() -> None:
@@ -1104,148 +1101,6 @@ def render_node_intelligence() -> None:
                 )
 
 
-
-
-def node_visual_style(node: dict) -> dict:
-    if node["role"] == "SEED_CUSTOMER":
-        return {"color": "#dc2626", "size": 42, "shape": "dot"}
-
-    if node["node_type"] == "CUSTOMER" and node["risk_count"] >= 2:
-        return {"color": "#ef4444", "size": 40, "shape": "dot"}
-
-    if node["node_type"] == "CUSTOMER":
-        return {"color": "#2563eb", "size": 34, "shape": "dot"}
-
-    if node["node_type"] == "EID":
-        return {"color": "#7c3aed", "size": 32, "shape": "diamond"}
-
-    if node["policy"] == "BLOCK_BY_DEFAULT":
-        return {"color": "#94a3b8", "size": 34, "shape": "box"}
-
-    if node["policy"] == "EVIDENCE_ONLY":
-        return {"color": "#f59e0b", "size": 32, "shape": "box"}
-
-    if node["node_type"] == "ACCOUNT":
-        return {"color": "#16a34a", "size": 34, "shape": "box"}
-
-    return {"color": "#64748b", "size": 28, "shape": "dot"}
-
-
-def normalise_agraph_selection(selection) -> str | None:
-    if isinstance(selection, str):
-        return selection
-
-    if isinstance(selection, dict):
-        for key in ["id", "node", "selected_node", "selectedNode"]:
-            value = selection.get(key)
-            if isinstance(value, str):
-                return value
-
-        nodes = selection.get("nodes")
-        if isinstance(nodes, list) and nodes:
-            return nodes[0]
-
-    return None
-
-
-def render_interactive_agraph() -> None:
-    graph_nodes = []
-
-    for node in st.session_state.v2_nodes.values():
-        style = node_visual_style(node)
-
-        graph_nodes.append(
-            Node(
-                id=node["id"],
-                label=node["label"],
-                size=style["size"],
-                color=style["color"],
-                shape=style["shape"],
-            )
-        )
-
-    graph_edges = []
-
-    for edge in st.session_state.v2_edges.values():
-        graph_edges.append(
-            Edge(
-                source=edge["source"],
-                target=edge["target"],
-                label="",
-            )
-        )
-
-    config = Config(
-        width=1000,
-        height=620,
-        directed=False,
-        physics=False,
-        hierarchical=True,
-        nodeHighlightBehavior=True,
-        highlightColor="#f59e0b",
-        collapsible=False,
-    )
-
-    selected = agraph(
-        nodes=graph_nodes,
-        edges=graph_edges,
-        config=config,
-    )
-
-    selected_node_id = normalise_agraph_selection(selected)
-
-    if selected_node_id and selected_node_id in st.session_state.v2_nodes:
-        st.session_state.v2_selected_node_id = selected_node_id
-
-
-def render_selected_graph_node_panel() -> None:
-    selected_node_id = st.session_state.get("v2_selected_node_id")
-
-    if not selected_node_id or selected_node_id not in st.session_state.v2_nodes:
-        st.markdown(
-            """
-            <div class="panel">
-                <div class="panel-title">Selected node</div>
-                <div class="panel-caption">
-                    Click a node in the graph to inspect it. Expansion happens from this panel, not automatically.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-        return
-
-    node = st.session_state.v2_nodes[selected_node_id]
-
-    st.markdown(
-        f"""
-        <div class="panel">
-            <div class="panel-title">{html.escape(node["label"])}</div>
-            <div class="panel-caption">{html.escape(node["summary"])}</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    if node["expanded"]:
-        st.success("This node is already expanded.")
-        return
-
-    if node["policy"] == "BLOCK_BY_DEFAULT":
-        st.warning("This is a high-degree/common connector. It is visible as context but blocked from default expansion.")
-        return
-
-    if node["policy"] == "EVIDENCE_ONLY":
-        if st.button("Mark evidence-only node as reviewed", key=f"review_{node['id']}"):
-            expand_node(node["id"])
-            st.rerun()
-        return
-
-    if st.button("Expand selected node", type="primary", key=f"expand_selected_{node['id']}"):
-        expand_node(node["id"])
-        st.rerun()
-
-
 def main() -> None:
     st.set_page_config(
         page_title="V2 Interactive Investigation Graph",
@@ -1341,27 +1196,11 @@ def main() -> None:
     )
 
     with tab_graph:
-        st.markdown(
-            """
-            <div class="panel">
-                <div class="panel-title">Investigation graph</div>
-                <div class="panel-caption">
-                    Click a node to inspect it. Use the panel on the right to expand the selected node.
-                    This avoids uncontrolled graph jumps and keeps the investigation flow explicit.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
+        components.html(
+            render_graph_html(),
+            height=760,
+            scrolling=True,
         )
-
-        graph_col, detail_col = st.columns([2, 1])
-
-        with graph_col:
-            render_interactive_agraph()
-
-        with detail_col:
-            render_selected_graph_node_panel()
-
         render_ai_summary()
 
     with tab_expand:
