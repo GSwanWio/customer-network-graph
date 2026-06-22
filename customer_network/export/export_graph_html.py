@@ -1,6 +1,8 @@
 from pathlib import Path
 import html
+import json
 
+import networkx as nx
 import pandas as pd
 
 
@@ -11,69 +13,33 @@ def clean_value(value: object) -> object:
 	return value
 
 
-def get_node_style(node_type: str, node_role: str) -> dict[str, str]:
+def get_node_group(node_type: str, node_role: str) -> str:
 	if node_role == "SEED_ENTITY":
-		return {
-			"fill": "#d62728",
-			"stroke": "#8c1d1d",
-			"shape": "circle",
-		}
+		return "seed_entity"
 
 	if node_role == "COUNTERPARTY_EXPANSION_START_ENTITY":
-		return {
-			"fill": "#ff7f0e",
-			"stroke": "#a85108",
-			"shape": "circle",
-		}
+		return "counterparty_expansion_start"
 
 	if node_type == "ENTITY":
-		return {
-			"fill": "#1f77b4",
-			"stroke": "#15527d",
-			"shape": "circle",
-		}
+		return "linked_entity"
 
 	if node_type == "EMIRATES_ID":
-		return {
-			"fill": "#9467bd",
-			"stroke": "#5e3f7a",
-			"shape": "diamond",
-		}
+		return "emirates_id"
 
 	if node_type == "LOCAL_COUNTERPARTY_ACCOUNT":
-		return {
-			"fill": "#2ca02c",
-			"stroke": "#1d6b1d",
-			"shape": "square",
-		}
+		return "local_counterparty_account"
 
-	return {
-		"fill": "#999999",
-		"stroke": "#555555",
-		"shape": "circle",
-	}
+	return "default"
 
 
-def get_edge_style(relationship_layer: str) -> dict[str, str]:
+def get_edge_group(relationship_layer: str) -> str:
 	if relationship_layer == "IDENTITY":
-		return {
-			"stroke": "#9467bd",
-			"dasharray": "6 4",
-			"label": "EID",
-		}
+		return "identity"
 
 	if relationship_layer == "LOCAL_COUNTERPARTY_CORE":
-		return {
-			"stroke": "#2ca02c",
-			"dasharray": "",
-			"label": "Account",
-		}
+		return "local_counterparty"
 
-	return {
-		"stroke": "#999999",
-		"dasharray": "",
-		"label": "",
-	}
+	return "default"
 
 
 def build_node_title(row: pd.Series) -> str:
@@ -121,6 +87,64 @@ def build_edge_title(row: pd.Series) -> str:
 	return "\n".join(lines)
 
 
+def build_initial_positions(
+	combined_nodes: pd.DataFrame,
+	combined_edges: pd.DataFrame,
+	width: int,
+	height: int,
+) -> dict[str, dict[str, float]]:
+	graph = nx.Graph()
+
+	for node_id in combined_nodes["node_id"].tolist():
+		graph.add_node(node_id)
+
+	for _, row in combined_edges.iterrows():
+		graph.add_edge(row["source_node_id"], row["target_node_id"])
+
+	if graph.number_of_nodes() == 1:
+		node_id = next(iter(graph.nodes))
+		return {
+			node_id: {
+				"x": width / 2,
+				"y": height / 2,
+			}
+		}
+
+	raw_positions = nx.spring_layout(
+		graph,
+		seed=42,
+		k=1.4,
+		iterations=150,
+	)
+
+	x_values = [position[0] for position in raw_positions.values()]
+	y_values = [position[1] for position in raw_positions.values()]
+
+	min_x = min(x_values)
+	max_x = max(x_values)
+	min_y = min(y_values)
+	max_y = max(y_values)
+
+	x_range = max(max_x - min_x, 0.0001)
+	y_range = max(max_y - min_y, 0.0001)
+
+	padding_x = 120
+	padding_y = 110
+
+	positions = {}
+
+	for node_id, position in raw_positions.items():
+		x = padding_x + ((position[0] - min_x) / x_range) * (width - 2 * padding_x)
+		y = padding_y + ((position[1] - min_y) / y_range) * (height - 2 * padding_y)
+
+		positions[node_id] = {
+			"x": float(x),
+			"y": float(y),
+		}
+
+	return positions
+
+
 def export_graph_html(
 	combined_nodes: pd.DataFrame,
 	combined_edges: pd.DataFrame,
@@ -130,171 +154,121 @@ def export_graph_html(
 	output_path = Path(output_path)
 	output_path.parent.mkdir(parents=True, exist_ok=True)
 
-	display_order = [
-		"ENTITY|SME|CUST_1",
-		"EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
-		"ENTITY|RETAIL|CUST_2",
-		"LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
-		"ENTITY|SME|CUST_3",
-		"LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
-		"ENTITY|RETAIL|CUST_4",
-		"LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
-		"ENTITY|SME|CUST_5",
-	]
+	width = 1500
+	height = 850
 
-	nodes_by_id = {
-		row["node_id"]: row
-		for _, row in combined_nodes.iterrows()
-	}
+	initial_positions = build_initial_positions(
+		combined_nodes=combined_nodes,
+		combined_edges=combined_edges,
+		width=width,
+		height=height,
+	)
 
-	ordered_node_ids = [
-		node_id
-		for node_id in display_order
-		if node_id in nodes_by_id
-	]
+	nodes = []
 
-	for node_id in combined_nodes["node_id"].tolist():
-		if node_id not in ordered_node_ids:
-			ordered_node_ids.append(node_id)
+	for _, row in combined_nodes.iterrows():
+		position = initial_positions[row["node_id"]]
 
-	positions = {}
-	start_x = 110
-	start_y = 220
-	step_x = 220
-	step_y = 230
-	nodes_per_row = 5
+		nodes.append({
+			"id": row["node_id"],
+			"label": row["display_label"],
+			"title": build_node_title(row),
+			"group": get_node_group(row["node_type"], row["node_role"]),
+			"nodeType": row["node_type"],
+			"nodeRole": row["node_role"],
+			"x": position["x"],
+			"y": position["y"],
+		})
 
-	for index, node_id in enumerate(ordered_node_ids):
-		row_index = index // nodes_per_row
-		column_index = index % nodes_per_row
+	edges = []
 
-		if row_index % 2 == 1:
-			column_index = nodes_per_row - 1 - column_index
+	for index, row in combined_edges.reset_index(drop=True).iterrows():
+		edge_group = get_edge_group(row["relationship_layer"])
 
-		positions[node_id] = {
-			"x": start_x + column_index * step_x,
-			"y": start_y + row_index * step_y,
-		}
+		edges.append({
+			"id": f"edge_{index}",
+			"from": row["source_node_id"],
+			"to": row["target_node_id"],
+			"title": build_edge_title(row),
+			"group": edge_group,
+			"label": "EID" if edge_group == "identity" else "Account",
+		})
 
-	width = max(1180, start_x * 2 + step_x * (nodes_per_row - 1))
-	height = max(620, start_y * 2 + step_y * ((len(ordered_node_ids) - 1) // nodes_per_row))
+	layout_key = "|".join(sorted(combined_nodes["node_id"].astype(str).tolist()))
 
-	edge_elements = []
-
-	for _, row in combined_edges.iterrows():
-		source_node_id = row["source_node_id"]
-		target_node_id = row["target_node_id"]
-
-		if source_node_id not in positions or target_node_id not in positions:
-			continue
-
-		source = positions[source_node_id]
-		target = positions[target_node_id]
-		style = get_edge_style(row["relationship_layer"])
-
-		label_x = (source["x"] + target["x"]) / 2
-		label_y = (source["y"] + target["y"]) / 2 - 14
-
-		edge_elements.append(f'''
-			<g class="edge">
-				<title>{html.escape(build_edge_title(row))}</title>
-				<line
-					x1="{source["x"]}"
-					y1="{source["y"]}"
-					x2="{target["x"]}"
-					y2="{target["y"]}"
-					stroke="{style["stroke"]}"
-					stroke-width="3"
-					stroke-dasharray="{style["dasharray"]}"
-				/>
-				<text x="{label_x}" y="{label_y}" text-anchor="middle" class="edge-label">{html.escape(style["label"])}</text>
-			</g>
-		''')
-
-	node_elements = []
-
-	for node_id in ordered_node_ids:
-		row = nodes_by_id[node_id]
-		position = positions[node_id]
-		style = get_node_style(row["node_type"], row["node_role"])
-		label = html.escape(str(row["display_label"]))
-
-		if style["shape"] == "diamond":
-			shape = f'''
-				<polygon
-					points="{position["x"]},{position["y"] - 34} {position["x"] + 34},{position["y"]} {position["x"]},{position["y"] + 34} {position["x"] - 34},{position["y"]}"
-					fill="{style["fill"]}"
-					stroke="{style["stroke"]}"
-					stroke-width="3"
-				/>
-			'''
-		elif style["shape"] == "square":
-			shape = f'''
-				<rect
-					x="{position["x"] - 30}"
-					y="{position["y"] - 30}"
-					width="60"
-					height="60"
-					rx="8"
-					fill="{style["fill"]}"
-					stroke="{style["stroke"]}"
-					stroke-width="3"
-				/>
-			'''
-		else:
-			radius = 36 if row["node_role"] == "SEED_ENTITY" else 32
-			shape = f'''
-				<circle
-					cx="{position["x"]}"
-					cy="{position["y"]}"
-					r="{radius}"
-					fill="{style["fill"]}"
-					stroke="{style["stroke"]}"
-					stroke-width="3"
-				/>
-			'''
-
-		node_elements.append(f'''
-			<g class="node">
-				<title>{html.escape(build_node_title(row))}</title>
-				{shape}
-				<text x="{position["x"]}" y="{position["y"] + 56}" text-anchor="middle" class="node-label">{label}</text>
-				<text x="{position["x"]}" y="{position["y"] + 74}" text-anchor="middle" class="node-role">{html.escape(str(row["node_role"]))}</text>
-			</g>
-		''')
-
-	html_content = f"""<!doctype html>
+	html_template = """<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>{html.escape(title)}</title>
+	<title>__TITLE_HTML__</title>
 	<style>
-		body {{
+		body {
 			margin: 0;
 			font-family: Arial, sans-serif;
 			background: #f7f7f7;
 			color: #222;
-		}}
+		}
 
-		.header {{
+		.header {
 			padding: 16px 20px;
 			background: white;
 			border-bottom: 1px solid #ddd;
-		}}
+		}
 
-		.header h1 {{
+		.header h1 {
 			margin: 0 0 6px 0;
 			font-size: 20px;
-		}}
+		}
 
-		.header p {{
+		.header p {
 			margin: 0;
 			font-size: 13px;
 			color: #555;
-		}}
+		}
 
-		.legend {{
+		.toolbar {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 20px;
+			background: white;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.toolbar button {
+			border: 1px solid #cbd5e1;
+			background: #ffffff;
+			color: #0f172a;
+			border-radius: 10px;
+			font-size: 13px;
+			font-weight: 700;
+			padding: 8px 12px;
+			cursor: pointer;
+		}
+
+		.toolbar button:hover {
+			background: #f1f5f9;
+		}
+
+		.toolbar .primary {
+			background: #ef4444;
+			color: white;
+			border-color: #ef4444;
+		}
+
+		.toolbar .primary:hover {
+			background: #dc2626;
+		}
+
+		.status {
+			font-size: 12px;
+			color: #64748b;
+			margin-left: 4px;
+		}
+
+		.legend {
 			display: flex;
 			flex-wrap: wrap;
 			gap: 12px;
@@ -302,44 +276,54 @@ def export_graph_html(
 			background: white;
 			border-bottom: 1px solid #ddd;
 			font-size: 13px;
-		}}
+		}
 
-		.legend-item {{
+		.legend-item {
 			display: flex;
 			align-items: center;
 			gap: 6px;
-		}}
+		}
 
-		.legend-dot {{
+		.legend-dot {
 			width: 12px;
 			height: 12px;
 			border-radius: 50%;
 			display: inline-block;
-		}}
+		}
 
-		.canvas-wrapper {{
+		.canvas-wrapper {
 			overflow: auto;
-			height: calc(100vh - 116px);
+			height: calc(100vh - 166px);
 			background: #fafafa;
-		}}
+		}
 
-		svg {{
-			min-width: 100%;
+		svg {
 			background: #fafafa;
-		}}
+			user-select: none;
+		}
 
-		.node-label {{
+		.node {
+			cursor: grab;
+		}
+
+		.node.dragging {
+			cursor: grabbing;
+		}
+
+		.node-label {
 			font-size: 13px;
 			font-weight: 700;
 			fill: #222;
-		}}
+			pointer-events: none;
+		}
 
-		.node-role {{
+		.node-role {
 			font-size: 9px;
 			fill: #555;
-		}}
+			pointer-events: none;
+		}
 
-		.edge-label {{
+		.edge-label {
 			font-size: 11px;
 			fill: #555;
 			font-weight: 700;
@@ -347,19 +331,21 @@ def export_graph_html(
 			stroke: #fafafa;
 			stroke-width: 4px;
 			stroke-linejoin: round;
-		}}
-
-		.node:hover,
-		.edge:hover {{
-			cursor: pointer;
-			filter: brightness(1.05);
-		}}
+			pointer-events: none;
+		}
 	</style>
 </head>
 <body>
 	<div class="header">
-		<h1>{html.escape(title)}</h1>
-		<p>Self-contained visual. Hover over nodes and edges for details. No external JavaScript is required.</p>
+		<h1>__TITLE_HTML__</h1>
+		<p>Drag nodes to arrange the network. Hover over nodes and edges for details. Use Save layout to keep your arrangement in this browser.</p>
+	</div>
+
+	<div class="toolbar">
+		<button class="primary" id="saveLayoutButton">Save layout</button>
+		<button id="resetLayoutButton">Reset layout</button>
+		<button id="downloadLayoutButton">Download layout JSON</button>
+		<span class="status" id="layoutStatus">Layout not saved yet.</span>
 	</div>
 
 	<div class="legend">
@@ -371,14 +357,368 @@ def export_graph_html(
 	</div>
 
 	<div class="canvas-wrapper">
-		<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}">
-			{''.join(edge_elements)}
-			{''.join(node_elements)}
-		</svg>
+		<svg id="graphSvg" width="__WIDTH__" height="__HEIGHT__" viewBox="0 0 __WIDTH__ __HEIGHT__"></svg>
 	</div>
+
+	<script>
+		const svgNamespace = "http://www.w3.org/2000/svg";
+		const initialNodes = __NODES_JSON__;
+		const edges = __EDGES_JSON__;
+		const storageKey = "customer-network-layout:" + __LAYOUT_KEY_JSON__;
+
+		const svg = document.getElementById("graphSvg");
+		const layoutStatus = document.getElementById("layoutStatus");
+
+		const nodes = new Map();
+		const initialPositions = new Map();
+		const nodeElements = new Map();
+		const edgeElements = new Map();
+		const edgeLabelElements = new Map();
+
+		let draggingNodeId = null;
+		let dragOffset = { x: 0, y: 0 };
+
+		function clone(value) {
+			return JSON.parse(JSON.stringify(value));
+		}
+
+		function createSvgElement(name, attributes = {}) {
+			const element = document.createElementNS(svgNamespace, name);
+
+			for (const [key, value] of Object.entries(attributes)) {
+				if (value !== null && value !== undefined && value !== "") {
+					element.setAttribute(key, value);
+				}
+			}
+
+			return element;
+		}
+
+		function nodeStyle(node) {
+			if (node.group === "seed_entity") {
+				return { fill: "#d62728", stroke: "#8c1d1d", shape: "circle", radius: 37 };
+			}
+
+			if (node.group === "counterparty_expansion_start") {
+				return { fill: "#ff7f0e", stroke: "#a85108", shape: "circle", radius: 34 };
+			}
+
+			if (node.group === "linked_entity") {
+				return { fill: "#1f77b4", stroke: "#15527d", shape: "circle", radius: 32 };
+			}
+
+			if (node.group === "emirates_id") {
+				return { fill: "#9467bd", stroke: "#5e3f7a", shape: "diamond", radius: 34 };
+			}
+
+			if (node.group === "local_counterparty_account") {
+				return { fill: "#2ca02c", stroke: "#1d6b1d", shape: "square", radius: 31 };
+			}
+
+			return { fill: "#999999", stroke: "#555555", shape: "circle", radius: 30 };
+		}
+
+		function edgeStyle(edge) {
+			if (edge.group === "identity") {
+				return { stroke: "#9467bd", dasharray: "7 5" };
+			}
+
+			if (edge.group === "local_counterparty") {
+				return { stroke: "#2ca02c", dasharray: "" };
+			}
+
+			return { stroke: "#999999", dasharray: "" };
+		}
+
+		function loadNodes() {
+			const savedLayoutRaw = localStorage.getItem(storageKey);
+			let savedLayout = null;
+
+			if (savedLayoutRaw) {
+				try {
+					savedLayout = JSON.parse(savedLayoutRaw);
+				} catch {
+					savedLayout = null;
+				}
+			}
+
+			for (const node of initialNodes) {
+				const workingNode = clone(node);
+				initialPositions.set(node.id, { x: node.x, y: node.y });
+
+				if (savedLayout && savedLayout[node.id]) {
+					workingNode.x = savedLayout[node.id].x;
+					workingNode.y = savedLayout[node.id].y;
+				}
+
+				nodes.set(node.id, workingNode);
+			}
+
+			if (savedLayout) {
+				layoutStatus.textContent = "Saved layout loaded from this browser.";
+			}
+		}
+
+		function getSvgPoint(event) {
+			const point = svg.createSVGPoint();
+			point.x = event.clientX;
+			point.y = event.clientY;
+			return point.matrixTransform(svg.getScreenCTM().inverse());
+		}
+
+		function renderEdges() {
+			for (const edge of edges) {
+				const source = nodes.get(edge.from);
+				const target = nodes.get(edge.to);
+				const style = edgeStyle(edge);
+
+				const group = createSvgElement("g", { class: "edge" });
+
+				const title = createSvgElement("title");
+				title.textContent = edge.title;
+				group.appendChild(title);
+
+				const line = createSvgElement("line", {
+					x1: source.x,
+					y1: source.y,
+					x2: target.x,
+					y2: target.y,
+					stroke: style.stroke,
+					"stroke-width": 3,
+					"stroke-dasharray": style.dasharray,
+				});
+
+				const label = createSvgElement("text", {
+					x: (source.x + target.x) / 2,
+					y: (source.y + target.y) / 2 - 12,
+					"text-anchor": "middle",
+					class: "edge-label",
+				});
+
+				label.textContent = edge.label;
+
+				group.appendChild(line);
+				group.appendChild(label);
+				svg.appendChild(group);
+
+				edgeElements.set(edge.id, line);
+				edgeLabelElements.set(edge.id, label);
+			}
+		}
+
+		function renderNodeShape(group, node) {
+			const style = nodeStyle(node);
+
+			if (style.shape === "diamond") {
+				group.appendChild(
+					createSvgElement("polygon", {
+						points: `0,${-style.radius} ${style.radius},0 0,${style.radius} ${-style.radius},0`,
+						fill: style.fill,
+						stroke: style.stroke,
+						"stroke-width": 3,
+					})
+				);
+				return;
+			}
+
+			if (style.shape === "square") {
+				group.appendChild(
+					createSvgElement("rect", {
+						x: -style.radius,
+						y: -style.radius,
+						width: style.radius * 2,
+						height: style.radius * 2,
+						rx: 9,
+						fill: style.fill,
+						stroke: style.stroke,
+						"stroke-width": 3,
+					})
+				);
+				return;
+			}
+
+			group.appendChild(
+				createSvgElement("circle", {
+					cx: 0,
+					cy: 0,
+					r: style.radius,
+					fill: style.fill,
+					stroke: style.stroke,
+					"stroke-width": 3,
+				})
+			);
+		}
+
+		function renderNodes() {
+			for (const node of nodes.values()) {
+				const group = createSvgElement("g", {
+					class: "node",
+					transform: `translate(${node.x}, ${node.y})`,
+				});
+
+				const title = createSvgElement("title");
+				title.textContent = node.title;
+				group.appendChild(title);
+
+				renderNodeShape(group, node);
+
+				const label = createSvgElement("text", {
+					x: 0,
+					y: 56,
+					"text-anchor": "middle",
+					class: "node-label",
+				});
+				label.textContent = node.label;
+				group.appendChild(label);
+
+				const role = createSvgElement("text", {
+					x: 0,
+					y: 74,
+					"text-anchor": "middle",
+					class: "node-role",
+				});
+				role.textContent = node.nodeRole;
+				group.appendChild(role);
+
+				group.addEventListener("pointerdown", (event) => {
+					event.preventDefault();
+					draggingNodeId = node.id;
+
+					const point = getSvgPoint(event);
+					dragOffset.x = node.x - point.x;
+					dragOffset.y = node.y - point.y;
+
+					group.classList.add("dragging");
+					group.setPointerCapture(event.pointerId);
+				});
+
+				group.addEventListener("pointerup", () => {
+					group.classList.remove("dragging");
+					draggingNodeId = null;
+				});
+
+				nodeElements.set(node.id, group);
+				svg.appendChild(group);
+			}
+		}
+
+		function updatePositions() {
+			for (const node of nodes.values()) {
+				const element = nodeElements.get(node.id);
+				element.setAttribute("transform", `translate(${node.x}, ${node.y})`);
+			}
+
+			for (const edge of edges) {
+				const source = nodes.get(edge.from);
+				const target = nodes.get(edge.to);
+				const line = edgeElements.get(edge.id);
+				const label = edgeLabelElements.get(edge.id);
+
+				line.setAttribute("x1", source.x);
+				line.setAttribute("y1", source.y);
+				line.setAttribute("x2", target.x);
+				line.setAttribute("y2", target.y);
+
+				label.setAttribute("x", (source.x + target.x) / 2);
+				label.setAttribute("y", (source.y + target.y) / 2 - 12);
+			}
+		}
+
+		function saveLayout() {
+			const layout = {};
+
+			for (const node of nodes.values()) {
+				layout[node.id] = {
+					x: Math.round(node.x),
+					y: Math.round(node.y),
+				};
+			}
+
+			localStorage.setItem(storageKey, JSON.stringify(layout, null, 2));
+			layoutStatus.textContent = "Layout saved in this browser.";
+		}
+
+		function resetLayout() {
+			localStorage.removeItem(storageKey);
+
+			for (const node of nodes.values()) {
+				const initialPosition = initialPositions.get(node.id);
+				node.x = initialPosition.x;
+				node.y = initialPosition.y;
+			}
+
+			updatePositions();
+			layoutStatus.textContent = "Layout reset.";
+		}
+
+		function downloadLayout() {
+			const layout = {};
+
+			for (const node of nodes.values()) {
+				layout[node.id] = {
+					label: node.label,
+					x: Math.round(node.x),
+					y: Math.round(node.y),
+				};
+			}
+
+			const blob = new Blob([JSON.stringify(layout, null, 2)], {
+				type: "application/json",
+			});
+
+			const url = URL.createObjectURL(blob);
+			const link = document.createElement("a");
+			link.href = url;
+			link.download = "customer_network_layout.json";
+			link.click();
+
+			URL.revokeObjectURL(url);
+		}
+
+		svg.addEventListener("pointermove", (event) => {
+			if (!draggingNodeId) {
+				return;
+			}
+
+			const node = nodes.get(draggingNodeId);
+			const point = getSvgPoint(event);
+
+			node.x = point.x + dragOffset.x;
+			node.y = point.y + dragOffset.y;
+
+			updatePositions();
+			layoutStatus.textContent = "Layout changed. Click Save layout to keep it.";
+		});
+
+		window.addEventListener("pointerup", () => {
+			draggingNodeId = null;
+
+			for (const element of nodeElements.values()) {
+				element.classList.remove("dragging");
+			}
+		});
+
+		document.getElementById("saveLayoutButton").addEventListener("click", saveLayout);
+		document.getElementById("resetLayoutButton").addEventListener("click", resetLayout);
+		document.getElementById("downloadLayoutButton").addEventListener("click", downloadLayout);
+
+		loadNodes();
+		renderEdges();
+		renderNodes();
+	</script>
 </body>
 </html>
 """
+
+	html_content = (
+		html_template
+		.replace("__TITLE_HTML__", html.escape(title))
+		.replace("__WIDTH__", str(width))
+		.replace("__HEIGHT__", str(height))
+		.replace("__NODES_JSON__", json.dumps(nodes, indent=2))
+		.replace("__EDGES_JSON__", json.dumps(edges, indent=2))
+		.replace("__LAYOUT_KEY_JSON__", json.dumps(layout_key))
+	)
 
 	output_path.write_text(html_content, encoding="utf-8")
 

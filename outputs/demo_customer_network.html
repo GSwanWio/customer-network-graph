@@ -29,6 +29,47 @@
 			color: #555;
 		}
 
+		.toolbar {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 20px;
+			background: white;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.toolbar button {
+			border: 1px solid #cbd5e1;
+			background: #ffffff;
+			color: #0f172a;
+			border-radius: 10px;
+			font-size: 13px;
+			font-weight: 700;
+			padding: 8px 12px;
+			cursor: pointer;
+		}
+
+		.toolbar button:hover {
+			background: #f1f5f9;
+		}
+
+		.toolbar .primary {
+			background: #ef4444;
+			color: white;
+			border-color: #ef4444;
+		}
+
+		.toolbar .primary:hover {
+			background: #dc2626;
+		}
+
+		.status {
+			font-size: 12px;
+			color: #64748b;
+			margin-left: 4px;
+		}
+
 		.legend {
 			display: flex;
 			flex-wrap: wrap;
@@ -54,24 +95,34 @@
 
 		.canvas-wrapper {
 			overflow: auto;
-			height: calc(100vh - 116px);
+			height: calc(100vh - 166px);
 			background: #fafafa;
 		}
 
 		svg {
-			min-width: 100%;
 			background: #fafafa;
+			user-select: none;
+		}
+
+		.node {
+			cursor: grab;
+		}
+
+		.node.dragging {
+			cursor: grabbing;
 		}
 
 		.node-label {
 			font-size: 13px;
 			font-weight: 700;
 			fill: #222;
+			pointer-events: none;
 		}
 
 		.node-role {
 			font-size: 9px;
 			fill: #555;
+			pointer-events: none;
 		}
 
 		.edge-label {
@@ -82,19 +133,21 @@
 			stroke: #fafafa;
 			stroke-width: 4px;
 			stroke-linejoin: round;
-		}
-
-		.node:hover,
-		.edge:hover {
-			cursor: pointer;
-			filter: brightness(1.05);
+			pointer-events: none;
 		}
 	</style>
 </head>
 <body>
 	<div class="header">
 		<h1>Demo Customer Network Graph</h1>
-		<p>Self-contained visual. Hover over nodes and edges for details. No external JavaScript is required.</p>
+		<p>Drag nodes to arrange the network. Hover over nodes and edges for details. Use Save layout to keep your arrangement in this browser.</p>
+	</div>
+
+	<div class="toolbar">
+		<button class="primary" id="saveLayoutButton">Save layout</button>
+		<button id="resetLayoutButton">Reset layout</button>
+		<button id="downloadLayoutButton">Download layout JSON</button>
+		<span class="status" id="layoutStatus">Layout not saved yet.</span>
 	</div>
 
 	<div class="legend">
@@ -106,988 +159,792 @@
 	</div>
 
 	<div class="canvas-wrapper">
-		<svg width="1180" height="1590" viewBox="0 0 1180 1590">
-			
-			<g class="edge">
-				<title>Relationship: ENTITY_HAS_EMIRATES_ID
-Layer: IDENTITY
-Role: GROUP_FORMING
-Emirates ID: ****2222</title>
-				<line
-					x1="330"
-					y1="680"
-					x2="110"
-					y2="450"
-					stroke="#9467bd"
-					stroke-width="3"
-					stroke-dasharray="6 4"
-				/>
-				<text x="220.0" y="551.0" text-anchor="middle" class="edge-label">EID</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_HAS_EMIRATES_ID
-Layer: IDENTITY
-Role: GROUP_FORMING
-Emirates ID: ****2222</title>
-				<line
-					x1="110"
-					y1="680"
-					x2="110"
-					y2="450"
-					stroke="#9467bd"
-					stroke-width="3"
-					stroke-dasharray="6 4"
-				/>
-				<text x="110.0" y="551.0" text-anchor="middle" class="edge-label">EID</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_HAS_EMIRATES_ID
-Layer: IDENTITY
-Role: GROUP_FORMING
-Emirates ID: ****1234</title>
-				<line
-					x1="550"
-					y1="220"
-					x2="330"
-					y2="220"
-					stroke="#9467bd"
-					stroke-width="3"
-					stroke-dasharray="6 4"
-				/>
-				<text x="440.0" y="206.0" text-anchor="middle" class="edge-label">EID</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_HAS_EMIRATES_ID
-Layer: IDENTITY
-Role: GROUP_FORMING
-Emirates ID: ****1234</title>
-				<line
-					x1="110"
-					y1="220"
-					x2="330"
-					y2="220"
-					stroke="#9467bd"
-					stroke-width="3"
-					stroke-dasharray="6 4"
-				/>
-				<text x="220.0" y="206.0" text-anchor="middle" class="edge-label">EID</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 1000.0
-First seen: 2026-01-01 10:00:00
-Last seen: 2026-01-01 10:00:00</title>
-				<line
-					x1="550"
-					y1="220"
-					x2="770"
-					y2="220"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="660.0" y="206.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 300.0
-First seen: 2026-01-05 14:00:00
-Last seen: 2026-01-05 14:00:00</title>
-				<line
-					x1="770"
-					y1="450"
-					x2="550"
-					y2="450"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="660.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: INBOUND_ONLY
-Transaction count: 1
-Transaction amount: 700.0
-First seen: 2026-01-04 13:00:00
-Last seen: 2026-01-04 13:00:00</title>
-				<line
-					x1="770"
-					y1="450"
-					x2="990"
-					y2="450"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="880.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: INBOUND_ONLY
-Transaction count: 1
-Transaction amount: 2000.0
-First seen: 2026-01-02 11:00:00
-Last seen: 2026-01-02 11:00:00</title>
-				<line
-					x1="990"
-					y1="220"
-					x2="770"
-					y2="220"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="880.0" y="206.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 500.0
-First seen: 2026-01-03 12:00:00
-Last seen: 2026-01-03 12:00:00</title>
-				<line
-					x1="990"
-					y1="220"
-					x2="990"
-					y2="450"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="990.0" y="321.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: INBOUND_ONLY
-Transaction count: 1
-Transaction amount: 400.0
-First seen: 2026-01-06 15:00:00
-Last seen: 2026-01-06 15:00:00</title>
-				<line
-					x1="330"
-					y1="450"
-					x2="550"
-					y2="450"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="440.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_HAS_EMIRATES_ID
-Layer: IDENTITY
-Role: GROUP_FORMING
-Emirates ID: ****5555</title>
-				<line
-					x1="990"
-					y1="680"
-					x2="550"
-					y2="680"
-					stroke="#9467bd"
-					stroke-width="3"
-					stroke-dasharray="6 4"
-				/>
-				<text x="770.0" y="666.0" text-anchor="middle" class="edge-label">EID</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_HAS_EMIRATES_ID
-Layer: IDENTITY
-Role: GROUP_FORMING
-Emirates ID: ****5555</title>
-				<line
-					x1="770"
-					y1="680"
-					x2="550"
-					y2="680"
-					stroke="#9467bd"
-					stroke-width="3"
-					stroke-dasharray="6 4"
-				/>
-				<text x="660.0" y="666.0" text-anchor="middle" class="edge-label">EID</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_HAS_EMIRATES_ID
-Layer: IDENTITY
-Role: GROUP_FORMING
-Emirates ID: ****5555</title>
-				<line
-					x1="990"
-					y1="910"
-					x2="550"
-					y2="680"
-					stroke="#9467bd"
-					stroke-width="3"
-					stroke-dasharray="6 4"
-				/>
-				<text x="770.0" y="781.0" text-anchor="middle" class="edge-label">EID</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 1500.0
-First seen: 2026-02-01 10:00:00
-Last seen: 2026-02-01 10:00:00</title>
-				<line
-					x1="990"
-					y1="680"
-					x2="330"
-					y2="1140"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="660.0" y="896.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: INBOUND_ONLY
-Transaction count: 1
-Transaction amount: 1800.0
-First seen: 2026-02-02 11:00:00
-Last seen: 2026-02-02 11:00:00</title>
-				<line
-					x1="770"
-					y1="910"
-					x2="330"
-					y2="1140"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="550.0" y="1011.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 600.0
-First seen: 2026-02-04 13:00:00
-Last seen: 2026-02-04 13:00:00</title>
-				<line
-					x1="770"
-					y1="910"
-					x2="990"
-					y2="1140"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="880.0" y="1011.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: INBOUND_ONLY
-Transaction count: 1
-Transaction amount: 650.0
-First seen: 2026-02-05 14:00:00
-Last seen: 2026-02-05 14:00:00</title>
-				<line
-					x1="330"
-					y1="910"
-					x2="990"
-					y2="1140"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="660.0" y="1011.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: INBOUND_ONLY
-Transaction count: 1
-Transaction amount: 1300.0
-First seen: 2026-02-09 18:00:00
-Last seen: 2026-02-09 18:00:00</title>
-				<line
-					x1="110"
-					y1="1140"
-					x2="550"
-					y2="1140"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="330.0" y="1126.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 1200.0
-First seen: 2026-02-08 17:00:00
-Last seen: 2026-02-08 17:00:00</title>
-				<line
-					x1="990"
-					y1="910"
-					x2="550"
-					y2="1140"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="770.0" y="1011.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 900.0
-First seen: 2026-02-03 12:00:00
-Last seen: 2026-02-03 12:00:00</title>
-				<line
-					x1="550"
-					y1="910"
-					x2="330"
-					y2="1140"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="440.0" y="1011.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 750.0
-First seen: 2026-02-06 15:00:00
-Last seen: 2026-02-06 15:00:00</title>
-				<line
-					x1="550"
-					y1="910"
-					x2="770"
-					y2="1140"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="660.0" y="1011.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: INBOUND_ONLY
-Transaction count: 1
-Transaction amount: 800.0
-First seen: 2026-02-07 16:00:00
-Last seen: 2026-02-07 16:00:00</title>
-				<line
-					x1="110"
-					y1="910"
-					x2="770"
-					y2="1140"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="440.0" y="1011.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_1
-Type: ENTITY
-Role: SEED_ENTITY
-Layers: IDENTITY
-Entity type: SME
-Customer ID: CUST_1</title>
-				
-				<circle
-					cx="110"
-					cy="220"
-					r="36"
-					fill="#d62728"
-					stroke="#8c1d1d"
-					stroke-width="3"
-				/>
-			
-				<text x="110" y="276" text-anchor="middle" class="node-label">CUST_1</text>
-				<text x="110" y="294" text-anchor="middle" class="node-role">SEED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181
-Type: EMIRATES_ID
-Role: EMIRATES_ID_CONNECTOR
-Layers: IDENTITY
-Emirates ID: ****1234</title>
-				
-				<polygon
-					points="330,186 364,220 330,254 296,220"
-					fill="#9467bd"
-					stroke="#5e3f7a"
-					stroke-width="3"
-				/>
-			
-				<text x="330" y="276" text-anchor="middle" class="node-label">EID ****1234</text>
-				<text x="330" y="294" text-anchor="middle" class="node-role">EMIRATES_ID_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|RETAIL|CUST_2
-Type: ENTITY
-Role: COUNTERPARTY_EXPANSION_START_ENTITY
-Layers: IDENTITY|LOCAL_COUNTERPARTY
-Entity type: RETAIL
-Customer ID: CUST_2</title>
-				
-				<circle
-					cx="550"
-					cy="220"
-					r="32"
-					fill="#ff7f0e"
-					stroke="#a85108"
-					stroke-width="3"
-				/>
-			
-				<text x="550" y="276" text-anchor="middle" class="node-label">CUST_2</text>
-				<text x="550" y="294" text-anchor="middle" class="node-role">COUNTERPARTY_EXPANSION_START_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20
-Type: LOCAL_COUNTERPARTY_ACCOUNT
-Role: COUNTERPARTY_CONNECTOR
-Layers: LOCAL_COUNTERPARTY
-Counterparty account: ****OUNT</title>
-				
-				<rect
-					x="740"
-					y="190"
-					width="60"
-					height="60"
-					rx="8"
-					fill="#2ca02c"
-					stroke="#1d6b1d"
-					stroke-width="3"
-				/>
-			
-				<text x="770" y="276" text-anchor="middle" class="node-label">Account ****OUNT (1D1D8D)</text>
-				<text x="770" y="294" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_3
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: SME
-Customer ID: CUST_3</title>
-				
-				<circle
-					cx="990"
-					cy="220"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="990" y="276" text-anchor="middle" class="node-label">CUST_3</text>
-				<text x="990" y="294" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B
-Type: LOCAL_COUNTERPARTY_ACCOUNT
-Role: COUNTERPARTY_CONNECTOR
-Layers: LOCAL_COUNTERPARTY
-Counterparty account: ****OUNT</title>
-				
-				<rect
-					x="960"
-					y="420"
-					width="60"
-					height="60"
-					rx="8"
-					fill="#2ca02c"
-					stroke="#1d6b1d"
-					stroke-width="3"
-				/>
-			
-				<text x="990" y="506" text-anchor="middle" class="node-label">Account ****OUNT (7266EE)</text>
-				<text x="990" y="524" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|RETAIL|CUST_4
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: RETAIL
-Customer ID: CUST_4</title>
-				
-				<circle
-					cx="770"
-					cy="450"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="770" y="506" text-anchor="middle" class="node-label">CUST_4</text>
-				<text x="770" y="524" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4
-Type: LOCAL_COUNTERPARTY_ACCOUNT
-Role: COUNTERPARTY_CONNECTOR
-Layers: LOCAL_COUNTERPARTY
-Counterparty account: ****OUNT</title>
-				
-				<rect
-					x="520"
-					y="420"
-					width="60"
-					height="60"
-					rx="8"
-					fill="#2ca02c"
-					stroke="#1d6b1d"
-					stroke-width="3"
-				/>
-			
-				<text x="550" y="506" text-anchor="middle" class="node-label">Account ****OUNT (3395DB)</text>
-				<text x="550" y="524" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_5
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: SME
-Customer ID: CUST_5</title>
-				
-				<circle
-					cx="330"
-					cy="450"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="330" y="506" text-anchor="middle" class="node-label">CUST_5</text>
-				<text x="330" y="524" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: EID|29C7CD38825C9889758BCEF1A1B31E9BFF6A5D23C255609706277A35E228B1E0
-Type: EMIRATES_ID
-Role: EMIRATES_ID_CONNECTOR
-Layers: IDENTITY
-Emirates ID: ****2222</title>
-				
-				<polygon
-					points="110,416 144,450 110,484 76,450"
-					fill="#9467bd"
-					stroke="#5e3f7a"
-					stroke-width="3"
-				/>
-			
-				<text x="110" y="506" text-anchor="middle" class="node-label">EID ****2222</text>
-				<text x="110" y="524" text-anchor="middle" class="node-role">EMIRATES_ID_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_6
-Type: ENTITY
-Role: SEED_ENTITY
-Layers: IDENTITY
-Entity type: SME
-Customer ID: CUST_6</title>
-				
-				<circle
-					cx="110"
-					cy="680"
-					r="36"
-					fill="#d62728"
-					stroke="#8c1d1d"
-					stroke-width="3"
-				/>
-			
-				<text x="110" y="736" text-anchor="middle" class="node-label">CUST_6</text>
-				<text x="110" y="754" text-anchor="middle" class="node-role">SEED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|RETAIL|CUST_7
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: IDENTITY
-Entity type: RETAIL
-Customer ID: CUST_7</title>
-				
-				<circle
-					cx="330"
-					cy="680"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="330" y="736" text-anchor="middle" class="node-label">CUST_7</text>
-				<text x="330" y="754" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: EID|C52DF1A93A6C14DC39E68996ED9A0758FC6DA30CC4B615146245046E33D9A6FD
-Type: EMIRATES_ID
-Role: EMIRATES_ID_CONNECTOR
-Layers: IDENTITY
-Emirates ID: ****5555</title>
-				
-				<polygon
-					points="550,646 584,680 550,714 516,680"
-					fill="#9467bd"
-					stroke="#5e3f7a"
-					stroke-width="3"
-				/>
-			
-				<text x="550" y="736" text-anchor="middle" class="node-label">EID ****5555</text>
-				<text x="550" y="754" text-anchor="middle" class="node-role">EMIRATES_ID_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_10
-Type: ENTITY
-Role: SEED_ENTITY
-Layers: IDENTITY
-Entity type: SME
-Customer ID: CUST_10</title>
-				
-				<circle
-					cx="770"
-					cy="680"
-					r="36"
-					fill="#d62728"
-					stroke="#8c1d1d"
-					stroke-width="3"
-				/>
-			
-				<text x="770" y="736" text-anchor="middle" class="node-label">CUST_10</text>
-				<text x="770" y="754" text-anchor="middle" class="node-role">SEED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|RETAIL|CUST_11
-Type: ENTITY
-Role: COUNTERPARTY_EXPANSION_START_ENTITY
-Layers: IDENTITY|LOCAL_COUNTERPARTY
-Entity type: RETAIL
-Customer ID: CUST_11</title>
-				
-				<circle
-					cx="990"
-					cy="680"
-					r="32"
-					fill="#ff7f0e"
-					stroke="#a85108"
-					stroke-width="3"
-				/>
-			
-				<text x="990" y="736" text-anchor="middle" class="node-label">CUST_11</text>
-				<text x="990" y="754" text-anchor="middle" class="node-role">COUNTERPARTY_EXPANSION_START_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_12
-Type: ENTITY
-Role: COUNTERPARTY_EXPANSION_START_ENTITY
-Layers: IDENTITY|LOCAL_COUNTERPARTY
-Entity type: SME
-Customer ID: CUST_12</title>
-				
-				<circle
-					cx="990"
-					cy="910"
-					r="32"
-					fill="#ff7f0e"
-					stroke="#a85108"
-					stroke-width="3"
-				/>
-			
-				<text x="990" y="966" text-anchor="middle" class="node-label">CUST_12</text>
-				<text x="990" y="984" text-anchor="middle" class="node-role">COUNTERPARTY_EXPANSION_START_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|RETAIL|CUST_13
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: RETAIL
-Customer ID: CUST_13</title>
-				
-				<circle
-					cx="770"
-					cy="910"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="770" y="966" text-anchor="middle" class="node-label">CUST_13</text>
-				<text x="770" y="984" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_14
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: SME
-Customer ID: CUST_14</title>
-				
-				<circle
-					cx="550"
-					cy="910"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="550" y="966" text-anchor="middle" class="node-label">CUST_14</text>
-				<text x="550" y="984" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|RETAIL|CUST_15
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: RETAIL
-Customer ID: CUST_15</title>
-				
-				<circle
-					cx="330"
-					cy="910"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="330" y="966" text-anchor="middle" class="node-label">CUST_15</text>
-				<text x="330" y="984" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_16
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: SME
-Customer ID: CUST_16</title>
-				
-				<circle
-					cx="110"
-					cy="910"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="110" y="966" text-anchor="middle" class="node-label">CUST_16</text>
-				<text x="110" y="984" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|RETAIL|CUST_17
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: RETAIL
-Customer ID: CUST_17</title>
-				
-				<circle
-					cx="110"
-					cy="1140"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="110" y="1196" text-anchor="middle" class="node-label">CUST_17</text>
-				<text x="110" y="1214" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|4964ABF5B41443597943F2FAC035BD979272067D6D96E45F3E516C398CBAFC00
-Type: LOCAL_COUNTERPARTY_ACCOUNT
-Role: COUNTERPARTY_CONNECTOR
-Layers: LOCAL_COUNTERPARTY
-Counterparty account: ****OUNT</title>
-				
-				<rect
-					x="300"
-					y="1110"
-					width="60"
-					height="60"
-					rx="8"
-					fill="#2ca02c"
-					stroke="#1d6b1d"
-					stroke-width="3"
-				/>
-			
-				<text x="330" y="1196" text-anchor="middle" class="node-label">Account ****OUNT (4964AB)</text>
-				<text x="330" y="1214" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|6BB4B501AD0663CC37212CAD062F31289105A3AE9DCCA9C654CF570B19FBF008
-Type: LOCAL_COUNTERPARTY_ACCOUNT
-Role: COUNTERPARTY_CONNECTOR
-Layers: LOCAL_COUNTERPARTY
-Counterparty account: ****OUNT</title>
-				
-				<rect
-					x="520"
-					y="1110"
-					width="60"
-					height="60"
-					rx="8"
-					fill="#2ca02c"
-					stroke="#1d6b1d"
-					stroke-width="3"
-				/>
-			
-				<text x="550" y="1196" text-anchor="middle" class="node-label">Account ****OUNT (6BB4B5)</text>
-				<text x="550" y="1214" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|8B3D456FCE67C9814F5FE3425677DBAD85BF442C0E0435326050EB526965F26E
-Type: LOCAL_COUNTERPARTY_ACCOUNT
-Role: COUNTERPARTY_CONNECTOR
-Layers: LOCAL_COUNTERPARTY
-Counterparty account: ****OUNT</title>
-				
-				<rect
-					x="740"
-					y="1110"
-					width="60"
-					height="60"
-					rx="8"
-					fill="#2ca02c"
-					stroke="#1d6b1d"
-					stroke-width="3"
-				/>
-			
-				<text x="770" y="1196" text-anchor="middle" class="node-label">Account ****OUNT (8B3D45)</text>
-				<text x="770" y="1214" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|B13322029717A5794884F74483F5B4847283A9751E47FD6153312CF9FD04F170
-Type: LOCAL_COUNTERPARTY_ACCOUNT
-Role: COUNTERPARTY_CONNECTOR
-Layers: LOCAL_COUNTERPARTY
-Counterparty account: ****OUNT</title>
-				
-				<rect
-					x="960"
-					y="1110"
-					width="60"
-					height="60"
-					rx="8"
-					fill="#2ca02c"
-					stroke="#1d6b1d"
-					stroke-width="3"
-				/>
-			
-				<text x="990" y="1196" text-anchor="middle" class="node-label">Account ****OUNT (B13322)</text>
-				<text x="990" y="1214" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_8
-Type: ENTITY
-Role: SEED_ENTITY
-Layers: IDENTITY
-Entity type: SME
-Customer ID: CUST_8</title>
-				
-				<circle
-					cx="990"
-					cy="1370"
-					r="36"
-					fill="#d62728"
-					stroke="#8c1d1d"
-					stroke-width="3"
-				/>
-			
-				<text x="990" y="1426" text-anchor="middle" class="node-label">CUST_8</text>
-				<text x="990" y="1444" text-anchor="middle" class="node-role">SEED_ENTITY</text>
-			</g>
-		
-		</svg>
+		<svg id="graphSvg" width="1500" height="850" viewBox="0 0 1500 850"></svg>
 	</div>
+
+	<script>
+		const svgNamespace = "http://www.w3.org/2000/svg";
+		const initialNodes = [
+  {
+    "id": "EID|29C7CD38825C9889758BCEF1A1B31E9BFF6A5D23C255609706277A35E228B1E0",
+    "label": "EID ****2222",
+    "title": "Node ID: EID|29C7CD38825C9889758BCEF1A1B31E9BFF6A5D23C255609706277A35E228B1E0\nType: EMIRATES_ID\nRole: EMIRATES_ID_CONNECTOR\nLayers: IDENTITY\nEmirates ID: ****2222",
+    "group": "emirates_id",
+    "nodeType": "EMIRATES_ID",
+    "nodeRole": "EMIRATES_ID_CONNECTOR",
+    "x": 862.2461312043724,
+    "y": 675.9589658890111
+  },
+  {
+    "id": "ENTITY|SME|CUST_6",
+    "label": "CUST_6",
+    "title": "Node ID: ENTITY|SME|CUST_6\nType: ENTITY\nRole: SEED_ENTITY\nLayers: IDENTITY\nEntity type: SME\nCustomer ID: CUST_6",
+    "group": "seed_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "SEED_ENTITY",
+    "x": 1014.1690273478159,
+    "y": 706.2201960237742
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_7",
+    "label": "CUST_7",
+    "title": "Node ID: ENTITY|RETAIL|CUST_7\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: IDENTITY\nEntity type: RETAIL\nCustomer ID: CUST_7",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 701.1387947045063,
+    "y": 567.0889594173808
+  },
+  {
+    "id": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
+    "label": "EID ****1234",
+    "title": "Node ID: EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181\nType: EMIRATES_ID\nRole: EMIRATES_ID_CONNECTOR\nLayers: IDENTITY\nEmirates ID: ****1234",
+    "group": "emirates_id",
+    "nodeType": "EMIRATES_ID",
+    "nodeRole": "EMIRATES_ID_CONNECTOR",
+    "x": 440.5089065872612,
+    "y": 678.2287187376767
+  },
+  {
+    "id": "ENTITY|SME|CUST_1",
+    "label": "CUST_1",
+    "title": "Node ID: ENTITY|SME|CUST_1\nType: ENTITY\nRole: SEED_ENTITY\nLayers: IDENTITY\nEntity type: SME\nCustomer ID: CUST_1",
+    "group": "seed_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "SEED_ENTITY",
+    "x": 591.5003692912178,
+    "y": 740.0
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_2",
+    "label": "CUST_2",
+    "title": "Node ID: ENTITY|RETAIL|CUST_2\nType: ENTITY\nRole: COUNTERPARTY_EXPANSION_START_ENTITY\nLayers: IDENTITY|LOCAL_COUNTERPARTY\nEntity type: RETAIL\nCustomer ID: CUST_2",
+    "group": "counterparty_expansion_start",
+    "nodeType": "ENTITY",
+    "nodeRole": "COUNTERPARTY_EXPANSION_START_ENTITY",
+    "x": 437.1379580352887,
+    "y": 530.3060577051767
+  },
+  {
+    "id": "ENTITY|SME|CUST_3",
+    "label": "CUST_3",
+    "title": "Node ID: ENTITY|SME|CUST_3\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: SME\nCustomer ID: CUST_3",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 644.1244294521124,
+    "y": 253.08584065369635
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_4",
+    "label": "CUST_4",
+    "title": "Node ID: ENTITY|RETAIL|CUST_4\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: RETAIL\nCustomer ID: CUST_4",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 474.11552344438104,
+    "y": 160.46723002950586
+  },
+  {
+    "id": "ENTITY|SME|CUST_5",
+    "label": "CUST_5",
+    "title": "Node ID: ENTITY|SME|CUST_5\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: SME\nCustomer ID: CUST_5",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 784.284915717489,
+    "y": 230.2720661255356
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
+    "label": "Account ****OUNT (1D1D8D)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20\nType: LOCAL_COUNTERPARTY_ACCOUNT\nRole: COUNTERPARTY_CONNECTOR\nLayers: LOCAL_COUNTERPARTY\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account",
+    "nodeType": "LOCAL_COUNTERPARTY_ACCOUNT",
+    "nodeRole": "COUNTERPARTY_CONNECTOR",
+    "x": 548.9118038188774,
+    "y": 390.0035521573826
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
+    "label": "Account ****OUNT (3395DB)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4\nType: LOCAL_COUNTERPARTY_ACCOUNT\nRole: COUNTERPARTY_CONNECTOR\nLayers: LOCAL_COUNTERPARTY\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account",
+    "nodeType": "LOCAL_COUNTERPARTY_ACCOUNT",
+    "nodeRole": "COUNTERPARTY_CONNECTOR",
+    "x": 693.2711525747334,
+    "y": 134.46737392936976
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
+    "label": "Account ****OUNT (7266EE)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B\nType: LOCAL_COUNTERPARTY_ACCOUNT\nRole: COUNTERPARTY_CONNECTOR\nLayers: LOCAL_COUNTERPARTY\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account",
+    "nodeType": "LOCAL_COUNTERPARTY_ACCOUNT",
+    "nodeRole": "COUNTERPARTY_CONNECTOR",
+    "x": 535.2567536444003,
+    "y": 142.0285368330285
+  },
+  {
+    "id": "EID|C52DF1A93A6C14DC39E68996ED9A0758FC6DA30CC4B615146245046E33D9A6FD",
+    "label": "EID ****5555",
+    "title": "Node ID: EID|C52DF1A93A6C14DC39E68996ED9A0758FC6DA30CC4B615146245046E33D9A6FD\nType: EMIRATES_ID\nRole: EMIRATES_ID_CONNECTOR\nLayers: IDENTITY\nEmirates ID: ****5555",
+    "group": "emirates_id",
+    "nodeType": "EMIRATES_ID",
+    "nodeRole": "EMIRATES_ID_CONNECTOR",
+    "x": 505.46605427394377,
+    "y": 588.0998960788252
+  },
+  {
+    "id": "ENTITY|SME|CUST_10",
+    "label": "CUST_10",
+    "title": "Node ID: ENTITY|SME|CUST_10\nType: ENTITY\nRole: SEED_ENTITY\nLayers: IDENTITY\nEntity type: SME\nCustomer ID: CUST_10",
+    "group": "seed_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "SEED_ENTITY",
+    "x": 280.4361776645647,
+    "y": 626.6144245858895
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_11",
+    "label": "CUST_11",
+    "title": "Node ID: ENTITY|RETAIL|CUST_11\nType: ENTITY\nRole: COUNTERPARTY_EXPANSION_START_ENTITY\nLayers: IDENTITY|LOCAL_COUNTERPARTY\nEntity type: RETAIL\nCustomer ID: CUST_11",
+    "group": "counterparty_expansion_start",
+    "nodeType": "ENTITY",
+    "nodeRole": "COUNTERPARTY_EXPANSION_START_ENTITY",
+    "x": 771.0039371642916,
+    "y": 557.8466948628875
+  },
+  {
+    "id": "ENTITY|SME|CUST_12",
+    "label": "CUST_12",
+    "title": "Node ID: ENTITY|SME|CUST_12\nType: ENTITY\nRole: COUNTERPARTY_EXPANSION_START_ENTITY\nLayers: IDENTITY|LOCAL_COUNTERPARTY\nEntity type: SME\nCustomer ID: CUST_12",
+    "group": "counterparty_expansion_start",
+    "nodeType": "ENTITY",
+    "nodeRole": "COUNTERPARTY_EXPANSION_START_ENTITY",
+    "x": 536.8879724389199,
+    "y": 554.2223520376376
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_13",
+    "label": "CUST_13",
+    "title": "Node ID: ENTITY|RETAIL|CUST_13\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: RETAIL\nCustomer ID: CUST_13",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 770.3595187155523,
+    "y": 385.45549792242997
+  },
+  {
+    "id": "ENTITY|SME|CUST_14",
+    "label": "CUST_14",
+    "title": "Node ID: ENTITY|SME|CUST_14\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: SME\nCustomer ID: CUST_14",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 1151.8639937979829,
+    "y": 548.1819328235158
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_15",
+    "label": "CUST_15",
+    "title": "Node ID: ENTITY|RETAIL|CUST_15\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: RETAIL\nCustomer ID: CUST_15",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 607.0517795961543,
+    "y": 110.0
+  },
+  {
+    "id": "ENTITY|SME|CUST_16",
+    "label": "CUST_16",
+    "title": "Node ID: ENTITY|SME|CUST_16\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: SME\nCustomer ID: CUST_16",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 1347.1428821113504,
+    "y": 419.20587471653084
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_17",
+    "label": "CUST_17",
+    "title": "Node ID: ENTITY|RETAIL|CUST_17\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: RETAIL\nCustomer ID: CUST_17",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 120.0,
+    "y": 487.2389766484562
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|4964ABF5B41443597943F2FAC035BD979272067D6D96E45F3E516C398CBAFC00",
+    "label": "Account ****OUNT (4964AB)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|4964ABF5B41443597943F2FAC035BD979272067D6D96E45F3E516C398CBAFC00\nType: LOCAL_COUNTERPARTY_ACCOUNT\nRole: COUNTERPARTY_CONNECTOR\nLayers: LOCAL_COUNTERPARTY\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account",
+    "nodeType": "LOCAL_COUNTERPARTY_ACCOUNT",
+    "nodeRole": "COUNTERPARTY_CONNECTOR",
+    "x": 941.4931453927152,
+    "y": 489.0970074100029
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|6BB4B501AD0663CC37212CAD062F31289105A3AE9DCCA9C654CF570B19FBF008",
+    "label": "Account ****OUNT (6BB4B5)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|6BB4B501AD0663CC37212CAD062F31289105A3AE9DCCA9C654CF570B19FBF008\nType: LOCAL_COUNTERPARTY_ACCOUNT\nRole: COUNTERPARTY_CONNECTOR\nLayers: LOCAL_COUNTERPARTY\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account",
+    "nodeType": "LOCAL_COUNTERPARTY_ACCOUNT",
+    "nodeRole": "COUNTERPARTY_CONNECTOR",
+    "x": 293.83541074486885,
+    "y": 518.7194437003909
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|8B3D456FCE67C9814F5FE3425677DBAD85BF442C0E0435326050EB526965F26E",
+    "label": "Account ****OUNT (8B3D45)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|8B3D456FCE67C9814F5FE3425677DBAD85BF442C0E0435326050EB526965F26E\nType: LOCAL_COUNTERPARTY_ACCOUNT\nRole: COUNTERPARTY_CONNECTOR\nLayers: LOCAL_COUNTERPARTY\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account",
+    "nodeType": "LOCAL_COUNTERPARTY_ACCOUNT",
+    "nodeRole": "COUNTERPARTY_CONNECTOR",
+    "x": 1304.1624444638755,
+    "y": 514.9420934062304
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|B13322029717A5794884F74483F5B4847283A9751E47FD6153312CF9FD04F170",
+    "label": "Account ****OUNT (B13322)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|B13322029717A5794884F74483F5B4847283A9751E47FD6153312CF9FD04F170\nType: LOCAL_COUNTERPARTY_ACCOUNT\nRole: COUNTERPARTY_CONNECTOR\nLayers: LOCAL_COUNTERPARTY\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account",
+    "nodeType": "LOCAL_COUNTERPARTY_ACCOUNT",
+    "nodeRole": "COUNTERPARTY_CONNECTOR",
+    "x": 607.1137928236726,
+    "y": 251.01612218585464
+  },
+  {
+    "id": "ENTITY|SME|CUST_8",
+    "label": "CUST_8",
+    "title": "Node ID: ENTITY|SME|CUST_8\nType: ENTITY\nRole: SEED_ENTITY\nLayers: IDENTITY\nEntity type: SME\nCustomer ID: CUST_8",
+    "group": "seed_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "SEED_ENTITY",
+    "x": 1380.0,
+    "y": 470.87699070745873
+  }
+];
+		const edges = [
+  {
+    "id": "edge_0",
+    "from": "ENTITY|RETAIL|CUST_7",
+    "to": "EID|29C7CD38825C9889758BCEF1A1B31E9BFF6A5D23C255609706277A35E228B1E0",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\nLayer: IDENTITY\nRole: GROUP_FORMING\nEmirates ID: ****2222",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "id": "edge_1",
+    "from": "ENTITY|SME|CUST_6",
+    "to": "EID|29C7CD38825C9889758BCEF1A1B31E9BFF6A5D23C255609706277A35E228B1E0",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\nLayer: IDENTITY\nRole: GROUP_FORMING\nEmirates ID: ****2222",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "id": "edge_2",
+    "from": "ENTITY|RETAIL|CUST_2",
+    "to": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\nLayer: IDENTITY\nRole: GROUP_FORMING\nEmirates ID: ****1234",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "id": "edge_3",
+    "from": "ENTITY|SME|CUST_1",
+    "to": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\nLayer: IDENTITY\nRole: GROUP_FORMING\nEmirates ID: ****1234",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "id": "edge_4",
+    "from": "ENTITY|RETAIL|CUST_2",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 1000.0\nFirst seen: 2026-01-01 10:00:00\nLast seen: 2026-01-01 10:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_5",
+    "from": "ENTITY|RETAIL|CUST_4",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 300.0\nFirst seen: 2026-01-05 14:00:00\nLast seen: 2026-01-05 14:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_6",
+    "from": "ENTITY|RETAIL|CUST_4",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: INBOUND_ONLY\nTransaction count: 1\nTransaction amount: 700.0\nFirst seen: 2026-01-04 13:00:00\nLast seen: 2026-01-04 13:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_7",
+    "from": "ENTITY|SME|CUST_3",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: INBOUND_ONLY\nTransaction count: 1\nTransaction amount: 2000.0\nFirst seen: 2026-01-02 11:00:00\nLast seen: 2026-01-02 11:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_8",
+    "from": "ENTITY|SME|CUST_3",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 500.0\nFirst seen: 2026-01-03 12:00:00\nLast seen: 2026-01-03 12:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_9",
+    "from": "ENTITY|SME|CUST_5",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: INBOUND_ONLY\nTransaction count: 1\nTransaction amount: 400.0\nFirst seen: 2026-01-06 15:00:00\nLast seen: 2026-01-06 15:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_10",
+    "from": "ENTITY|RETAIL|CUST_11",
+    "to": "EID|C52DF1A93A6C14DC39E68996ED9A0758FC6DA30CC4B615146245046E33D9A6FD",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\nLayer: IDENTITY\nRole: GROUP_FORMING\nEmirates ID: ****5555",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "id": "edge_11",
+    "from": "ENTITY|SME|CUST_10",
+    "to": "EID|C52DF1A93A6C14DC39E68996ED9A0758FC6DA30CC4B615146245046E33D9A6FD",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\nLayer: IDENTITY\nRole: GROUP_FORMING\nEmirates ID: ****5555",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "id": "edge_12",
+    "from": "ENTITY|SME|CUST_12",
+    "to": "EID|C52DF1A93A6C14DC39E68996ED9A0758FC6DA30CC4B615146245046E33D9A6FD",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\nLayer: IDENTITY\nRole: GROUP_FORMING\nEmirates ID: ****5555",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "id": "edge_13",
+    "from": "ENTITY|RETAIL|CUST_11",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|4964ABF5B41443597943F2FAC035BD979272067D6D96E45F3E516C398CBAFC00",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 1500.0\nFirst seen: 2026-02-01 10:00:00\nLast seen: 2026-02-01 10:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_14",
+    "from": "ENTITY|RETAIL|CUST_13",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|4964ABF5B41443597943F2FAC035BD979272067D6D96E45F3E516C398CBAFC00",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: INBOUND_ONLY\nTransaction count: 1\nTransaction amount: 1800.0\nFirst seen: 2026-02-02 11:00:00\nLast seen: 2026-02-02 11:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_15",
+    "from": "ENTITY|RETAIL|CUST_13",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|B13322029717A5794884F74483F5B4847283A9751E47FD6153312CF9FD04F170",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 600.0\nFirst seen: 2026-02-04 13:00:00\nLast seen: 2026-02-04 13:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_16",
+    "from": "ENTITY|RETAIL|CUST_15",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|B13322029717A5794884F74483F5B4847283A9751E47FD6153312CF9FD04F170",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: INBOUND_ONLY\nTransaction count: 1\nTransaction amount: 650.0\nFirst seen: 2026-02-05 14:00:00\nLast seen: 2026-02-05 14:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_17",
+    "from": "ENTITY|RETAIL|CUST_17",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|6BB4B501AD0663CC37212CAD062F31289105A3AE9DCCA9C654CF570B19FBF008",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: INBOUND_ONLY\nTransaction count: 1\nTransaction amount: 1300.0\nFirst seen: 2026-02-09 18:00:00\nLast seen: 2026-02-09 18:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_18",
+    "from": "ENTITY|SME|CUST_12",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|6BB4B501AD0663CC37212CAD062F31289105A3AE9DCCA9C654CF570B19FBF008",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 1200.0\nFirst seen: 2026-02-08 17:00:00\nLast seen: 2026-02-08 17:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_19",
+    "from": "ENTITY|SME|CUST_14",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|4964ABF5B41443597943F2FAC035BD979272067D6D96E45F3E516C398CBAFC00",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 900.0\nFirst seen: 2026-02-03 12:00:00\nLast seen: 2026-02-03 12:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_20",
+    "from": "ENTITY|SME|CUST_14",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|8B3D456FCE67C9814F5FE3425677DBAD85BF442C0E0435326050EB526965F26E",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 750.0\nFirst seen: 2026-02-06 15:00:00\nLast seen: 2026-02-06 15:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_21",
+    "from": "ENTITY|SME|CUST_16",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|8B3D456FCE67C9814F5FE3425677DBAD85BF442C0E0435326050EB526965F26E",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: INBOUND_ONLY\nTransaction count: 1\nTransaction amount: 800.0\nFirst seen: 2026-02-07 16:00:00\nLast seen: 2026-02-07 16:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  }
+];
+		const storageKey = "customer-network-layout:" + "EID|29C7CD38825C9889758BCEF1A1B31E9BFF6A5D23C255609706277A35E228B1E0|EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181|EID|C52DF1A93A6C14DC39E68996ED9A0758FC6DA30CC4B615146245046E33D9A6FD|ENTITY|RETAIL|CUST_11|ENTITY|RETAIL|CUST_13|ENTITY|RETAIL|CUST_15|ENTITY|RETAIL|CUST_17|ENTITY|RETAIL|CUST_2|ENTITY|RETAIL|CUST_4|ENTITY|RETAIL|CUST_7|ENTITY|SME|CUST_1|ENTITY|SME|CUST_10|ENTITY|SME|CUST_12|ENTITY|SME|CUST_14|ENTITY|SME|CUST_16|ENTITY|SME|CUST_3|ENTITY|SME|CUST_5|ENTITY|SME|CUST_6|ENTITY|SME|CUST_8|LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20|LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4|LOCAL_COUNTERPARTY_ACCOUNT|4964ABF5B41443597943F2FAC035BD979272067D6D96E45F3E516C398CBAFC00|LOCAL_COUNTERPARTY_ACCOUNT|6BB4B501AD0663CC37212CAD062F31289105A3AE9DCCA9C654CF570B19FBF008|LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B|LOCAL_COUNTERPARTY_ACCOUNT|8B3D456FCE67C9814F5FE3425677DBAD85BF442C0E0435326050EB526965F26E|LOCAL_COUNTERPARTY_ACCOUNT|B13322029717A5794884F74483F5B4847283A9751E47FD6153312CF9FD04F170";
+
+		const svg = document.getElementById("graphSvg");
+		const layoutStatus = document.getElementById("layoutStatus");
+
+		const nodes = new Map();
+		const initialPositions = new Map();
+		const nodeElements = new Map();
+		const edgeElements = new Map();
+		const edgeLabelElements = new Map();
+
+		let draggingNodeId = null;
+		let dragOffset = { x: 0, y: 0 };
+
+		function clone(value) {
+			return JSON.parse(JSON.stringify(value));
+		}
+
+		function createSvgElement(name, attributes = {}) {
+			const element = document.createElementNS(svgNamespace, name);
+
+			for (const [key, value] of Object.entries(attributes)) {
+				if (value !== null && value !== undefined && value !== "") {
+					element.setAttribute(key, value);
+				}
+			}
+
+			return element;
+		}
+
+		function nodeStyle(node) {
+			if (node.group === "seed_entity") {
+				return { fill: "#d62728", stroke: "#8c1d1d", shape: "circle", radius: 37 };
+			}
+
+			if (node.group === "counterparty_expansion_start") {
+				return { fill: "#ff7f0e", stroke: "#a85108", shape: "circle", radius: 34 };
+			}
+
+			if (node.group === "linked_entity") {
+				return { fill: "#1f77b4", stroke: "#15527d", shape: "circle", radius: 32 };
+			}
+
+			if (node.group === "emirates_id") {
+				return { fill: "#9467bd", stroke: "#5e3f7a", shape: "diamond", radius: 34 };
+			}
+
+			if (node.group === "local_counterparty_account") {
+				return { fill: "#2ca02c", stroke: "#1d6b1d", shape: "square", radius: 31 };
+			}
+
+			return { fill: "#999999", stroke: "#555555", shape: "circle", radius: 30 };
+		}
+
+		function edgeStyle(edge) {
+			if (edge.group === "identity") {
+				return { stroke: "#9467bd", dasharray: "7 5" };
+			}
+
+			if (edge.group === "local_counterparty") {
+				return { stroke: "#2ca02c", dasharray: "" };
+			}
+
+			return { stroke: "#999999", dasharray: "" };
+		}
+
+		function loadNodes() {
+			const savedLayoutRaw = localStorage.getItem(storageKey);
+			let savedLayout = null;
+
+			if (savedLayoutRaw) {
+				try {
+					savedLayout = JSON.parse(savedLayoutRaw);
+				} catch {
+					savedLayout = null;
+				}
+			}
+
+			for (const node of initialNodes) {
+				const workingNode = clone(node);
+				initialPositions.set(node.id, { x: node.x, y: node.y });
+
+				if (savedLayout && savedLayout[node.id]) {
+					workingNode.x = savedLayout[node.id].x;
+					workingNode.y = savedLayout[node.id].y;
+				}
+
+				nodes.set(node.id, workingNode);
+			}
+
+			if (savedLayout) {
+				layoutStatus.textContent = "Saved layout loaded from this browser.";
+			}
+		}
+
+		function getSvgPoint(event) {
+			const point = svg.createSVGPoint();
+			point.x = event.clientX;
+			point.y = event.clientY;
+			return point.matrixTransform(svg.getScreenCTM().inverse());
+		}
+
+		function renderEdges() {
+			for (const edge of edges) {
+				const source = nodes.get(edge.from);
+				const target = nodes.get(edge.to);
+				const style = edgeStyle(edge);
+
+				const group = createSvgElement("g", { class: "edge" });
+
+				const title = createSvgElement("title");
+				title.textContent = edge.title;
+				group.appendChild(title);
+
+				const line = createSvgElement("line", {
+					x1: source.x,
+					y1: source.y,
+					x2: target.x,
+					y2: target.y,
+					stroke: style.stroke,
+					"stroke-width": 3,
+					"stroke-dasharray": style.dasharray,
+				});
+
+				const label = createSvgElement("text", {
+					x: (source.x + target.x) / 2,
+					y: (source.y + target.y) / 2 - 12,
+					"text-anchor": "middle",
+					class: "edge-label",
+				});
+
+				label.textContent = edge.label;
+
+				group.appendChild(line);
+				group.appendChild(label);
+				svg.appendChild(group);
+
+				edgeElements.set(edge.id, line);
+				edgeLabelElements.set(edge.id, label);
+			}
+		}
+
+		function renderNodeShape(group, node) {
+			const style = nodeStyle(node);
+
+			if (style.shape === "diamond") {
+				group.appendChild(
+					createSvgElement("polygon", {
+						points: `0,${-style.radius} ${style.radius},0 0,${style.radius} ${-style.radius},0`,
+						fill: style.fill,
+						stroke: style.stroke,
+						"stroke-width": 3,
+					})
+				);
+				return;
+			}
+
+			if (style.shape === "square") {
+				group.appendChild(
+					createSvgElement("rect", {
+						x: -style.radius,
+						y: -style.radius,
+						width: style.radius * 2,
+						height: style.radius * 2,
+						rx: 9,
+						fill: style.fill,
+						stroke: style.stroke,
+						"stroke-width": 3,
+					})
+				);
+				return;
+			}
+
+			group.appendChild(
+				createSvgElement("circle", {
+					cx: 0,
+					cy: 0,
+					r: style.radius,
+					fill: style.fill,
+					stroke: style.stroke,
+					"stroke-width": 3,
+				})
+			);
+		}
+
+		function renderNodes() {
+			for (const node of nodes.values()) {
+				const group = createSvgElement("g", {
+					class: "node",
+					transform: `translate(${node.x}, ${node.y})`,
+				});
+
+				const title = createSvgElement("title");
+				title.textContent = node.title;
+				group.appendChild(title);
+
+				renderNodeShape(group, node);
+
+				const label = createSvgElement("text", {
+					x: 0,
+					y: 56,
+					"text-anchor": "middle",
+					class: "node-label",
+				});
+				label.textContent = node.label;
+				group.appendChild(label);
+
+				const role = createSvgElement("text", {
+					x: 0,
+					y: 74,
+					"text-anchor": "middle",
+					class: "node-role",
+				});
+				role.textContent = node.nodeRole;
+				group.appendChild(role);
+
+				group.addEventListener("pointerdown", (event) => {
+					event.preventDefault();
+					draggingNodeId = node.id;
+
+					const point = getSvgPoint(event);
+					dragOffset.x = node.x - point.x;
+					dragOffset.y = node.y - point.y;
+
+					group.classList.add("dragging");
+					group.setPointerCapture(event.pointerId);
+				});
+
+				group.addEventListener("pointerup", () => {
+					group.classList.remove("dragging");
+					draggingNodeId = null;
+				});
+
+				nodeElements.set(node.id, group);
+				svg.appendChild(group);
+			}
+		}
+
+		function updatePositions() {
+			for (const node of nodes.values()) {
+				const element = nodeElements.get(node.id);
+				element.setAttribute("transform", `translate(${node.x}, ${node.y})`);
+			}
+
+			for (const edge of edges) {
+				const source = nodes.get(edge.from);
+				const target = nodes.get(edge.to);
+				const line = edgeElements.get(edge.id);
+				const label = edgeLabelElements.get(edge.id);
+
+				line.setAttribute("x1", source.x);
+				line.setAttribute("y1", source.y);
+				line.setAttribute("x2", target.x);
+				line.setAttribute("y2", target.y);
+
+				label.setAttribute("x", (source.x + target.x) / 2);
+				label.setAttribute("y", (source.y + target.y) / 2 - 12);
+			}
+		}
+
+		function saveLayout() {
+			const layout = {};
+
+			for (const node of nodes.values()) {
+				layout[node.id] = {
+					x: Math.round(node.x),
+					y: Math.round(node.y),
+				};
+			}
+
+			localStorage.setItem(storageKey, JSON.stringify(layout, null, 2));
+			layoutStatus.textContent = "Layout saved in this browser.";
+		}
+
+		function resetLayout() {
+			localStorage.removeItem(storageKey);
+
+			for (const node of nodes.values()) {
+				const initialPosition = initialPositions.get(node.id);
+				node.x = initialPosition.x;
+				node.y = initialPosition.y;
+			}
+
+			updatePositions();
+			layoutStatus.textContent = "Layout reset.";
+		}
+
+		function downloadLayout() {
+			const layout = {};
+
+			for (const node of nodes.values()) {
+				layout[node.id] = {
+					label: node.label,
+					x: Math.round(node.x),
+					y: Math.round(node.y),
+				};
+			}
+
+			const blob = new Blob([JSON.stringify(layout, null, 2)], {
+				type: "application/json",
+			});
+
+			const url = URL.createObjectURL(blob);
+			const link = document.createElement("a");
+			link.href = url;
+			link.download = "customer_network_layout.json";
+			link.click();
+
+			URL.revokeObjectURL(url);
+		}
+
+		svg.addEventListener("pointermove", (event) => {
+			if (!draggingNodeId) {
+				return;
+			}
+
+			const node = nodes.get(draggingNodeId);
+			const point = getSvgPoint(event);
+
+			node.x = point.x + dragOffset.x;
+			node.y = point.y + dragOffset.y;
+
+			updatePositions();
+			layoutStatus.textContent = "Layout changed. Click Save layout to keep it.";
+		});
+
+		window.addEventListener("pointerup", () => {
+			draggingNodeId = null;
+
+			for (const element of nodeElements.values()) {
+				element.classList.remove("dragging");
+			}
+		});
+
+		document.getElementById("saveLayoutButton").addEventListener("click", saveLayout);
+		document.getElementById("resetLayoutButton").addEventListener("click", resetLayout);
+		document.getElementById("downloadLayoutButton").addEventListener("click", downloadLayout);
+
+		loadNodes();
+		renderEdges();
+		renderNodes();
+	</script>
 </body>
 </html>

@@ -29,6 +29,47 @@
 			color: #555;
 		}
 
+		.toolbar {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 10px;
+			padding: 10px 20px;
+			background: white;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.toolbar button {
+			border: 1px solid #cbd5e1;
+			background: #ffffff;
+			color: #0f172a;
+			border-radius: 10px;
+			font-size: 13px;
+			font-weight: 700;
+			padding: 8px 12px;
+			cursor: pointer;
+		}
+
+		.toolbar button:hover {
+			background: #f1f5f9;
+		}
+
+		.toolbar .primary {
+			background: #ef4444;
+			color: white;
+			border-color: #ef4444;
+		}
+
+		.toolbar .primary:hover {
+			background: #dc2626;
+		}
+
+		.status {
+			font-size: 12px;
+			color: #64748b;
+			margin-left: 4px;
+		}
+
 		.legend {
 			display: flex;
 			flex-wrap: wrap;
@@ -54,24 +95,34 @@
 
 		.canvas-wrapper {
 			overflow: auto;
-			height: calc(100vh - 116px);
+			height: calc(100vh - 166px);
 			background: #fafafa;
 		}
 
 		svg {
-			min-width: 100%;
 			background: #fafafa;
+			user-select: none;
+		}
+
+		.node {
+			cursor: grab;
+		}
+
+		.node.dragging {
+			cursor: grabbing;
 		}
 
 		.node-label {
 			font-size: 13px;
 			font-weight: 700;
 			fill: #222;
+			pointer-events: none;
 		}
 
 		.node-role {
 			font-size: 9px;
 			fill: #555;
+			pointer-events: none;
 		}
 
 		.edge-label {
@@ -82,19 +133,21 @@
 			stroke: #fafafa;
 			stroke-width: 4px;
 			stroke-linejoin: round;
-		}
-
-		.node:hover,
-		.edge:hover {
-			cursor: pointer;
-			filter: brightness(1.05);
+			pointer-events: none;
 		}
 	</style>
 </head>
 <body>
 	<div class="header">
 		<h1>Customer Network Graph: CUST_1</h1>
-		<p>Self-contained visual. Hover over nodes and edges for details. No external JavaScript is required.</p>
+		<p>Drag nodes to arrange the network. Hover over nodes and edges for details. Use Save layout to keep your arrangement in this browser.</p>
+	</div>
+
+	<div class="toolbar">
+		<button class="primary" id="saveLayoutButton">Save layout</button>
+		<button id="resetLayoutButton">Reset layout</button>
+		<button id="downloadLayoutButton">Download layout JSON</button>
+		<span class="status" id="layoutStatus">Layout not saved yet.</span>
 	</div>
 
 	<div class="legend">
@@ -106,359 +159,510 @@
 	</div>
 
 	<div class="canvas-wrapper">
-		<svg width="1180" height="670" viewBox="0 0 1180 670">
-			
-			<g class="edge">
-				<title>Relationship: ENTITY_HAS_EMIRATES_ID
-Layer: IDENTITY
-Role: GROUP_FORMING
-Emirates ID: ****1234</title>
-				<line
-					x1="550"
-					y1="220"
-					x2="330"
-					y2="220"
-					stroke="#9467bd"
-					stroke-width="3"
-					stroke-dasharray="6 4"
-				/>
-				<text x="440.0" y="206.0" text-anchor="middle" class="edge-label">EID</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_HAS_EMIRATES_ID
-Layer: IDENTITY
-Role: GROUP_FORMING
-Emirates ID: ****1234</title>
-				<line
-					x1="110"
-					y1="220"
-					x2="330"
-					y2="220"
-					stroke="#9467bd"
-					stroke-width="3"
-					stroke-dasharray="6 4"
-				/>
-				<text x="220.0" y="206.0" text-anchor="middle" class="edge-label">EID</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 1000.0
-First seen: 2026-01-01 10:00:00
-Last seen: 2026-01-01 10:00:00</title>
-				<line
-					x1="550"
-					y1="220"
-					x2="770"
-					y2="220"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="660.0" y="206.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 300.0
-First seen: 2026-01-05 14:00:00
-Last seen: 2026-01-05 14:00:00</title>
-				<line
-					x1="770"
-					y1="450"
-					x2="550"
-					y2="450"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="660.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: INBOUND_ONLY
-Transaction count: 1
-Transaction amount: 700.0
-First seen: 2026-01-04 13:00:00
-Last seen: 2026-01-04 13:00:00</title>
-				<line
-					x1="770"
-					y1="450"
-					x2="990"
-					y2="450"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="880.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: INBOUND_ONLY
-Transaction count: 1
-Transaction amount: 2000.0
-First seen: 2026-01-02 11:00:00
-Last seen: 2026-01-02 11:00:00</title>
-				<line
-					x1="990"
-					y1="220"
-					x2="770"
-					y2="220"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="880.0" y="206.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: OUTBOUND_ONLY
-Transaction count: 1
-Transaction amount: 500.0
-First seen: 2026-01-03 12:00:00
-Last seen: 2026-01-03 12:00:00</title>
-				<line
-					x1="990"
-					y1="220"
-					x2="990"
-					y2="450"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="990.0" y="321.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			<g class="edge">
-				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
-Layer: LOCAL_COUNTERPARTY_CORE
-Role: GROUP_FORMING
-Direction: INBOUND_ONLY
-Transaction count: 1
-Transaction amount: 400.0
-First seen: 2026-01-06 15:00:00
-Last seen: 2026-01-06 15:00:00</title>
-				<line
-					x1="330"
-					y1="450"
-					x2="550"
-					y2="450"
-					stroke="#2ca02c"
-					stroke-width="3"
-					stroke-dasharray=""
-				/>
-				<text x="440.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
-			</g>
-		
-			
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_1
-Type: ENTITY
-Role: SEED_ENTITY
-Layers: IDENTITY
-Entity type: SME
-Customer ID: CUST_1</title>
-				
-				<circle
-					cx="110"
-					cy="220"
-					r="36"
-					fill="#d62728"
-					stroke="#8c1d1d"
-					stroke-width="3"
-				/>
-			
-				<text x="110" y="276" text-anchor="middle" class="node-label">CUST_1</text>
-				<text x="110" y="294" text-anchor="middle" class="node-role">SEED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181
-Type: EMIRATES_ID
-Role: EMIRATES_ID_CONNECTOR
-Layers: IDENTITY
-Emirates ID: ****1234</title>
-				
-				<polygon
-					points="330,186 364,220 330,254 296,220"
-					fill="#9467bd"
-					stroke="#5e3f7a"
-					stroke-width="3"
-				/>
-			
-				<text x="330" y="276" text-anchor="middle" class="node-label">EID ****1234</text>
-				<text x="330" y="294" text-anchor="middle" class="node-role">EMIRATES_ID_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|RETAIL|CUST_2
-Type: ENTITY
-Role: COUNTERPARTY_EXPANSION_START_ENTITY
-Layers: IDENTITY|LOCAL_COUNTERPARTY
-Entity type: RETAIL
-Customer ID: CUST_2</title>
-				
-				<circle
-					cx="550"
-					cy="220"
-					r="32"
-					fill="#ff7f0e"
-					stroke="#a85108"
-					stroke-width="3"
-				/>
-			
-				<text x="550" y="276" text-anchor="middle" class="node-label">CUST_2</text>
-				<text x="550" y="294" text-anchor="middle" class="node-role">COUNTERPARTY_EXPANSION_START_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20
-Type: LOCAL_COUNTERPARTY_ACCOUNT
-Role: COUNTERPARTY_CONNECTOR
-Layers: LOCAL_COUNTERPARTY
-Counterparty account: ****OUNT</title>
-				
-				<rect
-					x="740"
-					y="190"
-					width="60"
-					height="60"
-					rx="8"
-					fill="#2ca02c"
-					stroke="#1d6b1d"
-					stroke-width="3"
-				/>
-			
-				<text x="770" y="276" text-anchor="middle" class="node-label">Account ****OUNT (1D1D8D)</text>
-				<text x="770" y="294" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_3
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: SME
-Customer ID: CUST_3</title>
-				
-				<circle
-					cx="990"
-					cy="220"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="990" y="276" text-anchor="middle" class="node-label">CUST_3</text>
-				<text x="990" y="294" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B
-Type: LOCAL_COUNTERPARTY_ACCOUNT
-Role: COUNTERPARTY_CONNECTOR
-Layers: LOCAL_COUNTERPARTY
-Counterparty account: ****OUNT</title>
-				
-				<rect
-					x="960"
-					y="420"
-					width="60"
-					height="60"
-					rx="8"
-					fill="#2ca02c"
-					stroke="#1d6b1d"
-					stroke-width="3"
-				/>
-			
-				<text x="990" y="506" text-anchor="middle" class="node-label">Account ****OUNT (7266EE)</text>
-				<text x="990" y="524" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|RETAIL|CUST_4
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: RETAIL
-Customer ID: CUST_4</title>
-				
-				<circle
-					cx="770"
-					cy="450"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="770" y="506" text-anchor="middle" class="node-label">CUST_4</text>
-				<text x="770" y="524" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4
-Type: LOCAL_COUNTERPARTY_ACCOUNT
-Role: COUNTERPARTY_CONNECTOR
-Layers: LOCAL_COUNTERPARTY
-Counterparty account: ****OUNT</title>
-				
-				<rect
-					x="520"
-					y="420"
-					width="60"
-					height="60"
-					rx="8"
-					fill="#2ca02c"
-					stroke="#1d6b1d"
-					stroke-width="3"
-				/>
-			
-				<text x="550" y="506" text-anchor="middle" class="node-label">Account ****OUNT (3395DB)</text>
-				<text x="550" y="524" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
-			</g>
-		
-			<g class="node">
-				<title>Node ID: ENTITY|SME|CUST_5
-Type: ENTITY
-Role: LINKED_ENTITY
-Layers: LOCAL_COUNTERPARTY
-Entity type: SME
-Customer ID: CUST_5</title>
-				
-				<circle
-					cx="330"
-					cy="450"
-					r="32"
-					fill="#1f77b4"
-					stroke="#15527d"
-					stroke-width="3"
-				/>
-			
-				<text x="330" y="506" text-anchor="middle" class="node-label">CUST_5</text>
-				<text x="330" y="524" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
-			</g>
-		
-		</svg>
+		<svg id="graphSvg" width="1500" height="850" viewBox="0 0 1500 850"></svg>
 	</div>
+
+	<script>
+		const svgNamespace = "http://www.w3.org/2000/svg";
+		const initialNodes = [
+  {
+    "id": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
+    "label": "EID ****1234",
+    "title": "Node ID: EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181\nType: EMIRATES_ID\nRole: EMIRATES_ID_CONNECTOR\nLayers: IDENTITY\nEmirates ID: ****1234",
+    "group": "emirates_id",
+    "nodeType": "EMIRATES_ID",
+    "nodeRole": "EMIRATES_ID_CONNECTOR",
+    "x": 1148.3389161738733,
+    "y": 269.1095082564972
+  },
+  {
+    "id": "ENTITY|SME|CUST_1",
+    "label": "CUST_1",
+    "title": "Node ID: ENTITY|SME|CUST_1\nType: ENTITY\nRole: SEED_ENTITY\nLayers: IDENTITY\nEntity type: SME\nCustomer ID: CUST_1",
+    "group": "seed_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "SEED_ENTITY",
+    "x": 1380.0,
+    "y": 330.7139455284482
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_2",
+    "label": "CUST_2",
+    "title": "Node ID: ENTITY|RETAIL|CUST_2\nType: ENTITY\nRole: COUNTERPARTY_EXPANSION_START_ENTITY\nLayers: IDENTITY|LOCAL_COUNTERPARTY\nEntity type: RETAIL\nCustomer ID: CUST_2",
+    "group": "counterparty_expansion_start",
+    "nodeType": "ENTITY",
+    "nodeRole": "COUNTERPARTY_EXPANSION_START_ENTITY",
+    "x": 975.1821971818961,
+    "y": 151.6646564078215
+  },
+  {
+    "id": "ENTITY|SME|CUST_3",
+    "label": "CUST_3",
+    "title": "Node ID: ENTITY|SME|CUST_3\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: SME\nCustomer ID: CUST_3",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 417.35353726994055,
+    "y": 165.23016997129406
+  },
+  {
+    "id": "ENTITY|RETAIL|CUST_4",
+    "label": "CUST_4",
+    "title": "Node ID: ENTITY|RETAIL|CUST_4\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: RETAIL\nCustomer ID: CUST_4",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 214.6625383070657,
+    "y": 452.1684544559413
+  },
+  {
+    "id": "ENTITY|SME|CUST_5",
+    "label": "CUST_5",
+    "title": "Node ID: ENTITY|SME|CUST_5\nType: ENTITY\nRole: LINKED_ENTITY\nLayers: LOCAL_COUNTERPARTY\nEntity type: SME\nCustomer ID: CUST_5",
+    "group": "linked_entity",
+    "nodeType": "ENTITY",
+    "nodeRole": "LINKED_ENTITY",
+    "x": 120.0,
+    "y": 740.0
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
+    "label": "Account ****OUNT (1D1D8D)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20\nType: LOCAL_COUNTERPARTY_ACCOUNT\nRole: COUNTERPARTY_CONNECTOR\nLayers: LOCAL_COUNTERPARTY\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account",
+    "nodeType": "LOCAL_COUNTERPARTY_ACCOUNT",
+    "nodeRole": "COUNTERPARTY_CONNECTOR",
+    "x": 695.0024055439121,
+    "y": 110.0
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
+    "label": "Account ****OUNT (3395DB)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4\nType: LOCAL_COUNTERPARTY_ACCOUNT\nRole: COUNTERPARTY_CONNECTOR\nLayers: LOCAL_COUNTERPARTY\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account",
+    "nodeType": "LOCAL_COUNTERPARTY_ACCOUNT",
+    "nodeRole": "COUNTERPARTY_CONNECTOR",
+    "x": 214.1165094921033,
+    "y": 607.9363238734102
+  },
+  {
+    "id": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
+    "label": "Account ****OUNT (7266EE)",
+    "title": "Node ID: LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B\nType: LOCAL_COUNTERPARTY_ACCOUNT\nRole: COUNTERPARTY_CONNECTOR\nLayers: LOCAL_COUNTERPARTY\nCounterparty account: ****OUNT",
+    "group": "local_counterparty_account",
+    "nodeType": "LOCAL_COUNTERPARTY_ACCOUNT",
+    "nodeRole": "COUNTERPARTY_CONNECTOR",
+    "x": 245.49131557760847,
+    "y": 295.61308979171173
+  }
+];
+		const edges = [
+  {
+    "id": "edge_0",
+    "from": "ENTITY|RETAIL|CUST_2",
+    "to": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\nLayer: IDENTITY\nRole: GROUP_FORMING\nEmirates ID: ****1234",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "id": "edge_1",
+    "from": "ENTITY|SME|CUST_1",
+    "to": "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181",
+    "title": "Relationship: ENTITY_HAS_EMIRATES_ID\nLayer: IDENTITY\nRole: GROUP_FORMING\nEmirates ID: ****1234",
+    "group": "identity",
+    "label": "EID"
+  },
+  {
+    "id": "edge_2",
+    "from": "ENTITY|RETAIL|CUST_2",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 1000.0\nFirst seen: 2026-01-01 10:00:00\nLast seen: 2026-01-01 10:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_3",
+    "from": "ENTITY|RETAIL|CUST_4",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 300.0\nFirst seen: 2026-01-05 14:00:00\nLast seen: 2026-01-05 14:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_4",
+    "from": "ENTITY|RETAIL|CUST_4",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: INBOUND_ONLY\nTransaction count: 1\nTransaction amount: 700.0\nFirst seen: 2026-01-04 13:00:00\nLast seen: 2026-01-04 13:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_5",
+    "from": "ENTITY|SME|CUST_3",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: INBOUND_ONLY\nTransaction count: 1\nTransaction amount: 2000.0\nFirst seen: 2026-01-02 11:00:00\nLast seen: 2026-01-02 11:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_6",
+    "from": "ENTITY|SME|CUST_3",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: OUTBOUND_ONLY\nTransaction count: 1\nTransaction amount: 500.0\nFirst seen: 2026-01-03 12:00:00\nLast seen: 2026-01-03 12:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  },
+  {
+    "id": "edge_7",
+    "from": "ENTITY|SME|CUST_5",
+    "to": "LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4",
+    "title": "Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT\nLayer: LOCAL_COUNTERPARTY_CORE\nRole: GROUP_FORMING\nDirection: INBOUND_ONLY\nTransaction count: 1\nTransaction amount: 400.0\nFirst seen: 2026-01-06 15:00:00\nLast seen: 2026-01-06 15:00:00",
+    "group": "local_counterparty",
+    "label": "Account"
+  }
+];
+		const storageKey = "customer-network-layout:" + "EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181|ENTITY|RETAIL|CUST_2|ENTITY|RETAIL|CUST_4|ENTITY|SME|CUST_1|ENTITY|SME|CUST_3|ENTITY|SME|CUST_5|LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20|LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4|LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B";
+
+		const svg = document.getElementById("graphSvg");
+		const layoutStatus = document.getElementById("layoutStatus");
+
+		const nodes = new Map();
+		const initialPositions = new Map();
+		const nodeElements = new Map();
+		const edgeElements = new Map();
+		const edgeLabelElements = new Map();
+
+		let draggingNodeId = null;
+		let dragOffset = { x: 0, y: 0 };
+
+		function clone(value) {
+			return JSON.parse(JSON.stringify(value));
+		}
+
+		function createSvgElement(name, attributes = {}) {
+			const element = document.createElementNS(svgNamespace, name);
+
+			for (const [key, value] of Object.entries(attributes)) {
+				if (value !== null && value !== undefined && value !== "") {
+					element.setAttribute(key, value);
+				}
+			}
+
+			return element;
+		}
+
+		function nodeStyle(node) {
+			if (node.group === "seed_entity") {
+				return { fill: "#d62728", stroke: "#8c1d1d", shape: "circle", radius: 37 };
+			}
+
+			if (node.group === "counterparty_expansion_start") {
+				return { fill: "#ff7f0e", stroke: "#a85108", shape: "circle", radius: 34 };
+			}
+
+			if (node.group === "linked_entity") {
+				return { fill: "#1f77b4", stroke: "#15527d", shape: "circle", radius: 32 };
+			}
+
+			if (node.group === "emirates_id") {
+				return { fill: "#9467bd", stroke: "#5e3f7a", shape: "diamond", radius: 34 };
+			}
+
+			if (node.group === "local_counterparty_account") {
+				return { fill: "#2ca02c", stroke: "#1d6b1d", shape: "square", radius: 31 };
+			}
+
+			return { fill: "#999999", stroke: "#555555", shape: "circle", radius: 30 };
+		}
+
+		function edgeStyle(edge) {
+			if (edge.group === "identity") {
+				return { stroke: "#9467bd", dasharray: "7 5" };
+			}
+
+			if (edge.group === "local_counterparty") {
+				return { stroke: "#2ca02c", dasharray: "" };
+			}
+
+			return { stroke: "#999999", dasharray: "" };
+		}
+
+		function loadNodes() {
+			const savedLayoutRaw = localStorage.getItem(storageKey);
+			let savedLayout = null;
+
+			if (savedLayoutRaw) {
+				try {
+					savedLayout = JSON.parse(savedLayoutRaw);
+				} catch {
+					savedLayout = null;
+				}
+			}
+
+			for (const node of initialNodes) {
+				const workingNode = clone(node);
+				initialPositions.set(node.id, { x: node.x, y: node.y });
+
+				if (savedLayout && savedLayout[node.id]) {
+					workingNode.x = savedLayout[node.id].x;
+					workingNode.y = savedLayout[node.id].y;
+				}
+
+				nodes.set(node.id, workingNode);
+			}
+
+			if (savedLayout) {
+				layoutStatus.textContent = "Saved layout loaded from this browser.";
+			}
+		}
+
+		function getSvgPoint(event) {
+			const point = svg.createSVGPoint();
+			point.x = event.clientX;
+			point.y = event.clientY;
+			return point.matrixTransform(svg.getScreenCTM().inverse());
+		}
+
+		function renderEdges() {
+			for (const edge of edges) {
+				const source = nodes.get(edge.from);
+				const target = nodes.get(edge.to);
+				const style = edgeStyle(edge);
+
+				const group = createSvgElement("g", { class: "edge" });
+
+				const title = createSvgElement("title");
+				title.textContent = edge.title;
+				group.appendChild(title);
+
+				const line = createSvgElement("line", {
+					x1: source.x,
+					y1: source.y,
+					x2: target.x,
+					y2: target.y,
+					stroke: style.stroke,
+					"stroke-width": 3,
+					"stroke-dasharray": style.dasharray,
+				});
+
+				const label = createSvgElement("text", {
+					x: (source.x + target.x) / 2,
+					y: (source.y + target.y) / 2 - 12,
+					"text-anchor": "middle",
+					class: "edge-label",
+				});
+
+				label.textContent = edge.label;
+
+				group.appendChild(line);
+				group.appendChild(label);
+				svg.appendChild(group);
+
+				edgeElements.set(edge.id, line);
+				edgeLabelElements.set(edge.id, label);
+			}
+		}
+
+		function renderNodeShape(group, node) {
+			const style = nodeStyle(node);
+
+			if (style.shape === "diamond") {
+				group.appendChild(
+					createSvgElement("polygon", {
+						points: `0,${-style.radius} ${style.radius},0 0,${style.radius} ${-style.radius},0`,
+						fill: style.fill,
+						stroke: style.stroke,
+						"stroke-width": 3,
+					})
+				);
+				return;
+			}
+
+			if (style.shape === "square") {
+				group.appendChild(
+					createSvgElement("rect", {
+						x: -style.radius,
+						y: -style.radius,
+						width: style.radius * 2,
+						height: style.radius * 2,
+						rx: 9,
+						fill: style.fill,
+						stroke: style.stroke,
+						"stroke-width": 3,
+					})
+				);
+				return;
+			}
+
+			group.appendChild(
+				createSvgElement("circle", {
+					cx: 0,
+					cy: 0,
+					r: style.radius,
+					fill: style.fill,
+					stroke: style.stroke,
+					"stroke-width": 3,
+				})
+			);
+		}
+
+		function renderNodes() {
+			for (const node of nodes.values()) {
+				const group = createSvgElement("g", {
+					class: "node",
+					transform: `translate(${node.x}, ${node.y})`,
+				});
+
+				const title = createSvgElement("title");
+				title.textContent = node.title;
+				group.appendChild(title);
+
+				renderNodeShape(group, node);
+
+				const label = createSvgElement("text", {
+					x: 0,
+					y: 56,
+					"text-anchor": "middle",
+					class: "node-label",
+				});
+				label.textContent = node.label;
+				group.appendChild(label);
+
+				const role = createSvgElement("text", {
+					x: 0,
+					y: 74,
+					"text-anchor": "middle",
+					class: "node-role",
+				});
+				role.textContent = node.nodeRole;
+				group.appendChild(role);
+
+				group.addEventListener("pointerdown", (event) => {
+					event.preventDefault();
+					draggingNodeId = node.id;
+
+					const point = getSvgPoint(event);
+					dragOffset.x = node.x - point.x;
+					dragOffset.y = node.y - point.y;
+
+					group.classList.add("dragging");
+					group.setPointerCapture(event.pointerId);
+				});
+
+				group.addEventListener("pointerup", () => {
+					group.classList.remove("dragging");
+					draggingNodeId = null;
+				});
+
+				nodeElements.set(node.id, group);
+				svg.appendChild(group);
+			}
+		}
+
+		function updatePositions() {
+			for (const node of nodes.values()) {
+				const element = nodeElements.get(node.id);
+				element.setAttribute("transform", `translate(${node.x}, ${node.y})`);
+			}
+
+			for (const edge of edges) {
+				const source = nodes.get(edge.from);
+				const target = nodes.get(edge.to);
+				const line = edgeElements.get(edge.id);
+				const label = edgeLabelElements.get(edge.id);
+
+				line.setAttribute("x1", source.x);
+				line.setAttribute("y1", source.y);
+				line.setAttribute("x2", target.x);
+				line.setAttribute("y2", target.y);
+
+				label.setAttribute("x", (source.x + target.x) / 2);
+				label.setAttribute("y", (source.y + target.y) / 2 - 12);
+			}
+		}
+
+		function saveLayout() {
+			const layout = {};
+
+			for (const node of nodes.values()) {
+				layout[node.id] = {
+					x: Math.round(node.x),
+					y: Math.round(node.y),
+				};
+			}
+
+			localStorage.setItem(storageKey, JSON.stringify(layout, null, 2));
+			layoutStatus.textContent = "Layout saved in this browser.";
+		}
+
+		function resetLayout() {
+			localStorage.removeItem(storageKey);
+
+			for (const node of nodes.values()) {
+				const initialPosition = initialPositions.get(node.id);
+				node.x = initialPosition.x;
+				node.y = initialPosition.y;
+			}
+
+			updatePositions();
+			layoutStatus.textContent = "Layout reset.";
+		}
+
+		function downloadLayout() {
+			const layout = {};
+
+			for (const node of nodes.values()) {
+				layout[node.id] = {
+					label: node.label,
+					x: Math.round(node.x),
+					y: Math.round(node.y),
+				};
+			}
+
+			const blob = new Blob([JSON.stringify(layout, null, 2)], {
+				type: "application/json",
+			});
+
+			const url = URL.createObjectURL(blob);
+			const link = document.createElement("a");
+			link.href = url;
+			link.download = "customer_network_layout.json";
+			link.click();
+
+			URL.revokeObjectURL(url);
+		}
+
+		svg.addEventListener("pointermove", (event) => {
+			if (!draggingNodeId) {
+				return;
+			}
+
+			const node = nodes.get(draggingNodeId);
+			const point = getSvgPoint(event);
+
+			node.x = point.x + dragOffset.x;
+			node.y = point.y + dragOffset.y;
+
+			updatePositions();
+			layoutStatus.textContent = "Layout changed. Click Save layout to keep it.";
+		});
+
+		window.addEventListener("pointerup", () => {
+			draggingNodeId = null;
+
+			for (const element of nodeElements.values()) {
+				element.classList.remove("dragging");
+			}
+		});
+
+		document.getElementById("saveLayoutButton").addEventListener("click", saveLayout);
+		document.getElementById("resetLayoutButton").addEventListener("click", resetLayout);
+		document.getElementById("downloadLayoutButton").addEventListener("click", downloadLayout);
+
+		loadNodes();
+		renderEdges();
+		renderNodes();
+	</script>
 </body>
 </html>
