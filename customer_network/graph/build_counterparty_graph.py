@@ -420,7 +420,7 @@ def build_counterparty_graph(
 			"entity_type": None,
 			"entity_id": None,
 			"lookup_customer_id": None,
-			"display_label": f"Account {row['counterparty_account_masked']}",
+			"display_label": f"Account {row['counterparty_account_masked']} ({row['counterparty_account_node_id'].split('|')[-1][:6]})",
 			"network_layer": "LOCAL_COUNTERPARTY",
 			"seed_entity_flag": 0,
 			"node_role": "COUNTERPARTY_CONNECTOR",
