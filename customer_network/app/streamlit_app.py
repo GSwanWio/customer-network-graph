@@ -12,6 +12,7 @@ from customer_network.export.export_graph_html import export_graph_html
 from customer_network.graph.build_combined_graph import build_combined_graph
 from customer_network.graph.build_counterparty_graph import build_counterparty_graph
 from customer_network.graph.build_eid_graph import build_eid_graph
+from customer_network.interpret.interpret_graph import interpret_combined_graph
 from customer_network.prepare.prepare_counterparty_flows import prepare_local_counterparty_flows
 from customer_network.prepare.prepare_identity import prepare_identity_entities
 from customer_network.prepare.prepare_seed import prepare_seed_customers
@@ -437,13 +438,13 @@ def main() -> None:
 		with metric_columns[5]:
 			metric_card("Transactions", int(component["total_transaction_count"]), "Counterparty txns")
 
-		tab_graph, tab_summary, tab_nodes, tab_edges, tab_components = st.tabs(
+		interpretation = interpret_combined_graph(combined_graph)
+
+		tab_graph, tab_interpretation, tab_evidence = st.tabs(
 			[
 				"Network graph",
-				"Summary",
-				"Nodes",
-				"Edges",
-				"Components",
+				"AI interpretation",
+				"Evidence summary",
 			]
 		)
 
@@ -473,38 +474,69 @@ def main() -> None:
 				mime="text/html",
 			)
 
-		with tab_summary:
+		with tab_interpretation:
 			st.markdown(
-				"""
+				f"""
 				<div class="panel">
-					<div class="panel-title">Network interpretation</div>
-					<div class="panel-caption">High-level explanation of the generated component.</div>
+					<div class="panel-title">{interpretation["network_profile"]}</div>
+					<div class="panel-caption">{interpretation["overview"]}</div>
 				</div>
 				""",
 				unsafe_allow_html=True,
 			)
-			render_component_summary(component)
 
-		with tab_nodes:
-			st.dataframe(
-				combined_graph["combined_nodes"],
-				use_container_width=True,
-				hide_index=True,
+			st.markdown("### Key findings")
+
+			for finding in interpretation["key_findings"]:
+				st.markdown(
+					f"""
+					<div class="insight-box">
+						<div class="insight-title">{finding["title"]}</div>
+						<div class="insight-text">{finding["text"]}</div>
+					</div>
+					""",
+					unsafe_allow_html=True,
+				)
+
+			st.markdown("### Suggested analyst actions")
+
+			for action in interpretation["recommended_actions"]:
+				st.markdown(f"- {action}")
+
+		with tab_evidence:
+			st.markdown(
+				"""
+				<div class="panel">
+					<div class="panel-title">Evidence summary</div>
+					<div class="panel-caption">
+						Summarised relationship evidence only. Raw graph node and edge tables are intentionally hidden from the main demo.
+					</div>
+				</div>
+				""",
+				unsafe_allow_html=True,
 			)
 
-		with tab_edges:
-			st.dataframe(
-				combined_graph["combined_edges"],
-				use_container_width=True,
-				hide_index=True,
-			)
+			st.markdown("### Relationship paths from seed")
 
-		with tab_components:
-			st.dataframe(
-				combined_graph["combined_components"],
-				use_container_width=True,
-				hide_index=True,
-			)
+			if len(interpretation["path_summary"]) > 0:
+				st.dataframe(
+					interpretation["path_summary"],
+					use_container_width=True,
+					hide_index=True,
+				)
+			else:
+				st.info("No relationship paths found.")
+
+			st.markdown("### Relationship evidence")
+
+			if len(interpretation["relationship_summary"]) > 0:
+				st.dataframe(
+					interpretation["relationship_summary"],
+					use_container_width=True,
+					hide_index=True,
+				)
+			else:
+				st.info("No relationship evidence found.")
 
 	except Exception as error:
 		st.error(str(error))
