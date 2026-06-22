@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Customer Network Graph: CUST_1</title>
+	<style>
+		body {
+			margin: 0;
+			font-family: Arial, sans-serif;
+			background: #f7f7f7;
+			color: #222;
+		}
+
+		.header {
+			padding: 16px 20px;
+			background: white;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.header h1 {
+			margin: 0 0 6px 0;
+			font-size: 20px;
+		}
+
+		.header p {
+			margin: 0;
+			font-size: 13px;
+			color: #555;
+		}
+
+		.legend {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			padding: 10px 20px;
+			background: white;
+			border-bottom: 1px solid #ddd;
+			font-size: 13px;
+		}
+
+		.legend-item {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+		}
+
+		.legend-dot {
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			display: inline-block;
+		}
+
+		.canvas-wrapper {
+			overflow: auto;
+			height: calc(100vh - 116px);
+			background: #fafafa;
+		}
+
+		svg {
+			min-width: 100%;
+			background: #fafafa;
+		}
+
+		.node-label {
+			font-size: 13px;
+			font-weight: 700;
+			fill: #222;
+		}
+
+		.node-role {
+			font-size: 9px;
+			fill: #555;
+		}
+
+		.edge-label {
+			font-size: 11px;
+			fill: #555;
+			font-weight: 700;
+			paint-order: stroke;
+			stroke: #fafafa;
+			stroke-width: 4px;
+			stroke-linejoin: round;
+		}
+
+		.node:hover,
+		.edge:hover {
+			cursor: pointer;
+			filter: brightness(1.05);
+		}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<h1>Customer Network Graph: CUST_1</h1>
+		<p>Self-contained visual. Hover over nodes and edges for details. No external JavaScript is required.</p>
+	</div>
+
+	<div class="legend">
+		<div class="legend-item"><span class="legend-dot" style="background:#d62728"></span>Original seed</div>
+		<div class="legend-item"><span class="legend-dot" style="background:#ff7f0e"></span>Counterparty expansion start</div>
+		<div class="legend-item"><span class="legend-dot" style="background:#1f77b4"></span>Linked customer/entity</div>
+		<div class="legend-item"><span class="legend-dot" style="background:#9467bd"></span>Emirates ID connector</div>
+		<div class="legend-item"><span class="legend-dot" style="background:#2ca02c"></span>Local counterparty account</div>
+	</div>
+
+	<div class="canvas-wrapper">
+		<svg width="1180" height="670" viewBox="0 0 1180 670">
+			
+			<g class="edge">
+				<title>Relationship: ENTITY_HAS_EMIRATES_ID
+Layer: IDENTITY
+Role: GROUP_FORMING
+Emirates ID: ****1234</title>
+				<line
+					x1="550"
+					y1="220"
+					x2="330"
+					y2="220"
+					stroke="#9467bd"
+					stroke-width="3"
+					stroke-dasharray="6 4"
+				/>
+				<text x="440.0" y="206.0" text-anchor="middle" class="edge-label">EID</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_HAS_EMIRATES_ID
+Layer: IDENTITY
+Role: GROUP_FORMING
+Emirates ID: ****1234</title>
+				<line
+					x1="110"
+					y1="220"
+					x2="330"
+					y2="220"
+					stroke="#9467bd"
+					stroke-width="3"
+					stroke-dasharray="6 4"
+				/>
+				<text x="220.0" y="206.0" text-anchor="middle" class="edge-label">EID</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: OUTBOUND_ONLY
+Transaction count: 1
+Transaction amount: 1000.0
+First seen: 2026-01-01 10:00:00
+Last seen: 2026-01-01 10:00:00</title>
+				<line
+					x1="550"
+					y1="220"
+					x2="770"
+					y2="220"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="660.0" y="206.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: OUTBOUND_ONLY
+Transaction count: 1
+Transaction amount: 300.0
+First seen: 2026-01-05 14:00:00
+Last seen: 2026-01-05 14:00:00</title>
+				<line
+					x1="770"
+					y1="450"
+					x2="550"
+					y2="450"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="660.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: INBOUND_ONLY
+Transaction count: 1
+Transaction amount: 700.0
+First seen: 2026-01-04 13:00:00
+Last seen: 2026-01-04 13:00:00</title>
+				<line
+					x1="770"
+					y1="450"
+					x2="990"
+					y2="450"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="880.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: INBOUND_ONLY
+Transaction count: 1
+Transaction amount: 2000.0
+First seen: 2026-01-02 11:00:00
+Last seen: 2026-01-02 11:00:00</title>
+				<line
+					x1="990"
+					y1="220"
+					x2="770"
+					y2="220"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="880.0" y="206.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: OUTBOUND_ONLY
+Transaction count: 1
+Transaction amount: 500.0
+First seen: 2026-01-03 12:00:00
+Last seen: 2026-01-03 12:00:00</title>
+				<line
+					x1="990"
+					y1="220"
+					x2="990"
+					y2="450"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="990.0" y="321.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			<g class="edge">
+				<title>Relationship: ENTITY_USES_LOCAL_COUNTERPARTY_ACCOUNT
+Layer: LOCAL_COUNTERPARTY_CORE
+Role: GROUP_FORMING
+Direction: INBOUND_ONLY
+Transaction count: 1
+Transaction amount: 400.0
+First seen: 2026-01-06 15:00:00
+Last seen: 2026-01-06 15:00:00</title>
+				<line
+					x1="330"
+					y1="450"
+					x2="550"
+					y2="450"
+					stroke="#2ca02c"
+					stroke-width="3"
+					stroke-dasharray=""
+				/>
+				<text x="440.0" y="436.0" text-anchor="middle" class="edge-label">Account</text>
+			</g>
+		
+			
+			<g class="node">
+				<title>Node ID: ENTITY|SME|CUST_1
+Type: ENTITY
+Role: SEED_ENTITY
+Layers: IDENTITY
+Entity type: SME
+Customer ID: CUST_1</title>
+				
+				<circle
+					cx="110"
+					cy="220"
+					r="36"
+					fill="#d62728"
+					stroke="#8c1d1d"
+					stroke-width="3"
+				/>
+			
+				<text x="110" y="276" text-anchor="middle" class="node-label">CUST_1</text>
+				<text x="110" y="294" text-anchor="middle" class="node-role">SEED_ENTITY</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: EID|43C41990C303B9D7FE501AE51203229235F27F191B3187FB962CCF70EE76C181
+Type: EMIRATES_ID
+Role: EMIRATES_ID_CONNECTOR
+Layers: IDENTITY
+Emirates ID: ****1234</title>
+				
+				<polygon
+					points="330,186 364,220 330,254 296,220"
+					fill="#9467bd"
+					stroke="#5e3f7a"
+					stroke-width="3"
+				/>
+			
+				<text x="330" y="276" text-anchor="middle" class="node-label">EID ****1234</text>
+				<text x="330" y="294" text-anchor="middle" class="node-role">EMIRATES_ID_CONNECTOR</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: ENTITY|RETAIL|CUST_2
+Type: ENTITY
+Role: COUNTERPARTY_EXPANSION_START_ENTITY
+Layers: IDENTITY|LOCAL_COUNTERPARTY
+Entity type: RETAIL
+Customer ID: CUST_2</title>
+				
+				<circle
+					cx="550"
+					cy="220"
+					r="32"
+					fill="#ff7f0e"
+					stroke="#a85108"
+					stroke-width="3"
+				/>
+			
+				<text x="550" y="276" text-anchor="middle" class="node-label">CUST_2</text>
+				<text x="550" y="294" text-anchor="middle" class="node-role">COUNTERPARTY_EXPANSION_START_ENTITY</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|1D1D8D1FC1BB7CD46F9F3B92FB26547122D480C9F85BEE5DADB5AAB80C77DE20
+Type: LOCAL_COUNTERPARTY_ACCOUNT
+Role: COUNTERPARTY_CONNECTOR
+Layers: LOCAL_COUNTERPARTY
+Counterparty account: ****OUNT</title>
+				
+				<rect
+					x="740"
+					y="190"
+					width="60"
+					height="60"
+					rx="8"
+					fill="#2ca02c"
+					stroke="#1d6b1d"
+					stroke-width="3"
+				/>
+			
+				<text x="770" y="276" text-anchor="middle" class="node-label">Account ****OUNT (1D1D8D)</text>
+				<text x="770" y="294" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: ENTITY|SME|CUST_3
+Type: ENTITY
+Role: LINKED_ENTITY
+Layers: LOCAL_COUNTERPARTY
+Entity type: SME
+Customer ID: CUST_3</title>
+				
+				<circle
+					cx="990"
+					cy="220"
+					r="32"
+					fill="#1f77b4"
+					stroke="#15527d"
+					stroke-width="3"
+				/>
+			
+				<text x="990" y="276" text-anchor="middle" class="node-label">CUST_3</text>
+				<text x="990" y="294" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|7266EE5B3812D9C647CA459B3A040269EDD709A412F602D1714CF35E8E24C82B
+Type: LOCAL_COUNTERPARTY_ACCOUNT
+Role: COUNTERPARTY_CONNECTOR
+Layers: LOCAL_COUNTERPARTY
+Counterparty account: ****OUNT</title>
+				
+				<rect
+					x="960"
+					y="420"
+					width="60"
+					height="60"
+					rx="8"
+					fill="#2ca02c"
+					stroke="#1d6b1d"
+					stroke-width="3"
+				/>
+			
+				<text x="990" y="506" text-anchor="middle" class="node-label">Account ****OUNT (7266EE)</text>
+				<text x="990" y="524" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: ENTITY|RETAIL|CUST_4
+Type: ENTITY
+Role: LINKED_ENTITY
+Layers: LOCAL_COUNTERPARTY
+Entity type: RETAIL
+Customer ID: CUST_4</title>
+				
+				<circle
+					cx="770"
+					cy="450"
+					r="32"
+					fill="#1f77b4"
+					stroke="#15527d"
+					stroke-width="3"
+				/>
+			
+				<text x="770" y="506" text-anchor="middle" class="node-label">CUST_4</text>
+				<text x="770" y="524" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: LOCAL_COUNTERPARTY_ACCOUNT|3395DBCB7506478D1F75DFDBC0F45CA8DC110CE4AD672CFCB2B96056D26F73D4
+Type: LOCAL_COUNTERPARTY_ACCOUNT
+Role: COUNTERPARTY_CONNECTOR
+Layers: LOCAL_COUNTERPARTY
+Counterparty account: ****OUNT</title>
+				
+				<rect
+					x="520"
+					y="420"
+					width="60"
+					height="60"
+					rx="8"
+					fill="#2ca02c"
+					stroke="#1d6b1d"
+					stroke-width="3"
+				/>
+			
+				<text x="550" y="506" text-anchor="middle" class="node-label">Account ****OUNT (3395DB)</text>
+				<text x="550" y="524" text-anchor="middle" class="node-role">COUNTERPARTY_CONNECTOR</text>
+			</g>
+		
+			<g class="node">
+				<title>Node ID: ENTITY|SME|CUST_5
+Type: ENTITY
+Role: LINKED_ENTITY
+Layers: LOCAL_COUNTERPARTY
+Entity type: SME
+Customer ID: CUST_5</title>
+				
+				<circle
+					cx="330"
+					cy="450"
+					r="32"
+					fill="#1f77b4"
+					stroke="#15527d"
+					stroke-width="3"
+				/>
+			
+				<text x="330" y="506" text-anchor="middle" class="node-label">CUST_5</text>
+				<text x="330" y="524" text-anchor="middle" class="node-role">LINKED_ENTITY</text>
+			</g>
+		
+		</svg>
+	</div>
+</body>
+</html>
