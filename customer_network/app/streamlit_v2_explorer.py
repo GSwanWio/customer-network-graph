@@ -573,12 +573,45 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
     }
 
     .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         font-size: 11px;
         color: #475569;
         background: white;
         border: 1px solid #e5e7eb;
         border-radius: 999px;
-        padding: 5px 8px;
+        padding: 5px 9px;
+        white-space: nowrap;
+    }
+
+    .legend span::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        display: inline-block;
+        background: #94a3b8;
+    }
+
+    .legend .legend-risk::before {
+        background: var(--red);
+    }
+
+    .legend .legend-account::before {
+        background: var(--green);
+    }
+
+    .legend .legend-eid::before {
+        background: var(--purple);
+    }
+
+    .legend .legend-blocked::before {
+        background: var(--slate);
+    }
+
+    .legend .legend-evidence::before {
+        background: var(--amber);
     }
 
     .storage-pill {
@@ -605,10 +638,11 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
                     Click a node to inspect it. If expansion is allowed, the graph expands immediately and the right panel explains what changed.
                 </div>
                 <div class="legend">
-                    <span>Red = risk/customer seed</span>
-                    <span>Green = expandable account</span>
-                    <span>Purple = identity connector</span>
-                    <span>Grey = blocked common connector</span>
+                    <span class="legend-risk">Risk / customer seed</span>
+                    <span class="legend-account">Expandable account</span>
+                    <span class="legend-eid">Identity connector</span>
+                    <span class="legend-blocked">Blocked common connector</span>
+                    <span class="legend-evidence">Evidence-only context</span>
                 </div>
             </div>
             <div class="toolbar">
