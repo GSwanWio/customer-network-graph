@@ -1,5 +1,4 @@
 import html
-import json
 from collections import deque
 
 import streamlit as st
@@ -9,7 +8,7 @@ import streamlit.components.v1 as components
 CUSTOMERS = {
     "RETAIL_1": {
         "segment": "Retail",
-        "summary": "Triggered seed customer. First-level view shows one shared Emirates ID, one common company-like account, and one low-degree account worth expanding.",
+        "summary": "Triggered seed customer. First-level view shows one shared Emirates ID, one common account, and one low-degree account worth expanding.",
     },
     "SME_1": {
         "segment": "SME",
@@ -17,15 +16,15 @@ CUSTOMERS = {
     },
     "RETAIL_2": {
         "segment": "Retail",
-        "summary": "Linked through ACCOUNT_2. This customer has multiple simulated fraud indicators and should be reviewed.",
+        "summary": "Linked through Account ****2202. This customer has multiple simulated fraud indicators.",
     },
     "VICTIM_SOURCE_1": {
         "segment": "Retail",
-        "summary": "Simulated source-of-funds customer that sent one large payment into the ACCOUNT_2 path. This is not confirmed victim status.",
+        "summary": "Simulated source-of-funds customer. This is not confirmed victim status; it is only investigative context.",
     },
     "RETAIL_3": {
         "segment": "Retail",
-        "summary": "Isolated seed example. No useful first-level relationship chain is found in the simulated data.",
+        "summary": "Isolated seed example with no useful first-level relationship chain in the simulated data.",
     },
 }
 
@@ -33,12 +32,12 @@ EIDS = {
     "EID_1": {
         "label": "EID ****1001",
         "linked_customers": ["RETAIL_1", "SME_1"],
-        "summary": "This Emirates ID is linked to 2 customer entities: RETAIL_1 and SME_1. This is a low-degree deterministic identity connector, so expansion is allowed.",
+        "summary": "Low-degree deterministic identity connector. It links RETAIL_1 and SME_1.",
     },
     "EID_2": {
         "label": "EID ****2002",
         "linked_customers": ["RETAIL_2"],
-        "summary": "This Emirates ID is linked to one visible customer only in the simulated data. It is useful as context but does not expand further.",
+        "summary": "Single-customer EID in the simulated data. Useful context, but not group-forming.",
     },
 }
 
@@ -55,28 +54,22 @@ ACCOUNTS = {
         "label": "Account ****9011",
         "name": "Mega Services Collections LLC",
         "linked_customer_count": 300,
-        "transaction_count": 920,
-        "total_amount": 1845000,
         "policy": "BLOCK_BY_DEFAULT",
-        "summary": "This account has high transaction volume and approximately 300 linked customers. The name appears company-like, so it may be a legitimate merchant, utility, collections account, payroll provider, or common recipient. Expansion is blocked by default to avoid graph noise.",
+        "summary": "High-degree, company-like account. It is visible as context but blocked from default expansion to avoid graph noise.",
     },
     "ACCOUNT_2": {
         "label": "Account ****2202",
         "name": "Low-degree wallet account",
         "linked_customer_count": 3,
-        "transaction_count": 15,
-        "total_amount": 23750,
         "policy": "ALLOW",
-        "summary": "This account is low-degree and group-forming. It links the seed customer to a small number of other customers, so it is a useful path to expand.",
+        "summary": "Low-degree account linking the seed to a small number of customers. This is the recommended next expansion.",
     },
     "CASHOUT_ACCOUNT": {
         "label": "Account ****7788",
         "name": "Cash-out destination account",
         "linked_customer_count": 1,
-        "transaction_count": 4,
-        "total_amount": 17200,
         "policy": "EVIDENCE_ONLY",
-        "summary": "This account is used by one customer only in the simulated data. It does not create a group-forming relationship but provides cash-out context.",
+        "summary": "Single-customer account. It is evidence-only context and does not create a group-forming expansion.",
     },
 }
 
@@ -117,7 +110,7 @@ FRAUD_INDICATORS = {
         {
             "name": "Flow-through behaviour",
             "severity": "High",
-            "description": "A high share of inbound value is moved to another destination account.",
+            "description": "A high share of inbound value is moved onward to another destination account.",
         },
     ],
 }
@@ -126,22 +119,15 @@ TRANSACTION_PATTERNS = {
     "ACCOUNT_2": [
         {
             "title": "Possible activity simulation",
-            "summary": "RETAIL_1 and RETAIL_2 show repeated small-value back-and-forth movement around ACCOUNT_2. This does not prove fraud, but it is useful investigative context.",
-            "guidance": "Review timestamps, payment direction, counterparties, and whether there is a legitimate commercial explanation.",
+            "summary": "RETAIL_1 and RETAIL_2 show repeated small-value back-and-forth movement around Account ****2202.",
+            "guidance": "Review timestamps, payment direction, counterparties, and whether there is a legitimate explanation.",
         },
         {
             "title": "Large inbound source-of-funds event",
-            "summary": "VICTIM_SOURCE_1 sends one larger simulated payment into the same path before value moves onward. This may represent a source-of-funds event worth checking against fraud reports or dispute activity.",
-            "guidance": "Check whether the source account has fraud claims, disputes, account takeover signals, or unusual recent onboarding behaviour.",
+            "summary": "VICTIM_SOURCE_1 sends one larger simulated payment into the same path before value moves onward.",
+            "guidance": "Check for disputes, fraud claims, account takeover signals, or unusual onboarding behaviour.",
         },
-    ],
-    "BIG_COMPANY_ACCOUNT": [
-        {
-            "title": "Likely common counterparty",
-            "summary": "The account has high customer degree and a company-like name. This is more likely to create noise than a useful small relationship group.",
-            "guidance": "Keep visible as context, but do not expand by default unless there is a specific reason.",
-        },
-    ],
+    ]
 }
 
 
@@ -154,7 +140,7 @@ def apply_style() -> None:
             }
 
             [data-testid="stSidebar"] {
-                background: #101827;
+                background: #0f172a;
             }
 
             [data-testid="stSidebar"] * {
@@ -162,81 +148,66 @@ def apply_style() -> None:
             }
 
             .block-container {
-                max-width: 1550px;
+                max-width: 1600px;
                 padding-top: 2rem;
                 padding-bottom: 3rem;
             }
 
-            .hero-card {
-                background: linear-gradient(135deg, #111827 0%, #263b63 55%, #355c7d 100%);
+            .hero {
+                background: linear-gradient(135deg, #111827 0%, #263b63 60%, #355c7d 100%);
                 color: white;
                 border-radius: 22px;
                 padding: 28px 32px;
-                margin-bottom: 22px;
-                box-shadow: 0 16px 35px rgba(17, 24, 39, 0.18);
+                margin-bottom: 20px;
+                box-shadow: 0 16px 35px rgba(15, 23, 42, 0.18);
             }
 
             .hero-title {
                 font-size: 34px;
-                font-weight: 800;
-                margin: 0 0 8px 0;
-                letter-spacing: -0.03em;
+                font-weight: 850;
+                letter-spacing: -0.04em;
+                margin-bottom: 8px;
             }
 
-            .hero-subtitle {
-                font-size: 15px;
+            .hero-text {
                 color: #dbeafe;
-                margin: 0;
-                max-width: 1000px;
+                font-size: 15px;
                 line-height: 1.5;
-            }
-
-            .status-pill {
-                display: inline-flex;
-                align-items: center;
-                border-radius: 999px;
-                padding: 6px 12px;
-                background: rgba(255,255,255,0.14);
-                border: 1px solid rgba(255,255,255,0.22);
-                font-size: 12px;
-                font-weight: 700;
-                color: #ffffff;
-                margin-bottom: 14px;
+                max-width: 1050px;
             }
 
             .panel {
                 background: white;
                 border: 1px solid #e5e7eb;
-                border-radius: 20px;
-                padding: 20px;
+                border-radius: 18px;
+                padding: 18px;
                 box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-                margin-bottom: 16px;
+                margin-bottom: 14px;
             }
 
             .panel-title {
-                font-size: 18px;
-                font-weight: 800;
+                font-size: 17px;
+                font-weight: 850;
                 color: #0f172a;
                 margin-bottom: 6px;
             }
 
-            .panel-caption {
+            .panel-text {
+                color: #475569;
                 font-size: 13px;
-                color: #64748b;
                 line-height: 1.5;
             }
 
             .metric-card {
                 background: white;
                 border: 1px solid #e5e7eb;
-                border-radius: 18px;
-                padding: 18px 20px;
-                box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-                min-height: 105px;
+                border-radius: 16px;
+                padding: 16px;
+                box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
             }
 
             .metric-label {
-                font-size: 12px;
+                font-size: 11px;
                 text-transform: uppercase;
                 letter-spacing: 0.08em;
                 color: #64748b;
@@ -245,48 +216,20 @@ def apply_style() -> None:
             }
 
             .metric-value {
-                font-size: 32px;
+                font-size: 30px;
                 line-height: 1;
                 color: #0f172a;
-                font-weight: 800;
-                letter-spacing: -0.04em;
-            }
-
-            .metric-helper {
-                font-size: 12px;
-                color: #64748b;
-                margin-top: 8px;
-            }
-
-            .insight-box {
-                background: #ffffff;
-                border: 1px solid #e2e8f0;
-                border-radius: 16px;
-                padding: 16px 18px;
-                margin-bottom: 12px;
-                box-shadow: 0 5px 16px rgba(15, 23, 42, 0.04);
-            }
-
-            .insight-title {
-                font-weight: 800;
-                color: #0f172a;
-                margin-bottom: 5px;
-            }
-
-            .insight-text {
-                color: #475569;
-                font-size: 13px;
-                line-height: 1.5;
+                font-weight: 850;
             }
 
             .badge {
                 display: inline-block;
-                padding: 4px 9px;
                 border-radius: 999px;
+                padding: 4px 9px;
                 font-size: 11px;
                 font-weight: 800;
-                margin-right: 6px;
-                margin-bottom: 6px;
+                margin-right: 5px;
+                margin-bottom: 5px;
             }
 
             .badge-high {
@@ -299,13 +242,28 @@ def apply_style() -> None:
                 color: #9a3412;
             }
 
-            .badge-low {
+            .badge-info {
                 background: #e0f2fe;
                 color: #075985;
             }
 
+            .recommendation {
+                border-left: 4px solid #2563eb;
+                padding-left: 12px;
+            }
+
+            .blocked {
+                border-left: 4px solid #94a3b8;
+                padding-left: 12px;
+            }
+
+            .risk {
+                border-left: 4px solid #dc2626;
+                padding-left: 12px;
+            }
+
             .stButton > button {
-                border-radius: 13px;
+                border-radius: 12px;
                 font-weight: 800;
             }
         </style>
@@ -314,15 +272,12 @@ def apply_style() -> None:
     )
 
 
-def ntype_key(node_type: str, key: str) -> str:
-    return f"{node_type}|{key}"
-
-
 def reset_state() -> None:
     st.session_state.v2_nodes = {}
     st.session_state.v2_edges = {}
-    st.session_state.v2_history = []
     st.session_state.v2_seed = None
+    st.session_state.v2_history = []
+    st.session_state.v2_focus_node_id = None
 
 
 def ensure_state() -> None:
@@ -330,27 +285,32 @@ def ensure_state() -> None:
         reset_state()
 
 
+def node_id(node_type: str, key: str) -> str:
+    return f"{node_type}|{key}"
+
+
 def customer_risk_count(customer_id: str) -> int:
     return len(FRAUD_INDICATORS.get(customer_id, []))
 
 
 def add_node(
-    node_id: str,
-    label: str,
     node_type: str,
-    role: str,
     key: str,
+    label: str,
+    role: str,
     summary: str,
     expand_type: str | None,
     policy: str = "ALLOW",
-) -> None:
-    existing = st.session_state.v2_nodes.get(node_id, {})
-    st.session_state.v2_nodes[node_id] = {
-        "id": node_id,
-        "label": label,
+) -> str:
+    nid = node_id(node_type, key)
+    existing = st.session_state.v2_nodes.get(nid, {})
+
+    st.session_state.v2_nodes[nid] = {
+        "id": nid,
         "node_type": node_type,
-        "role": role,
         "key": key,
+        "label": label,
+        "role": role,
         "summary": summary,
         "expand_type": expand_type,
         "policy": policy,
@@ -358,9 +318,12 @@ def add_node(
         "risk_count": customer_risk_count(key) if node_type == "CUSTOMER" else 0,
     }
 
+    return nid
+
 
 def add_edge(source: str, target: str, label: str, relationship_type: str, summary: str) -> None:
     edge_id = f"{source}->{target}|{relationship_type}|{label}"
+
     st.session_state.v2_edges[edge_id] = {
         "id": edge_id,
         "source": source,
@@ -371,52 +334,40 @@ def add_edge(source: str, target: str, label: str, relationship_type: str, summa
     }
 
 
-def build_customer_summary(customer_id: str) -> str:
+def customer_summary(customer_id: str) -> str:
     customer = CUSTOMERS[customer_id]
-    eid_count = len(CUSTOMER_EIDS.get(customer_id, []))
-    account_count = len(CUSTOMER_ACCOUNTS.get(customer_id, []))
     risk_count = customer_risk_count(customer_id)
 
-    risk_text = (
-        f"{risk_count} simulated fraud indicator(s) are active."
-        if risk_count > 0
-        else "No active simulated fraud indicators."
-    )
+    if risk_count:
+        risk_text = f"{risk_count} simulated fraud indicators are active."
+    else:
+        risk_text = "No active simulated fraud indicators."
 
-    return (
-        f"{customer_id} is a {customer['segment']} customer. "
-        f"{customer['summary']} "
-        f"First-level context: {eid_count} EID connector(s), {account_count} account connector(s). "
-        f"{risk_text}"
-    )
+    return f"{customer_id} is a {customer['segment']} customer. {customer['summary']} {risk_text}"
 
 
-def add_customer_node(customer_id: str, role: str) -> None:
-    add_node(
-        node_id=ntype_key("CUSTOMER", customer_id),
-        label=customer_id,
+def add_customer_node(customer_id: str, role: str) -> str:
+    return add_node(
         node_type="CUSTOMER",
-        role=role,
         key=customer_id,
-        summary=build_customer_summary(customer_id),
+        label=customer_id,
+        role=role,
+        summary=customer_summary(customer_id),
         expand_type="CUSTOMER",
         policy="ALLOW",
     )
 
 
 def add_customer_connectors(customer_id: str) -> None:
-    customer_node = ntype_key("CUSTOMER", customer_id)
+    customer_node = node_id("CUSTOMER", customer_id)
 
     for eid_key in CUSTOMER_EIDS.get(customer_id, []):
         eid = EIDS[eid_key]
-        eid_node = ntype_key("EID", eid_key)
-
-        add_node(
-            node_id=eid_node,
-            label=eid["label"],
+        eid_node = add_node(
             node_type="EID",
-            role="IDENTITY_CONNECTOR",
             key=eid_key,
+            label=eid["label"],
+            role="IDENTITY_CONNECTOR",
             summary=eid["summary"],
             expand_type="EID",
             policy="ALLOW",
@@ -425,22 +376,20 @@ def add_customer_connectors(customer_id: str) -> None:
         add_edge(
             source=customer_node,
             target=eid_node,
-            label="EID",
-            relationship_type="ENTITY_HAS_EMIRATES_ID",
+            label="Emirates ID",
+            relationship_type="ENTITY_HAS_EID",
             summary=f"{customer_id} is linked to {eid['label']}.",
         )
 
-    for account_link in CUSTOMER_ACCOUNTS.get(customer_id, []):
-        account_key = account_link["account"]
+    for link in CUSTOMER_ACCOUNTS.get(customer_id, []):
+        account_key = link["account"]
         account = ACCOUNTS[account_key]
-        account_node = ntype_key("ACCOUNT", account_key)
 
-        add_node(
-            node_id=account_node,
-            label=account["label"],
+        account_node = add_node(
             node_type="ACCOUNT",
-            role="COUNTERPARTY_CONNECTOR",
             key=account_key,
+            label=account["label"],
+            role="COUNTERPARTY_CONNECTOR",
             summary=account["summary"],
             expand_type="ACCOUNT",
             policy=account["policy"],
@@ -449,11 +398,11 @@ def add_customer_connectors(customer_id: str) -> None:
         add_edge(
             source=customer_node,
             target=account_node,
-            label=account_link["direction"],
-            relationship_type="ENTITY_USES_COUNTERPARTY_ACCOUNT",
+            label=link["direction"],
+            relationship_type="ENTITY_USES_ACCOUNT",
             summary=(
-                f"{customer_id} has {account_link['transaction_count']} simulated transaction(s) "
-                f"with {account['label']} totalling {account_link['amount']:,.0f}."
+                f"{customer_id} has {link['transaction_count']} simulated transaction(s) "
+                f"with {account['label']} totalling {link['amount']:,.0f}."
             ),
         )
 
@@ -462,24 +411,23 @@ def start_investigation(customer_id: str) -> None:
     reset_state()
     st.session_state.v2_seed = customer_id
 
-    add_customer_node(customer_id, role="SEED_CUSTOMER")
+    seed_node = add_customer_node(customer_id, role="SEED_CUSTOMER")
     add_customer_connectors(customer_id)
 
-    seed_node = ntype_key("CUSTOMER", customer_id)
     st.session_state.v2_nodes[seed_node]["expanded"] = True
-
+    st.session_state.v2_focus_node_id = seed_node
     st.session_state.v2_history.append(
-        f"Started investigation from {customer_id}. The first view shows only immediate EID and account connectors."
+        f"Started from {customer_id}. The graph shows immediate EID and account connectors only."
     )
 
 
 def expand_eid(eid_key: str) -> str:
     eid = EIDS[eid_key]
-    eid_node = ntype_key("EID", eid_key)
+    eid_node = node_id("EID", eid_key)
     added = []
 
     for customer_id in eid["linked_customers"]:
-        customer_node = ntype_key("CUSTOMER", customer_id)
+        customer_node = node_id("CUSTOMER", customer_id)
 
         if customer_node not in st.session_state.v2_nodes:
             add_customer_node(customer_id, role="LINKED_CUSTOMER")
@@ -496,18 +444,18 @@ def expand_eid(eid_key: str) -> str:
     st.session_state.v2_nodes[eid_node]["expanded"] = True
 
     if added:
-        return f"Expanded {eid['label']} and added linked customer(s): {', '.join(added)}."
+        return f"Expanded {eid['label']} and added {', '.join(added)}."
 
-    return f"Expanded {eid['label']}. No new customer nodes were added."
+    return f"Expanded {eid['label']}. No new customers were added."
 
 
 def expand_account(account_key: str) -> str:
     account = ACCOUNTS[account_key]
-    account_node = ntype_key("ACCOUNT", account_key)
+    account_node = node_id("ACCOUNT", account_key)
     added = []
 
     for customer_id in ACCOUNT_CUSTOMERS.get(account_key, []):
-        customer_node = ntype_key("CUSTOMER", customer_id)
+        customer_node = node_id("CUSTOMER", customer_id)
 
         if customer_node not in st.session_state.v2_nodes:
             add_customer_node(customer_id, role="LINKED_CUSTOMER")
@@ -523,25 +471,21 @@ def expand_account(account_key: str) -> str:
 
     st.session_state.v2_nodes[account_node]["expanded"] = True
 
-    pattern_text = " ".join(
-        pattern["summary"]
-        for pattern in TRANSACTION_PATTERNS.get(account_key, [])
-    )
-
     if added:
-        return f"Expanded {account['label']} and added linked customer(s): {', '.join(added)}. {pattern_text}"
+        return f"Expanded {account['label']} and added {', '.join(added)}."
 
-    return f"Expanded {account['label']}. No new customers were added. {pattern_text}"
+    return f"Expanded {account['label']}. No new customers were added."
 
 
 def expand_customer(customer_id: str) -> str:
     add_customer_connectors(customer_id)
-    st.session_state.v2_nodes[ntype_key("CUSTOMER", customer_id)]["expanded"] = True
-    return f"Expanded customer context for {customer_id}. Added first-level EID and account connectors where available."
+    st.session_state.v2_nodes[node_id("CUSTOMER", customer_id)]["expanded"] = True
+    return f"Expanded customer context for {customer_id}."
 
 
-def expand_node(node_id: str) -> None:
-    node = st.session_state.v2_nodes[node_id]
+def expand_node(nid: str) -> None:
+    node = st.session_state.v2_nodes[nid]
+    st.session_state.v2_focus_node_id = nid
 
     if node["expanded"]:
         st.session_state.v2_history.append(f"{node['label']} was already expanded.")
@@ -549,15 +493,15 @@ def expand_node(node_id: str) -> None:
 
     if node["policy"] == "BLOCK_BY_DEFAULT":
         st.session_state.v2_history.append(
-            f"{node['label']} was not expanded because it is a high-degree/common connector blocked by default."
+            f"{node['label']} was blocked from default expansion because it appears high-degree/common."
         )
         return
 
     if node["policy"] == "EVIDENCE_ONLY":
+        node["expanded"] = True
         st.session_state.v2_history.append(
-            f"{node['label']} is evidence-only. It is visible as context but does not create a group-forming expansion."
+            f"{node['label']} was marked as reviewed evidence-only context."
         )
-        st.session_state.v2_nodes[node_id]["expanded"] = True
         return
 
     if node["expand_type"] == "EID":
@@ -572,538 +516,494 @@ def expand_node(node_id: str) -> None:
     st.session_state.v2_history.append(message)
 
 
-def metric_card(label: str, value: str | int, helper: str) -> None:
-    st.markdown(
-        f"""
-        <div class="metric-card">
-            <div class="metric-label">{label}</div>
-            <div class="metric-value">{value}</div>
-            <div class="metric-helper">{helper}</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+def visible_customer_nodes() -> list[dict]:
+    return [
+        node
+        for node in st.session_state.v2_nodes.values()
+        if node["node_type"] == "CUSTOMER"
+    ]
 
 
-def calculate_positions(nodes: list[dict], edges: list[dict]) -> dict[str, dict[str, int]]:
-    adjacency: dict[str, set[str]] = {}
+def recommendation_score(node: dict) -> tuple[int, str]:
+    if node["expanded"]:
+        return (99, node["label"])
 
-    for edge in edges:
-        adjacency.setdefault(edge["source"], set()).add(edge["target"])
-        adjacency.setdefault(edge["target"], set()).add(edge["source"])
+    if node["policy"] == "BLOCK_BY_DEFAULT":
+        return (50, node["label"])
 
-    seed_nodes = [node["id"] for node in nodes if node["role"] == "SEED_CUSTOMER"]
-    if not seed_nodes and nodes:
-        seed_nodes = [nodes[0]["id"]]
+    if node["policy"] == "EVIDENCE_ONLY":
+        return (40, node["label"])
 
-    levels = {}
-    queue = deque()
+    if node["node_type"] == "ACCOUNT" and node["policy"] == "ALLOW":
+        return (1, node["label"])
 
-    for seed in seed_nodes:
-        levels[seed] = 0
-        queue.append(seed)
+    if node["node_type"] == "CUSTOMER" and node["risk_count"] > 0:
+        return (2, node["label"])
 
-    while queue:
-        current = queue.popleft()
-        for linked in adjacency.get(current, set()):
-            if linked not in levels:
-                levels[linked] = levels[current] + 1
-                queue.append(linked)
+    if node["node_type"] == "EID":
+        return (3, node["label"])
 
-    for node in nodes:
-        if node["id"] not in levels:
-            levels[node["id"]] = max(levels.values(), default=0) + 1
+    if node["node_type"] == "CUSTOMER":
+        return (4, node["label"])
 
-    grouped: dict[int, list[dict]] = {}
-    for node in nodes:
-        grouped.setdefault(levels[node["id"]], []).append(node)
+    return (10, node["label"])
 
-    positions = {}
 
-    for level, level_nodes in grouped.items():
-        level_nodes = sorted(level_nodes, key=lambda item: (item["node_type"], item["label"]))
-        x = 130 + level * 265
-
-        for index, node in enumerate(level_nodes):
-            positions[node["id"]] = {
-                "x": x,
-                "y": 110 + index * 135,
-            }
-
-    return positions
-
-
-def render_graph_html() -> str:
-    nodes = list(st.session_state.v2_nodes.values())
-    edges = list(st.session_state.v2_edges.values())
-    positions = calculate_positions(nodes, edges)
-
-    for node in nodes:
-        node["x"] = positions[node["id"]]["x"]
-        node["y"] = positions[node["id"]]["y"]
-
-    width = max(1200, max([node["x"] for node in nodes], default=800) + 220)
-    height = max(720, max([node["y"] for node in nodes], default=500) + 180)
-
-    template = """
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <style>
-        body { margin: 0; background: #ffffff; font-family: Arial, sans-serif; }
-        .graph-header { padding: 12px 14px; border-bottom: 1px solid #e5e7eb; font-size: 13px; color: #64748b; }
-        .graph-wrap { overflow: auto; height: 700px; background: #ffffff; }
-        svg { background: #ffffff; user-select: none; }
-        .node { cursor: grab; }
-        .node.dragging { cursor: grabbing; }
-        .label { font-size: 12px; font-weight: 800; fill: #0f172a; pointer-events: none; }
-        .sub-label { font-size: 9px; fill: #64748b; pointer-events: none; }
-        .edge-label { font-size: 10px; fill: #64748b; font-weight: 700; paint-order: stroke; stroke: #ffffff; stroke-width: 4px; pointer-events: none; }
-    </style>
-</head>
-<body>
-    <div class="graph-header">
-        Drag nodes to arrange the view. Hover over nodes and edges for summaries. Use the Expand next tab to add the next layer.
-    </div>
-    <div class="graph-wrap">
-        <svg id="graph" width="__WIDTH__" height="__HEIGHT__" viewBox="0 0 __WIDTH__ __HEIGHT__"></svg>
-    </div>
-
-    <script>
-        const ns = "http://www.w3.org/2000/svg";
-        const nodes = __NODES_JSON__;
-        const edges = __EDGES_JSON__;
-
-        const svg = document.getElementById("graph");
-        const nodeMap = new Map(nodes.map(node => [node.id, node]));
-        const nodeElements = new Map();
-        const edgeElements = new Map();
-        const edgeLabelElements = new Map();
-
-        let dragging = null;
-        let offset = { x: 0, y: 0 };
-
-        function createSvg(name, attrs) {
-            const el = document.createElementNS(ns, name);
-            for (const [key, value] of Object.entries(attrs || {})) {
-                if (value !== undefined && value !== null) {
-                    el.setAttribute(key, value);
-                }
-            }
-            return el;
-        }
-
-        function nodeStyle(node) {
-            if (node.role === "SEED_CUSTOMER") {
-                return { fill: "#d62728", stroke: "#7f1d1d", shape: "circle", size: 34 };
-            }
-            if (node.node_type === "CUSTOMER" && node.risk_count >= 2) {
-                return { fill: "#ef4444", stroke: "#7f1d1d", shape: "circle", size: 34 };
-            }
-            if (node.node_type === "CUSTOMER") {
-                return { fill: "#1f77b4", stroke: "#15527d", shape: "circle", size: 32 };
-            }
-            if (node.node_type === "EID") {
-                return { fill: "#9467bd", stroke: "#5e3f7a", shape: "diamond", size: 34 };
-            }
-            if (node.policy === "BLOCK_BY_DEFAULT") {
-                return { fill: "#94a3b8", stroke: "#475569", shape: "square", size: 31 };
-            }
-            if (node.node_type === "ACCOUNT") {
-                return { fill: "#2ca02c", stroke: "#1d6b1d", shape: "square", size: 31 };
-            }
-            return { fill: "#999999", stroke: "#555555", shape: "circle", size: 30 };
-        }
-
-        function edgeStyle(edge) {
-            if (edge.relationship_type.includes("EID")) {
-                return { stroke: "#9467bd", dash: "7 5" };
-            }
-            if (edge.relationship_type.includes("ACCOUNT") || edge.relationship_type.includes("COUNTERPARTY")) {
-                return { stroke: "#2ca02c", dash: "" };
-            }
-            return { stroke: "#94a3b8", dash: "" };
-        }
-
-        function point(evt) {
-            const pt = svg.createSVGPoint();
-            pt.x = evt.clientX;
-            pt.y = evt.clientY;
-            return pt.matrixTransform(svg.getScreenCTM().inverse());
-        }
-
-        function drawEdges() {
-            for (const edge of edges) {
-                const source = nodeMap.get(edge.source);
-                const target = nodeMap.get(edge.target);
-                const style = edgeStyle(edge);
-                const group = createSvg("g", {});
-
-                const title = createSvg("title", {});
-                title.textContent = edge.summary;
-                group.appendChild(title);
-
-                const line = createSvg("line", {
-                    x1: source.x,
-                    y1: source.y,
-                    x2: target.x,
-                    y2: target.y,
-                    stroke: style.stroke,
-                    "stroke-width": 3,
-                    "stroke-dasharray": style.dash,
-                });
-
-                const label = createSvg("text", {
-                    x: (source.x + target.x) / 2,
-                    y: (source.y + target.y) / 2 - 10,
-                    "text-anchor": "middle",
-                    class: "edge-label",
-                });
-                label.textContent = edge.label;
-
-                group.appendChild(line);
-                group.appendChild(label);
-                svg.appendChild(group);
-
-                edgeElements.set(edge.id, line);
-                edgeLabelElements.set(edge.id, label);
-            }
-        }
-
-        function drawShape(group, node) {
-            const style = nodeStyle(node);
-
-            if (style.shape === "diamond") {
-                group.appendChild(createSvg("polygon", {
-                    points: `0,${-style.size} ${style.size},0 0,${style.size} ${-style.size},0`,
-                    fill: style.fill,
-                    stroke: style.stroke,
-                    "stroke-width": 3,
-                }));
-                return;
-            }
-
-            if (style.shape === "square") {
-                group.appendChild(createSvg("rect", {
-                    x: -style.size,
-                    y: -style.size,
-                    width: style.size * 2,
-                    height: style.size * 2,
-                    rx: 9,
-                    fill: style.fill,
-                    stroke: style.stroke,
-                    "stroke-width": 3,
-                }));
-                return;
-            }
-
-            group.appendChild(createSvg("circle", {
-                cx: 0,
-                cy: 0,
-                r: style.size,
-                fill: style.fill,
-                stroke: style.stroke,
-                "stroke-width": 3,
-            }));
-        }
-
-        function drawNodes() {
-            for (const node of nodes) {
-                const group = createSvg("g", {
-                    class: "node",
-                    transform: `translate(${node.x}, ${node.y})`,
-                });
-
-                const title = createSvg("title", {});
-                title.textContent = node.summary;
-                group.appendChild(title);
-
-                drawShape(group, node);
-
-                const label = createSvg("text", {
-                    x: 0,
-                    y: 52,
-                    "text-anchor": "middle",
-                    class: "label",
-                });
-                label.textContent = node.label;
-                group.appendChild(label);
-
-                const subLabel = createSvg("text", {
-                    x: 0,
-                    y: 68,
-                    "text-anchor": "middle",
-                    class: "sub-label",
-                });
-
-                if (node.risk_count > 0) {
-                    subLabel.textContent = `${node.risk_count} risk indicator(s)`;
-                } else if (node.expanded) {
-                    subLabel.textContent = "expanded";
-                } else if (node.policy === "BLOCK_BY_DEFAULT") {
-                    subLabel.textContent = "blocked common connector";
-                } else if (node.policy === "EVIDENCE_ONLY") {
-                    subLabel.textContent = "evidence only";
-                } else {
-                    subLabel.textContent = "expandable";
-                }
-
-                group.appendChild(subLabel);
-
-                group.addEventListener("pointerdown", (evt) => {
-                    evt.preventDefault();
-                    dragging = node.id;
-                    const p = point(evt);
-                    offset.x = node.x - p.x;
-                    offset.y = node.y - p.y;
-                    group.classList.add("dragging");
-                    group.setPointerCapture(evt.pointerId);
-                });
-
-                group.addEventListener("pointerup", () => {
-                    dragging = null;
-                    group.classList.remove("dragging");
-                });
-
-                nodeElements.set(node.id, group);
-                svg.appendChild(group);
-            }
-        }
-
-        function update() {
-            for (const node of nodes) {
-                const el = nodeElements.get(node.id);
-                el.setAttribute("transform", `translate(${node.x}, ${node.y})`);
-            }
-
-            for (const edge of edges) {
-                const source = nodeMap.get(edge.source);
-                const target = nodeMap.get(edge.target);
-                const line = edgeElements.get(edge.id);
-                const label = edgeLabelElements.get(edge.id);
-
-                line.setAttribute("x1", source.x);
-                line.setAttribute("y1", source.y);
-                line.setAttribute("x2", target.x);
-                line.setAttribute("y2", target.y);
-
-                label.setAttribute("x", (source.x + target.x) / 2);
-                label.setAttribute("y", (source.y + target.y) / 2 - 10);
-            }
-        }
-
-        svg.addEventListener("pointermove", (evt) => {
-            if (!dragging) {
-                return;
-            }
-            const p = point(evt);
-            const node = nodeMap.get(dragging);
-            node.x = p.x + offset.x;
-            node.y = p.y + offset.y;
-            update();
-        });
-
-        window.addEventListener("pointerup", () => {
-            dragging = null;
-            for (const el of nodeElements.values()) {
-                el.classList.remove("dragging");
-            }
-        });
-
-        drawEdges();
-        drawNodes();
-    </script>
-</body>
-</html>
-"""
-
-    return (
-        template
-        .replace("__WIDTH__", str(width))
-        .replace("__HEIGHT__", str(height))
-        .replace("__NODES_JSON__", json.dumps(nodes))
-        .replace("__EDGES_JSON__", json.dumps(edges))
-    )
-
-
-def render_badges(customer_id: str) -> None:
-    indicators = FRAUD_INDICATORS.get(customer_id, [])
-
-    if not indicators:
-        st.markdown(
-            '<span class="badge badge-low">No active simulated indicators</span>',
-            unsafe_allow_html=True,
-        )
-        return
-
-    for indicator in indicators:
-        css_class = "badge-high" if indicator["severity"] == "High" else "badge-medium"
-        st.markdown(
-            f'<span class="badge {css_class}">{html.escape(indicator["name"])}</span>',
-            unsafe_allow_html=True,
-        )
-
-
-def render_ai_summary() -> None:
-    nodes = list(st.session_state.v2_nodes.values())
-    customer_nodes = [node for node in nodes if node["node_type"] == "CUSTOMER"]
-    risk_nodes = [node for node in customer_nodes if node["risk_count"] > 0]
-    blocked_nodes = [node for node in nodes if node["policy"] == "BLOCK_BY_DEFAULT"]
-
-    st.markdown(
-        f"""
-        <div class="panel">
-            <div class="panel-title">AI investigation summary</div>
-            <div class="panel-caption">
-                The graph currently contains {len(nodes)} visible node(s), {len(st.session_state.v2_edges)} relationship edge(s), 
-                and {len(risk_nodes)} customer node(s) with simulated fraud indicators.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    if blocked_nodes:
-        for node in blocked_nodes:
-            st.markdown(
-                f"""
-                <div class="insight-box">
-                    <div class="insight-title">Common connector identified</div>
-                    <div class="insight-text">
-                        {html.escape(node["label"])} is visible as first-level context, but expansion is blocked by default because it appears to be a high-degree/common counterparty.
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-    if risk_nodes:
-        for node in risk_nodes:
-            st.markdown(
-                f"""
-                <div class="insight-box">
-                    <div class="insight-title">Risk-bearing linked customer</div>
-                    <div class="insight-text">
-                        {html.escape(node["label"])} has {node["risk_count"]} simulated fraud indicator(s). 
-                        Review this node before expanding wider low-confidence paths.
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-    if not risk_nodes:
-        st.markdown(
-            """
-            <div class="insight-box">
-                <div class="insight-title">Suggested next action</div>
-                <div class="insight-text">
-                    Review low-degree connectors first. In this demo, Account ****2202 is the useful expandable counterparty path, while Account ****9011 is intentionally blocked as a common connector.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-
-def render_expansion_cards() -> None:
+def open_recommendations() -> list[dict]:
     candidates = [
         node
         for node in st.session_state.v2_nodes.values()
         if node["expand_type"] is not None and not node["expanded"]
     ]
 
-    if not candidates:
-        st.info("No expandable nodes remain in the current graph.")
-        return
+    return sorted(candidates, key=recommendation_score)
 
-    for node in candidates:
-        st.markdown(
+
+def metric_card(label: str, value: int | str) -> None:
+    st.markdown(
+        f"""
+        <div class="metric-card">
+            <div class="metric-label">{html.escape(label)}</div>
+            <div class="metric-value">{html.escape(str(value))}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def graph_positions() -> dict[str, tuple[int, int]]:
+    nodes = st.session_state.v2_nodes
+    edges = st.session_state.v2_edges
+    seed = node_id("CUSTOMER", st.session_state.v2_seed) if st.session_state.v2_seed else None
+
+    adjacency = {}
+
+    for edge in edges.values():
+        adjacency.setdefault(edge["source"], set()).add(edge["target"])
+        adjacency.setdefault(edge["target"], set()).add(edge["source"])
+
+    levels = {}
+
+    if seed in nodes:
+        levels[seed] = 0
+        queue = deque([seed])
+    else:
+        queue = deque()
+
+    while queue:
+        current = queue.popleft()
+
+        for linked in adjacency.get(current, set()):
+            if linked not in levels:
+                levels[linked] = levels[current] + 1
+                queue.append(linked)
+
+    for nid in nodes:
+        if nid not in levels:
+            levels[nid] = max(levels.values(), default=0) + 1
+
+    grouped = {}
+
+    def sort_key(nid: str) -> tuple[int, str]:
+        node = nodes[nid]
+        type_rank = {"CUSTOMER": 1, "EID": 2, "ACCOUNT": 3}.get(node["node_type"], 9)
+        if node["role"] == "SEED_CUSTOMER":
+            type_rank = 0
+        return type_rank, node["label"]
+
+    for nid, level in levels.items():
+        grouped.setdefault(level, []).append(nid)
+
+    positions = {}
+
+    for level, ids in grouped.items():
+        ids = sorted(ids, key=sort_key)
+        x = 70 + level * 300
+        total_height = (len(ids) - 1) * 125
+        start_y = max(40, 285 - total_height // 2)
+
+        for index, nid in enumerate(ids):
+            positions[nid] = (x, start_y + index * 125)
+
+    return positions
+
+
+def node_class(node: dict) -> str:
+    if node["role"] == "SEED_CUSTOMER":
+        return "seed"
+
+    if node["node_type"] == "CUSTOMER" and node["risk_count"] > 0:
+        return "risk-node"
+
+    if node["node_type"] == "CUSTOMER":
+        return "customer"
+
+    if node["node_type"] == "EID":
+        return "eid"
+
+    if node["policy"] == "BLOCK_BY_DEFAULT":
+        return "blocked-node"
+
+    if node["policy"] == "EVIDENCE_ONLY":
+        return "evidence"
+
+    if node["node_type"] == "ACCOUNT":
+        return "account"
+
+    return "customer"
+
+
+def node_status(node: dict) -> str:
+    if node["risk_count"] > 0:
+        return f"{node['risk_count']} indicators"
+
+    if node["expanded"]:
+        return "expanded"
+
+    if node["policy"] == "BLOCK_BY_DEFAULT":
+        return "blocked"
+
+    if node["policy"] == "EVIDENCE_ONLY":
+        return "evidence only"
+
+    return "available"
+
+
+def render_graph_html() -> str:
+    positions = graph_positions()
+    nodes = st.session_state.v2_nodes
+    edges = st.session_state.v2_edges
+
+    card_w = 210
+    card_h = 74
+
+    max_x = max((x for x, _ in positions.values()), default=600) + card_w + 80
+    max_y = max((y for _, y in positions.values()), default=450) + card_h + 80
+
+    edge_parts = []
+
+    for edge in edges.values():
+        if edge["source"] not in positions or edge["target"] not in positions:
+            continue
+
+        sx, sy = positions[edge["source"]]
+        tx, ty = positions[edge["target"]]
+
+        x1 = sx + card_w
+        y1 = sy + card_h / 2
+        x2 = tx
+        y2 = ty + card_h / 2
+
+        if tx < sx:
+            x1 = sx
+            x2 = tx + card_w
+
+        stroke = "#7c3aed" if "EID" in edge["relationship_type"] else "#16a34a"
+        dash = "6 6" if "EID" in edge["relationship_type"] else ""
+
+        edge_parts.append(
             f"""
-            <div class="insight-box">
-                <div class="insight-title">{html.escape(node["label"])}</div>
-                <div class="insight-text">{html.escape(node["summary"])}</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
+            <path d="M {x1} {y1} C {(x1+x2)/2} {y1}, {(x1+x2)/2} {y2}, {x2} {y2}"
+                  fill="none"
+                  stroke="{stroke}"
+                  stroke-width="2.2"
+                  stroke-dasharray="{dash}"
+                  opacity="0.55">
+                <title>{html.escape(edge["summary"])}</title>
+            </path>
+            """
         )
 
-        disabled = node["policy"] in ["BLOCK_BY_DEFAULT", "EVIDENCE_ONLY"]
+    node_parts = []
 
-        if node["policy"] == "BLOCK_BY_DEFAULT":
-            label = "Expansion blocked by default"
-        elif node["policy"] == "EVIDENCE_ONLY":
-            label = "Evidence-only node"
-        elif node["expand_type"] == "ACCOUNT":
-            label = "Expand account"
-        elif node["expand_type"] == "EID":
-            label = "Expand EID"
-        else:
-            label = "Expand customer context"
+    for nid, node in nodes.items():
+        x, y = positions[nid]
 
-        if st.button(label, key=f"expand_{node['id']}", disabled=disabled):
-            expand_node(node["id"])
-            st.rerun()
+        node_parts.append(
+            f"""
+            <div class="node-card {node_class(node)}" style="left:{x}px; top:{y}px;" title="{html.escape(node["summary"])}">
+                <div class="node-type">{html.escape(node["node_type"])}</div>
+                <div class="node-label">{html.escape(node["label"])}</div>
+                <div class="node-status">{html.escape(node_status(node))}</div>
+            </div>
+            """
+        )
+
+    return f"""
+    <html>
+    <head>
+        <style>
+            body {{
+                margin: 0;
+                background: #ffffff;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            }}
+
+            .canvas {{
+                position: relative;
+                width: {max_x}px;
+                height: {max_y}px;
+                background:
+                    radial-gradient(circle at 1px 1px, #e5e7eb 1px, transparent 0);
+                background-size: 22px 22px;
+                border: 1px solid #e5e7eb;
+                border-radius: 18px;
+                overflow: auto;
+            }}
+
+            svg {{
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 1;
+            }}
+
+            .node-card {{
+                position: absolute;
+                width: {card_w}px;
+                height: {card_h}px;
+                z-index: 2;
+                background: #ffffff;
+                border: 2px solid #cbd5e1;
+                border-radius: 16px;
+                box-sizing: border-box;
+                padding: 10px 12px;
+                box-shadow: 0 10px 22px rgba(15, 23, 42, 0.10);
+            }}
+
+            .node-type {{
+                font-size: 10px;
+                font-weight: 850;
+                letter-spacing: 0.08em;
+                color: #64748b;
+                margin-bottom: 4px;
+            }}
+
+            .node-label {{
+                font-size: 15px;
+                font-weight: 850;
+                color: #0f172a;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }}
+
+            .node-status {{
+                font-size: 11px;
+                color: #475569;
+                margin-top: 4px;
+            }}
+
+            .seed {{
+                border-color: #dc2626;
+                background: #fff1f2;
+            }}
+
+            .customer {{
+                border-color: #2563eb;
+                background: #eff6ff;
+            }}
+
+            .risk-node {{
+                border-color: #dc2626;
+                background: #fee2e2;
+            }}
+
+            .eid {{
+                border-color: #7c3aed;
+                background: #f3e8ff;
+            }}
+
+            .account {{
+                border-color: #16a34a;
+                background: #f0fdf4;
+            }}
+
+            .blocked-node {{
+                border-color: #94a3b8;
+                background: #f1f5f9;
+            }}
+
+            .evidence {{
+                border-color: #f59e0b;
+                background: #fffbeb;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="canvas">
+            <svg width="{max_x}" height="{max_y}">
+                {''.join(edge_parts)}
+            </svg>
+            {''.join(node_parts)}
+        </div>
+    </body>
+    </html>
+    """
 
 
-def render_node_intelligence() -> None:
-    nodes = list(st.session_state.v2_nodes.values())
-    labels = {f"{node['label']} · {node['node_type']}": node["id"] for node in nodes}
-
-    selected_label = st.selectbox("Select visible node", options=list(labels.keys()))
-    node = st.session_state.v2_nodes[labels[selected_label]]
-
+def render_node_details(node: dict) -> None:
     st.markdown(
         f"""
         <div class="panel">
             <div class="panel-title">{html.escape(node["label"])}</div>
-            <div class="panel-caption">{html.escape(node["summary"])}</div>
+            <div class="panel-text">{html.escape(node["summary"])}</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     if node["node_type"] == "CUSTOMER":
-        st.markdown("### Simulated fraud indicators")
-        render_badges(node["key"])
+        indicators = FRAUD_INDICATORS.get(node["key"], [])
 
-        for indicator in FRAUD_INDICATORS.get(node["key"], []):
+        if indicators:
+            st.markdown("##### Fraud indicator overlay")
+
+            for indicator in indicators:
+                badge_class = "badge-high" if indicator["severity"] == "High" else "badge-medium"
+                st.markdown(
+                    f"""
+                    <div class="panel risk">
+                        <span class="badge {badge_class}">{html.escape(indicator["severity"])}</span>
+                        <strong>{html.escape(indicator["name"])}</strong>
+                        <div class="panel-text">{html.escape(indicator["description"])}</div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+        else:
+            st.markdown('<span class="badge badge-info">No active simulated indicators</span>', unsafe_allow_html=True)
+
+    if node["node_type"] == "ACCOUNT":
+        for pattern in TRANSACTION_PATTERNS.get(node["key"], []):
             st.markdown(
                 f"""
-                <div class="insight-box">
-                    <div class="insight-title">{html.escape(indicator["name"])} · {html.escape(indicator["severity"])}</div>
-                    <div class="insight-text">{html.escape(indicator["description"])}</div>
+                <div class="panel">
+                    <div class="panel-title">{html.escape(pattern["title"])}</div>
+                    <div class="panel-text">
+                        {html.escape(pattern["summary"])}
+                        <br><br>
+                        <strong>Analyst guidance:</strong> {html.escape(pattern["guidance"])}
+                    </div>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
 
-    if node["node_type"] == "ACCOUNT":
-        patterns = TRANSACTION_PATTERNS.get(node["key"], [])
 
-        if patterns:
-            st.markdown("### Transaction-pattern interpretation")
+def render_focus_panel() -> None:
+    nodes = list(st.session_state.v2_nodes.values())
 
-            for pattern in patterns:
-                st.markdown(
-                    f"""
-                    <div class="insight-box">
-                        <div class="insight-title">{html.escape(pattern["title"])}</div>
-                        <div class="insight-text">
-                            {html.escape(pattern["summary"])}
-                            <br><br>
-                            <strong>Analyst guidance:</strong> {html.escape(pattern["guidance"])}
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
+    if not nodes:
+        return
+
+    labels = {f"{node['label']} · {node['node_type']}": node["id"] for node in nodes}
+    current = st.session_state.get("v2_focus_node_id")
+
+    if current not in st.session_state.v2_nodes:
+        current = nodes[0]["id"]
+
+    current_label = next(label for label, nid in labels.items() if nid == current)
+
+    selected_label = st.selectbox(
+        "Inspect visible node",
+        options=list(labels.keys()),
+        index=list(labels.keys()).index(current_label),
+    )
+
+    st.session_state.v2_focus_node_id = labels[selected_label]
+    render_node_details(st.session_state.v2_nodes[labels[selected_label]])
+
+
+def render_recommendations() -> None:
+    recommendations = open_recommendations()
+
+    if not recommendations:
+        st.success("No recommended expansion remains for the current graph.")
+        return
+
+    st.markdown("##### Recommended next actions")
+
+    for index, node in enumerate(recommendations[:5], start=1):
+        if node["policy"] == "BLOCK_BY_DEFAULT":
+            css_class = "blocked"
+            action_label = "Blocked by default"
+        elif node["policy"] == "EVIDENCE_ONLY":
+            css_class = "blocked"
+            action_label = "Mark as reviewed"
+        elif node["node_type"] == "ACCOUNT":
+            css_class = "recommendation"
+            action_label = "Expand account"
+        elif node["node_type"] == "CUSTOMER":
+            css_class = "recommendation"
+            action_label = "Expand customer context"
+        else:
+            css_class = "recommendation"
+            action_label = "Expand connector"
+
+        st.markdown(
+            f"""
+            <div class="panel {css_class}">
+                <div class="panel-title">{index}. {html.escape(node["label"])}</div>
+                <div class="panel-text">{html.escape(node["summary"])}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        col_a, col_b = st.columns([1, 1])
+
+        with col_a:
+            if st.button("Inspect", key=f"inspect_{node['id']}"):
+                st.session_state.v2_focus_node_id = node["id"]
+                st.rerun()
+
+        with col_b:
+            disabled = node["policy"] == "BLOCK_BY_DEFAULT"
+
+            if st.button(action_label, key=f"expand_{node['id']}", disabled=disabled):
+                expand_node(node["id"])
+                st.rerun()
+
+
+def render_summary() -> None:
+    nodes = list(st.session_state.v2_nodes.values())
+    customer_nodes = visible_customer_nodes()
+    risk_nodes = [node for node in customer_nodes if node["risk_count"] > 0]
+    blocked_nodes = [node for node in nodes if node["policy"] == "BLOCK_BY_DEFAULT"]
+
+    cols = st.columns(4)
+
+    with cols[0]:
+        metric_card("Visible nodes", len(nodes))
+
+    with cols[1]:
+        metric_card("Relationships", len(st.session_state.v2_edges))
+
+    with cols[2]:
+        metric_card("Customers", len(customer_nodes))
+
+    with cols[3]:
+        metric_card("Risk nodes", len(risk_nodes))
+
+    if blocked_nodes:
+        st.markdown(
+            """
+            <div class="panel blocked">
+                <div class="panel-title">Common connector control</div>
+                <div class="panel-text">
+                    High-degree/company-like counterparties are shown as context but blocked from default expansion.
+                    This prevents graph explosion and keeps the investigation focused.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 
 def main() -> None:
     st.set_page_config(
-        page_title="V2 Interactive Investigation Graph",
+        page_title="V2 Analyst Investigation Graph",
         layout="wide",
     )
 
@@ -1112,10 +1012,10 @@ def main() -> None:
 
     with st.sidebar:
         st.markdown("## V2 Explorer")
-        st.caption("Interactive layer-by-layer investigation demo")
+        st.caption("Analyst-led relationship expansion")
 
         selected_customer = st.selectbox(
-            "Search customer",
+            "Seed customer",
             options=list(CUSTOMERS.keys()),
             index=list(CUSTOMERS.keys()).index("RETAIL_1"),
         )
@@ -1124,27 +1024,26 @@ def main() -> None:
             start_investigation(selected_customer)
             st.rerun()
 
-        if st.button("Reset graph"):
+        if st.button("Reset"):
             reset_state()
             st.rerun()
 
         st.markdown("---")
-        st.caption("Suggested demo path")
-        st.caption("1. Start RETAIL_1")
-        st.caption("2. Review the common account")
-        st.caption("3. Expand Account ****2202")
-        st.caption("4. Select RETAIL_2")
-        st.caption("5. Review indicators and transaction pattern")
+        st.caption("Recommended demo path")
+        st.caption("Start RETAIL_1")
+        st.caption("Expand Account ****2202")
+        st.caption("Inspect RETAIL_2")
+        st.caption("Expand RETAIL_2")
+        st.caption("Review cash-out context")
 
     st.markdown(
         """
-        <div class="hero-card">
-            <div class="status-pill">Version 2 concept · Interactive expansion</div>
+        <div class="hero">
             <div class="hero-title">AI-Assisted Investigation Graph</div>
-            <p class="hero-subtitle">
-                Start from a triggered customer, review first-level identity and counterparty connectors, then expand only the paths that look useful.
-                Fraud indicators and transaction-pattern interpretation are shown as an overlay, not as a replacement for analyst judgement.
-            </p>
+            <div class="hero-text">
+                The graph maps relationships around a triggered customer. Fraud indicators are shown as overlays.
+                The system recommends useful expansion paths, but the analyst decides what to expand.
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -1154,9 +1053,9 @@ def main() -> None:
         st.markdown(
             """
             <div class="panel">
-                <div class="panel-title">Start a new investigation</div>
-                <div class="panel-caption">
-                    Select RETAIL_1 in the sidebar and click Start investigation. The app will show only first-level connectors first.
+                <div class="panel-title">Start an investigation</div>
+                <div class="panel-text">
+                    Use the sidebar to start from RETAIL_1. The first view will show immediate EID and account connectors only.
                 </div>
             </div>
             """,
@@ -1164,70 +1063,38 @@ def main() -> None:
         )
         return
 
-    nodes = list(st.session_state.v2_nodes.values())
-    customer_nodes = [node for node in nodes if node["node_type"] == "CUSTOMER"]
-    risk_nodes = [node for node in customer_nodes if node["risk_count"] > 0]
-    blocked_nodes = [node for node in nodes if node["policy"] == "BLOCK_BY_DEFAULT"]
+    render_summary()
 
-    cols = st.columns(5)
+    workspace_tab, history_tab = st.tabs(["Investigation workspace", "History"])
 
-    with cols[0]:
-        metric_card("Visible nodes", len(nodes), "Current graph state")
+    with workspace_tab:
+        graph_col, control_col = st.columns([2.2, 1])
 
-    with cols[1]:
-        metric_card("Edges", len(st.session_state.v2_edges), "Visible relationships")
-
-    with cols[2]:
-        metric_card("Customers", len(customer_nodes), "Visible customer nodes")
-
-    with cols[3]:
-        metric_card("Risk nodes", len(risk_nodes), "Customers with indicators")
-
-    with cols[4]:
-        metric_card("Blocked", len(blocked_nodes), "Common/noisy connectors")
-
-    tab_graph, tab_expand, tab_intelligence, tab_history = st.tabs(
-        [
-            "Investigation graph",
-            "Expand next",
-            "Node intelligence",
-            "Investigation history",
-        ]
-    )
-
-    with tab_graph:
-        components.html(
-            render_graph_html(),
-            height=760,
-            scrolling=True,
-        )
-        render_ai_summary()
-
-    with tab_expand:
-        st.markdown(
-            """
-            <div class="panel">
-                <div class="panel-title">Expansion choices</div>
-                <div class="panel-caption">
-                    The system summarises each visible connector. The analyst chooses which path to expand.
-                    High-degree/common accounts are visible but blocked by default to reduce graph explosion.
+        with graph_col:
+            st.markdown(
+                """
+                <div class="panel">
+                    <div class="panel-title">Relationship graph</div>
+                    <div class="panel-text">
+                        This is a controlled visual map. Expansion is managed from the recommendation panel to avoid unstable graph behaviour.
+                    </div>
                 </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-        render_expansion_cards()
+                """,
+                unsafe_allow_html=True,
+            )
+            components.html(render_graph_html(), height=650, scrolling=True)
 
-    with tab_intelligence:
-        render_node_intelligence()
+        with control_col:
+            render_recommendations()
+            render_focus_panel()
 
-    with tab_history:
+    with history_tab:
         for item in st.session_state.v2_history:
             st.markdown(
                 f"""
-                <div class="insight-box">
-                    <div class="insight-title">Step</div>
-                    <div class="insight-text">{html.escape(item)}</div>
+                <div class="panel">
+                    <div class="panel-title">Step</div>
+                    <div class="panel-text">{html.escape(item)}</div>
                 </div>
                 """,
                 unsafe_allow_html=True,
