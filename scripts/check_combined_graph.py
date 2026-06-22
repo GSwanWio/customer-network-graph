@@ -116,6 +116,8 @@ def main() -> None:
 							"node_id",
 							"node_type",
 							"display_label",
+							"seed_entity_flag",
+							"counterparty_expansion_seed_flag",
 							"node_role",
 							"network_layers",
 						]

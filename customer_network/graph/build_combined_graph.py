@@ -25,6 +25,7 @@ def build_combined_graph(
 
 	def upsert_node(row: pd.Series, source_layer: str) -> None:
 		node_id = row["node_id"]
+		source_seed_flag = int(row.get("seed_entity_flag", 0) or 0)
 
 		if node_id not in node_records_by_id:
 			node_records_by_id[node_id] = {
@@ -38,7 +39,8 @@ def build_combined_graph(
 				"emirates_id_masked": clean_value(row.get("emirates_id_masked")),
 				"counterparty_account_masked": clean_value(row.get("counterparty_account_masked")),
 				"counterparty_account_number": clean_value(row.get("counterparty_account_number")),
-				"seed_entity_flag": int(row.get("seed_entity_flag", 0) or 0),
+				"seed_entity_flag": 0,
+				"counterparty_expansion_seed_flag": 0,
 				"node_role_values": set(),
 				"network_layer_values": set(),
 				"eid_component_id": clean_value(row.get("eid_component_id")),
@@ -47,10 +49,14 @@ def build_combined_graph(
 
 		record = node_records_by_id[node_id]
 
-		record["seed_entity_flag"] = max(
-			record["seed_entity_flag"],
-			int(row.get("seed_entity_flag", 0) or 0),
-		)
+		if source_layer == "IDENTITY":
+			record["seed_entity_flag"] = max(record["seed_entity_flag"], source_seed_flag)
+
+		if source_layer == "LOCAL_COUNTERPARTY":
+			record["counterparty_expansion_seed_flag"] = max(
+				record["counterparty_expansion_seed_flag"],
+				source_seed_flag,
+			)
 
 		node_role = clean_value(row.get("node_role"))
 
@@ -79,18 +85,13 @@ def build_combined_graph(
 			if record.get(column) is None and clean_value(row.get(column)) is not None:
 				record[column] = clean_value(row.get(column))
 
-	eid_nodes = eid_graph["eid_nodes"].copy()
-	counterparty_nodes = counterparty_graph["counterparty_nodes"].copy()
-
-	for _, row in eid_nodes.iterrows():
+	for _, row in eid_graph["eid_nodes"].iterrows():
 		upsert_node(row, "IDENTITY")
 
-	for _, row in counterparty_nodes.iterrows():
+	for _, row in counterparty_graph["counterparty_nodes"].iterrows():
 		upsert_node(row, "LOCAL_COUNTERPARTY")
 
-	eid_edges = eid_graph["eid_edges"].copy()
-
-	for _, row in eid_edges.iterrows():
+	for _, row in eid_graph["eid_edges"].iterrows():
 		edge_rows.append({
 			"source_node_id": row["source_node_id"],
 			"target_node_id": row["target_node_id"],
@@ -115,9 +116,7 @@ def build_combined_graph(
 			"source_graph": "EID",
 		})
 
-	counterparty_edges = counterparty_graph["counterparty_edges"].copy()
-
-	for _, row in counterparty_edges.iterrows():
+	for _, row in counterparty_graph["counterparty_edges"].iterrows():
 		edge_rows.append({
 			"source_node_id": row["source_node_id"],
 			"target_node_id": row["target_node_id"],
@@ -168,11 +167,12 @@ def build_combined_graph(
 
 	for node_id, record in node_records_by_id.items():
 		component_info = node_component_map[node_id]
-
 		node_role_values = record["node_role_values"]
 
 		if record["seed_entity_flag"] == 1:
 			node_role = "SEED_ENTITY"
+		elif record["counterparty_expansion_seed_flag"] == 1:
+			node_role = "COUNTERPARTY_EXPANSION_START_ENTITY"
 		elif "EMIRATES_ID_CONNECTOR" in node_role_values:
 			node_role = "EMIRATES_ID_CONNECTOR"
 		elif "COUNTERPARTY_CONNECTOR" in node_role_values:
@@ -194,6 +194,7 @@ def build_combined_graph(
 			"counterparty_account_masked": record["counterparty_account_masked"],
 			"counterparty_account_number": record["counterparty_account_number"],
 			"seed_entity_flag": record["seed_entity_flag"],
+			"counterparty_expansion_seed_flag": record["counterparty_expansion_seed_flag"],
 			"node_role": node_role,
 			"network_layers": "|".join(sorted(record["network_layer_values"])),
 			"eid_component_id": record["eid_component_id"],
@@ -241,6 +242,7 @@ def build_combined_graph(
 			eid_node_count=("node_type", lambda values: (values == "EMIRATES_ID").sum()),
 			counterparty_account_node_count=("node_type", lambda values: (values == "LOCAL_COUNTERPARTY_ACCOUNT").sum()),
 			seed_entity_count=("seed_entity_flag", "sum"),
+			counterparty_expansion_seed_entity_count=("counterparty_expansion_seed_flag", "sum"),
 		)
 		.reset_index()
 	)
