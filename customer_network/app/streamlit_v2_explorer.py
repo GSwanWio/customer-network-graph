@@ -4,19 +4,15 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 
-DEMO_DATA = {
-    PROJECT_ROOT = Path(__file__).resolve().parents[2]
-    DATA_PATH = PROJECT_ROOT / "data" / "real_demo" / "customer_network_demo_data.json"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DATA_PATH = PROJECT_ROOT / "data" / "real_demo" / "customer_network_demo_data.json"
 
-    with DATA_PATH.open("r", encoding="utf-8") as f:
-        DEMO_DATA = json.load(f)
-}
+with DATA_PATH.open("r", encoding="utf-8") as f:
+    DEMO_DATA = json.load(f)
 
 
-def build_html(seed_customer: str, analyst_id: str) -> str:
+def build_html() -> str:
     data_json = json.dumps(DEMO_DATA)
-    seed_json = json.dumps(seed_customer)
-    analyst_json = json.dumps(analyst_id)
 
     template = r"""
 <!doctype html>
@@ -37,6 +33,31 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
         --amber: #f59e0b;
         --slate: #94a3b8;
         --shadow: 0 14px 35px rgba(15, 23, 42, 0.10);
+
+        /* Single source of truth for graph risk colors */
+        --high-risk-border: #dc2626;
+        --high-risk-bg: #fee2e2;
+        --high-risk-text: #991b1b;
+
+        --flagged-border: #f97316;
+        --flagged-bg: #fff7ed;
+        --flagged-text: #9a3412;
+
+        --exposed-border: #f59e0b;
+        --exposed-bg: #fffbeb;
+        --exposed-text: #92400e;
+
+        --account-standard-border: #16a34a;
+        --account-standard-bg: #f0fdf4;
+        --account-standard-text: #166534;
+
+        --identity-border: #7c3aed;
+        --identity-bg: #f3e8ff;
+        --identity-text: #5b21b6;
+
+        --controlled-border: #94a3b8;
+        --controlled-bg: #f1f5f9;
+        --controlled-text: #475569;
     }
 
     * {
@@ -52,11 +73,76 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
     }
 
     .app {
-        height: 850px;
+        height: 940px;
         display: grid;
         grid-template-columns: minmax(740px, 1fr) 420px;
+        grid-template-rows: 104px 1fr;
         gap: 14px;
         padding: 14px;
+    }
+
+    .top-bar {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        background: var(--panel);
+        border: 1px solid #e5e7eb;
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        display: grid;
+        grid-template-columns: minmax(260px, 1fr) 220px 260px 156px;
+        gap: 14px;
+        align-items: center;
+        padding: 12px 16px;
+    }
+
+    .top-brand {
+        font-size: 26px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        color: var(--ink);
+        white-space: nowrap;
+    }
+
+    .top-control label {
+        display: block;
+        font-size: 11px;
+        font-weight: 850;
+        color: #475569;
+        margin-bottom: 5px;
+    }
+
+    .top-control input,
+    .top-control select {
+        width: 100%;
+        height: 38px;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        background: #f8fafc;
+        color: var(--ink);
+        padding: 0 11px;
+        font-size: 13px;
+        font-weight: 650;
+        outline: none;
+    }
+
+    .top-control input:focus,
+    .top-control select:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+        background: white;
+    }
+
+    .top-actions {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 7px;
+    }
+
+    .top-actions button {
+        width: 100%;
+        height: 32px;
+        padding: 0 10px;
+        border-radius: 11px;
     }
 
     .canvas-shell,
@@ -66,36 +152,19 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
         border-radius: 22px;
         box-shadow: var(--shadow);
         overflow: hidden;
+        min-height: 0;
     }
 
-    .canvas-header {
-        height: 86px;
-        padding: 15px 18px;
-        border-bottom: 1px solid #e5e7eb;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    .canvas-shell {
+        grid-column: 1;
+        grid-row: 2;
     }
 
-    .title {
-        font-size: 20px;
-        font-weight: 850;
-        letter-spacing: -0.03em;
+    .side-panel {
+        grid-column: 2;
+        grid-row: 2;
     }
 
-    .subtitle {
-        margin-top: 5px;
-        font-size: 13px;
-        color: var(--muted);
-        line-height: 1.35;
-    }
-
-    .toolbar {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-    }
 
     button {
         border: 0;
@@ -125,7 +194,7 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
 
     .canvas-wrap {
         position: relative;
-        height: 764px;
+        height: 100%;
         overflow: auto;
         background:
             radial-gradient(circle at 1px 1px, #e8eef6 1px, transparent 0);
@@ -171,8 +240,8 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
     }
 
     .node.seed {
-        border-color: var(--red);
-        background: #fff1f2;
+        border-color: var(--high-risk-border);
+        background: var(--high-risk-bg);
     }
 
     .node.customer {
@@ -180,29 +249,62 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
         background: #eff6ff;
     }
 
-    .node.risk {
-        border-color: var(--red);
-        background: #fee2e2;
+    .node.risk,
+    .node.highrisk {
+        border-color: var(--high-risk-border);
+        background: var(--high-risk-bg);
+    }
+
+    .node.mediumrisk {
+        border-color: var(--flagged-border);
+        background: var(--flagged-bg);
+    }
+
+    .node.exposed {
+        border-color: var(--exposed-border);
+        background: var(--exposed-bg);
     }
 
     .node.eid {
-        border-color: var(--purple);
-        background: #f3e8ff;
+        border-color: var(--identity-border);
+        background: var(--identity-bg);
     }
 
     .node.account {
-        border-color: var(--green);
-        background: #f0fdf4;
+        border-color: var(--account-standard-border);
+        background: var(--account-standard-bg);
     }
 
-    .node.blocked {
-        border-color: var(--slate);
-        background: #f1f5f9;
+    .node.suspicious-account {
+        border-color: var(--flagged-border);
+        background: var(--flagged-bg);
+    }
+
+    .node.blocked,
+    .node.safe-account {
+        border-color: var(--controlled-border);
+        background: var(--controlled-bg);
     }
 
     .node.evidence {
-        border-color: var(--amber);
-        background: #fffbeb;
+        border-color: var(--exposed-border);
+        background: var(--exposed-bg);
+    }
+
+    .node-icon {
+        position: absolute;
+        top: 7px;
+        right: 9px;
+        min-width: 23px;
+        height: 23px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.78);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        line-height: 1;
+        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.10);
     }
 
     .node-type {
@@ -242,16 +344,20 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
         background: #94a3b8;
     }
 
-    .dot.allow { background: var(--green); }
-    .dot.blocked { background: var(--slate); }
-    .dot.risk { background: var(--red); }
-    .dot.evidence { background: var(--amber); }
+    .dot.allow { background: var(--account-standard-border); }
+    .dot.blocked { background: var(--controlled-border); }
+    .dot.high { background: var(--high-risk-border); }
+    .dot.flagged { background: var(--flagged-border); }
+    .dot.risk { background: var(--high-risk-border); }
+    .dot.suspicious { background: var(--flagged-border); }
+    .dot.evidence { background: var(--exposed-border); }
+    .dot.exposed { background: var(--exposed-border); }
     .dot.expanded { background: var(--blue); }
 
     .side-panel {
         display: flex;
         flex-direction: column;
-        height: 850px;
+        height: 100%;
     }
 
     .side-header {
@@ -364,6 +470,11 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
         color: #9a3412;
     }
 
+    .badge.low {
+        background: #fef9c3;
+        color: #854d0e;
+    }
+
     .badge.info {
         background: #e0f2fe;
         color: #075985;
@@ -415,53 +526,216 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
         margin-top: 8px;
     }
 
-    .legend {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-top: 8px;
+    .legend-pill {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        z-index: 6;
+        height: 36px;
+        border-radius: 999px;
+        padding: 0 14px;
+        border: 1px solid #dbe3ef;
+        background: rgba(255, 255, 255, 0.92);
+        color: #334155;
+        font-weight: 850;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
+        backdrop-filter: blur(8px);
     }
 
-    .legend span {
+    .legend-flyout {
+        position: absolute;
+        top: 58px;
+        left: 14px;
+        z-index: 7;
+        width: 342px;
+        padding: 12px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.97);
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+        backdrop-filter: blur(10px);
+    }
+
+    .legend-flyout.hidden {
+        display: none;
+    }
+
+    .legend-title {
+        font-size: 13px;
+        font-weight: 900;
+        color: var(--ink);
+        margin: 2px 2px 10px 2px;
+    }
+
+    .legend-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 7px;
+    }
+
+    .legend-chip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 12px;
+        font-weight: 800;
+        border-radius: 14px;
+        padding: 8px 10px;
+        border: 2px solid #e5e7eb;
+    }
+
+    .legend-chip .legend-left {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        font-size: 11px;
-        color: #475569;
-        background: white;
+        gap: 8px;
+    }
+
+    .legend-chip .legend-swatch {
+        width: 24px;
+        height: 18px;
+        border-radius: 8px;
+        border: 2px solid currentColor;
+        background: currentColor;
+        opacity: 0.16;
+    }
+
+    .legend-high {
+        background: var(--high-risk-bg);
+        border-color: var(--high-risk-border) !important;
+        color: var(--high-risk-text);
+    }
+
+    .legend-medium {
+        background: var(--flagged-bg);
+        border-color: var(--flagged-border) !important;
+        color: var(--flagged-text);
+    }
+
+    .legend-exposed {
+        background: var(--exposed-bg);
+        border-color: var(--exposed-border) !important;
+        color: var(--exposed-text);
+    }
+
+    .legend-suspicious-account {
+        background: var(--flagged-bg);
+        border-color: var(--flagged-border) !important;
+        color: var(--flagged-text);
+    }
+
+    .legend-expandable-account {
+        background: var(--account-standard-bg);
+        border-color: var(--account-standard-border) !important;
+        color: var(--account-standard-text);
+    }
+
+    .legend-eid {
+        background: var(--identity-bg);
+        border-color: var(--identity-border) !important;
+        color: var(--identity-text);
+    }
+
+    .legend-blocked {
+        background: var(--controlled-bg);
+        border-color: var(--controlled-border) !important;
+        color: var(--controlled-text);
+    }
+
+    .legend-evidence {
+        background: var(--exposed-bg);
+        border-color: var(--exposed-border) !important;
+        color: var(--exposed-text);
+    }
+
+
+    .guidance-card {
+        border-radius: 18px;
+        padding: 16px;
+        margin-bottom: 12px;
+        border: 1px solid #dbeafe;
+        background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+    }
+
+    .guidance-kicker {
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        color: #2563eb;
+        margin-bottom: 6px;
+    }
+
+    .guidance-main {
+        font-size: 18px;
+        line-height: 1.25;
+        font-weight: 900;
+        color: #0f172a;
+    }
+
+    .observation-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .observation-card {
         border: 1px solid #e5e7eb;
-        border-radius: 999px;
-        padding: 5px 9px;
-        white-space: nowrap;
+        border-radius: 15px;
+        padding: 12px;
+        background: #f8fafc;
     }
 
-    .legend span::before {
-        content: "";
-        width: 9px;
-        height: 9px;
-        border-radius: 999px;
-        display: inline-block;
-        background: #94a3b8;
+    .observation-label {
+        font-size: 10px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 850;
+        margin-bottom: 5px;
     }
 
-    .legend .legend-risk::before {
-        background: var(--red);
+    .observation-value {
+        font-size: 16px;
+        font-weight: 850;
+        color: var(--ink);
+        line-height: 1.25;
     }
 
-    .legend .legend-account::before {
-        background: var(--green);
+    .next-steps {
+        margin: 8px 0 0 18px;
+        padding: 0;
+        color: #475569;
+        font-size: 13px;
+        line-height: 1.5;
     }
 
-    .legend .legend-eid::before {
-        background: var(--purple);
+    .next-steps li {
+        margin-bottom: 6px;
     }
 
-    .legend .legend-blocked::before {
-        background: var(--slate);
+    .risk-flag {
+        border-left: 4px solid #e5e7eb;
+        padding: 8px 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background: #f8fafc;
     }
 
-    .legend .legend-evidence::before {
-        background: var(--amber);
+    .risk-flag.high {
+        border-left-color: var(--high-risk-border);
+        background: #fff1f2;
+    }
+
+    .risk-flag.medium {
+        border-left-color: var(--flagged-border);
+        background: #fff7ed;
+    }
+
+    .risk-flag.low {
+        border-left-color: var(--exposed-border);
+        background: #fffbeb;
     }
 
     .storage-pill {
@@ -480,27 +754,38 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
 
 <body>
 <div class="app">
-    <div class="canvas-shell">
-        <div class="canvas-header">
-            <div>
-                <div class="title">Investigation canvas</div>
-                <div class="subtitle">
-                    Click a node to inspect it. If expansion is allowed, the graph expands immediately and the right panel explains what changed.
-                </div>
-                <div class="legend">
-                    <span class="legend-risk">Risk / customer seed</span>
-                    <span class="legend-account">Expandable account</span>
-                    <span class="legend-eid">Identity connector</span>
-                    <span class="legend-blocked">Blocked common connector</span>
-                    <span class="legend-evidence">Evidence-only context</span>
-                </div>
-            </div>
-            <div class="toolbar">
-                <button onclick="resetGraph()">Reset</button>
-                <button class="primary" onclick="startInvestigation()">Start investigation</button>
-            </div>
+    <header class="top-bar">
+        <div class="top-brand">Wio Network Graphing</div>
+        <div class="top-control">
+            <label for="analystInput">Analyst ID</label>
+            <input id="analystInput" type="text" value="analyst_001" oninput="handleAnalystChange()" />
         </div>
+        <div class="top-control">
+            <label for="seedSelect">Seed customer</label>
+            <select id="seedSelect" onchange="handleSeedChange()"></select>
+        </div>
+        <div class="top-actions">
+            <button class="primary" onclick="startInvestigation()">Start investigation</button>
+            <button onclick="resetGraph()">Reset</button>
+        </div>
+    </header>
+
+    <div class="canvas-shell">
         <div class="canvas-wrap">
+            <button class="legend-pill" onclick="toggleLegend()">Risk legend</button>
+            <div id="legendFlyout" class="legend-flyout hidden">
+                <div class="legend-title">Visual risk legend</div>
+                <div class="legend-grid">
+                    <div class="legend-chip legend-high"><span class="legend-left">☠️ High-risk customer</span><span class="legend-swatch"></span></div>
+                    <div class="legend-chip legend-medium"><span class="legend-left">⚠️ Flagged customer</span><span class="legend-swatch"></span></div>
+                    <div class="legend-chip legend-exposed"><span class="legend-left">😟 Network-exposed customer</span><span class="legend-swatch"></span></div>
+                    <div class="legend-chip legend-suspicious-account"><span class="legend-left">🚩 Suspicious account / link</span><span class="legend-swatch"></span></div>
+                    <div class="legend-chip legend-expandable-account"><span class="legend-left">✅ Standard expandable account / link</span><span class="legend-swatch"></span></div>
+                    <div class="legend-chip legend-eid"><span class="legend-left">🔗 Identity connector / link</span><span class="legend-swatch"></span></div>
+                    <div class="legend-chip legend-blocked"><span class="legend-left">🛡️ Controlled context connector / link</span><span class="legend-swatch"></span></div>
+                    <div class="legend-chip legend-evidence"><span class="legend-left">🧾 Evidence-only connector / link</span><span class="legend-swatch"></span></div>
+                </div>
+            </div>
             <div id="canvas" class="canvas">
                 <svg id="edges"></svg>
             </div>
@@ -512,7 +797,7 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
             <div class="side-kicker" id="panelKicker">Ready</div>
             <div class="side-title" id="panelTitle">Start the investigation</div>
             <div class="side-subtitle" id="panelSubtitle">
-                Click Start to load the seed customer and immediate connectors.
+                Click Start to load the selected customer and immediate connections.
             </div>
             <div class="storage-pill" id="storageStatus">Audit trail: not started</div>
             <div class="side-actions">
@@ -526,8 +811,8 @@ def build_html(seed_customer: str, analyst_id: str) -> str:
 
 <script>
 const DATA = __DATA_JSON__;
-const SEED = __SEED_JSON__;
-const ANALYST_ID = __ANALYST_JSON__;
+let SEED = "";
+let ANALYST_ID = "analyst_001";
 
 const state = {
     nodes: {},
@@ -570,6 +855,72 @@ function setStorageStatus(message) {
     document.getElementById("storageStatus").textContent = message;
 }
 
+function customerKeys() {
+    return Object.keys(DATA.customers || {}).sort();
+}
+
+function populateSeedSelect() {
+    const select = document.getElementById("seedSelect");
+    if (!select || select.options.length) return;
+
+    for (const customerId of customerKeys()) {
+        const option = document.createElement("option");
+        option.value = customerId;
+        option.textContent = customerId;
+        select.appendChild(option);
+    }
+}
+
+function syncControlsFromInputs() {
+    const analystInput = document.getElementById("analystInput");
+    const seedSelect = document.getElementById("seedSelect");
+
+    ANALYST_ID = analystInput && analystInput.value.trim() ? analystInput.value.trim() : "analyst_001";
+    SEED = seedSelect && seedSelect.value ? seedSelect.value : customerKeys()[0];
+    state.analystId = ANALYST_ID;
+}
+
+function resetStateOnly() {
+    state.nodes = {};
+    state.edges = {};
+    state.selectedNodeId = null;
+    state.history = [];
+    state.events = [];
+    state.started = false;
+    state.sessionId = null;
+    state.startedAt = null;
+}
+
+function handleSeedChange() {
+    syncControlsFromInputs();
+    resetStateOnly();
+    render();
+
+    if (!restoreSavedCase()) {
+        renderWelcomePanel();
+    }
+}
+
+function handleAnalystChange() {
+    syncControlsFromInputs();
+    setStorageStatus(state.sessionId ? `Audit trail: ${state.events.length} event(s)` : "Audit trail: not started");
+}
+
+function toggleLegend() {
+    const legend = document.getElementById("legendFlyout");
+    if (legend) legend.classList.toggle("hidden");
+}
+
+function initApp() {
+    populateSeedSelect();
+    syncControlsFromInputs();
+    render();
+
+    if (!restoreSavedCase()) {
+        renderWelcomePanel();
+    }
+}
+
 function saveCaseState() {
     if (!safeStorageAvailable()) {
         setStorageStatus("Audit trail: browser storage unavailable");
@@ -585,6 +936,8 @@ function saveCaseState() {
 }
 
 function clearSavedCase() {
+    syncControlsFromInputs();
+
     if (safeStorageAvailable()) {
         window.localStorage.removeItem(storageKey());
     }
@@ -683,7 +1036,7 @@ function exportPayload() {
         seed_customer_id: SEED,
         started_at: state.startedAt,
         exported_at: nowIso(),
-        app_version: "v2_browser_canvas_demo",
+        app_version: "wio_network_graphing_v2",
         graph_snapshot: graphSnapshot(),
         investigation_events: state.events,
         investigation_trail: state.history
@@ -691,6 +1044,7 @@ function exportPayload() {
 }
 
 function downloadCaseReport() {
+    syncControlsFromInputs();
     const payload = exportPayload();
 
     if (!payload.investigation_session_id) {
@@ -822,6 +1176,123 @@ function customerRisk(customerId) {
     return DATA.customers[customerId]?.risk || [];
 }
 
+function severityRank(severity) {
+    if (severity === "High") return 3;
+    if (severity === "Medium") return 2;
+    if (severity === "Low") return 1;
+    return 0;
+}
+
+function customerMaxSeverity(customerId) {
+    const risks = customerRisk(customerId);
+    if (!risks.length) return 0;
+    return Math.max(...risks.map(risk => severityRank(risk.severity)));
+}
+
+function customerIsFraudFlagged(customerId) {
+    return customerMaxSeverity(customerId) > 0;
+}
+
+function accountRiskCustomerCount(accountId) {
+    const account = DATA.accounts[accountId];
+    if (!account) return 0;
+
+    return new Set((account.linked_customers || [])
+        .filter(customerId => customerIsFraudFlagged(customerId))).size;
+}
+
+function customerRelatedRiskCount(customerId) {
+    if (customerIsFraudFlagged(customerId)) return 0;
+
+    const relatedCustomers = new Set();
+
+    for (const eidKey of DATA.customer_eids[customerId] || []) {
+        for (const linkedCustomer of DATA.eids[eidKey]?.linked_customers || []) {
+            if (linkedCustomer !== customerId) relatedCustomers.add(linkedCustomer);
+        }
+    }
+
+    for (const accountLink of DATA.customer_accounts[customerId] || []) {
+        for (const linkedCustomer of DATA.accounts[accountLink.account]?.linked_customers || []) {
+            if (linkedCustomer !== customerId) relatedCustomers.add(linkedCustomer);
+        }
+    }
+
+    return [...relatedCustomers].filter(linkedCustomer => customerIsFraudFlagged(linkedCustomer)).length;
+}
+
+function visualMarker(node) {
+    if (node.type === "CUSTOMER") {
+        const maxSeverity = customerMaxSeverity(node.key);
+        const exposureCount = customerRelatedRiskCount(node.key);
+
+        if (maxSeverity === 3) {
+            return {
+                emoji: "☠️",
+                title: "High-risk customer: high-severity fraud indicator present"
+            };
+        }
+
+        if (maxSeverity === 2) {
+            return {
+                emoji: "⚠️",
+                title: "Medium-risk customer: fraud indicator present"
+            };
+        }
+
+        if (maxSeverity === 1) {
+            return {
+                emoji: "⚠️",
+                title: "Low-risk customer: low-severity fraud indicator present"
+            };
+        }
+
+        if (exposureCount > 0) {
+            return {
+                emoji: "😟",
+                title: `Potential victim / exposed customer: linked to ${exposureCount} fraud-flagged customer(s)`
+            };
+        }
+    }
+
+    if (node.type === "ACCOUNT") {
+        const riskyLinkedCustomers = accountRiskCustomerCount(node.key);
+
+        if (node.policy === "allow" && riskyLinkedCustomers > 0) {
+            return {
+                emoji: "🚩",
+                title: `Suspicious shared account: linked to ${riskyLinkedCustomers} fraud-flagged customer(s)`
+            };
+        }
+
+        if (node.policy === "evidence") {
+            return {
+                emoji: "🧾",
+                title: "Evidence-only account: review context but do not expand by default"
+            };
+        }
+
+        if (node.policy === "blocked") {
+            return {
+                emoji: "🛡️",
+                title: "Controlled/common connector: expansion is blocked to prevent graph noise"
+            };
+        }
+    }
+
+    if (node.type === "EID") {
+        return {
+            emoji: "🔗",
+            title: "Identity connector"
+        };
+    }
+
+    return {
+        emoji: "",
+        title: ""
+    };
+}
+
 function addNode(type, key, label, role, summary, expandType, policy = "allow") {
     const id = nodeId(type, key);
     const existing = state.nodes[id] || {};
@@ -858,7 +1329,12 @@ function addEdge(source, target, label, relationshipType, summary) {
 function addCustomer(customerId, role) {
     const customer = DATA.customers[customerId];
     const risks = customerRisk(customerId);
-    const riskText = risks.length ? `${risks.length} simulated fraud indicators are active.` : "No active simulated fraud indicators.";
+    const exposureCount = customerRelatedRiskCount(customerId);
+    const riskText = risks.length
+        ? `${risks.length} fraud indicator(s) are active.`
+        : exposureCount > 0
+            ? `No direct fraud indicator is active, but this customer is linked to ${exposureCount} fraud-flagged customer(s).`
+            : "No active fraud indicators.";
 
     return addNode(
         "CUSTOMER",
@@ -912,12 +1388,14 @@ function addCustomerConnectors(customerId) {
             accountNode,
             link.direction,
             "ENTITY_USES_ACCOUNT",
-            `${customerId} has ${link.transaction_count} simulated transaction(s) with ${account.label} totalling ${link.amount.toLocaleString()}.`
+            `${customerId} has ${link.transaction_count} transaction(s) with ${account.label} totalling ${link.amount.toLocaleString()}.`
         );
     }
 }
 
 function startInvestigation() {
+    syncControlsFromInputs();
+
     state.nodes = {};
     state.edges = {};
     state.history = [];
@@ -944,6 +1422,8 @@ function startInvestigation() {
 }
 
 function resetGraph() {
+    syncControlsFromInputs();
+
     state.nodes = {};
     state.edges = {};
     state.selectedNodeId = null;
@@ -970,11 +1450,21 @@ function expandNode(id) {
     }
 
     if (node.policy === "blocked") {
-        const message = `${node.label} is blocked from default expansion because it appears to be a high-degree/common connector.`;
+        const account = node.type === "ACCOUNT" ? DATA.accounts[node.key] : null;
+        const linkedCount = account?.linked_customer_count || 0;
+        const riskyLinkedCustomers = node.type === "ACCOUNT" ? accountRiskCustomerCount(node.key) : 0;
+        const blockedReason = linkedCount <= 1
+            ? "CONTEXT_ONLY_SINGLE_CUSTOMER"
+            : "BROAD_CONTEXT_CONNECTOR";
+        const message = linkedCount <= 1
+            ? `${node.label} is shown for context. It does not currently create a useful relationship path because it links to one visible customer.`
+            : `${node.label} is shown for context. It is connected to many customers, so the relationship should not be interpreted on its own.`;
 
-        recordEvent("BLOCK_COMMON_COUNTERPARTY", message, node, {
+        recordEvent("REVIEW_CONTEXT_CONNECTOR", message, node, {
             expansion_allowed_flag: false,
-            blocked_reason: "HIGH_DEGREE_OR_COMMON_COUNTERPARTY"
+            blocked_reason: blockedReason,
+            linked_customer_count: linkedCount,
+            fraud_flagged_linked_customer_count: riskyLinkedCustomers
         });
 
         return {
@@ -986,11 +1476,11 @@ function expandNode(id) {
     if (node.policy === "evidence") {
         node.expanded = true;
 
-        const message = `${node.label} is evidence-only. It provides context but does not create new group-forming links.`;
+        const message = `${node.label} is supporting evidence. Review it as context, but do not use it alone to infer a relationship.`;
 
         recordEvent("REVIEW_EVIDENCE_ONLY_NODE", message, node, {
             expansion_allowed_flag: false,
-            blocked_reason: "EVIDENCE_ONLY_NOT_GROUP_FORMING"
+            blocked_reason: "SUPPORTING_EVIDENCE_ONLY"
         });
 
         return {
@@ -1202,22 +1692,73 @@ function computePositions() {
 }
 
 function nodeCss(node) {
-    if (node.role === "SEED_CUSTOMER") return "seed";
-    if (node.type === "CUSTOMER" && node.riskCount > 0) return "risk";
-    if (node.type === "CUSTOMER") return "customer";
+    if (node.type === "CUSTOMER") {
+        const maxSeverity = customerMaxSeverity(node.key);
+        const exposureCount = customerRelatedRiskCount(node.key);
+
+        if (maxSeverity === 3) return "highrisk";
+        if (maxSeverity === 2 || maxSeverity === 1) return "mediumrisk";
+        if (exposureCount > 0) return "exposed";
+        return "customer";
+    }
+
     if (node.type === "EID") return "eid";
-    if (node.policy === "blocked") return "blocked";
-    if (node.policy === "evidence") return "evidence";
-    if (node.type === "ACCOUNT") return "account";
+
+    if (node.type === "ACCOUNT") {
+        if (node.policy === "evidence") return "evidence";
+        if (node.policy === "blocked") return "blocked";
+        if (accountRiskCustomerCount(node.key) > 0) return "suspicious-account";
+        return "account";
+    }
+
     return "customer";
 }
 
 function nodeStatus(node) {
-    if (node.riskCount > 0) return {dot: "risk", text: `${node.riskCount} indicator(s)`};
+    if (node.type === "CUSTOMER") {
+        const maxSeverity = customerMaxSeverity(node.key);
+        const exposureCount = customerRelatedRiskCount(node.key);
+
+        if (node.riskCount > 0) {
+            if (maxSeverity === 3) return {dot: "high", text: `${node.riskCount} indicator(s)`};
+            return {dot: "flagged", text: `${node.riskCount} indicator(s)`};
+        }
+
+        if (exposureCount > 0) return {dot: "exposed", text: `exposed to ${exposureCount} flagged`};
+    }
+
+    if (node.type === "ACCOUNT") {
+        const riskyLinkedCustomers = accountRiskCustomerCount(node.key);
+
+        if (node.policy === "allow" && riskyLinkedCustomers > 0) {
+            return {dot: "suspicious", text: `${riskyLinkedCustomers} flagged link(s)`};
+        }
+    }
+
     if (node.expanded) return {dot: "expanded", text: "expanded"};
-    if (node.policy === "blocked") return {dot: "blocked", text: "blocked"};
+    if (node.policy === "blocked") return {dot: "blocked", text: "controlled"};
     if (node.policy === "evidence") return {dot: "evidence", text: "evidence only"};
     return {dot: "allow", text: "click to expand"};
+}
+
+
+function edgeStroke(edge) {
+    const sourceNode = state.nodes[edge.source];
+    const targetNode = state.nodes[edge.target];
+    const accountNode = sourceNode?.type === "ACCOUNT" ? sourceNode : targetNode?.type === "ACCOUNT" ? targetNode : null;
+
+    if (edge.relationshipType.includes("EID")) {
+        return "#7c3aed";
+    }
+
+    if (accountNode) {
+        if (accountNode.policy === "evidence") return "#f59e0b";
+        if (accountNode.policy === "blocked") return "#94a3b8";
+        if (accountRiskCustomerCount(accountNode.key) > 0) return "#f97316";
+        return "#16a34a";
+    }
+
+    return "#16a34a";
 }
 
 function render() {
@@ -1253,7 +1794,7 @@ function render() {
             x2 = target.x + cardW;
         }
 
-        const stroke = edge.relationshipType.includes("EID") ? "#7c3aed" : "#16a34a";
+        const stroke = edgeStroke(edge);
         const dash = edge.relationshipType.includes("EID") ? "6 6" : "";
 
         const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -1273,6 +1814,7 @@ function render() {
     for (const node of Object.values(state.nodes)) {
         const position = positions[node.id];
         const status = nodeStatus(node);
+        const marker = visualMarker(node);
 
         const div = document.createElement("div");
         div.className = `node ${nodeCss(node)}${node.id === state.selectedNodeId ? " selected" : ""}`;
@@ -1281,6 +1823,7 @@ function render() {
         div.title = node.summary;
 
         div.innerHTML = `
+            ${marker.emoji ? `<div class="node-icon" title="${escapeHtml(marker.title)}">${marker.emoji}</div>` : ""}
             <div class="node-type">${escapeHtml(node.type)}</div>
             <div class="node-label">${escapeHtml(node.label)}</div>
             <div class="node-status">
@@ -1294,28 +1837,463 @@ function render() {
     }
 }
 
+function formatMoney(value) {
+    const numeric = Number(value || 0);
+    if (!Number.isFinite(numeric)) return "AED 0";
+
+    return `AED ${numeric.toLocaleString(undefined, {
+        maximumFractionDigits: 0
+    })}`;
+}
+
+function formatNumber(value) {
+    return Number(value || 0).toLocaleString();
+}
+
+function highestSeverityText(customerId) {
+    const rank = customerMaxSeverity(customerId);
+    if (rank === 3) return "High";
+    if (rank === 2) return "Medium";
+    if (rank === 1) return "Low";
+    return "None";
+}
+
+function customerAccountLinks(customerId) {
+    return DATA.customer_accounts[customerId] || [];
+}
+
+function accountLinks(accountId) {
+    const rows = [];
+
+    for (const [customerId, links] of Object.entries(DATA.customer_accounts || {})) {
+        for (const link of links || []) {
+            if (link.account === accountId) {
+                rows.push({
+                    customerId,
+                    direction: link.direction,
+                    transactionCount: Number(link.transaction_count || 0),
+                    amount: Number(link.amount || 0)
+                });
+            }
+        }
+    }
+
+    return rows;
+}
+
+function accountFlowProfile(accountId) {
+    const links = accountLinks(accountId);
+    let receivesFromCustomersAmount = 0;
+    let sendsToCustomersAmount = 0;
+    let receivesFromCustomersTxns = 0;
+    let sendsToCustomersTxns = 0;
+    let totalAmount = 0;
+    let totalTransactions = 0;
+
+    for (const link of links) {
+        totalAmount += link.amount;
+        totalTransactions += link.transactionCount;
+
+        if (link.direction === "Paid to") {
+            receivesFromCustomersAmount += link.amount;
+            receivesFromCustomersTxns += link.transactionCount;
+        } else if (link.direction === "Received from") {
+            sendsToCustomersAmount += link.amount;
+            sendsToCustomersTxns += link.transactionCount;
+        } else {
+            receivesFromCustomersAmount += link.amount / 2;
+            sendsToCustomersAmount += link.amount / 2;
+            receivesFromCustomersTxns += link.transactionCount / 2;
+            sendsToCustomersTxns += link.transactionCount / 2;
+        }
+    }
+
+    let flowDirection = "Mixed activity";
+    if (receivesFromCustomersAmount > sendsToCustomersAmount * 1.5 && receivesFromCustomersAmount > 0) {
+        flowDirection = "Mostly receives funds";
+    } else if (sendsToCustomersAmount > receivesFromCustomersAmount * 1.5 && sendsToCustomersAmount > 0) {
+        flowDirection = "Mostly sends funds";
+    }
+
+    return {
+        links,
+        totalAmount,
+        totalTransactions,
+        receivesFromCustomersAmount,
+        sendsToCustomersAmount,
+        receivesFromCustomersTxns,
+        sendsToCustomersTxns,
+        flowDirection
+    };
+}
+
+function linkedCustomerRiskCounts(customerIds) {
+    const uniqueCustomers = [...new Set(customerIds || [])];
+    let flagged = 0;
+    let high = 0;
+    let medium = 0;
+    let low = 0;
+
+    for (const customerId of uniqueCustomers) {
+        const maxSeverity = customerMaxSeverity(customerId);
+        if (maxSeverity > 0) flagged += 1;
+        if (maxSeverity === 3) high += 1;
+        if (maxSeverity === 2) medium += 1;
+        if (maxSeverity === 1) low += 1;
+    }
+
+    return {
+        total: uniqueCustomers.length,
+        flagged,
+        high,
+        medium,
+        low,
+        unflagged: uniqueCustomers.length - flagged
+    };
+}
+
+function customerTransactionProfile(customerId) {
+    const links = customerAccountLinks(customerId);
+    let paidToAmount = 0;
+    let receivedFromAmount = 0;
+    let totalAmount = 0;
+    let transactionCount = 0;
+    let largestLink = null;
+
+    for (const link of links) {
+        const amount = Number(link.amount || 0);
+        const txns = Number(link.transaction_count || 0);
+        totalAmount += amount;
+        transactionCount += txns;
+
+        if (link.direction === "Paid to") {
+            paidToAmount += amount;
+        } else if (link.direction === "Received from") {
+            receivedFromAmount += amount;
+        }
+
+        if (!largestLink || amount > largestLink.amount) {
+            largestLink = {
+                account: link.account,
+                direction: link.direction,
+                amount,
+                transactionCount: txns
+            };
+        }
+    }
+
+    let flowDirection = "No visible account activity";
+    if (paidToAmount > receivedFromAmount * 1.5 && paidToAmount > 0) {
+        flowDirection = "Mostly paid out";
+    } else if (receivedFromAmount > paidToAmount * 1.5 && receivedFromAmount > 0) {
+        flowDirection = "Mostly received funds";
+    } else if (totalAmount > 0) {
+        flowDirection = "Mixed in/out activity";
+    }
+
+    return {
+        links,
+        paidToAmount,
+        receivedFromAmount,
+        totalAmount,
+        transactionCount,
+        largestLink,
+        flowDirection
+    };
+}
+
+function customerConnectedSummary(customerId) {
+    const relatedCustomers = new Set();
+    const identityLinks = DATA.customer_eids[customerId] || [];
+    const accountLinksForCustomer = customerAccountLinks(customerId);
+    let suspiciousAccountCount = 0;
+
+    for (const eidKey of identityLinks) {
+        for (const linkedCustomer of DATA.eids[eidKey]?.linked_customers || []) {
+            if (linkedCustomer !== customerId) relatedCustomers.add(linkedCustomer);
+        }
+    }
+
+    for (const accountLink of accountLinksForCustomer) {
+        const account = DATA.accounts[accountLink.account];
+        if (accountRiskCustomerCount(accountLink.account) > 0) suspiciousAccountCount += 1;
+
+        for (const linkedCustomer of account?.linked_customers || []) {
+            if (linkedCustomer !== customerId) relatedCustomers.add(linkedCustomer);
+        }
+    }
+
+    const riskCounts = linkedCustomerRiskCounts([...relatedCustomers]);
+
+    return {
+        relatedCustomers: [...relatedCustomers],
+        identityLinkCount: identityLinks.length,
+        accountLinkCount: accountLinksForCustomer.length,
+        suspiciousAccountCount,
+        flaggedRelatedCount: riskCounts.flagged,
+        highRiskRelatedCount: riskCounts.high
+    };
+}
+
+function observationCard(label, value) {
+    return `
+        <div class="observation-card">
+            <div class="observation-label">${escapeHtml(label)}</div>
+            <div class="observation-value">${escapeHtml(value)}</div>
+        </div>
+    `;
+}
+
+function observationGrid(items) {
+    return `
+        <div class="observation-grid">
+            ${items.map(item => observationCard(item.label, item.value)).join("")}
+        </div>
+    `;
+}
+
+function nextStepsList(steps) {
+    return `
+        <ol class="next-steps">
+            ${steps.map(step => `<li>${escapeHtml(step)}</li>`).join("")}
+        </ol>
+    `;
+}
+
+function nodeActionVerb(node) {
+    if (node.type === "ACCOUNT") {
+        if (node.policy === "allow") return "Open linked customers";
+        if (node.policy === "evidence") return "Use as supporting evidence";
+        return "Keep as context";
+    }
+
+    if (node.type === "EID") return "Review linked entities";
+    if (node.type === "CUSTOMER") return "Review customer context";
+    return "Review node";
+}
+
+function panelHeaderSubtitle(node) {
+    if (node.type === "CUSTOMER") {
+        const riskCount = customerRisk(node.key).length;
+        const exposureCount = customerRelatedRiskCount(node.key);
+
+        if (riskCount > 0) return `${riskCount} fraud indicator(s) attached to this customer.`;
+        if (exposureCount > 0) return `No direct indicators, but linked to ${exposureCount} fraud-flagged customer(s).`;
+        return "No direct indicators visible in this network extract.";
+    }
+
+    if (node.type === "ACCOUNT") {
+        const account = DATA.accounts[node.key];
+        const riskCounts = linkedCustomerRiskCounts(account?.linked_customers || []);
+        return `${riskCounts.total} related Wio customer(s); ${riskCounts.flagged} have fraud indicators.`;
+    }
+
+    if (node.type === "EID") {
+        const eid = DATA.eids[node.key];
+        const riskCounts = linkedCustomerRiskCounts(eid?.linked_customers || []);
+        return `${eid?.linked_customers?.length || 0} linked customer/entity node(s); ${riskCounts.flagged} have fraud indicators.`;
+    }
+
+    return node.summary;
+}
+
+function customerGuidance(node) {
+    const customerId = node.key;
+    const customer = DATA.customers[customerId];
+    const risks = customerRisk(customerId);
+    const maxSeverity = customerMaxSeverity(customerId);
+    const exposureCount = customerRelatedRiskCount(customerId);
+    const connectedSummary = customerConnectedSummary(customerId);
+    const tx = customerTransactionProfile(customerId);
+    const largest = tx.largestLink;
+
+    let recommendation = "Review this customer’s relationship path before deciding whether to expand further.";
+    let why = "This customer is part of the visible relationship network through shared accounts, identity links, or both.";
+
+    if (maxSeverity === 3) {
+        recommendation = "Prioritise this customer. They have a high-severity fraud indicator and should anchor the next review step.";
+        why = "A directly flagged customer connected to other customers or accounts can explain how risk moves through the network.";
+    } else if (risks.length > 0) {
+        recommendation = "Review this customer’s fraud indicators, then inspect their strongest account connections.";
+        why = "This customer has direct indicators, so their shared accounts and identity links may reveal related activity.";
+    } else if (exposureCount > 0 && largest && largest.direction === "Paid to") {
+        recommendation = "Review as a potentially exposed customer. Check whether the outgoing payment looks like scam or victim behaviour.";
+        why = "This customer has no direct fraud indicators, but they paid a counterparty connected to fraud-flagged customers.";
+    } else if (exposureCount > 0) {
+        recommendation = "Review as network-exposed. Check whether the connection is explainable or suspicious.";
+        why = "This customer has no direct indicators but is close to fraud-flagged customers in the relationship graph.";
+    }
+
+    const observations = [
+        {label: "Customer type", value: customer.segment || "Unknown"},
+        {label: "Fraud indicators", value: `${risks.length}`},
+        {label: "Highest severity", value: highestSeverityText(customerId)},
+        {label: "Connected flagged customers", value: `${connectedSummary.flaggedRelatedCount}`},
+        {label: "Visible account links", value: `${connectedSummary.accountLinkCount}`},
+        {label: "Identity links", value: `${connectedSummary.identityLinkCount}`},
+        {label: "Flow direction", value: tx.flowDirection},
+        {label: "Visible value", value: formatMoney(tx.totalAmount)}
+    ];
+
+    if (largest) {
+        observations.push({
+            label: "Largest visible link",
+            value: `${largest.direction} ${formatMoney(largest.amount)} via ${largest.account}`
+        });
+    }
+
+    const steps = risks.length > 0
+        ? [
+            "Start with the highest-severity fraud indicator and confirm what behaviour triggered it.",
+            "Open the shared accounts connected to this customer and compare transaction direction and value.",
+            "Review customers reached through the same account or identity connector.",
+            "Document whether the customer appears to be driving the network activity or being exposed to it."
+        ]
+        : [
+            "Check whether money moved from this customer to a counterparty connected to flagged customers.",
+            "Compare the amount and frequency against normal customer behaviour.",
+            "Review linked flagged customers before concluding whether this customer is a victim or participant.",
+            "Look for supporting evidence from identity, device, employer, beneficiary, or support case signals."
+        ];
+
+    return {recommendation, why, observations, steps};
+}
+
+function accountGuidance(node) {
+    const account = DATA.accounts[node.key];
+    const visibleCustomers = account?.linked_customers || [];
+    const riskCounts = linkedCustomerRiskCounts(visibleCustomers);
+    const flow = accountFlowProfile(node.key);
+    const relatedWioCustomers = account?.linked_customer_count || visibleCustomers.length;
+
+    let recommendation = "Review this account to understand how the linked customers are connected.";
+    let why = "A shared account can reveal a relationship between customers, especially when the connected customers have fraud indicators.";
+
+    if (node.policy === "evidence") {
+        recommendation = "Use this as supporting evidence only. Do not rely on this account alone to explain the network.";
+        why = "This account appears across a wide customer base or is better treated as background context. A link here needs supporting evidence from other signals.";
+    } else if (node.policy === "blocked" && visibleCustomers.length <= 1) {
+        recommendation = "Keep this as context. It does not currently connect multiple visible customers in this case.";
+        why = "The account is visible because it is related to the selected customer, but it does not create a useful relationship path on its own.";
+    } else if (node.policy === "blocked") {
+        recommendation = "Use carefully. This account is connected to many customers, so the relationship is weaker without supporting evidence.";
+        why = "Broad payment points can create misleading network links. Use this only to support other stronger evidence.";
+    } else if (riskCounts.flagged >= 2) {
+        recommendation = "Open this account first. It connects multiple customers with fraud indicators.";
+        why = "The account links a focused set of customers, and several are already risk flagged. This makes it useful for relationship discovery.";
+    } else if (riskCounts.flagged === 1) {
+        recommendation = "Review this account. It connects at least one flagged customer to others who may be exposed.";
+        why = "The account may explain how risk is spreading from a flagged customer to connected customers.";
+    }
+
+    let roleInsight = "The account has mixed activity with linked customers.";
+    if (flow.flowDirection === "Mostly receives funds") {
+        roleInsight = "The account mostly receives funds from linked customers. Review whether it acts as a collection point.";
+    } else if (flow.flowDirection === "Mostly sends funds") {
+        roleInsight = "The account mostly sends funds to linked customers. Review whether it acts as a distribution point.";
+    }
+
+    const observations = [
+        {label: "Related Wio customers", value: `${relatedWioCustomers}`},
+        {label: "Visible customers", value: `${visibleCustomers.length}`},
+        {label: "Flagged customers", value: `${riskCounts.flagged}`},
+        {label: "High-risk customers", value: `${riskCounts.high}`},
+        {label: "Flow pattern", value: flow.flowDirection},
+        {label: "Visible transactions", value: `${formatNumber(flow.totalTransactions)}`},
+        {label: "Visible value", value: formatMoney(flow.totalAmount)},
+        {label: "Analyst action", value: nodeActionVerb(node)}
+    ];
+
+    const steps = node.policy === "allow"
+        ? [
+            "Open the linked customers and review the fraud-flagged ones first.",
+            "Compare who paid into the account and who received funds from it.",
+            "Check whether the amounts look like normal business/customer activity or suspicious pass-through activity.",
+            "Look for repeated identity, employer, device, beneficiary, or support case signals across linked customers."
+        ]
+        : [
+            "Do not treat this account as a strong relationship by itself.",
+            "Use it to support stronger links from shared identity, focused shared accounts, or direct fraud indicators.",
+            "Review transaction direction and value only if another signal makes this account relevant.",
+            "Avoid expanding broad context unless the analyst has a specific reason."
+        ];
+
+    return {recommendation, why: `${why} ${roleInsight}`, observations, steps};
+}
+
+function eidGuidance(node) {
+    const eid = DATA.eids[node.key];
+    const linkedCustomers = eid?.linked_customers || [];
+    const riskCounts = linkedCustomerRiskCounts(linkedCustomers);
+    let retailCount = 0;
+    let smeCount = 0;
+
+    for (const customerId of linkedCustomers) {
+        const segment = DATA.customers[customerId]?.segment;
+        if (segment === "Retail") retailCount += 1;
+        if (segment === "SME") smeCount += 1;
+    }
+
+    let recommendation = "Review the customers connected by this identity link.";
+    let why = "The same identity links multiple Wio customer/entity records. This can reveal related accounts that should be reviewed together.";
+
+    if (riskCounts.flagged > 0) {
+        recommendation = "Review the flagged customers on this identity link first, then compare the linked Retail and SME activity.";
+        why = "When one linked customer has fraud indicators, related customers under the same identity may need review even if they are not directly flagged.";
+    }
+
+    const observations = [
+        {label: "Linked customers", value: `${linkedCustomers.length}`},
+        {label: "Retail", value: `${retailCount}`},
+        {label: "SME", value: `${smeCount}`},
+        {label: "Flagged customers", value: `${riskCounts.flagged}`},
+        {label: "High-risk customers", value: `${riskCounts.high}`},
+        {label: "Analyst action", value: "Review linked entities"}
+    ];
+
+    const steps = [
+        "Start with the linked customers that have fraud indicators.",
+        "Compare whether Retail and SME accounts share counterparties or transaction patterns.",
+        "Check whether funds move between related entities or through the same external accounts.",
+        "Document whether the identity link strengthens the case or is only background context."
+    ];
+
+    return {recommendation, why, observations, steps};
+}
+
+function guidanceForNode(node) {
+    if (node.type === "CUSTOMER") return customerGuidance(node);
+    if (node.type === "ACCOUNT") return accountGuidance(node);
+    if (node.type === "EID") return eidGuidance(node);
+
+    return {
+        recommendation: "Review this node in context.",
+        why: node.summary,
+        observations: [],
+        steps: ["Review connected nodes before taking action."]
+    };
+}
+
 function renderWelcomePanel() {
     document.getElementById("panelKicker").textContent = "Ready";
     document.getElementById("panelTitle").textContent = "Start the investigation";
-    document.getElementById("panelSubtitle").textContent = "Click Start to load the seed customer and immediate connectors.";
+    document.getElementById("panelSubtitle").textContent = "Click Start to load the selected customer and immediate connections.";
 
     document.getElementById("panelBody").innerHTML = `
+        <div class="guidance-card">
+            <div class="guidance-kicker">Analyst guidance</div>
+            <div class="guidance-main">Start with the selected customer, then follow the strongest relationship path.</div>
+        </div>
         <div class="section">
-            <div class="section-title">Designed to reduce analyst error</div>
+            <div class="section-title">How to use this view</div>
             <div class="section-text">
-                The graph reveals relationships step by step and blocks common/high-degree accounts by default, so the analyst is not overloaded with noisy links.
+                Click a customer, identity connector, or counterparty account to get a plain-English investigation summary and suggested next checks.
             </div>
         </div>
         <div class="section">
-            <div class="section-title">Persistent audit trail</div>
+            <div class="section-title">Investigation principle</div>
             <div class="section-text">
-                Every click and expansion decision is recorded as a structured case event. In this demo it is saved locally in the browser and can be exported as JSON.
-            </div>
-        </div>
-        <div class="section">
-            <div class="section-title">Recommended demo path</div>
-            <div class="section-text">
-                Start RETAIL_1, click Account ****2202, then click RETAIL_2. The right panel explains the selected node, expansion result, and relevant risk context.
+                Prioritise direct fraud indicators, focused shared accounts, and identity links that connect flagged customers. Treat broad or single-customer context as supporting evidence only.
             </div>
         </div>
     `;
@@ -1326,86 +2304,43 @@ function statusCard(result) {
 
     return `
         <div class="status-card ${result.status}">
-            <strong>Click result</strong><br>
+            <strong>Latest action</strong><br>
             ${escapeHtml(result.message)}
         </div>
     `;
 }
 
-function renderRiskSection(node) {
+function renderRiskDetails(node) {
     if (node.type !== "CUSTOMER") return "";
 
     const risks = customerRisk(node.key);
 
     if (!risks.length) {
+        const exposureCount = customerRelatedRiskCount(node.key);
+        const message = exposureCount > 0
+            ? `No direct fraud indicators are attached to this customer, but they are connected to ${exposureCount} fraud-flagged customer(s).`
+            : "No fraud indicators are attached to this customer in the current risk overlay.";
+
         return `
             <div class="section">
-                <div class="section-title">Fraud indicator overlay</div>
-                <span class="badge info">No active simulated indicators</span>
+                <div class="section-title">Fraud indicators</div>
+                <div class="section-text">${escapeHtml(message)}</div>
             </div>
         `;
     }
 
     return `
         <div class="section">
-            <div class="section-title">Fraud indicator overlay</div>
-            ${risks.map(risk => `
-                <div style="margin-bottom: 12px;">
-                    <span class="badge ${risk.severity === "High" ? "high" : "medium"}">${escapeHtml(risk.severity)}</span>
-                    <strong>${escapeHtml(risk.name)}</strong>
-                    <div class="section-text" style="margin-top: 5px;">${escapeHtml(risk.description)}</div>
-                </div>
-            `).join("")}
-        </div>
-    `;
-}
-
-function renderAccountSection(node) {
-    if (node.type !== "ACCOUNT") return "";
-
-    const account = DATA.accounts[node.key];
-    const patterns = account.patterns || [];
-
-    return `
-        <div class="mini-grid">
-            <div class="mini">
-                <div class="mini-label">Linked customers</div>
-                <div class="mini-value">${account.linked_customer_count}</div>
-            </div>
-            <div class="mini">
-                <div class="mini-label">Policy</div>
-                <div class="mini-value">${account.policy}</div>
-            </div>
-        </div>
-
-        ${patterns.map(pattern => `
-            <div class="section">
-                <div class="section-title">${escapeHtml(pattern.title)}</div>
-                <div class="section-text">
-                    ${escapeHtml(pattern.summary)}
-                    <br><br>
-                    <strong>Analyst guidance:</strong> ${escapeHtml(pattern.guidance)}
-                </div>
-            </div>
-        `).join("")}
-    `;
-}
-
-function renderIdentitySection(node) {
-    if (node.type !== "EID") return "";
-
-    const eid = DATA.eids[node.key];
-
-    return `
-        <div class="mini-grid">
-            <div class="mini">
-                <div class="mini-label">Linked entities</div>
-                <div class="mini-value">${eid.linked_customers.length}</div>
-            </div>
-            <div class="mini">
-                <div class="mini-label">Policy</div>
-                <div class="mini-value">${eid.policy}</div>
-            </div>
+            <div class="section-title">Fraud indicators</div>
+            ${risks.map(risk => {
+                const severityClass = risk.severity === "High" ? "high" : risk.severity === "Medium" ? "medium" : "low";
+                return `
+                    <div class="risk-flag ${severityClass}">
+                        <strong>${escapeHtml(risk.name)}</strong>
+                        <div class="section-text" style="margin-top: 4px;">${escapeHtml(risk.description)}</div>
+                    </div>
+                `;
+            }).join("")}
         </div>
     `;
 }
@@ -1416,7 +2351,7 @@ function renderAuditTrail() {
     }
 
     return `
-        <details class="section" open>
+        <details class="section">
             <summary class="section-title">Case activity timeline</summary>
             <ol class="history">
                 ${state.history.slice(-8).map(item => `
@@ -1431,44 +2366,54 @@ function renderAuditTrail() {
 }
 
 function renderNodePanel(node, result) {
+    const guidance = guidanceForNode(node);
+
     document.getElementById("panelKicker").textContent = node.type;
     document.getElementById("panelTitle").textContent = node.label;
-    document.getElementById("panelSubtitle").textContent = node.summary;
+    document.getElementById("panelSubtitle").textContent = panelHeaderSubtitle(node);
 
     document.getElementById("panelBody").innerHTML = `
         ${statusCard(result)}
 
-        <div class="section">
-            <div class="section-title">What this node means</div>
-            <div class="section-text">${escapeHtml(node.summary)}</div>
+        <div class="guidance-card">
+            <div class="guidance-kicker">Analyst guidance</div>
+            <div class="guidance-main">${escapeHtml(guidance.recommendation)}</div>
         </div>
 
-        ${renderRiskSection(node)}
-        ${renderAccountSection(node)}
-        ${renderIdentitySection(node)}
+        <div class="section">
+            <div class="section-title">Why this matters</div>
+            <div class="section-text">${escapeHtml(guidance.why)}</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Key observations</div>
+            ${observationGrid(guidance.observations)}
+        </div>
+
+        ${renderRiskDetails(node)}
+
+        <div class="section">
+            <div class="section-title">Suggested next checks</div>
+            ${nextStepsList(guidance.steps)}
+        </div>
+
         ${renderAuditTrail()}
     `;
 }
 
-if (!restoreSavedCase()) {
-    renderWelcomePanel();
-}
+
+initApp();
 </script>
 </body>
 </html>
 """
 
-    return (
-        template
-        .replace("__DATA_JSON__", data_json)
-        .replace("__SEED_JSON__", seed_json)
-        .replace("__ANALYST_JSON__", analyst_json)
-    )
+    return template.replace("__DATA_JSON__", data_json)
 
 
 def main() -> None:
     st.set_page_config(
-        page_title="V2 Investigation Canvas",
+        page_title="Wio Network Graphing",
         layout="wide",
     )
 
@@ -1479,9 +2424,17 @@ def main() -> None:
                 background: #f5f7fb;
             }
 
+            [data-testid="stSidebar"] {
+                display: none;
+            }
+
+            [data-testid="collapsedControl"] {
+                display: none;
+            }
+
             .block-container {
-                max-width: 1800px;
-                padding: 1rem 1.2rem 2rem 1.2rem;
+                max-width: 100%;
+                padding: 0;
             }
 
             [data-testid="stHeader"] {
@@ -1492,32 +2445,9 @@ def main() -> None:
         unsafe_allow_html=True,
     )
 
-    with st.sidebar:
-        st.title("V2 Explorer")
-        st.caption("Clean browser-side investigation canvas")
-
-        analyst_id = st.text_input(
-            "Analyst ID",
-            value="demo_analyst",
-            help="Demo placeholder. In production this would come from login/SSO.",
-        )
-
-        seed_customer = st.selectbox(
-            "Seed customer",
-            options=list(DEMO_DATA["customers"].keys()),
-            index=list(DEMO_DATA["customers"].keys()).index("RETAIL_1"),
-        )
-
-        st.markdown("---")
-        st.caption("Demo path")
-        st.caption("1. Start RETAIL_1")
-        st.caption("2. Click Account ****2202")
-        st.caption("3. Click RETAIL_2")
-        st.caption("4. Export case JSON")
-
     components.html(
-        build_html(seed_customer, analyst_id),
-        height=900,
+        build_html(),
+        height=1000,
         scrolling=False,
     )
 
