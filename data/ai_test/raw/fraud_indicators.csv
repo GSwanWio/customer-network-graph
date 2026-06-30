@@ -1,0 +1,15 @@
+indicator_id,customer_id,indicator_type,severity,trigger_count,first_seen_date,last_seen_date,supporting_metric,supporting_value
+FI_0001,CUST_1,rapid_fund_movement,high,4,2026-06-18,2026-06-28,movement_to_average_balance_ratio,7.89
+FI_0002,CUST_1,shared_counterparty_with_flagged_customers,high,2,2026-06-12,2026-06-29,flagged_related_customer_count,4.0
+FI_0003,CUST_1,high_beneficiary_velocity,medium,3,2026-06-06,2026-06-24,beneficiaries_added,14.0
+FI_0004,CUST_3,high_beneficiary_velocity,high,5,2026-06-02,2026-06-26,beneficiaries_added,21.0
+FI_0005,CUST_3,large_international_outflow,medium,3,2026-06-14,2026-06-27,international_transfer_aed_90d,386000.0
+FI_0006,CUST_5,rapid_fund_movement,high,6,2026-06-10,2026-06-28,movement_to_average_balance_ratio,25.6
+FI_0007,CUST_5,high_beneficiary_velocity,high,7,2026-05-29,2026-06-29,beneficiaries_added,34.0
+FI_0008,CUST_5,cash_intensive_activity,medium,4,2026-06-09,2026-06-25,cash_withdrawal_aed_90d,244000.0
+FI_0009,CUST_5,shared_counterparty_with_flagged_customers,high,3,2026-06-12,2026-06-28,flagged_related_customer_count,6.0
+FI_0010,CUST_7,unusual_outbound_activity,medium,2,2026-06-16,2026-06-28,sent_to_monthly_income_ratio,17.5
+FI_0011,CUST_9,supplier_payment_concentration,medium,2,2026-06-05,2026-06-22,top_3_counterparty_share_of_sent_value,0.69
+FI_0012,CUST_10,rapid_fund_movement,high,5,2026-06-19,2026-06-29,movement_to_average_balance_ratio,24.3
+FI_0013,CUST_10,shared_counterparty_with_flagged_customers,high,4,2026-06-11,2026-06-28,flagged_related_customer_count,7.0
+FI_0014,CUST_10,high_beneficiary_velocity,medium,5,2026-05-31,2026-06-27,beneficiaries_added,29.0

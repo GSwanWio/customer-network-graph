@@ -1,0 +1,11 @@
+peer_group,metric,p50,p75,p90,p95
+SME_active_24_to_48m,movement_to_average_balance_ratio,2.8,4.6,7.2,10.5
+SME_active_24_to_48m,sent_to_monthly_income_ratio,3.1,5.4,8.5,12.0
+SME_active_24_to_48m,beneficiaries_added,5.0,9.0,15.0,22.0
+SME_active_24_to_48m,total_transaction_count,28.0,44.0,70.0,95.0
+SME_active_24_to_48m,flagged_related_customer_count,0.0,1.0,2.0,4.0
+Retail_active_24_to_48m,movement_to_average_balance_ratio,1.7,3.0,5.8,8.2
+Retail_active_24_to_48m,sent_to_monthly_income_ratio,1.6,3.2,6.0,9.0
+Retail_active_24_to_48m,beneficiaries_added,2.0,4.0,8.0,12.0
+Retail_active_24_to_48m,total_transaction_count,16.0,28.0,48.0,70.0
+Retail_active_24_to_48m,flagged_related_customer_count,0.0,0.0,1.0,2.0

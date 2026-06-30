@@ -1,0 +1,10 @@
+eid_id,customer_id,link_type,created_date
+EID_001,CUST_1,emirates_id,2024-01-01
+EID_001,CUST_2,emirates_id,2024-01-01
+EID_001,CUST_6,emirates_id,2024-01-01
+EID_002,CUST_5,emirates_id,2024-01-01
+EID_002,CUST_10,emirates_id,2024-01-01
+EID_003,CUST_3,emirates_id,2024-01-01
+EID_003,CUST_9,emirates_id,2024-01-01
+EID_004,CUST_4,emirates_id,2024-01-01
+EID_004,CUST_8,emirates_id,2024-01-01

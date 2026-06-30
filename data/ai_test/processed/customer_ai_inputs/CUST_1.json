@@ -1,0 +1,220 @@
+{
+  "selected_node": {
+    "node_type": "customer",
+    "node_id": "CUST_1",
+    "is_seed_customer": true,
+    "distance_from_seed": 0,
+    "current_path": [
+      "CUST_1"
+    ]
+  },
+  "profile": {
+    "customer_id": "CUST_1",
+    "customer_name": "Omar Haddad",
+    "segment": "SME",
+    "account_status": "Active",
+    "age": 42,
+    "nationality": "Jordanian",
+    "occupation": "Managing Partner",
+    "employer": "Blue Palm Trading FZE",
+    "customer_since": "2023-04-17",
+    "customer_tenure_months": 38,
+    "monthly_income_aed": 48500.0,
+    "average_balance_aed": 126400.0,
+    "peer_group": "SME_active_24_to_48m"
+  },
+  "risk_indicators": {
+    "total_count": 3,
+    "high_severity_count": 2,
+    "medium_severity_count": 1,
+    "low_severity_count": 0,
+    "categories": [
+      {
+        "indicator_type": "rapid_fund_movement",
+        "severity": "high",
+        "trigger_count": 4,
+        "first_seen_days_ago": 24,
+        "last_seen_days_ago": 14,
+        "supporting_metric": "movement_to_average_balance_ratio",
+        "supporting_value": 7.89
+      },
+      {
+        "indicator_type": "shared_counterparty_with_flagged_customers",
+        "severity": "high",
+        "trigger_count": 2,
+        "first_seen_days_ago": 30,
+        "last_seen_days_ago": 13,
+        "supporting_metric": "flagged_related_customer_count",
+        "supporting_value": 4.0
+      },
+      {
+        "indicator_type": "high_beneficiary_velocity",
+        "severity": "medium",
+        "trigger_count": 3,
+        "first_seen_days_ago": 36,
+        "last_seen_days_ago": 18,
+        "supporting_metric": "beneficiaries_added",
+        "supporting_value": 14.0
+      }
+    ]
+  },
+  "activity": {
+    "period_days": 90,
+    "total_sent_aed": 482000.0,
+    "total_received_aed": 515000.0,
+    "total_movement_aed": 997000.0,
+    "net_flow_aed": 33000.0,
+    "sent_transaction_count": 38,
+    "received_transaction_count": 22,
+    "total_transaction_count": 60,
+    "average_transaction_size_aed": 16616.67,
+    "largest_sent_transaction_aed": 24455.17,
+    "largest_received_transaction_aed": 36344.46,
+    "unique_receivers": 14,
+    "unique_senders": 7
+  },
+  "normalized_activity": {
+    "movement_to_average_balance_ratio": 7.89,
+    "sent_to_monthly_income_ratio": 9.94,
+    "received_to_monthly_income_ratio": 10.62,
+    "cash_withdrawal_to_total_movement_ratio": 0.0762,
+    "international_transfer_to_total_movement_ratio": 0.2224
+  },
+  "peer_comparison": {
+    "peer_group": "SME_active_24_to_48m",
+    "movement_to_average_balance_ratio": {
+      "value": 7.89,
+      "approx_percentile_bucket": "p90_to_p95",
+      "peer_p50": 2.8,
+      "peer_p75": 4.6,
+      "peer_p90": 7.2,
+      "peer_p95": 10.5
+    },
+    "sent_to_monthly_income_ratio": {
+      "value": 9.94,
+      "approx_percentile_bucket": "p90_to_p95",
+      "peer_p50": 3.1,
+      "peer_p75": 5.4,
+      "peer_p90": 8.5,
+      "peer_p95": 12.0
+    },
+    "beneficiaries_added": {
+      "value": 14,
+      "approx_percentile_bucket": "p75_to_p90",
+      "peer_p50": 5.0,
+      "peer_p75": 9.0,
+      "peer_p90": 15.0,
+      "peer_p95": 22.0
+    },
+    "total_transaction_count": {
+      "value": 60,
+      "approx_percentile_bucket": "p75_to_p90",
+      "peer_p50": 28.0,
+      "peer_p75": 44.0,
+      "peer_p90": 70.0,
+      "peer_p95": 95.0
+    },
+    "flagged_related_customer_count": {
+      "value": 5,
+      "approx_percentile_bucket": ">=p95",
+      "peer_p50": 0.0,
+      "peer_p75": 1.0,
+      "peer_p90": 2.0,
+      "peer_p95": 4.0
+    }
+  },
+  "own_history_comparison": {
+    "current_period_days": 90,
+    "previous_period_days": 90,
+    "total_movement_change_pct": 78.57,
+    "sent_value_change_pct": 78.57,
+    "received_value_change_pct": 78.57,
+    "transaction_count_change": 25,
+    "average_transaction_size_change_pct": 4.17,
+    "unique_receivers_change": 0,
+    "unique_senders_change": 0
+  },
+  "beneficiaries_and_counterparties": {
+    "beneficiaries_added": 14,
+    "active_beneficiaries_90d": 9,
+    "new_beneficiaries_30d": 7,
+    "unique_receivers_90d": 14,
+    "unique_senders_90d": 7,
+    "top_payment_country": "United Arab Emirates",
+    "largest_counterparty_share_of_sent_value": 0.1099,
+    "top_3_counterparty_share_of_sent_value": 0.302
+  },
+  "relationship_exposure": {
+    "linked_counterparty_count": 4,
+    "linked_identity_count": 1,
+    "related_customer_count": 8,
+    "flagged_related_customer_count": 5,
+    "high_priority_related_customer_count": 3,
+    "related_customers": [
+      "CUST_10",
+      "CUST_2",
+      "CUST_3",
+      "CUST_4",
+      "CUST_5",
+      "CUST_6",
+      "CUST_7",
+      "CUST_9"
+    ],
+    "flagged_related_customers": [
+      "CUST_10",
+      "CUST_3",
+      "CUST_5",
+      "CUST_7",
+      "CUST_9"
+    ],
+    "high_priority_related_customers": [
+      "CUST_10",
+      "CUST_3",
+      "CUST_5"
+    ],
+    "strongest_shared_counterparty": {
+      "counterparty_id": "CP_SHARED_001",
+      "linked_customer_count": 5,
+      "flagged_linked_customer_count": 4,
+      "linked_customers": [
+        "CUST_1",
+        "CUST_10",
+        "CUST_3",
+        "CUST_5",
+        "CUST_7"
+      ],
+      "flagged_linked_customers": [
+        "CUST_10",
+        "CUST_3",
+        "CUST_5",
+        "CUST_7"
+      ],
+      "total_shared_value_aed": 938549.67,
+      "seed_customer_value_aed": 109825.37
+    }
+  },
+  "current_investigation_path": {
+    "active_path": [
+      "CUST_1"
+    ],
+    "selected_node_id": "CUST_1",
+    "selected_node_type": "customer",
+    "relationship_to_seed": "seed_customer",
+    "distance_from_seed": 0,
+    "path_contains_flagged_customer": true
+  },
+  "data_quality": {
+    "has_customer_profile": true,
+    "has_income_data": true,
+    "has_average_balance": true,
+    "has_transaction_history": true,
+    "has_beneficiary_data": true,
+    "has_relationship_data": true,
+    "known_limitations": [
+      "payment purpose is not available in the simulated data",
+      "source of funds is not available in the simulated data",
+      "external counterparty ownership is not verified in the simulated data",
+      "peer benchmarks are simulated and should be replaced with production benchmarks later"
+    ]
+  }
+}

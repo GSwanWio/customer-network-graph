@@ -1,0 +1,11 @@
+customer_id,customer_name,segment,account_status,age,nationality,employer,occupation,customer_since,customer_tenure_months,monthly_income_aed,average_balance_aed,peer_group
+CUST_1,Omar Haddad,SME,Active,42,Jordanian,Blue Palm Trading FZE,Managing Partner,2023-04-17,38,48500,126400,SME_active_24_to_48m
+CUST_2,Maya Nair,Retail,Active,34,Indian,Al Noor Facilities Management LLC,Operations Manager,2023-11-02,31,19200,38600,Retail_active_24_to_48m
+CUST_3,Bilal Qureshi,SME,Active,39,Pakistani,Crescent Digital Services LLC,Owner,2024-01-19,29,37200,68400,SME_active_24_to_48m
+CUST_4,Nadia Petrova,Retail,Active,31,Bulgarian,Gulf Horizon Events LLC,Event Coordinator,2024-02-12,28,15800,21900,Retail_active_24_to_48m
+CUST_5,Samuel Okafor,SME,Under Review,45,Nigerian,Red Falcon General Trading LLC,Director,2022-09-05,45,62400,94000,SME_active_24_to_48m
+CUST_6,Leila Mansour,Retail,Active,29,Lebanese,Aster Media Production LLC,Account Executive,2023-07-21,35,14750,18400,Retail_active_24_to_48m
+CUST_7,Hassan Farouk,Retail,Active,37,Egyptian,Brightline Cargo Services LLC,Logistics Supervisor,2024-03-08,27,13600,9200,Retail_active_24_to_48m
+CUST_8,Anika Sharma,Retail,Active,26,Indian,Pearl Avenue Medical Centre,Nurse,2024-05-16,25,11200,14100,Retail_active_24_to_48m
+CUST_9,Rami Khoury,SME,Active,48,Syrian,Golden Route Auto Parts LLC,General Manager,2022-12-11,42,53800,153200,SME_active_24_to_48m
+CUST_10,Amina Yusuf,SME,Under Review,33,Kenyan,Urban Nest Cleaning Services LLC,Business Owner,2023-02-27,40,41700,76800,SME_active_24_to_48m

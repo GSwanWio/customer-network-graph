@@ -1,0 +1,1224 @@
+transaction_id,customer_id,period_label,transaction_date,direction,transaction_type,counterparty_id,amount_aed,payment_country,is_international,is_cash_withdrawal
+TXN_000001,CUST_1,current_90d,2026-04-04,sent,cash_withdrawal,CASH_WITHDRAWAL,17446.63,United Arab Emirates,False,True
+TXN_000002,CUST_1,current_90d,2026-04-06,sent,cash_withdrawal,CASH_WITHDRAWAL,10396.15,United Arab Emirates,False,True
+TXN_000003,CUST_1,current_90d,2026-04-09,sent,cash_withdrawal,CASH_WITHDRAWAL,24455.17,United Arab Emirates,False,True
+TXN_000004,CUST_1,current_90d,2026-04-11,sent,cash_withdrawal,CASH_WITHDRAWAL,23702.05,United Arab Emirates,False,True
+TXN_000005,CUST_1,current_90d,2026-04-14,sent,transfer,CP_SHARED_001,18991.12,United Arab Emirates,True,False
+TXN_000006,CUST_1,current_90d,2026-04-16,sent,transfer,CP_SHARED_002,11659.31,United Arab Emirates,True,False
+TXN_000007,CUST_1,current_90d,2026-04-18,sent,transfer,CP_SHARED_003,15341.66,United Arab Emirates,True,False
+TXN_000008,CUST_1,current_90d,2026-04-21,sent,transfer,CP_SHARED_004,15566.62,United Arab Emirates,True,False
+TXN_000009,CUST_1,current_90d,2026-04-23,sent,transfer,CP_CUST_1_001,8273.62,United Arab Emirates,True,False
+TXN_000010,CUST_1,current_90d,2026-04-26,sent,transfer,CP_CUST_1_002,6354.05,United Arab Emirates,True,False
+TXN_000011,CUST_1,current_90d,2026-04-28,sent,transfer,CP_CUST_1_003,13713.26,United Arab Emirates,True,False
+TXN_000012,CUST_1,current_90d,2026-04-30,sent,transfer,CP_CUST_1_004,6969.5,United Arab Emirates,True,False
+TXN_000013,CUST_1,current_90d,2026-05-03,sent,transfer,CP_CUST_1_005,10620.42,United Arab Emirates,True,False
+TXN_000014,CUST_1,current_90d,2026-05-05,sent,transfer,CP_CUST_1_006,17737.99,United Arab Emirates,True,False
+TXN_000015,CUST_1,current_90d,2026-05-08,sent,transfer,CP_CUST_1_007,17491.8,United Arab Emirates,True,False
+TXN_000016,CUST_1,current_90d,2026-05-10,sent,transfer,CP_CUST_1_008,6924.2,United Arab Emirates,True,False
+TXN_000017,CUST_1,current_90d,2026-05-12,sent,transfer,CP_CUST_1_009,6412.9,United Arab Emirates,True,False
+TXN_000018,CUST_1,current_90d,2026-05-15,sent,transfer,CP_CUST_1_010,8379.99,United Arab Emirates,True,False
+TXN_000019,CUST_1,current_90d,2026-05-17,sent,transfer,CP_SHARED_001,16873.86,United Arab Emirates,True,False
+TXN_000020,CUST_1,current_90d,2026-05-20,sent,transfer,CP_SHARED_002,5606.3,United Arab Emirates,True,False
+TXN_000021,CUST_1,current_90d,2026-05-22,sent,transfer,CP_SHARED_003,8417.82,United Arab Emirates,True,False
+TXN_000022,CUST_1,current_90d,2026-05-24,sent,transfer,CP_SHARED_004,6763.57,United Arab Emirates,True,False
+TXN_000023,CUST_1,current_90d,2026-05-27,sent,transfer,CP_CUST_1_001,7049.71,United Arab Emirates,True,False
+TXN_000024,CUST_1,current_90d,2026-05-29,sent,transfer,CP_CUST_1_002,12600.79,United Arab Emirates,True,False
+TXN_000025,CUST_1,current_90d,2026-06-01,sent,transfer,CP_CUST_1_003,7832.24,United Arab Emirates,False,False
+TXN_000026,CUST_1,current_90d,2026-06-03,sent,transfer,CP_CUST_1_004,11002.15,United Arab Emirates,False,False
+TXN_000027,CUST_1,current_90d,2026-06-05,sent,transfer,CP_CUST_1_005,15542.77,United Arab Emirates,False,False
+TXN_000028,CUST_1,current_90d,2026-06-08,sent,transfer,CP_CUST_1_006,15399.85,United Arab Emirates,False,False
+TXN_000029,CUST_1,current_90d,2026-06-10,sent,transfer,CP_CUST_1_007,11080.61,United Arab Emirates,False,False
+TXN_000030,CUST_1,current_90d,2026-06-13,sent,transfer,CP_CUST_1_008,16285.4,United Arab Emirates,False,False
+TXN_000031,CUST_1,current_90d,2026-06-15,sent,transfer,CP_CUST_1_009,13289.19,United Arab Emirates,False,False
+TXN_000032,CUST_1,current_90d,2026-06-17,sent,transfer,CP_CUST_1_010,16857.99,United Arab Emirates,False,False
+TXN_000033,CUST_1,current_90d,2026-06-20,sent,transfer,CP_SHARED_001,8750.2,United Arab Emirates,False,False
+TXN_000034,CUST_1,current_90d,2026-06-22,sent,transfer,CP_SHARED_002,10436.64,United Arab Emirates,False,False
+TXN_000035,CUST_1,current_90d,2026-06-25,sent,transfer,CP_SHARED_003,13398.97,United Arab Emirates,False,False
+TXN_000036,CUST_1,current_90d,2026-06-27,sent,transfer,CP_SHARED_004,18526.09,United Arab Emirates,False,False
+TXN_000037,CUST_1,current_90d,2026-06-30,sent,transfer,CP_CUST_1_001,13932.01,United Arab Emirates,False,False
+TXN_000038,CUST_1,current_90d,2026-07-02,sent,transfer,CP_CUST_1_002,11917.4,United Arab Emirates,False,False
+TXN_000039,CUST_1,current_90d,2026-04-06,received,transfer,SRC_CUST_1_002,16442.29,United Arab Emirates,False,False
+TXN_000040,CUST_1,current_90d,2026-04-10,received,transfer,SRC_CUST_1_003,25300.16,United Arab Emirates,False,False
+TXN_000041,CUST_1,current_90d,2026-04-14,received,transfer,SRC_CUST_1_004,35644.45,United Arab Emirates,False,False
+TXN_000042,CUST_1,current_90d,2026-04-18,received,transfer,SRC_CUST_1_005,27324.16,United Arab Emirates,False,False
+TXN_000043,CUST_1,current_90d,2026-04-23,received,transfer,SRC_CUST_1_006,22687.05,United Arab Emirates,False,False
+TXN_000044,CUST_1,current_90d,2026-04-27,received,transfer,SRC_CUST_1_007,18095.87,United Arab Emirates,False,False
+TXN_000045,CUST_1,current_90d,2026-05-01,received,transfer,SRC_CUST_1_001,13567.37,United Arab Emirates,False,False
+TXN_000046,CUST_1,current_90d,2026-05-05,received,transfer,SRC_CUST_1_002,36344.46,United Arab Emirates,False,False
+TXN_000047,CUST_1,current_90d,2026-05-10,received,transfer,SRC_CUST_1_003,29878.2,United Arab Emirates,False,False
+TXN_000048,CUST_1,current_90d,2026-05-14,received,transfer,SRC_CUST_1_004,16538.42,United Arab Emirates,False,False
+TXN_000049,CUST_1,current_90d,2026-05-18,received,transfer,SRC_CUST_1_005,25646.95,United Arab Emirates,False,False
+TXN_000050,CUST_1,current_90d,2026-05-22,received,transfer,SRC_CUST_1_006,28672.89,United Arab Emirates,False,False
+TXN_000051,CUST_1,current_90d,2026-05-27,received,transfer,SRC_CUST_1_007,33911.49,United Arab Emirates,False,False
+TXN_000052,CUST_1,current_90d,2026-05-31,received,transfer,SRC_CUST_1_001,17338.28,United Arab Emirates,False,False
+TXN_000053,CUST_1,current_90d,2026-06-04,received,transfer,SRC_CUST_1_002,18214.31,United Arab Emirates,False,False
+TXN_000054,CUST_1,current_90d,2026-06-08,received,transfer,SRC_CUST_1_003,14876.18,United Arab Emirates,False,False
+TXN_000055,CUST_1,current_90d,2026-06-13,received,transfer,SRC_CUST_1_004,25524.51,United Arab Emirates,False,False
+TXN_000056,CUST_1,current_90d,2026-06-17,received,transfer,SRC_CUST_1_005,34313.71,United Arab Emirates,False,False
+TXN_000057,CUST_1,current_90d,2026-06-21,received,transfer,SRC_CUST_1_006,29354.31,United Arab Emirates,False,False
+TXN_000058,CUST_1,current_90d,2026-06-25,received,transfer,SRC_CUST_1_007,13614.08,United Arab Emirates,False,False
+TXN_000059,CUST_1,current_90d,2026-06-30,received,transfer,SRC_CUST_1_001,19765.45,United Arab Emirates,False,False
+TXN_000060,CUST_1,current_90d,2026-07-04,received,transfer,SRC_CUST_1_002,11945.41,United Arab Emirates,False,False
+TXN_000061,CUST_1,previous_90d,2026-01-06,sent,cash_withdrawal,CASH_WITHDRAWAL,27367.33,United Arab Emirates,False,True
+TXN_000062,CUST_1,previous_90d,2026-01-10,sent,cash_withdrawal,CASH_WITHDRAWAL,15192.67,United Arab Emirates,False,True
+TXN_000063,CUST_1,previous_90d,2026-01-14,sent,transfer,CP_SHARED_001,10602.56,United Arab Emirates,True,False
+TXN_000064,CUST_1,previous_90d,2026-01-18,sent,transfer,CP_SHARED_002,17070.07,United Arab Emirates,True,False
+TXN_000065,CUST_1,previous_90d,2026-01-23,sent,transfer,CP_SHARED_003,10826.01,United Arab Emirates,True,False
+TXN_000066,CUST_1,previous_90d,2026-01-27,sent,transfer,CP_SHARED_004,8312.47,United Arab Emirates,True,False
+TXN_000067,CUST_1,previous_90d,2026-01-31,sent,transfer,CP_CUST_1_001,8099.9,United Arab Emirates,True,False
+TXN_000068,CUST_1,previous_90d,2026-02-04,sent,transfer,CP_CUST_1_002,7046.41,United Arab Emirates,True,False
+TXN_000069,CUST_1,previous_90d,2026-02-09,sent,transfer,CP_CUST_1_003,9186.18,United Arab Emirates,True,False
+TXN_000070,CUST_1,previous_90d,2026-02-13,sent,transfer,CP_CUST_1_004,13441.04,United Arab Emirates,True,False
+TXN_000071,CUST_1,previous_90d,2026-02-17,sent,transfer,CP_CUST_1_005,9842.05,United Arab Emirates,True,False
+TXN_000072,CUST_1,previous_90d,2026-02-21,sent,transfer,CP_CUST_1_006,17540.85,United Arab Emirates,True,False
+TXN_000073,CUST_1,previous_90d,2026-02-26,sent,transfer,CP_CUST_1_007,15701.85,United Arab Emirates,True,False
+TXN_000074,CUST_1,previous_90d,2026-03-02,sent,transfer,CP_CUST_1_008,11315.0,United Arab Emirates,False,False
+TXN_000075,CUST_1,previous_90d,2026-03-06,sent,transfer,CP_CUST_1_009,15123.87,United Arab Emirates,False,False
+TXN_000076,CUST_1,previous_90d,2026-03-10,sent,transfer,CP_CUST_1_010,6558.13,United Arab Emirates,False,False
+TXN_000077,CUST_1,previous_90d,2026-03-15,sent,transfer,CP_SHARED_001,10621.26,United Arab Emirates,False,False
+TXN_000078,CUST_1,previous_90d,2026-03-19,sent,transfer,CP_SHARED_002,17453.14,United Arab Emirates,False,False
+TXN_000079,CUST_1,previous_90d,2026-03-23,sent,transfer,CP_SHARED_003,13505.44,United Arab Emirates,False,False
+TXN_000080,CUST_1,previous_90d,2026-03-27,sent,transfer,CP_SHARED_004,6318.78,United Arab Emirates,False,False
+TXN_000081,CUST_1,previous_90d,2026-04-01,sent,transfer,CP_CUST_1_001,9949.34,United Arab Emirates,False,False
+TXN_000082,CUST_1,previous_90d,2026-04-05,sent,transfer,CP_CUST_1_002,8845.65,United Arab Emirates,False,False
+TXN_000083,CUST_1,previous_90d,2026-01-09,received,transfer,SRC_CUST_1_002,27863.81,United Arab Emirates,False,False
+TXN_000084,CUST_1,previous_90d,2026-01-16,received,transfer,SRC_CUST_1_003,15869.89,United Arab Emirates,False,False
+TXN_000085,CUST_1,previous_90d,2026-01-24,received,transfer,SRC_CUST_1_004,18602.62,United Arab Emirates,False,False
+TXN_000086,CUST_1,previous_90d,2026-01-31,received,transfer,SRC_CUST_1_005,32159.97,United Arab Emirates,False,False
+TXN_000087,CUST_1,previous_90d,2026-02-08,received,transfer,SRC_CUST_1_006,10324.36,United Arab Emirates,False,False
+TXN_000088,CUST_1,previous_90d,2026-02-15,received,transfer,SRC_CUST_1_007,10396.72,United Arab Emirates,False,False
+TXN_000089,CUST_1,previous_90d,2026-02-22,received,transfer,SRC_CUST_1_001,33085.75,United Arab Emirates,False,False
+TXN_000090,CUST_1,previous_90d,2026-03-02,received,transfer,SRC_CUST_1_002,19014.19,United Arab Emirates,False,False
+TXN_000091,CUST_1,previous_90d,2026-03-09,received,transfer,SRC_CUST_1_003,21151.06,United Arab Emirates,False,False
+TXN_000092,CUST_1,previous_90d,2026-03-17,received,transfer,SRC_CUST_1_004,23080.47,United Arab Emirates,False,False
+TXN_000093,CUST_1,previous_90d,2026-03-24,received,transfer,SRC_CUST_1_005,23180.78,United Arab Emirates,False,False
+TXN_000094,CUST_1,previous_90d,2026-04-01,received,transfer,SRC_CUST_1_006,25573.61,United Arab Emirates,False,False
+TXN_000095,CUST_1,previous_90d,2026-04-08,received,transfer,SRC_CUST_1_007,28096.77,United Arab Emirates,False,False
+TXN_000096,CUST_2,current_90d,2026-04-07,sent,cash_withdrawal,CASH_WITHDRAWAL,9496.56,United Arab Emirates,False,True
+TXN_000097,CUST_2,current_90d,2026-04-12,sent,cash_withdrawal,CASH_WITHDRAWAL,8503.44,United Arab Emirates,False,True
+TXN_000098,CUST_2,current_90d,2026-04-17,sent,transfer,CP_SHARED_002,2913.92,India,True,False
+TXN_000099,CUST_2,current_90d,2026-04-22,sent,transfer,CP_CUST_2_001,5165.48,India,True,False
+TXN_000100,CUST_2,current_90d,2026-04-28,sent,transfer,CP_CUST_2_002,8438.72,India,True,False
+TXN_000101,CUST_2,current_90d,2026-05-03,sent,transfer,CP_CUST_2_003,9243.56,India,True,False
+TXN_000102,CUST_2,current_90d,2026-05-08,sent,transfer,CP_CUST_2_004,9651.99,India,True,False
+TXN_000103,CUST_2,current_90d,2026-05-13,sent,transfer,CP_CUST_2_005,10231.72,India,True,False
+TXN_000104,CUST_2,current_90d,2026-05-19,sent,transfer,CP_SHARED_002,4252.66,United Arab Emirates,False,False
+TXN_000105,CUST_2,current_90d,2026-05-24,sent,transfer,CP_CUST_2_001,4821.76,United Arab Emirates,False,False
+TXN_000106,CUST_2,current_90d,2026-05-29,sent,transfer,CP_CUST_2_002,6851.41,United Arab Emirates,False,False
+TXN_000107,CUST_2,current_90d,2026-06-03,sent,transfer,CP_CUST_2_003,7787.04,United Arab Emirates,False,False
+TXN_000108,CUST_2,current_90d,2026-06-09,sent,transfer,CP_CUST_2_004,4314.35,United Arab Emirates,False,False
+TXN_000109,CUST_2,current_90d,2026-06-14,sent,transfer,CP_CUST_2_005,8482.46,United Arab Emirates,False,False
+TXN_000110,CUST_2,current_90d,2026-06-19,sent,transfer,CP_SHARED_002,4932.49,United Arab Emirates,False,False
+TXN_000111,CUST_2,current_90d,2026-06-24,sent,transfer,CP_CUST_2_001,8006.17,United Arab Emirates,False,False
+TXN_000112,CUST_2,current_90d,2026-06-30,sent,transfer,CP_CUST_2_002,7741.36,United Arab Emirates,False,False
+TXN_000113,CUST_2,current_90d,2026-07-05,sent,transfer,CP_CUST_2_003,5164.91,United Arab Emirates,False,False
+TXN_000114,CUST_2,current_90d,2026-04-04,received,transfer,SRC_CUST_2_002,6828.75,United Arab Emirates,False,False
+TXN_000115,CUST_2,current_90d,2026-04-07,received,transfer,SRC_CUST_2_003,5589.45,United Arab Emirates,False,False
+TXN_000116,CUST_2,current_90d,2026-04-10,received,transfer,SRC_CUST_2_004,5159.6,United Arab Emirates,False,False
+TXN_000117,CUST_2,current_90d,2026-04-13,received,transfer,SRC_CUST_2_005,7001.69,United Arab Emirates,False,False
+TXN_000118,CUST_2,current_90d,2026-04-16,received,transfer,SRC_CUST_2_006,6246.56,United Arab Emirates,False,False
+TXN_000119,CUST_2,current_90d,2026-04-19,received,transfer,SRC_CUST_2_007,4555.19,United Arab Emirates,False,False
+TXN_000120,CUST_2,current_90d,2026-04-22,received,transfer,SRC_CUST_2_001,3196.66,United Arab Emirates,False,False
+TXN_000121,CUST_2,current_90d,2026-04-25,received,transfer,SRC_CUST_2_002,4465.01,United Arab Emirates,False,False
+TXN_000122,CUST_2,current_90d,2026-04-28,received,transfer,SRC_CUST_2_003,9870.58,United Arab Emirates,False,False
+TXN_000123,CUST_2,current_90d,2026-05-01,received,transfer,SRC_CUST_2_004,9920.11,United Arab Emirates,False,False
+TXN_000124,CUST_2,current_90d,2026-05-04,received,transfer,SRC_CUST_2_005,8057.47,United Arab Emirates,False,False
+TXN_000125,CUST_2,current_90d,2026-05-07,received,transfer,SRC_CUST_2_006,4957.87,United Arab Emirates,False,False
+TXN_000126,CUST_2,current_90d,2026-05-10,received,transfer,SRC_CUST_2_007,7074.33,United Arab Emirates,False,False
+TXN_000127,CUST_2,current_90d,2026-05-13,received,transfer,SRC_CUST_2_001,9040.82,United Arab Emirates,False,False
+TXN_000128,CUST_2,current_90d,2026-05-16,received,transfer,SRC_CUST_2_002,8949.57,United Arab Emirates,False,False
+TXN_000129,CUST_2,current_90d,2026-05-19,received,transfer,SRC_CUST_2_003,3253.67,United Arab Emirates,False,False
+TXN_000130,CUST_2,current_90d,2026-05-22,received,transfer,SRC_CUST_2_004,10442.22,United Arab Emirates,False,False
+TXN_000131,CUST_2,current_90d,2026-05-25,received,transfer,SRC_CUST_2_005,9085.73,United Arab Emirates,False,False
+TXN_000132,CUST_2,current_90d,2026-05-28,received,transfer,SRC_CUST_2_006,7530.46,United Arab Emirates,False,False
+TXN_000133,CUST_2,current_90d,2026-05-31,received,transfer,SRC_CUST_2_007,9452.93,United Arab Emirates,False,False
+TXN_000134,CUST_2,current_90d,2026-06-03,received,transfer,SRC_CUST_2_001,3316.19,United Arab Emirates,False,False
+TXN_000135,CUST_2,current_90d,2026-06-06,received,transfer,SRC_CUST_2_002,3992.32,United Arab Emirates,False,False
+TXN_000136,CUST_2,current_90d,2026-06-09,received,transfer,SRC_CUST_2_003,8003.09,United Arab Emirates,False,False
+TXN_000137,CUST_2,current_90d,2026-06-12,received,transfer,SRC_CUST_2_004,5494.67,United Arab Emirates,False,False
+TXN_000138,CUST_2,current_90d,2026-06-15,received,transfer,SRC_CUST_2_005,7696.2,United Arab Emirates,False,False
+TXN_000139,CUST_2,current_90d,2026-06-18,received,transfer,SRC_CUST_2_006,8209.9,United Arab Emirates,False,False
+TXN_000140,CUST_2,current_90d,2026-06-21,received,transfer,SRC_CUST_2_007,9580.3,United Arab Emirates,False,False
+TXN_000141,CUST_2,current_90d,2026-06-24,received,transfer,SRC_CUST_2_001,4379.19,United Arab Emirates,False,False
+TXN_000142,CUST_2,current_90d,2026-06-27,received,transfer,SRC_CUST_2_002,6159.24,United Arab Emirates,False,False
+TXN_000143,CUST_2,current_90d,2026-06-30,received,transfer,SRC_CUST_2_003,10148.84,United Arab Emirates,False,False
+TXN_000144,CUST_2,current_90d,2026-07-02,received,transfer,SRC_CUST_2_004,6341.39,United Arab Emirates,False,False
+TXN_000145,CUST_2,previous_90d,2026-01-11,sent,cash_withdrawal,CASH_WITHDRAWAL,11520.0,United Arab Emirates,False,True
+TXN_000146,CUST_2,previous_90d,2026-01-21,sent,transfer,CP_SHARED_002,10112.75,India,True,False
+TXN_000147,CUST_2,previous_90d,2026-01-31,sent,transfer,CP_CUST_2_001,7198.43,India,True,False
+TXN_000148,CUST_2,previous_90d,2026-02-10,sent,transfer,CP_CUST_2_002,4691.37,India,True,False
+TXN_000149,CUST_2,previous_90d,2026-02-20,sent,transfer,CP_CUST_2_003,11370.8,India,True,False
+TXN_000150,CUST_2,previous_90d,2026-03-02,sent,transfer,CP_CUST_2_004,4571.89,United Arab Emirates,False,False
+TXN_000151,CUST_2,previous_90d,2026-03-12,sent,transfer,CP_CUST_2_005,9695.96,United Arab Emirates,False,False
+TXN_000152,CUST_2,previous_90d,2026-03-22,sent,transfer,CP_SHARED_002,3606.88,United Arab Emirates,False,False
+TXN_000153,CUST_2,previous_90d,2026-04-01,sent,transfer,CP_CUST_2_001,8512.46,United Arab Emirates,False,False
+TXN_000154,CUST_2,previous_90d,2026-04-10,sent,transfer,CP_CUST_2_002,9359.46,United Arab Emirates,False,False
+TXN_000155,CUST_2,previous_90d,2026-01-07,received,transfer,SRC_CUST_2_002,7665.51,United Arab Emirates,False,False
+TXN_000156,CUST_2,previous_90d,2026-01-12,received,transfer,SRC_CUST_2_003,4457.64,United Arab Emirates,False,False
+TXN_000157,CUST_2,previous_90d,2026-01-17,received,transfer,SRC_CUST_2_004,6927.45,United Arab Emirates,False,False
+TXN_000158,CUST_2,previous_90d,2026-01-22,received,transfer,SRC_CUST_2_005,10208.3,United Arab Emirates,False,False
+TXN_000159,CUST_2,previous_90d,2026-01-28,received,transfer,SRC_CUST_2_006,4236.74,United Arab Emirates,False,False
+TXN_000160,CUST_2,previous_90d,2026-02-02,received,transfer,SRC_CUST_2_007,9273.63,United Arab Emirates,False,False
+TXN_000161,CUST_2,previous_90d,2026-02-07,received,transfer,SRC_CUST_2_001,9060.03,United Arab Emirates,False,False
+TXN_000162,CUST_2,previous_90d,2026-02-12,received,transfer,SRC_CUST_2_002,12129.81,United Arab Emirates,False,False
+TXN_000163,CUST_2,previous_90d,2026-02-18,received,transfer,SRC_CUST_2_003,4968.73,United Arab Emirates,False,False
+TXN_000164,CUST_2,previous_90d,2026-02-23,received,transfer,SRC_CUST_2_004,8808.56,United Arab Emirates,False,False
+TXN_000165,CUST_2,previous_90d,2026-02-28,received,transfer,SRC_CUST_2_005,5793.07,United Arab Emirates,False,False
+TXN_000166,CUST_2,previous_90d,2026-03-05,received,transfer,SRC_CUST_2_006,5973.06,United Arab Emirates,False,False
+TXN_000167,CUST_2,previous_90d,2026-03-11,received,transfer,SRC_CUST_2_007,11967.09,United Arab Emirates,False,False
+TXN_000168,CUST_2,previous_90d,2026-03-16,received,transfer,SRC_CUST_2_001,8139.01,United Arab Emirates,False,False
+TXN_000169,CUST_2,previous_90d,2026-03-21,received,transfer,SRC_CUST_2_002,6992.3,United Arab Emirates,False,False
+TXN_000170,CUST_2,previous_90d,2026-03-26,received,transfer,SRC_CUST_2_003,4897.81,United Arab Emirates,False,False
+TXN_000171,CUST_2,previous_90d,2026-04-01,received,transfer,SRC_CUST_2_004,6444.17,United Arab Emirates,False,False
+TXN_000172,CUST_2,previous_90d,2026-04-06,received,transfer,SRC_CUST_2_005,9017.09,United Arab Emirates,False,False
+TXN_000173,CUST_3,current_90d,2026-04-03,sent,cash_withdrawal,CASH_WITHDRAWAL,8274.43,United Arab Emirates,False,True
+TXN_000174,CUST_3,current_90d,2026-04-04,sent,cash_withdrawal,CASH_WITHDRAWAL,27342.93,United Arab Emirates,False,True
+TXN_000175,CUST_3,current_90d,2026-04-06,sent,cash_withdrawal,CASH_WITHDRAWAL,11596.1,United Arab Emirates,False,True
+TXN_000176,CUST_3,current_90d,2026-04-07,sent,cash_withdrawal,CASH_WITHDRAWAL,27863.85,United Arab Emirates,False,True
+TXN_000177,CUST_3,current_90d,2026-04-09,sent,cash_withdrawal,CASH_WITHDRAWAL,26894.06,United Arab Emirates,False,True
+TXN_000178,CUST_3,current_90d,2026-04-10,sent,cash_withdrawal,CASH_WITHDRAWAL,12893.67,United Arab Emirates,False,True
+TXN_000179,CUST_3,current_90d,2026-04-12,sent,cash_withdrawal,CASH_WITHDRAWAL,18134.96,United Arab Emirates,False,True
+TXN_000180,CUST_3,current_90d,2026-04-13,sent,transfer,CP_SHARED_001,5818.01,Pakistan,True,False
+TXN_000181,CUST_3,current_90d,2026-04-15,sent,transfer,CP_SHARED_005,4981.74,Pakistan,True,False
+TXN_000182,CUST_3,current_90d,2026-04-16,sent,transfer,CP_CUST_3_001,7594.26,Pakistan,True,False
+TXN_000183,CUST_3,current_90d,2026-04-18,sent,transfer,CP_CUST_3_002,16860.79,Pakistan,True,False
+TXN_000184,CUST_3,current_90d,2026-04-19,sent,transfer,CP_CUST_3_003,7676.68,Pakistan,True,False
+TXN_000185,CUST_3,current_90d,2026-04-21,sent,transfer,CP_CUST_3_004,14637.51,Pakistan,True,False
+TXN_000186,CUST_3,current_90d,2026-04-22,sent,transfer,CP_CUST_3_005,15121.08,Pakistan,True,False
+TXN_000187,CUST_3,current_90d,2026-04-24,sent,transfer,CP_CUST_3_006,11560.4,Pakistan,True,False
+TXN_000188,CUST_3,current_90d,2026-04-25,sent,transfer,CP_CUST_3_007,7388.55,Pakistan,True,False
+TXN_000189,CUST_3,current_90d,2026-04-27,sent,transfer,CP_CUST_3_008,15669.63,Pakistan,True,False
+TXN_000190,CUST_3,current_90d,2026-04-28,sent,transfer,CP_CUST_3_009,17937.64,Pakistan,True,False
+TXN_000191,CUST_3,current_90d,2026-04-30,sent,transfer,CP_CUST_3_010,10377.14,Pakistan,True,False
+TXN_000192,CUST_3,current_90d,2026-05-01,sent,transfer,CP_CUST_3_011,12184.97,Pakistan,True,False
+TXN_000193,CUST_3,current_90d,2026-05-03,sent,transfer,CP_CUST_3_012,6540.22,Pakistan,True,False
+TXN_000194,CUST_3,current_90d,2026-05-04,sent,transfer,CP_CUST_3_013,13894.63,Pakistan,True,False
+TXN_000195,CUST_3,current_90d,2026-05-06,sent,transfer,CP_CUST_3_014,13140.48,Pakistan,True,False
+TXN_000196,CUST_3,current_90d,2026-05-07,sent,transfer,CP_CUST_3_015,5297.85,Pakistan,True,False
+TXN_000197,CUST_3,current_90d,2026-05-09,sent,transfer,CP_CUST_3_016,15172.88,Pakistan,True,False
+TXN_000198,CUST_3,current_90d,2026-05-10,sent,transfer,CP_CUST_3_017,12901.54,Pakistan,True,False
+TXN_000199,CUST_3,current_90d,2026-05-12,sent,transfer,CP_CUST_3_018,6127.34,Pakistan,True,False
+TXN_000200,CUST_3,current_90d,2026-05-13,sent,transfer,CP_CUST_3_019,5283.89,Pakistan,True,False
+TXN_000201,CUST_3,current_90d,2026-05-15,sent,transfer,CP_SHARED_001,5012.23,Pakistan,True,False
+TXN_000202,CUST_3,current_90d,2026-05-16,sent,transfer,CP_SHARED_005,17504.66,Pakistan,True,False
+TXN_000203,CUST_3,current_90d,2026-05-17,sent,transfer,CP_CUST_3_001,15622.64,Pakistan,True,False
+TXN_000204,CUST_3,current_90d,2026-05-19,sent,transfer,CP_CUST_3_002,15910.16,Pakistan,True,False
+TXN_000205,CUST_3,current_90d,2026-05-20,sent,transfer,CP_CUST_3_003,11709.57,Pakistan,True,False
+TXN_000206,CUST_3,current_90d,2026-05-22,sent,transfer,CP_CUST_3_004,7081.95,Pakistan,True,False
+TXN_000207,CUST_3,current_90d,2026-05-23,sent,transfer,CP_CUST_3_005,5826.53,Pakistan,True,False
+TXN_000208,CUST_3,current_90d,2026-05-25,sent,transfer,CP_CUST_3_006,11083.84,Pakistan,True,False
+TXN_000209,CUST_3,current_90d,2026-05-26,sent,transfer,CP_CUST_3_007,15387.71,Pakistan,True,False
+TXN_000210,CUST_3,current_90d,2026-05-28,sent,transfer,CP_CUST_3_008,10078.31,Pakistan,True,False
+TXN_000211,CUST_3,current_90d,2026-05-29,sent,transfer,CP_CUST_3_009,7102.23,Pakistan,True,False
+TXN_000212,CUST_3,current_90d,2026-05-31,sent,transfer,CP_CUST_3_010,10798.23,Pakistan,True,False
+TXN_000213,CUST_3,current_90d,2026-06-01,sent,transfer,CP_CUST_3_011,11974.64,Pakistan,True,False
+TXN_000214,CUST_3,current_90d,2026-06-03,sent,transfer,CP_CUST_3_012,17303.08,Pakistan,True,False
+TXN_000215,CUST_3,current_90d,2026-06-04,sent,transfer,CP_CUST_3_013,7448.06,United Arab Emirates,False,False
+TXN_000216,CUST_3,current_90d,2026-06-06,sent,transfer,CP_CUST_3_014,10732.97,United Arab Emirates,False,False
+TXN_000217,CUST_3,current_90d,2026-06-07,sent,transfer,CP_CUST_3_015,9182.39,United Arab Emirates,False,False
+TXN_000218,CUST_3,current_90d,2026-06-09,sent,transfer,CP_CUST_3_016,15312.0,United Arab Emirates,False,False
+TXN_000219,CUST_3,current_90d,2026-06-10,sent,transfer,CP_CUST_3_017,7450.96,United Arab Emirates,False,False
+TXN_000220,CUST_3,current_90d,2026-06-12,sent,transfer,CP_CUST_3_018,14804.07,United Arab Emirates,False,False
+TXN_000221,CUST_3,current_90d,2026-06-13,sent,transfer,CP_CUST_3_019,15882.19,United Arab Emirates,False,False
+TXN_000222,CUST_3,current_90d,2026-06-15,sent,transfer,CP_SHARED_001,11510.94,United Arab Emirates,False,False
+TXN_000223,CUST_3,current_90d,2026-06-16,sent,transfer,CP_SHARED_005,12297.38,United Arab Emirates,False,False
+TXN_000224,CUST_3,current_90d,2026-06-18,sent,transfer,CP_CUST_3_001,17488.47,United Arab Emirates,False,False
+TXN_000225,CUST_3,current_90d,2026-06-19,sent,transfer,CP_CUST_3_002,6015.3,United Arab Emirates,False,False
+TXN_000226,CUST_3,current_90d,2026-06-21,sent,transfer,CP_CUST_3_003,5351.29,United Arab Emirates,False,False
+TXN_000227,CUST_3,current_90d,2026-06-22,sent,transfer,CP_CUST_3_004,9520.3,United Arab Emirates,False,False
+TXN_000228,CUST_3,current_90d,2026-06-24,sent,transfer,CP_CUST_3_005,12490.9,United Arab Emirates,False,False
+TXN_000229,CUST_3,current_90d,2026-06-25,sent,transfer,CP_CUST_3_006,12368.79,United Arab Emirates,False,False
+TXN_000230,CUST_3,current_90d,2026-06-27,sent,transfer,CP_CUST_3_007,6264.12,United Arab Emirates,False,False
+TXN_000231,CUST_3,current_90d,2026-06-28,sent,transfer,CP_CUST_3_008,5655.59,United Arab Emirates,False,False
+TXN_000232,CUST_3,current_90d,2026-06-30,sent,transfer,CP_CUST_3_009,16997.09,United Arab Emirates,False,False
+TXN_000233,CUST_3,current_90d,2026-07-01,sent,transfer,CP_CUST_3_010,15664.18,United Arab Emirates,False,False
+TXN_000234,CUST_3,current_90d,2026-04-03,received,transfer,SRC_CUST_3_002,9427.96,United Arab Emirates,False,False
+TXN_000235,CUST_3,current_90d,2026-04-05,received,transfer,SRC_CUST_3_003,7255.17,United Arab Emirates,False,False
+TXN_000236,CUST_3,current_90d,2026-04-07,received,transfer,SRC_CUST_3_004,13576.59,United Arab Emirates,False,False
+TXN_000237,CUST_3,current_90d,2026-04-09,received,transfer,SRC_CUST_3_005,11842.25,United Arab Emirates,False,False
+TXN_000238,CUST_3,current_90d,2026-04-11,received,transfer,SRC_CUST_3_006,19402.75,United Arab Emirates,False,False
+TXN_000239,CUST_3,current_90d,2026-04-13,received,transfer,SRC_CUST_3_007,19638.79,United Arab Emirates,False,False
+TXN_000240,CUST_3,current_90d,2026-04-15,received,transfer,SRC_CUST_3_001,18978.61,United Arab Emirates,False,False
+TXN_000241,CUST_3,current_90d,2026-04-17,received,transfer,SRC_CUST_3_002,12029.4,United Arab Emirates,False,False
+TXN_000242,CUST_3,current_90d,2026-04-19,received,transfer,SRC_CUST_3_003,16594.39,United Arab Emirates,False,False
+TXN_000243,CUST_3,current_90d,2026-04-20,received,transfer,SRC_CUST_3_004,15073.37,United Arab Emirates,False,False
+TXN_000244,CUST_3,current_90d,2026-04-22,received,transfer,SRC_CUST_3_005,11559.14,United Arab Emirates,False,False
+TXN_000245,CUST_3,current_90d,2026-04-24,received,transfer,SRC_CUST_3_006,8690.32,United Arab Emirates,False,False
+TXN_000246,CUST_3,current_90d,2026-04-26,received,transfer,SRC_CUST_3_007,16501.76,United Arab Emirates,False,False
+TXN_000247,CUST_3,current_90d,2026-04-28,received,transfer,SRC_CUST_3_001,18552.05,United Arab Emirates,False,False
+TXN_000248,CUST_3,current_90d,2026-04-30,received,transfer,SRC_CUST_3_002,19452.24,United Arab Emirates,False,False
+TXN_000249,CUST_3,current_90d,2026-05-02,received,transfer,SRC_CUST_3_003,18786.02,United Arab Emirates,False,False
+TXN_000250,CUST_3,current_90d,2026-05-04,received,transfer,SRC_CUST_3_004,18748.56,United Arab Emirates,False,False
+TXN_000251,CUST_3,current_90d,2026-05-06,received,transfer,SRC_CUST_3_005,5902.93,United Arab Emirates,False,False
+TXN_000252,CUST_3,current_90d,2026-05-07,received,transfer,SRC_CUST_3_006,13868.14,United Arab Emirates,False,False
+TXN_000253,CUST_3,current_90d,2026-05-09,received,transfer,SRC_CUST_3_007,19453.17,United Arab Emirates,False,False
+TXN_000254,CUST_3,current_90d,2026-05-11,received,transfer,SRC_CUST_3_001,12531.81,United Arab Emirates,False,False
+TXN_000255,CUST_3,current_90d,2026-05-13,received,transfer,SRC_CUST_3_002,19471.0,United Arab Emirates,False,False
+TXN_000256,CUST_3,current_90d,2026-05-15,received,transfer,SRC_CUST_3_003,8640.58,United Arab Emirates,False,False
+TXN_000257,CUST_3,current_90d,2026-05-17,received,transfer,SRC_CUST_3_004,19292.85,United Arab Emirates,False,False
+TXN_000258,CUST_3,current_90d,2026-05-19,received,transfer,SRC_CUST_3_005,15837.91,United Arab Emirates,False,False
+TXN_000259,CUST_3,current_90d,2026-05-21,received,transfer,SRC_CUST_3_006,19833.64,United Arab Emirates,False,False
+TXN_000260,CUST_3,current_90d,2026-05-23,received,transfer,SRC_CUST_3_007,17109.95,United Arab Emirates,False,False
+TXN_000261,CUST_3,current_90d,2026-05-25,received,transfer,SRC_CUST_3_001,10411.53,United Arab Emirates,False,False
+TXN_000262,CUST_3,current_90d,2026-05-26,received,transfer,SRC_CUST_3_002,9084.21,United Arab Emirates,False,False
+TXN_000263,CUST_3,current_90d,2026-05-28,received,transfer,SRC_CUST_3_003,16002.99,United Arab Emirates,False,False
+TXN_000264,CUST_3,current_90d,2026-05-30,received,transfer,SRC_CUST_3_004,18926.4,United Arab Emirates,False,False
+TXN_000265,CUST_3,current_90d,2026-06-01,received,transfer,SRC_CUST_3_005,17606.5,United Arab Emirates,False,False
+TXN_000266,CUST_3,current_90d,2026-06-03,received,transfer,SRC_CUST_3_006,8156.18,United Arab Emirates,False,False
+TXN_000267,CUST_3,current_90d,2026-06-05,received,transfer,SRC_CUST_3_007,18818.25,United Arab Emirates,False,False
+TXN_000268,CUST_3,current_90d,2026-06-07,received,transfer,SRC_CUST_3_001,11112.41,United Arab Emirates,False,False
+TXN_000269,CUST_3,current_90d,2026-06-09,received,transfer,SRC_CUST_3_002,13278.27,United Arab Emirates,False,False
+TXN_000270,CUST_3,current_90d,2026-06-11,received,transfer,SRC_CUST_3_003,18936.37,United Arab Emirates,False,False
+TXN_000271,CUST_3,current_90d,2026-06-12,received,transfer,SRC_CUST_3_004,16635.93,United Arab Emirates,False,False
+TXN_000272,CUST_3,current_90d,2026-06-14,received,transfer,SRC_CUST_3_005,8161.88,United Arab Emirates,False,False
+TXN_000273,CUST_3,current_90d,2026-06-16,received,transfer,SRC_CUST_3_006,9487.7,United Arab Emirates,False,False
+TXN_000274,CUST_3,current_90d,2026-06-18,received,transfer,SRC_CUST_3_007,13605.19,United Arab Emirates,False,False
+TXN_000275,CUST_3,current_90d,2026-06-20,received,transfer,SRC_CUST_3_001,10449.06,United Arab Emirates,False,False
+TXN_000276,CUST_3,current_90d,2026-06-22,received,transfer,SRC_CUST_3_002,15516.58,United Arab Emirates,False,False
+TXN_000277,CUST_3,current_90d,2026-06-24,received,transfer,SRC_CUST_3_003,18584.0,United Arab Emirates,False,False
+TXN_000278,CUST_3,current_90d,2026-06-26,received,transfer,SRC_CUST_3_004,16749.95,United Arab Emirates,False,False
+TXN_000279,CUST_3,current_90d,2026-06-28,received,transfer,SRC_CUST_3_005,12332.36,United Arab Emirates,False,False
+TXN_000280,CUST_3,current_90d,2026-06-30,received,transfer,SRC_CUST_3_006,9640.02,United Arab Emirates,False,False
+TXN_000281,CUST_3,current_90d,2026-07-01,received,transfer,SRC_CUST_3_007,7452.87,United Arab Emirates,False,False
+TXN_000282,CUST_3,previous_90d,2026-01-04,sent,cash_withdrawal,CASH_WITHDRAWAL,21689.32,United Arab Emirates,False,True
+TXN_000283,CUST_3,previous_90d,2026-01-07,sent,cash_withdrawal,CASH_WITHDRAWAL,34919.7,United Arab Emirates,False,True
+TXN_000284,CUST_3,previous_90d,2026-01-09,sent,cash_withdrawal,CASH_WITHDRAWAL,22146.43,United Arab Emirates,False,True
+TXN_000285,CUST_3,previous_90d,2026-01-12,sent,cash_withdrawal,CASH_WITHDRAWAL,17004.55,United Arab Emirates,False,True
+TXN_000286,CUST_3,previous_90d,2026-01-14,sent,transfer,CP_SHARED_001,19997.81,Pakistan,True,False
+TXN_000287,CUST_3,previous_90d,2026-01-17,sent,transfer,CP_SHARED_005,16821.55,Pakistan,True,False
+TXN_000288,CUST_3,previous_90d,2026-01-19,sent,transfer,CP_CUST_3_001,8702.4,Pakistan,True,False
+TXN_000289,CUST_3,previous_90d,2026-01-22,sent,transfer,CP_CUST_3_002,19153.83,Pakistan,True,False
+TXN_000290,CUST_3,previous_90d,2026-01-24,sent,transfer,CP_CUST_3_003,14609.97,Pakistan,True,False
+TXN_000291,CUST_3,previous_90d,2026-01-27,sent,transfer,CP_CUST_3_004,9101.92,Pakistan,True,False
+TXN_000292,CUST_3,previous_90d,2026-01-29,sent,transfer,CP_CUST_3_005,9541.08,Pakistan,True,False
+TXN_000293,CUST_3,previous_90d,2026-02-01,sent,transfer,CP_CUST_3_006,13486.92,Pakistan,True,False
+TXN_000294,CUST_3,previous_90d,2026-02-04,sent,transfer,CP_CUST_3_007,7317.5,Pakistan,True,False
+TXN_000295,CUST_3,previous_90d,2026-02-06,sent,transfer,CP_CUST_3_008,9684.16,Pakistan,True,False
+TXN_000296,CUST_3,previous_90d,2026-02-09,sent,transfer,CP_CUST_3_009,20676.4,Pakistan,True,False
+TXN_000297,CUST_3,previous_90d,2026-02-11,sent,transfer,CP_CUST_3_010,9730.46,Pakistan,True,False
+TXN_000298,CUST_3,previous_90d,2026-02-14,sent,transfer,CP_CUST_3_011,21066.09,Pakistan,True,False
+TXN_000299,CUST_3,previous_90d,2026-02-16,sent,transfer,CP_CUST_3_012,12891.79,Pakistan,True,False
+TXN_000300,CUST_3,previous_90d,2026-02-19,sent,transfer,CP_CUST_3_013,21581.01,Pakistan,True,False
+TXN_000301,CUST_3,previous_90d,2026-02-21,sent,transfer,CP_CUST_3_014,7447.18,Pakistan,True,False
+TXN_000302,CUST_3,previous_90d,2026-02-24,sent,transfer,CP_CUST_3_015,8175.19,Pakistan,True,False
+TXN_000303,CUST_3,previous_90d,2026-02-26,sent,transfer,CP_CUST_3_016,7900.19,Pakistan,True,False
+TXN_000304,CUST_3,previous_90d,2026-03-01,sent,transfer,CP_CUST_3_017,6738.39,Pakistan,True,False
+TXN_000305,CUST_3,previous_90d,2026-03-04,sent,transfer,CP_CUST_3_018,8262.66,Pakistan,True,False
+TXN_000306,CUST_3,previous_90d,2026-03-06,sent,transfer,CP_CUST_3_019,12206.73,Pakistan,True,False
+TXN_000307,CUST_3,previous_90d,2026-03-09,sent,transfer,CP_SHARED_001,18511.23,Pakistan,True,False
+TXN_000308,CUST_3,previous_90d,2026-03-11,sent,transfer,CP_SHARED_005,16866.56,United Arab Emirates,False,False
+TXN_000309,CUST_3,previous_90d,2026-03-14,sent,transfer,CP_CUST_3_001,15418.52,United Arab Emirates,False,False
+TXN_000310,CUST_3,previous_90d,2026-03-16,sent,transfer,CP_CUST_3_002,21024.08,United Arab Emirates,False,False
+TXN_000311,CUST_3,previous_90d,2026-03-19,sent,transfer,CP_CUST_3_003,13725.18,United Arab Emirates,False,False
+TXN_000312,CUST_3,previous_90d,2026-03-21,sent,transfer,CP_CUST_3_004,16941.56,United Arab Emirates,False,False
+TXN_000313,CUST_3,previous_90d,2026-03-24,sent,transfer,CP_CUST_3_005,13057.35,United Arab Emirates,False,False
+TXN_000314,CUST_3,previous_90d,2026-03-26,sent,transfer,CP_CUST_3_006,21446.41,United Arab Emirates,False,False
+TXN_000315,CUST_3,previous_90d,2026-03-29,sent,transfer,CP_CUST_3_007,6350.33,United Arab Emirates,False,False
+TXN_000316,CUST_3,previous_90d,2026-04-01,sent,transfer,CP_CUST_3_008,17070.07,United Arab Emirates,False,False
+TXN_000317,CUST_3,previous_90d,2026-04-03,sent,transfer,CP_CUST_3_009,7215.48,United Arab Emirates,False,False
+TXN_000318,CUST_3,previous_90d,2026-01-05,received,transfer,SRC_CUST_3_002,15347.34,United Arab Emirates,False,False
+TXN_000319,CUST_3,previous_90d,2026-01-08,received,transfer,SRC_CUST_3_003,27839.29,United Arab Emirates,False,False
+TXN_000320,CUST_3,previous_90d,2026-01-11,received,transfer,SRC_CUST_3_004,14415.81,United Arab Emirates,False,False
+TXN_000321,CUST_3,previous_90d,2026-01-15,received,transfer,SRC_CUST_3_005,26412.66,United Arab Emirates,False,False
+TXN_000322,CUST_3,previous_90d,2026-01-18,received,transfer,SRC_CUST_3_006,15946.71,United Arab Emirates,False,False
+TXN_000323,CUST_3,previous_90d,2026-01-21,received,transfer,SRC_CUST_3_007,15150.56,United Arab Emirates,False,False
+TXN_000324,CUST_3,previous_90d,2026-01-25,received,transfer,SRC_CUST_3_001,16402.0,United Arab Emirates,False,False
+TXN_000325,CUST_3,previous_90d,2026-01-28,received,transfer,SRC_CUST_3_002,27022.69,United Arab Emirates,False,False
+TXN_000326,CUST_3,previous_90d,2026-01-31,received,transfer,SRC_CUST_3_003,24302.65,United Arab Emirates,False,False
+TXN_000327,CUST_3,previous_90d,2026-02-03,received,transfer,SRC_CUST_3_004,19468.46,United Arab Emirates,False,False
+TXN_000328,CUST_3,previous_90d,2026-02-07,received,transfer,SRC_CUST_3_005,8799.85,United Arab Emirates,False,False
+TXN_000329,CUST_3,previous_90d,2026-02-10,received,transfer,SRC_CUST_3_006,14289.71,United Arab Emirates,False,False
+TXN_000330,CUST_3,previous_90d,2026-02-13,received,transfer,SRC_CUST_3_007,12135.06,United Arab Emirates,False,False
+TXN_000331,CUST_3,previous_90d,2026-02-17,received,transfer,SRC_CUST_3_001,7782.98,United Arab Emirates,False,False
+TXN_000332,CUST_3,previous_90d,2026-02-20,received,transfer,SRC_CUST_3_002,19962.25,United Arab Emirates,False,False
+TXN_000333,CUST_3,previous_90d,2026-02-23,received,transfer,SRC_CUST_3_003,21381.46,United Arab Emirates,False,False
+TXN_000334,CUST_3,previous_90d,2026-02-27,received,transfer,SRC_CUST_3_004,23222.73,United Arab Emirates,False,False
+TXN_000335,CUST_3,previous_90d,2026-03-02,received,transfer,SRC_CUST_3_005,10191.01,United Arab Emirates,False,False
+TXN_000336,CUST_3,previous_90d,2026-03-05,received,transfer,SRC_CUST_3_006,24382.21,United Arab Emirates,False,False
+TXN_000337,CUST_3,previous_90d,2026-03-08,received,transfer,SRC_CUST_3_007,19587.79,United Arab Emirates,False,False
+TXN_000338,CUST_3,previous_90d,2026-03-12,received,transfer,SRC_CUST_3_001,16788.39,United Arab Emirates,False,False
+TXN_000339,CUST_3,previous_90d,2026-03-15,received,transfer,SRC_CUST_3_002,10968.71,United Arab Emirates,False,False
+TXN_000340,CUST_3,previous_90d,2026-03-18,received,transfer,SRC_CUST_3_003,12731.66,United Arab Emirates,False,False
+TXN_000341,CUST_3,previous_90d,2026-03-22,received,transfer,SRC_CUST_3_004,24781.34,United Arab Emirates,False,False
+TXN_000342,CUST_3,previous_90d,2026-03-25,received,transfer,SRC_CUST_3_005,19636.4,United Arab Emirates,False,False
+TXN_000343,CUST_3,previous_90d,2026-03-28,received,transfer,SRC_CUST_3_006,10150.15,United Arab Emirates,False,False
+TXN_000344,CUST_3,previous_90d,2026-04-01,received,transfer,SRC_CUST_3_007,20288.33,United Arab Emirates,False,False
+TXN_000345,CUST_3,previous_90d,2026-04-04,received,transfer,SRC_CUST_3_001,16691.8,United Arab Emirates,False,False
+TXN_000346,CUST_4,current_90d,2026-04-08,sent,cash_withdrawal,CASH_WITHDRAWAL,22000.0,United Arab Emirates,False,True
+TXN_000347,CUST_4,current_90d,2026-04-14,sent,transfer,CP_SHARED_002,3861.42,United Arab Emirates,True,False
+TXN_000348,CUST_4,current_90d,2026-04-21,sent,transfer,CP_CUST_4_001,6326.89,United Arab Emirates,True,False
+TXN_000349,CUST_4,current_90d,2026-04-27,sent,transfer,CP_CUST_4_002,2524.02,United Arab Emirates,True,False
+TXN_000350,CUST_4,current_90d,2026-05-03,sent,transfer,CP_CUST_4_003,7983.96,United Arab Emirates,True,False
+TXN_000351,CUST_4,current_90d,2026-05-10,sent,transfer,CP_CUST_4_004,2852.14,United Arab Emirates,False,False
+TXN_000352,CUST_4,current_90d,2026-05-16,sent,transfer,CP_SHARED_002,3303.55,United Arab Emirates,False,False
+TXN_000353,CUST_4,current_90d,2026-05-22,sent,transfer,CP_CUST_4_001,3324.65,United Arab Emirates,False,False
+TXN_000354,CUST_4,current_90d,2026-05-29,sent,transfer,CP_CUST_4_002,4966.83,United Arab Emirates,False,False
+TXN_000355,CUST_4,current_90d,2026-06-04,sent,transfer,CP_CUST_4_003,2604.17,United Arab Emirates,False,False
+TXN_000356,CUST_4,current_90d,2026-06-10,sent,transfer,CP_CUST_4_004,6253.87,United Arab Emirates,False,False
+TXN_000357,CUST_4,current_90d,2026-06-17,sent,transfer,CP_SHARED_002,4238.8,United Arab Emirates,False,False
+TXN_000358,CUST_4,current_90d,2026-06-23,sent,transfer,CP_CUST_4_001,7622.21,United Arab Emirates,False,False
+TXN_000359,CUST_4,current_90d,2026-06-30,sent,transfer,CP_CUST_4_002,5162.92,United Arab Emirates,False,False
+TXN_000360,CUST_4,current_90d,2026-07-06,sent,transfer,CP_CUST_4_003,5974.57,United Arab Emirates,False,False
+TXN_000361,CUST_4,current_90d,2026-04-05,received,transfer,SRC_CUST_4_002,4796.74,United Arab Emirates,False,False
+TXN_000362,CUST_4,current_90d,2026-04-09,received,transfer,SRC_CUST_4_003,3248.9,United Arab Emirates,False,False
+TXN_000363,CUST_4,current_90d,2026-04-12,received,transfer,SRC_CUST_4_004,6304.05,United Arab Emirates,False,False
+TXN_000364,CUST_4,current_90d,2026-04-16,received,transfer,SRC_CUST_4_005,9604.42,United Arab Emirates,False,False
+TXN_000365,CUST_4,current_90d,2026-04-19,received,transfer,SRC_CUST_4_006,4765.1,United Arab Emirates,False,False
+TXN_000366,CUST_4,current_90d,2026-04-23,received,transfer,SRC_CUST_4_007,4838.88,United Arab Emirates,False,False
+TXN_000367,CUST_4,current_90d,2026-04-26,received,transfer,SRC_CUST_4_001,3583.11,United Arab Emirates,False,False
+TXN_000368,CUST_4,current_90d,2026-04-30,received,transfer,SRC_CUST_4_002,6433.5,United Arab Emirates,False,False
+TXN_000369,CUST_4,current_90d,2026-05-04,received,transfer,SRC_CUST_4_003,3351.97,United Arab Emirates,False,False
+TXN_000370,CUST_4,current_90d,2026-05-07,received,transfer,SRC_CUST_4_004,9865.27,United Arab Emirates,False,False
+TXN_000371,CUST_4,current_90d,2026-05-11,received,transfer,SRC_CUST_4_005,7483.22,United Arab Emirates,False,False
+TXN_000372,CUST_4,current_90d,2026-05-14,received,transfer,SRC_CUST_4_006,10396.89,United Arab Emirates,False,False
+TXN_000373,CUST_4,current_90d,2026-05-18,received,transfer,SRC_CUST_4_007,4070.39,United Arab Emirates,False,False
+TXN_000374,CUST_4,current_90d,2026-05-21,received,transfer,SRC_CUST_4_001,7147.35,United Arab Emirates,False,False
+TXN_000375,CUST_4,current_90d,2026-05-25,received,transfer,SRC_CUST_4_002,7719.29,United Arab Emirates,False,False
+TXN_000376,CUST_4,current_90d,2026-05-28,received,transfer,SRC_CUST_4_003,4841.64,United Arab Emirates,False,False
+TXN_000377,CUST_4,current_90d,2026-06-01,received,transfer,SRC_CUST_4_004,7024.06,United Arab Emirates,False,False
+TXN_000378,CUST_4,current_90d,2026-06-05,received,transfer,SRC_CUST_4_005,9748.64,United Arab Emirates,False,False
+TXN_000379,CUST_4,current_90d,2026-06-08,received,transfer,SRC_CUST_4_006,10192.7,United Arab Emirates,False,False
+TXN_000380,CUST_4,current_90d,2026-06-12,received,transfer,SRC_CUST_4_007,5048.28,United Arab Emirates,False,False
+TXN_000381,CUST_4,current_90d,2026-06-15,received,transfer,SRC_CUST_4_001,7403.17,United Arab Emirates,False,False
+TXN_000382,CUST_4,current_90d,2026-06-19,received,transfer,SRC_CUST_4_002,8625.88,United Arab Emirates,False,False
+TXN_000383,CUST_4,current_90d,2026-06-22,received,transfer,SRC_CUST_4_003,4417.84,United Arab Emirates,False,False
+TXN_000384,CUST_4,current_90d,2026-06-26,received,transfer,SRC_CUST_4_004,3355.24,United Arab Emirates,False,False
+TXN_000385,CUST_4,current_90d,2026-06-30,received,transfer,SRC_CUST_4_005,9673.17,United Arab Emirates,False,False
+TXN_000386,CUST_4,current_90d,2026-07-03,received,transfer,SRC_CUST_4_006,9060.3,United Arab Emirates,False,False
+TXN_000387,CUST_4,previous_90d,2026-01-13,sent,cash_withdrawal,CASH_WITHDRAWAL,17600.0,United Arab Emirates,False,True
+TXN_000388,CUST_4,previous_90d,2026-01-24,sent,transfer,CP_SHARED_002,6836.12,United Arab Emirates,True,False
+TXN_000389,CUST_4,previous_90d,2026-02-04,sent,transfer,CP_CUST_4_001,4045.2,United Arab Emirates,True,False
+TXN_000390,CUST_4,previous_90d,2026-02-15,sent,transfer,CP_CUST_4_002,9298.64,United Arab Emirates,True,False
+TXN_000391,CUST_4,previous_90d,2026-02-26,sent,transfer,CP_CUST_4_003,7119.11,United Arab Emirates,False,False
+TXN_000392,CUST_4,previous_90d,2026-03-09,sent,transfer,CP_CUST_4_004,6828.46,United Arab Emirates,False,False
+TXN_000393,CUST_4,previous_90d,2026-03-20,sent,transfer,CP_SHARED_002,3712.43,United Arab Emirates,False,False
+TXN_000394,CUST_4,previous_90d,2026-04-01,sent,transfer,CP_CUST_4_001,11632.77,United Arab Emirates,False,False
+TXN_000395,CUST_4,previous_90d,2026-04-12,sent,transfer,CP_CUST_4_002,4127.27,United Arab Emirates,False,False
+TXN_000396,CUST_4,previous_90d,2026-01-08,received,transfer,SRC_CUST_4_002,8064.6,United Arab Emirates,False,False
+TXN_000397,CUST_4,previous_90d,2026-01-14,received,transfer,SRC_CUST_4_003,12541.16,United Arab Emirates,False,False
+TXN_000398,CUST_4,previous_90d,2026-01-21,received,transfer,SRC_CUST_4_004,4046.59,United Arab Emirates,False,False
+TXN_000399,CUST_4,previous_90d,2026-01-27,received,transfer,SRC_CUST_4_005,12182.52,United Arab Emirates,False,False
+TXN_000400,CUST_4,previous_90d,2026-02-02,received,transfer,SRC_CUST_4_006,11097.47,United Arab Emirates,False,False
+TXN_000401,CUST_4,previous_90d,2026-02-09,received,transfer,SRC_CUST_4_007,7282.49,United Arab Emirates,False,False
+TXN_000402,CUST_4,previous_90d,2026-02-15,received,transfer,SRC_CUST_4_001,11880.45,United Arab Emirates,False,False
+TXN_000403,CUST_4,previous_90d,2026-02-21,received,transfer,SRC_CUST_4_002,8749.65,United Arab Emirates,False,False
+TXN_000404,CUST_4,previous_90d,2026-02-28,received,transfer,SRC_CUST_4_003,9797.78,United Arab Emirates,False,False
+TXN_000405,CUST_4,previous_90d,2026-03-06,received,transfer,SRC_CUST_4_004,6897.85,United Arab Emirates,False,False
+TXN_000406,CUST_4,previous_90d,2026-03-12,received,transfer,SRC_CUST_4_005,8785.28,United Arab Emirates,False,False
+TXN_000407,CUST_4,previous_90d,2026-03-19,received,transfer,SRC_CUST_4_006,12090.62,United Arab Emirates,False,False
+TXN_000408,CUST_4,previous_90d,2026-03-25,received,transfer,SRC_CUST_4_007,9640.95,United Arab Emirates,False,False
+TXN_000409,CUST_4,previous_90d,2026-04-01,received,transfer,SRC_CUST_4_001,11096.18,United Arab Emirates,False,False
+TXN_000410,CUST_4,previous_90d,2026-04-07,received,transfer,SRC_CUST_4_002,4246.41,United Arab Emirates,False,False
+TXN_000411,CUST_5,current_90d,2026-04-02,sent,cash_withdrawal,CASH_WITHDRAWAL,12671.74,United Arab Emirates,False,True
+TXN_000412,CUST_5,current_90d,2026-04-03,sent,cash_withdrawal,CASH_WITHDRAWAL,29452.12,United Arab Emirates,False,True
+TXN_000413,CUST_5,current_90d,2026-04-04,sent,cash_withdrawal,CASH_WITHDRAWAL,15833.47,United Arab Emirates,False,True
+TXN_000414,CUST_5,current_90d,2026-04-05,sent,cash_withdrawal,CASH_WITHDRAWAL,26006.25,United Arab Emirates,False,True
+TXN_000415,CUST_5,current_90d,2026-04-06,sent,cash_withdrawal,CASH_WITHDRAWAL,16156.78,United Arab Emirates,False,True
+TXN_000416,CUST_5,current_90d,2026-04-07,sent,cash_withdrawal,CASH_WITHDRAWAL,28261.36,United Arab Emirates,False,True
+TXN_000417,CUST_5,current_90d,2026-04-08,sent,cash_withdrawal,CASH_WITHDRAWAL,24627.25,United Arab Emirates,False,True
+TXN_000418,CUST_5,current_90d,2026-04-09,sent,cash_withdrawal,CASH_WITHDRAWAL,10519.2,United Arab Emirates,False,True
+TXN_000419,CUST_5,current_90d,2026-04-10,sent,cash_withdrawal,CASH_WITHDRAWAL,32225.88,United Arab Emirates,False,True
+TXN_000420,CUST_5,current_90d,2026-04-11,sent,cash_withdrawal,CASH_WITHDRAWAL,29419.28,United Arab Emirates,False,True
+TXN_000421,CUST_5,current_90d,2026-04-12,sent,cash_withdrawal,CASH_WITHDRAWAL,18826.67,United Arab Emirates,False,True
+TXN_000422,CUST_5,current_90d,2026-04-13,sent,transfer,CP_SHARED_001,6900.08,Nigeria,True,False
+TXN_000423,CUST_5,current_90d,2026-04-14,sent,transfer,CP_SHARED_004,17026.92,Nigeria,True,False
+TXN_000424,CUST_5,current_90d,2026-04-15,sent,transfer,CP_SHARED_006,16528.18,Nigeria,True,False
+TXN_000425,CUST_5,current_90d,2026-04-16,sent,transfer,CP_CUST_5_001,6010.91,Nigeria,True,False
+TXN_000426,CUST_5,current_90d,2026-04-17,sent,transfer,CP_CUST_5_002,16720.21,Nigeria,True,False
+TXN_000427,CUST_5,current_90d,2026-04-18,sent,transfer,CP_CUST_5_003,10737.99,Nigeria,True,False
+TXN_000428,CUST_5,current_90d,2026-04-19,sent,transfer,CP_CUST_5_004,8303.36,Nigeria,True,False
+TXN_000429,CUST_5,current_90d,2026-04-20,sent,transfer,CP_CUST_5_005,14949.7,Nigeria,True,False
+TXN_000430,CUST_5,current_90d,2026-04-21,sent,transfer,CP_CUST_5_006,15584.34,Nigeria,True,False
+TXN_000431,CUST_5,current_90d,2026-04-22,sent,transfer,CP_CUST_5_007,5376.77,Nigeria,True,False
+TXN_000432,CUST_5,current_90d,2026-04-23,sent,transfer,CP_CUST_5_008,6934.27,Nigeria,True,False
+TXN_000433,CUST_5,current_90d,2026-04-24,sent,transfer,CP_CUST_5_009,7818.29,Nigeria,True,False
+TXN_000434,CUST_5,current_90d,2026-04-25,sent,transfer,CP_CUST_5_010,9027.21,Nigeria,True,False
+TXN_000435,CUST_5,current_90d,2026-04-26,sent,transfer,CP_CUST_5_011,10842.94,Nigeria,True,False
+TXN_000436,CUST_5,current_90d,2026-04-27,sent,transfer,CP_CUST_5_012,13466.62,Nigeria,True,False
+TXN_000437,CUST_5,current_90d,2026-04-28,sent,transfer,CP_CUST_5_013,12920.04,Nigeria,True,False
+TXN_000438,CUST_5,current_90d,2026-04-29,sent,transfer,CP_CUST_5_014,17399.21,Nigeria,True,False
+TXN_000439,CUST_5,current_90d,2026-04-30,sent,transfer,CP_CUST_5_015,10132.7,Nigeria,True,False
+TXN_000440,CUST_5,current_90d,2026-05-01,sent,transfer,CP_CUST_5_016,7733.76,Nigeria,True,False
+TXN_000441,CUST_5,current_90d,2026-05-02,sent,transfer,CP_CUST_5_017,15339.52,Nigeria,True,False
+TXN_000442,CUST_5,current_90d,2026-05-03,sent,transfer,CP_CUST_5_018,17362.75,Nigeria,True,False
+TXN_000443,CUST_5,current_90d,2026-05-04,sent,transfer,CP_CUST_5_019,11180.95,Nigeria,True,False
+TXN_000444,CUST_5,current_90d,2026-05-05,sent,transfer,CP_CUST_5_020,13370.34,Nigeria,True,False
+TXN_000445,CUST_5,current_90d,2026-05-06,sent,transfer,CP_CUST_5_021,17573.29,Nigeria,True,False
+TXN_000446,CUST_5,current_90d,2026-05-07,sent,transfer,CP_CUST_5_022,8329.85,Nigeria,True,False
+TXN_000447,CUST_5,current_90d,2026-05-08,sent,transfer,CP_CUST_5_023,14930.8,Nigeria,True,False
+TXN_000448,CUST_5,current_90d,2026-05-09,sent,transfer,CP_CUST_5_024,12964.71,Nigeria,True,False
+TXN_000449,CUST_5,current_90d,2026-05-10,sent,transfer,CP_CUST_5_025,6104.97,Nigeria,True,False
+TXN_000450,CUST_5,current_90d,2026-05-11,sent,transfer,CP_CUST_5_026,11743.57,Nigeria,True,False
+TXN_000451,CUST_5,current_90d,2026-05-12,sent,transfer,CP_CUST_5_027,15299.93,Nigeria,True,False
+TXN_000452,CUST_5,current_90d,2026-05-13,sent,transfer,CP_CUST_5_028,4949.64,Nigeria,True,False
+TXN_000453,CUST_5,current_90d,2026-05-14,sent,transfer,CP_CUST_5_029,4945.83,Nigeria,True,False
+TXN_000454,CUST_5,current_90d,2026-05-15,sent,transfer,CP_CUST_5_030,13796.15,Nigeria,True,False
+TXN_000455,CUST_5,current_90d,2026-05-16,sent,transfer,CP_CUST_5_031,7106.96,Nigeria,True,False
+TXN_000456,CUST_5,current_90d,2026-05-16,sent,transfer,CP_SHARED_001,6266.61,Nigeria,True,False
+TXN_000457,CUST_5,current_90d,2026-05-17,sent,transfer,CP_SHARED_004,5171.66,Nigeria,True,False
+TXN_000458,CUST_5,current_90d,2026-05-18,sent,transfer,CP_SHARED_006,16065.34,Nigeria,True,False
+TXN_000459,CUST_5,current_90d,2026-05-19,sent,transfer,CP_CUST_5_001,16123.9,Nigeria,True,False
+TXN_000460,CUST_5,current_90d,2026-05-20,sent,transfer,CP_CUST_5_002,15245.61,Nigeria,True,False
+TXN_000461,CUST_5,current_90d,2026-05-21,sent,transfer,CP_CUST_5_003,13929.27,Nigeria,True,False
+TXN_000462,CUST_5,current_90d,2026-05-22,sent,transfer,CP_CUST_5_004,14761.51,Nigeria,True,False
+TXN_000463,CUST_5,current_90d,2026-05-23,sent,transfer,CP_CUST_5_005,12042.97,Nigeria,True,False
+TXN_000464,CUST_5,current_90d,2026-05-24,sent,transfer,CP_CUST_5_006,14267.02,Nigeria,True,False
+TXN_000465,CUST_5,current_90d,2026-05-25,sent,transfer,CP_CUST_5_007,17008.27,Nigeria,True,False
+TXN_000466,CUST_5,current_90d,2026-05-26,sent,transfer,CP_CUST_5_008,13990.04,Nigeria,True,False
+TXN_000467,CUST_5,current_90d,2026-05-27,sent,transfer,CP_CUST_5_009,9524.66,Nigeria,True,False
+TXN_000468,CUST_5,current_90d,2026-05-28,sent,transfer,CP_CUST_5_010,12189.83,Nigeria,True,False
+TXN_000469,CUST_5,current_90d,2026-05-29,sent,transfer,CP_CUST_5_011,10592.77,Nigeria,True,False
+TXN_000470,CUST_5,current_90d,2026-05-30,sent,transfer,CP_CUST_5_012,14251.37,Nigeria,True,False
+TXN_000471,CUST_5,current_90d,2026-05-31,sent,transfer,CP_CUST_5_013,12544.96,Nigeria,True,False
+TXN_000472,CUST_5,current_90d,2026-06-01,sent,transfer,CP_CUST_5_014,11804.54,Nigeria,True,False
+TXN_000473,CUST_5,current_90d,2026-06-02,sent,transfer,CP_CUST_5_015,14319.61,United Arab Emirates,False,False
+TXN_000474,CUST_5,current_90d,2026-06-03,sent,transfer,CP_CUST_5_016,17235.24,United Arab Emirates,False,False
+TXN_000475,CUST_5,current_90d,2026-06-04,sent,transfer,CP_CUST_5_017,7648.49,United Arab Emirates,False,False
+TXN_000476,CUST_5,current_90d,2026-06-05,sent,transfer,CP_CUST_5_018,5012.89,United Arab Emirates,False,False
+TXN_000477,CUST_5,current_90d,2026-06-06,sent,transfer,CP_CUST_5_019,7247.31,United Arab Emirates,False,False
+TXN_000478,CUST_5,current_90d,2026-06-07,sent,transfer,CP_CUST_5_020,13867.3,United Arab Emirates,False,False
+TXN_000479,CUST_5,current_90d,2026-06-08,sent,transfer,CP_CUST_5_021,10526.26,United Arab Emirates,False,False
+TXN_000480,CUST_5,current_90d,2026-06-09,sent,transfer,CP_CUST_5_022,17445.85,United Arab Emirates,False,False
+TXN_000481,CUST_5,current_90d,2026-06-10,sent,transfer,CP_CUST_5_023,13253.81,United Arab Emirates,False,False
+TXN_000482,CUST_5,current_90d,2026-06-11,sent,transfer,CP_CUST_5_024,16774.45,United Arab Emirates,False,False
+TXN_000483,CUST_5,current_90d,2026-06-12,sent,transfer,CP_CUST_5_025,7768.01,United Arab Emirates,False,False
+TXN_000484,CUST_5,current_90d,2026-06-13,sent,transfer,CP_CUST_5_026,15647.19,United Arab Emirates,False,False
+TXN_000485,CUST_5,current_90d,2026-06-14,sent,transfer,CP_CUST_5_027,14114.16,United Arab Emirates,False,False
+TXN_000486,CUST_5,current_90d,2026-06-15,sent,transfer,CP_CUST_5_028,12622.74,United Arab Emirates,False,False
+TXN_000487,CUST_5,current_90d,2026-06-16,sent,transfer,CP_CUST_5_029,8034.0,United Arab Emirates,False,False
+TXN_000488,CUST_5,current_90d,2026-06-17,sent,transfer,CP_CUST_5_030,6252.67,United Arab Emirates,False,False
+TXN_000489,CUST_5,current_90d,2026-06-18,sent,transfer,CP_CUST_5_031,13374.52,United Arab Emirates,False,False
+TXN_000490,CUST_5,current_90d,2026-06-19,sent,transfer,CP_SHARED_001,16197.37,United Arab Emirates,False,False
+TXN_000491,CUST_5,current_90d,2026-06-20,sent,transfer,CP_SHARED_004,17127.32,United Arab Emirates,False,False
+TXN_000492,CUST_5,current_90d,2026-06-21,sent,transfer,CP_SHARED_006,5053.13,United Arab Emirates,False,False
+TXN_000493,CUST_5,current_90d,2026-06-22,sent,transfer,CP_CUST_5_001,9236.77,United Arab Emirates,False,False
+TXN_000494,CUST_5,current_90d,2026-06-23,sent,transfer,CP_CUST_5_002,5179.78,United Arab Emirates,False,False
+TXN_000495,CUST_5,current_90d,2026-06-24,sent,transfer,CP_CUST_5_003,15145.58,United Arab Emirates,False,False
+TXN_000496,CUST_5,current_90d,2026-06-25,sent,transfer,CP_CUST_5_004,12346.72,United Arab Emirates,False,False
+TXN_000497,CUST_5,current_90d,2026-06-26,sent,transfer,CP_CUST_5_005,9382.27,United Arab Emirates,False,False
+TXN_000498,CUST_5,current_90d,2026-06-27,sent,transfer,CP_CUST_5_006,5080.47,United Arab Emirates,False,False
+TXN_000499,CUST_5,current_90d,2026-06-28,sent,transfer,CP_CUST_5_007,5446.36,United Arab Emirates,False,False
+TXN_000500,CUST_5,current_90d,2026-06-29,sent,transfer,CP_CUST_5_008,15347.2,United Arab Emirates,False,False
+TXN_000501,CUST_5,current_90d,2026-06-30,sent,transfer,CP_CUST_5_009,11069.02,United Arab Emirates,False,False
+TXN_000502,CUST_5,current_90d,2026-06-30,sent,transfer,CP_CUST_5_010,12050.42,United Arab Emirates,False,False
+TXN_000503,CUST_5,current_90d,2026-04-03,received,transfer,SRC_CUST_5_002,9326.69,United Arab Emirates,False,False
+TXN_000504,CUST_5,current_90d,2026-04-04,received,transfer,SRC_CUST_5_003,14356.89,United Arab Emirates,False,False
+TXN_000505,CUST_5,current_90d,2026-04-05,received,transfer,SRC_CUST_5_004,19292.35,United Arab Emirates,False,False
+TXN_000506,CUST_5,current_90d,2026-04-06,received,transfer,SRC_CUST_5_005,17385.41,United Arab Emirates,False,False
+TXN_000507,CUST_5,current_90d,2026-04-08,received,transfer,SRC_CUST_5_006,14093.15,United Arab Emirates,False,False
+TXN_000508,CUST_5,current_90d,2026-04-09,received,transfer,SRC_CUST_5_007,8997.43,United Arab Emirates,False,False
+TXN_000509,CUST_5,current_90d,2026-04-10,received,transfer,SRC_CUST_5_001,10990.66,United Arab Emirates,False,False
+TXN_000510,CUST_5,current_90d,2026-04-11,received,transfer,SRC_CUST_5_002,8734.47,United Arab Emirates,False,False
+TXN_000511,CUST_5,current_90d,2026-04-12,received,transfer,SRC_CUST_5_003,21856.63,United Arab Emirates,False,False
+TXN_000512,CUST_5,current_90d,2026-04-14,received,transfer,SRC_CUST_5_004,15198.66,United Arab Emirates,False,False
+TXN_000513,CUST_5,current_90d,2026-04-15,received,transfer,SRC_CUST_5_005,17855.29,United Arab Emirates,False,False
+TXN_000514,CUST_5,current_90d,2026-04-16,received,transfer,SRC_CUST_5_006,10154.37,United Arab Emirates,False,False
+TXN_000515,CUST_5,current_90d,2026-04-17,received,transfer,SRC_CUST_5_007,15769.64,United Arab Emirates,False,False
+TXN_000516,CUST_5,current_90d,2026-04-19,received,transfer,SRC_CUST_5_001,23394.12,United Arab Emirates,False,False
+TXN_000517,CUST_5,current_90d,2026-04-20,received,transfer,SRC_CUST_5_002,21776.67,United Arab Emirates,False,False
+TXN_000518,CUST_5,current_90d,2026-04-21,received,transfer,SRC_CUST_5_003,19667.04,United Arab Emirates,False,False
+TXN_000519,CUST_5,current_90d,2026-04-22,received,transfer,SRC_CUST_5_004,21474.14,United Arab Emirates,False,False
+TXN_000520,CUST_5,current_90d,2026-04-23,received,transfer,SRC_CUST_5_005,23342.02,United Arab Emirates,False,False
+TXN_000521,CUST_5,current_90d,2026-04-25,received,transfer,SRC_CUST_5_006,7147.68,United Arab Emirates,False,False
+TXN_000522,CUST_5,current_90d,2026-04-26,received,transfer,SRC_CUST_5_007,15890.52,United Arab Emirates,False,False
+TXN_000523,CUST_5,current_90d,2026-04-27,received,transfer,SRC_CUST_5_001,14762.61,United Arab Emirates,False,False
+TXN_000524,CUST_5,current_90d,2026-04-28,received,transfer,SRC_CUST_5_002,18241.0,United Arab Emirates,False,False
+TXN_000525,CUST_5,current_90d,2026-04-30,received,transfer,SRC_CUST_5_003,9263.42,United Arab Emirates,False,False
+TXN_000526,CUST_5,current_90d,2026-05-01,received,transfer,SRC_CUST_5_004,21129.67,United Arab Emirates,False,False
+TXN_000527,CUST_5,current_90d,2026-05-02,received,transfer,SRC_CUST_5_005,19649.16,United Arab Emirates,False,False
+TXN_000528,CUST_5,current_90d,2026-05-03,received,transfer,SRC_CUST_5_006,20889.51,United Arab Emirates,False,False
+TXN_000529,CUST_5,current_90d,2026-05-04,received,transfer,SRC_CUST_5_007,7322.47,United Arab Emirates,False,False
+TXN_000530,CUST_5,current_90d,2026-05-06,received,transfer,SRC_CUST_5_001,15866.37,United Arab Emirates,False,False
+TXN_000531,CUST_5,current_90d,2026-05-07,received,transfer,SRC_CUST_5_002,12734.83,United Arab Emirates,False,False
+TXN_000532,CUST_5,current_90d,2026-05-08,received,transfer,SRC_CUST_5_003,10093.63,United Arab Emirates,False,False
+TXN_000533,CUST_5,current_90d,2026-05-09,received,transfer,SRC_CUST_5_004,15452.85,United Arab Emirates,False,False
+TXN_000534,CUST_5,current_90d,2026-05-11,received,transfer,SRC_CUST_5_005,10069.9,United Arab Emirates,False,False
+TXN_000535,CUST_5,current_90d,2026-05-12,received,transfer,SRC_CUST_5_006,16689.25,United Arab Emirates,False,False
+TXN_000536,CUST_5,current_90d,2026-05-13,received,transfer,SRC_CUST_5_007,24489.38,United Arab Emirates,False,False
+TXN_000537,CUST_5,current_90d,2026-05-14,received,transfer,SRC_CUST_5_001,7208.79,United Arab Emirates,False,False
+TXN_000538,CUST_5,current_90d,2026-05-15,received,transfer,SRC_CUST_5_002,12862.8,United Arab Emirates,False,False
+TXN_000539,CUST_5,current_90d,2026-05-17,received,transfer,SRC_CUST_5_003,22501.39,United Arab Emirates,False,False
+TXN_000540,CUST_5,current_90d,2026-05-18,received,transfer,SRC_CUST_5_004,19953.41,United Arab Emirates,False,False
+TXN_000541,CUST_5,current_90d,2026-05-19,received,transfer,SRC_CUST_5_005,15902.88,United Arab Emirates,False,False
+TXN_000542,CUST_5,current_90d,2026-05-20,received,transfer,SRC_CUST_5_006,23114.7,United Arab Emirates,False,False
+TXN_000543,CUST_5,current_90d,2026-05-21,received,transfer,SRC_CUST_5_007,24842.78,United Arab Emirates,False,False
+TXN_000544,CUST_5,current_90d,2026-05-23,received,transfer,SRC_CUST_5_001,12806.31,United Arab Emirates,False,False
+TXN_000545,CUST_5,current_90d,2026-05-24,received,transfer,SRC_CUST_5_002,16961.46,United Arab Emirates,False,False
+TXN_000546,CUST_5,current_90d,2026-05-25,received,transfer,SRC_CUST_5_003,22900.58,United Arab Emirates,False,False
+TXN_000547,CUST_5,current_90d,2026-05-26,received,transfer,SRC_CUST_5_004,23459.99,United Arab Emirates,False,False
+TXN_000548,CUST_5,current_90d,2026-05-28,received,transfer,SRC_CUST_5_005,12441.67,United Arab Emirates,False,False
+TXN_000549,CUST_5,current_90d,2026-05-29,received,transfer,SRC_CUST_5_006,13904.89,United Arab Emirates,False,False
+TXN_000550,CUST_5,current_90d,2026-05-30,received,transfer,SRC_CUST_5_007,16518.28,United Arab Emirates,False,False
+TXN_000551,CUST_5,current_90d,2026-05-31,received,transfer,SRC_CUST_5_001,12155.77,United Arab Emirates,False,False
+TXN_000552,CUST_5,current_90d,2026-06-01,received,transfer,SRC_CUST_5_002,19752.44,United Arab Emirates,False,False
+TXN_000553,CUST_5,current_90d,2026-06-03,received,transfer,SRC_CUST_5_003,18735.69,United Arab Emirates,False,False
+TXN_000554,CUST_5,current_90d,2026-06-04,received,transfer,SRC_CUST_5_004,20458.93,United Arab Emirates,False,False
+TXN_000555,CUST_5,current_90d,2026-06-05,received,transfer,SRC_CUST_5_005,9584.36,United Arab Emirates,False,False
+TXN_000556,CUST_5,current_90d,2026-06-06,received,transfer,SRC_CUST_5_006,11754.74,United Arab Emirates,False,False
+TXN_000557,CUST_5,current_90d,2026-06-08,received,transfer,SRC_CUST_5_007,16509.77,United Arab Emirates,False,False
+TXN_000558,CUST_5,current_90d,2026-06-09,received,transfer,SRC_CUST_5_001,16946.76,United Arab Emirates,False,False
+TXN_000559,CUST_5,current_90d,2026-06-10,received,transfer,SRC_CUST_5_002,22822.01,United Arab Emirates,False,False
+TXN_000560,CUST_5,current_90d,2026-06-11,received,transfer,SRC_CUST_5_003,10188.8,United Arab Emirates,False,False
+TXN_000561,CUST_5,current_90d,2026-06-12,received,transfer,SRC_CUST_5_004,13279.92,United Arab Emirates,False,False
+TXN_000562,CUST_5,current_90d,2026-06-14,received,transfer,SRC_CUST_5_005,24026.09,United Arab Emirates,False,False
+TXN_000563,CUST_5,current_90d,2026-06-15,received,transfer,SRC_CUST_5_006,14730.5,United Arab Emirates,False,False
+TXN_000564,CUST_5,current_90d,2026-06-16,received,transfer,SRC_CUST_5_007,8416.08,United Arab Emirates,False,False
+TXN_000565,CUST_5,current_90d,2026-06-17,received,transfer,SRC_CUST_5_001,15528.52,United Arab Emirates,False,False
+TXN_000566,CUST_5,current_90d,2026-06-19,received,transfer,SRC_CUST_5_002,24095.26,United Arab Emirates,False,False
+TXN_000567,CUST_5,current_90d,2026-06-20,received,transfer,SRC_CUST_5_003,23216.3,United Arab Emirates,False,False
+TXN_000568,CUST_5,current_90d,2026-06-21,received,transfer,SRC_CUST_5_004,22194.2,United Arab Emirates,False,False
+TXN_000569,CUST_5,current_90d,2026-06-22,received,transfer,SRC_CUST_5_005,8085.06,United Arab Emirates,False,False
+TXN_000570,CUST_5,current_90d,2026-06-23,received,transfer,SRC_CUST_5_006,13491.61,United Arab Emirates,False,False
+TXN_000571,CUST_5,current_90d,2026-06-25,received,transfer,SRC_CUST_5_007,18684.58,United Arab Emirates,False,False
+TXN_000572,CUST_5,current_90d,2026-06-26,received,transfer,SRC_CUST_5_001,12751.64,United Arab Emirates,False,False
+TXN_000573,CUST_5,current_90d,2026-06-27,received,transfer,SRC_CUST_5_002,22736.33,United Arab Emirates,False,False
+TXN_000574,CUST_5,current_90d,2026-06-28,received,transfer,SRC_CUST_5_003,24363.61,United Arab Emirates,False,False
+TXN_000575,CUST_5,current_90d,2026-06-30,received,transfer,SRC_CUST_5_004,18139.18,United Arab Emirates,False,False
+TXN_000576,CUST_5,current_90d,2026-07-01,received,transfer,SRC_CUST_5_005,15614.04,United Arab Emirates,False,False
+TXN_000577,CUST_5,previous_90d,2026-01-03,sent,cash_withdrawal,CASH_WITHDRAWAL,25227.29,United Arab Emirates,False,True
+TXN_000578,CUST_5,previous_90d,2026-01-05,sent,cash_withdrawal,CASH_WITHDRAWAL,29070.13,United Arab Emirates,False,True
+TXN_000579,CUST_5,previous_90d,2026-01-06,sent,cash_withdrawal,CASH_WITHDRAWAL,18119.67,United Arab Emirates,False,True
+TXN_000580,CUST_5,previous_90d,2026-01-08,sent,cash_withdrawal,CASH_WITHDRAWAL,17987.23,United Arab Emirates,False,True
+TXN_000581,CUST_5,previous_90d,2026-01-10,sent,cash_withdrawal,CASH_WITHDRAWAL,14261.49,United Arab Emirates,False,True
+TXN_000582,CUST_5,previous_90d,2026-01-11,sent,cash_withdrawal,CASH_WITHDRAWAL,12454.19,United Arab Emirates,False,True
+TXN_000583,CUST_5,previous_90d,2026-01-13,sent,transfer,CP_SHARED_001,9859.56,Nigeria,True,False
+TXN_000584,CUST_5,previous_90d,2026-01-15,sent,transfer,CP_SHARED_004,4767.04,Nigeria,True,False
+TXN_000585,CUST_5,previous_90d,2026-01-16,sent,transfer,CP_SHARED_006,9037.99,Nigeria,True,False
+TXN_000586,CUST_5,previous_90d,2026-01-18,sent,transfer,CP_CUST_5_001,13763.12,Nigeria,True,False
+TXN_000587,CUST_5,previous_90d,2026-01-20,sent,transfer,CP_CUST_5_002,6005.28,Nigeria,True,False
+TXN_000588,CUST_5,previous_90d,2026-01-21,sent,transfer,CP_CUST_5_003,8549.87,Nigeria,True,False
+TXN_000589,CUST_5,previous_90d,2026-01-23,sent,transfer,CP_CUST_5_004,12668.04,Nigeria,True,False
+TXN_000590,CUST_5,previous_90d,2026-01-25,sent,transfer,CP_CUST_5_005,6579.72,Nigeria,True,False
+TXN_000591,CUST_5,previous_90d,2026-01-26,sent,transfer,CP_CUST_5_006,10634.38,Nigeria,True,False
+TXN_000592,CUST_5,previous_90d,2026-01-28,sent,transfer,CP_CUST_5_007,8470.95,Nigeria,True,False
+TXN_000593,CUST_5,previous_90d,2026-01-30,sent,transfer,CP_CUST_5_008,4294.18,Nigeria,True,False
+TXN_000594,CUST_5,previous_90d,2026-01-31,sent,transfer,CP_CUST_5_009,14581.7,Nigeria,True,False
+TXN_000595,CUST_5,previous_90d,2026-02-02,sent,transfer,CP_CUST_5_010,6657.87,Nigeria,True,False
+TXN_000596,CUST_5,previous_90d,2026-02-03,sent,transfer,CP_CUST_5_011,8399.62,Nigeria,True,False
+TXN_000597,CUST_5,previous_90d,2026-02-05,sent,transfer,CP_CUST_5_012,7234.54,Nigeria,True,False
+TXN_000598,CUST_5,previous_90d,2026-02-07,sent,transfer,CP_CUST_5_013,5493.62,Nigeria,True,False
+TXN_000599,CUST_5,previous_90d,2026-02-08,sent,transfer,CP_CUST_5_014,4500.3,Nigeria,True,False
+TXN_000600,CUST_5,previous_90d,2026-02-10,sent,transfer,CP_CUST_5_015,9570.68,Nigeria,True,False
+TXN_000601,CUST_5,previous_90d,2026-02-12,sent,transfer,CP_CUST_5_016,10540.64,Nigeria,True,False
+TXN_000602,CUST_5,previous_90d,2026-02-13,sent,transfer,CP_CUST_5_017,8245.59,Nigeria,True,False
+TXN_000603,CUST_5,previous_90d,2026-02-15,sent,transfer,CP_CUST_5_018,5559.02,Nigeria,True,False
+TXN_000604,CUST_5,previous_90d,2026-02-17,sent,transfer,CP_CUST_5_019,14393.35,Nigeria,True,False
+TXN_000605,CUST_5,previous_90d,2026-02-18,sent,transfer,CP_CUST_5_020,9887.05,Nigeria,True,False
+TXN_000606,CUST_5,previous_90d,2026-02-20,sent,transfer,CP_CUST_5_021,4870.21,Nigeria,True,False
+TXN_000607,CUST_5,previous_90d,2026-02-22,sent,transfer,CP_CUST_5_022,12483.26,Nigeria,True,False
+TXN_000608,CUST_5,previous_90d,2026-02-23,sent,transfer,CP_CUST_5_023,7025.43,Nigeria,True,False
+TXN_000609,CUST_5,previous_90d,2026-02-25,sent,transfer,CP_CUST_5_024,9598.5,Nigeria,True,False
+TXN_000610,CUST_5,previous_90d,2026-02-27,sent,transfer,CP_CUST_5_025,10091.79,Nigeria,True,False
+TXN_000611,CUST_5,previous_90d,2026-02-28,sent,transfer,CP_CUST_5_026,12551.92,Nigeria,True,False
+TXN_000612,CUST_5,previous_90d,2026-03-02,sent,transfer,CP_CUST_5_027,7586.95,Nigeria,True,False
+TXN_000613,CUST_5,previous_90d,2026-03-03,sent,transfer,CP_CUST_5_028,13828.12,Nigeria,True,False
+TXN_000614,CUST_5,previous_90d,2026-03-05,sent,transfer,CP_CUST_5_029,10126.36,Nigeria,True,False
+TXN_000615,CUST_5,previous_90d,2026-03-07,sent,transfer,CP_CUST_5_030,14375.46,Nigeria,True,False
+TXN_000616,CUST_5,previous_90d,2026-03-08,sent,transfer,CP_CUST_5_031,5499.64,United Arab Emirates,False,False
+TXN_000617,CUST_5,previous_90d,2026-03-10,sent,transfer,CP_SHARED_001,6750.14,United Arab Emirates,False,False
+TXN_000618,CUST_5,previous_90d,2026-03-12,sent,transfer,CP_SHARED_004,9059.25,United Arab Emirates,False,False
+TXN_000619,CUST_5,previous_90d,2026-03-13,sent,transfer,CP_SHARED_006,14537.37,United Arab Emirates,False,False
+TXN_000620,CUST_5,previous_90d,2026-03-15,sent,transfer,CP_CUST_5_001,12611.97,United Arab Emirates,False,False
+TXN_000621,CUST_5,previous_90d,2026-03-17,sent,transfer,CP_CUST_5_002,12607.91,United Arab Emirates,False,False
+TXN_000622,CUST_5,previous_90d,2026-03-18,sent,transfer,CP_CUST_5_003,8201.36,United Arab Emirates,False,False
+TXN_000623,CUST_5,previous_90d,2026-03-20,sent,transfer,CP_CUST_5_004,10742.48,United Arab Emirates,False,False
+TXN_000624,CUST_5,previous_90d,2026-03-22,sent,transfer,CP_CUST_5_005,12228.29,United Arab Emirates,False,False
+TXN_000625,CUST_5,previous_90d,2026-03-23,sent,transfer,CP_CUST_5_006,7131.36,United Arab Emirates,False,False
+TXN_000626,CUST_5,previous_90d,2026-03-25,sent,transfer,CP_CUST_5_007,7755.87,United Arab Emirates,False,False
+TXN_000627,CUST_5,previous_90d,2026-03-27,sent,transfer,CP_CUST_5_008,4475.34,United Arab Emirates,False,False
+TXN_000628,CUST_5,previous_90d,2026-03-28,sent,transfer,CP_CUST_5_009,5736.03,United Arab Emirates,False,False
+TXN_000629,CUST_5,previous_90d,2026-03-30,sent,transfer,CP_CUST_5_010,10222.96,United Arab Emirates,False,False
+TXN_000630,CUST_5,previous_90d,2026-04-01,sent,transfer,CP_CUST_5_011,12603.19,United Arab Emirates,False,False
+TXN_000631,CUST_5,previous_90d,2026-04-02,sent,transfer,CP_CUST_5_012,11204.73,United Arab Emirates,False,False
+TXN_000632,CUST_5,previous_90d,2026-01-04,received,transfer,SRC_CUST_5_002,16842.66,United Arab Emirates,False,False
+TXN_000633,CUST_5,previous_90d,2026-01-06,received,transfer,SRC_CUST_5_003,11272.87,United Arab Emirates,False,False
+TXN_000634,CUST_5,previous_90d,2026-01-08,received,transfer,SRC_CUST_5_004,19125.34,United Arab Emirates,False,False
+TXN_000635,CUST_5,previous_90d,2026-01-10,received,transfer,SRC_CUST_5_005,9989.21,United Arab Emirates,False,False
+TXN_000636,CUST_5,previous_90d,2026-01-12,received,transfer,SRC_CUST_5_006,17286.11,United Arab Emirates,False,False
+TXN_000637,CUST_5,previous_90d,2026-01-14,received,transfer,SRC_CUST_5_007,15685.24,United Arab Emirates,False,False
+TXN_000638,CUST_5,previous_90d,2026-01-16,received,transfer,SRC_CUST_5_001,17352.41,United Arab Emirates,False,False
+TXN_000639,CUST_5,previous_90d,2026-01-18,received,transfer,SRC_CUST_5_002,9940.97,United Arab Emirates,False,False
+TXN_000640,CUST_5,previous_90d,2026-01-20,received,transfer,SRC_CUST_5_003,7750.38,United Arab Emirates,False,False
+TXN_000641,CUST_5,previous_90d,2026-01-22,received,transfer,SRC_CUST_5_004,12990.32,United Arab Emirates,False,False
+TXN_000642,CUST_5,previous_90d,2026-01-24,received,transfer,SRC_CUST_5_005,9664.95,United Arab Emirates,False,False
+TXN_000643,CUST_5,previous_90d,2026-01-26,received,transfer,SRC_CUST_5_006,12926.46,United Arab Emirates,False,False
+TXN_000644,CUST_5,previous_90d,2026-01-28,received,transfer,SRC_CUST_5_007,11177.44,United Arab Emirates,False,False
+TXN_000645,CUST_5,previous_90d,2026-01-30,received,transfer,SRC_CUST_5_001,10060.3,United Arab Emirates,False,False
+TXN_000646,CUST_5,previous_90d,2026-02-02,received,transfer,SRC_CUST_5_002,13263.08,United Arab Emirates,False,False
+TXN_000647,CUST_5,previous_90d,2026-02-04,received,transfer,SRC_CUST_5_003,11531.82,United Arab Emirates,False,False
+TXN_000648,CUST_5,previous_90d,2026-02-06,received,transfer,SRC_CUST_5_004,13612.89,United Arab Emirates,False,False
+TXN_000649,CUST_5,previous_90d,2026-02-08,received,transfer,SRC_CUST_5_005,16428.23,United Arab Emirates,False,False
+TXN_000650,CUST_5,previous_90d,2026-02-10,received,transfer,SRC_CUST_5_006,16602.59,United Arab Emirates,False,False
+TXN_000651,CUST_5,previous_90d,2026-02-12,received,transfer,SRC_CUST_5_007,6319.14,United Arab Emirates,False,False
+TXN_000652,CUST_5,previous_90d,2026-02-14,received,transfer,SRC_CUST_5_001,18995.39,United Arab Emirates,False,False
+TXN_000653,CUST_5,previous_90d,2026-02-16,received,transfer,SRC_CUST_5_002,5774.18,United Arab Emirates,False,False
+TXN_000654,CUST_5,previous_90d,2026-02-18,received,transfer,SRC_CUST_5_003,18436.86,United Arab Emirates,False,False
+TXN_000655,CUST_5,previous_90d,2026-02-20,received,transfer,SRC_CUST_5_004,7618.83,United Arab Emirates,False,False
+TXN_000656,CUST_5,previous_90d,2026-02-22,received,transfer,SRC_CUST_5_005,12405.64,United Arab Emirates,False,False
+TXN_000657,CUST_5,previous_90d,2026-02-24,received,transfer,SRC_CUST_5_006,14238.54,United Arab Emirates,False,False
+TXN_000658,CUST_5,previous_90d,2026-02-26,received,transfer,SRC_CUST_5_007,17986.83,United Arab Emirates,False,False
+TXN_000659,CUST_5,previous_90d,2026-02-28,received,transfer,SRC_CUST_5_001,7856.95,United Arab Emirates,False,False
+TXN_000660,CUST_5,previous_90d,2026-03-03,received,transfer,SRC_CUST_5_002,18634.63,United Arab Emirates,False,False
+TXN_000661,CUST_5,previous_90d,2026-03-05,received,transfer,SRC_CUST_5_003,12636.09,United Arab Emirates,False,False
+TXN_000662,CUST_5,previous_90d,2026-03-07,received,transfer,SRC_CUST_5_004,14168.93,United Arab Emirates,False,False
+TXN_000663,CUST_5,previous_90d,2026-03-09,received,transfer,SRC_CUST_5_005,9428.45,United Arab Emirates,False,False
+TXN_000664,CUST_5,previous_90d,2026-03-11,received,transfer,SRC_CUST_5_006,6858.17,United Arab Emirates,False,False
+TXN_000665,CUST_5,previous_90d,2026-03-13,received,transfer,SRC_CUST_5_007,14436.31,United Arab Emirates,False,False
+TXN_000666,CUST_5,previous_90d,2026-03-15,received,transfer,SRC_CUST_5_001,16115.8,United Arab Emirates,False,False
+TXN_000667,CUST_5,previous_90d,2026-03-17,received,transfer,SRC_CUST_5_002,19800.56,United Arab Emirates,False,False
+TXN_000668,CUST_5,previous_90d,2026-03-19,received,transfer,SRC_CUST_5_003,16883.94,United Arab Emirates,False,False
+TXN_000669,CUST_5,previous_90d,2026-03-21,received,transfer,SRC_CUST_5_004,14781.24,United Arab Emirates,False,False
+TXN_000670,CUST_5,previous_90d,2026-03-23,received,transfer,SRC_CUST_5_005,14705.92,United Arab Emirates,False,False
+TXN_000671,CUST_5,previous_90d,2026-03-25,received,transfer,SRC_CUST_5_006,10476.99,United Arab Emirates,False,False
+TXN_000672,CUST_5,previous_90d,2026-03-27,received,transfer,SRC_CUST_5_007,7110.01,United Arab Emirates,False,False
+TXN_000673,CUST_5,previous_90d,2026-03-29,received,transfer,SRC_CUST_5_001,15432.48,United Arab Emirates,False,False
+TXN_000674,CUST_5,previous_90d,2026-04-01,received,transfer,SRC_CUST_5_002,9409.85,United Arab Emirates,False,False
+TXN_000675,CUST_5,previous_90d,2026-04-03,received,transfer,SRC_CUST_5_003,20145.0,United Arab Emirates,False,False
+TXN_000676,CUST_6,current_90d,2026-04-13,sent,cash_withdrawal,CASH_WITHDRAWAL,11000.0,United Arab Emirates,False,True
+TXN_000677,CUST_6,current_90d,2026-04-24,sent,transfer,CP_CUST_6_001,6235.73,United Arab Emirates,True,False
+TXN_000678,CUST_6,current_90d,2026-05-05,sent,transfer,CP_CUST_6_002,9457.68,United Arab Emirates,True,False
+TXN_000679,CUST_6,current_90d,2026-05-16,sent,transfer,CP_CUST_6_003,6096.85,United Arab Emirates,False,False
+TXN_000680,CUST_6,current_90d,2026-05-27,sent,transfer,CP_CUST_6_001,5151.82,United Arab Emirates,False,False
+TXN_000681,CUST_6,current_90d,2026-06-07,sent,transfer,CP_CUST_6_002,4095.45,United Arab Emirates,False,False
+TXN_000682,CUST_6,current_90d,2026-06-18,sent,transfer,CP_CUST_6_003,3305.36,United Arab Emirates,False,False
+TXN_000683,CUST_6,current_90d,2026-06-30,sent,transfer,CP_CUST_6_001,3257.18,United Arab Emirates,False,False
+TXN_000684,CUST_6,current_90d,2026-07-11,sent,transfer,CP_CUST_6_002,8399.93,United Arab Emirates,False,False
+TXN_000685,CUST_6,current_90d,2026-04-06,received,transfer,SRC_CUST_6_002,8579.69,United Arab Emirates,False,False
+TXN_000686,CUST_6,current_90d,2026-04-11,received,transfer,SRC_CUST_6_003,5195.83,United Arab Emirates,False,False
+TXN_000687,CUST_6,current_90d,2026-04-16,received,transfer,SRC_CUST_6_004,6571.77,United Arab Emirates,False,False
+TXN_000688,CUST_6,current_90d,2026-04-21,received,transfer,SRC_CUST_6_005,10409.9,United Arab Emirates,False,False
+TXN_000689,CUST_6,current_90d,2026-04-26,received,transfer,SRC_CUST_6_006,7018.33,United Arab Emirates,False,False
+TXN_000690,CUST_6,current_90d,2026-05-01,received,transfer,SRC_CUST_6_007,9523.73,United Arab Emirates,False,False
+TXN_000691,CUST_6,current_90d,2026-05-06,received,transfer,SRC_CUST_6_001,3836.29,United Arab Emirates,False,False
+TXN_000692,CUST_6,current_90d,2026-05-11,received,transfer,SRC_CUST_6_002,6596.47,United Arab Emirates,False,False
+TXN_000693,CUST_6,current_90d,2026-05-16,received,transfer,SRC_CUST_6_003,7530.71,United Arab Emirates,False,False
+TXN_000694,CUST_6,current_90d,2026-05-21,received,transfer,SRC_CUST_6_004,6116.59,United Arab Emirates,False,False
+TXN_000695,CUST_6,current_90d,2026-05-26,received,transfer,SRC_CUST_6_005,6534.19,United Arab Emirates,False,False
+TXN_000696,CUST_6,current_90d,2026-05-31,received,transfer,SRC_CUST_6_006,10374.65,United Arab Emirates,False,False
+TXN_000697,CUST_6,current_90d,2026-06-05,received,transfer,SRC_CUST_6_007,6485.92,United Arab Emirates,False,False
+TXN_000698,CUST_6,current_90d,2026-06-10,received,transfer,SRC_CUST_6_001,7539.88,United Arab Emirates,False,False
+TXN_000699,CUST_6,current_90d,2026-06-15,received,transfer,SRC_CUST_6_002,6624.17,United Arab Emirates,False,False
+TXN_000700,CUST_6,current_90d,2026-06-20,received,transfer,SRC_CUST_6_003,10623.24,United Arab Emirates,False,False
+TXN_000701,CUST_6,current_90d,2026-06-25,received,transfer,SRC_CUST_6_004,10921.78,United Arab Emirates,False,False
+TXN_000702,CUST_6,current_90d,2026-06-30,received,transfer,SRC_CUST_6_005,4671.05,United Arab Emirates,False,False
+TXN_000703,CUST_6,current_90d,2026-07-04,received,transfer,SRC_CUST_6_006,6845.81,United Arab Emirates,False,False
+TXN_000704,CUST_6,previous_90d,2026-01-24,sent,cash_withdrawal,CASH_WITHDRAWAL,6160.0,United Arab Emirates,False,True
+TXN_000705,CUST_6,previous_90d,2026-02-15,sent,transfer,CP_CUST_6_001,7780.99,United Arab Emirates,True,False
+TXN_000706,CUST_6,previous_90d,2026-03-09,sent,transfer,CP_CUST_6_002,6750.25,United Arab Emirates,False,False
+TXN_000707,CUST_6,previous_90d,2026-04-01,sent,transfer,CP_CUST_6_003,6652.02,United Arab Emirates,False,False
+TXN_000708,CUST_6,previous_90d,2026-04-23,sent,transfer,CP_CUST_6_001,4576.74,United Arab Emirates,False,False
+TXN_000709,CUST_6,previous_90d,2026-01-10,received,transfer,SRC_CUST_6_002,5980.05,United Arab Emirates,False,False
+TXN_000710,CUST_6,previous_90d,2026-01-19,received,transfer,SRC_CUST_6_003,7995.23,United Arab Emirates,False,False
+TXN_000711,CUST_6,previous_90d,2026-01-28,received,transfer,SRC_CUST_6_004,8841.62,United Arab Emirates,False,False
+TXN_000712,CUST_6,previous_90d,2026-02-06,received,transfer,SRC_CUST_6_005,9739.52,United Arab Emirates,False,False
+TXN_000713,CUST_6,previous_90d,2026-02-15,received,transfer,SRC_CUST_6_006,3922.06,United Arab Emirates,False,False
+TXN_000714,CUST_6,previous_90d,2026-02-24,received,transfer,SRC_CUST_6_007,10529.67,United Arab Emirates,False,False
+TXN_000715,CUST_6,previous_90d,2026-03-05,received,transfer,SRC_CUST_6_001,5236.17,United Arab Emirates,False,False
+TXN_000716,CUST_6,previous_90d,2026-03-14,received,transfer,SRC_CUST_6_002,7865.24,United Arab Emirates,False,False
+TXN_000717,CUST_6,previous_90d,2026-03-23,received,transfer,SRC_CUST_6_003,9106.26,United Arab Emirates,False,False
+TXN_000718,CUST_6,previous_90d,2026-04-01,received,transfer,SRC_CUST_6_004,7019.91,United Arab Emirates,False,False
+TXN_000719,CUST_6,previous_90d,2026-04-09,received,transfer,SRC_CUST_6_005,3284.27,United Arab Emirates,False,False
+TXN_000720,CUST_7,current_90d,2026-04-04,sent,cash_withdrawal,CASH_WITHDRAWAL,7041.82,United Arab Emirates,False,True
+TXN_000721,CUST_7,current_90d,2026-04-07,sent,cash_withdrawal,CASH_WITHDRAWAL,18072.61,United Arab Emirates,False,True
+TXN_000722,CUST_7,current_90d,2026-04-10,sent,cash_withdrawal,CASH_WITHDRAWAL,12740.02,United Arab Emirates,False,True
+TXN_000723,CUST_7,current_90d,2026-04-12,sent,cash_withdrawal,CASH_WITHDRAWAL,20145.55,United Arab Emirates,False,True
+TXN_000724,CUST_7,current_90d,2026-04-15,sent,transfer,CP_SHARED_001,3637.66,Egypt,True,False
+TXN_000725,CUST_7,current_90d,2026-04-18,sent,transfer,CP_CUST_7_001,5430.63,Egypt,True,False
+TXN_000726,CUST_7,current_90d,2026-04-20,sent,transfer,CP_CUST_7_002,7816.57,Egypt,True,False
+TXN_000727,CUST_7,current_90d,2026-04-23,sent,transfer,CP_CUST_7_003,4955.48,Egypt,True,False
+TXN_000728,CUST_7,current_90d,2026-04-26,sent,transfer,CP_CUST_7_004,9209.13,Egypt,True,False
+TXN_000729,CUST_7,current_90d,2026-04-28,sent,transfer,CP_CUST_7_005,5468.65,Egypt,True,False
+TXN_000730,CUST_7,current_90d,2026-05-01,sent,transfer,CP_CUST_7_006,5771.13,Egypt,True,False
+TXN_000731,CUST_7,current_90d,2026-05-04,sent,transfer,CP_CUST_7_007,9007.21,Egypt,True,False
+TXN_000732,CUST_7,current_90d,2026-05-07,sent,transfer,CP_CUST_7_008,4240.86,Egypt,True,False
+TXN_000733,CUST_7,current_90d,2026-05-09,sent,transfer,CP_CUST_7_009,2586.11,Egypt,True,False
+TXN_000734,CUST_7,current_90d,2026-05-12,sent,transfer,CP_CUST_7_010,3892.95,Egypt,True,False
+TXN_000735,CUST_7,current_90d,2026-05-15,sent,transfer,CP_SHARED_001,9288.39,Egypt,True,False
+TXN_000736,CUST_7,current_90d,2026-05-17,sent,transfer,CP_CUST_7_001,7327.03,Egypt,True,False
+TXN_000737,CUST_7,current_90d,2026-05-20,sent,transfer,CP_CUST_7_002,7471.39,United Arab Emirates,False,False
+TXN_000738,CUST_7,current_90d,2026-05-23,sent,transfer,CP_CUST_7_003,8041.63,United Arab Emirates,False,False
+TXN_000739,CUST_7,current_90d,2026-05-25,sent,transfer,CP_CUST_7_004,6540.47,United Arab Emirates,False,False
+TXN_000740,CUST_7,current_90d,2026-05-28,sent,transfer,CP_CUST_7_005,2823.78,United Arab Emirates,False,False
+TXN_000741,CUST_7,current_90d,2026-05-31,sent,transfer,CP_CUST_7_006,5264.05,United Arab Emirates,False,False
+TXN_000742,CUST_7,current_90d,2026-06-03,sent,transfer,CP_CUST_7_007,7898.24,United Arab Emirates,False,False
+TXN_000743,CUST_7,current_90d,2026-06-05,sent,transfer,CP_CUST_7_008,6409.57,United Arab Emirates,False,False
+TXN_000744,CUST_7,current_90d,2026-06-08,sent,transfer,CP_CUST_7_009,6938.94,United Arab Emirates,False,False
+TXN_000745,CUST_7,current_90d,2026-06-11,sent,transfer,CP_CUST_7_010,2645.74,United Arab Emirates,False,False
+TXN_000746,CUST_7,current_90d,2026-06-13,sent,transfer,CP_SHARED_001,3708.82,United Arab Emirates,False,False
+TXN_000747,CUST_7,current_90d,2026-06-16,sent,transfer,CP_CUST_7_001,8535.29,United Arab Emirates,False,False
+TXN_000748,CUST_7,current_90d,2026-06-19,sent,transfer,CP_CUST_7_002,8986.88,United Arab Emirates,False,False
+TXN_000749,CUST_7,current_90d,2026-06-21,sent,transfer,CP_CUST_7_003,3456.46,United Arab Emirates,False,False
+TXN_000750,CUST_7,current_90d,2026-06-24,sent,transfer,CP_CUST_7_004,6994.34,United Arab Emirates,False,False
+TXN_000751,CUST_7,current_90d,2026-06-27,sent,transfer,CP_CUST_7_005,4218.14,United Arab Emirates,False,False
+TXN_000752,CUST_7,current_90d,2026-06-30,sent,transfer,CP_CUST_7_006,8793.94,United Arab Emirates,False,False
+TXN_000753,CUST_7,current_90d,2026-07-02,sent,transfer,CP_CUST_7_007,2640.52,United Arab Emirates,False,False
+TXN_000754,CUST_7,current_90d,2026-04-05,received,transfer,SRC_CUST_7_002,9748.74,United Arab Emirates,False,False
+TXN_000755,CUST_7,current_90d,2026-04-08,received,transfer,SRC_CUST_7_003,9020.46,United Arab Emirates,False,False
+TXN_000756,CUST_7,current_90d,2026-04-11,received,transfer,SRC_CUST_7_004,7054.4,United Arab Emirates,False,False
+TXN_000757,CUST_7,current_90d,2026-04-14,received,transfer,SRC_CUST_7_005,8720.59,United Arab Emirates,False,False
+TXN_000758,CUST_7,current_90d,2026-04-17,received,transfer,SRC_CUST_7_006,6922.6,United Arab Emirates,False,False
+TXN_000759,CUST_7,current_90d,2026-04-21,received,transfer,SRC_CUST_7_007,11668.39,United Arab Emirates,False,False
+TXN_000760,CUST_7,current_90d,2026-04-24,received,transfer,SRC_CUST_7_001,11292.38,United Arab Emirates,False,False
+TXN_000761,CUST_7,current_90d,2026-04-27,received,transfer,SRC_CUST_7_002,3387.69,United Arab Emirates,False,False
+TXN_000762,CUST_7,current_90d,2026-04-30,received,transfer,SRC_CUST_7_003,10775.56,United Arab Emirates,False,False
+TXN_000763,CUST_7,current_90d,2026-05-03,received,transfer,SRC_CUST_7_004,11506.2,United Arab Emirates,False,False
+TXN_000764,CUST_7,current_90d,2026-05-06,received,transfer,SRC_CUST_7_005,11428.81,United Arab Emirates,False,False
+TXN_000765,CUST_7,current_90d,2026-05-10,received,transfer,SRC_CUST_7_006,8934.21,United Arab Emirates,False,False
+TXN_000766,CUST_7,current_90d,2026-05-13,received,transfer,SRC_CUST_7_007,5458.97,United Arab Emirates,False,False
+TXN_000767,CUST_7,current_90d,2026-05-16,received,transfer,SRC_CUST_7_001,8547.49,United Arab Emirates,False,False
+TXN_000768,CUST_7,current_90d,2026-05-19,received,transfer,SRC_CUST_7_002,6732.19,United Arab Emirates,False,False
+TXN_000769,CUST_7,current_90d,2026-05-22,received,transfer,SRC_CUST_7_003,9246.3,United Arab Emirates,False,False
+TXN_000770,CUST_7,current_90d,2026-05-26,received,transfer,SRC_CUST_7_004,8605.63,United Arab Emirates,False,False
+TXN_000771,CUST_7,current_90d,2026-05-29,received,transfer,SRC_CUST_7_005,10970.82,United Arab Emirates,False,False
+TXN_000772,CUST_7,current_90d,2026-06-01,received,transfer,SRC_CUST_7_006,8334.68,United Arab Emirates,False,False
+TXN_000773,CUST_7,current_90d,2026-06-04,received,transfer,SRC_CUST_7_007,7404.32,United Arab Emirates,False,False
+TXN_000774,CUST_7,current_90d,2026-06-07,received,transfer,SRC_CUST_7_001,4924.3,United Arab Emirates,False,False
+TXN_000775,CUST_7,current_90d,2026-06-10,received,transfer,SRC_CUST_7_002,5554.04,United Arab Emirates,False,False
+TXN_000776,CUST_7,current_90d,2026-06-14,received,transfer,SRC_CUST_7_003,10548.21,United Arab Emirates,False,False
+TXN_000777,CUST_7,current_90d,2026-06-17,received,transfer,SRC_CUST_7_004,9093.16,United Arab Emirates,False,False
+TXN_000778,CUST_7,current_90d,2026-06-20,received,transfer,SRC_CUST_7_005,8537.03,United Arab Emirates,False,False
+TXN_000779,CUST_7,current_90d,2026-06-23,received,transfer,SRC_CUST_7_006,11448.92,United Arab Emirates,False,False
+TXN_000780,CUST_7,current_90d,2026-06-26,received,transfer,SRC_CUST_7_007,5795.69,United Arab Emirates,False,False
+TXN_000781,CUST_7,current_90d,2026-06-30,received,transfer,SRC_CUST_7_001,10195.29,United Arab Emirates,False,False
+TXN_000782,CUST_7,current_90d,2026-07-03,received,transfer,SRC_CUST_7_002,9142.93,United Arab Emirates,False,False
+TXN_000783,CUST_7,previous_90d,2026-01-06,sent,cash_withdrawal,CASH_WITHDRAWAL,23650.06,United Arab Emirates,False,True
+TXN_000784,CUST_7,previous_90d,2026-01-11,sent,cash_withdrawal,CASH_WITHDRAWAL,13469.94,United Arab Emirates,False,True
+TXN_000785,CUST_7,previous_90d,2026-01-16,sent,transfer,CP_SHARED_001,5523.78,Egypt,True,False
+TXN_000786,CUST_7,previous_90d,2026-01-20,sent,transfer,CP_CUST_7_001,10019.85,Egypt,True,False
+TXN_000787,CUST_7,previous_90d,2026-01-25,sent,transfer,CP_CUST_7_002,5188.5,Egypt,True,False
+TXN_000788,CUST_7,previous_90d,2026-01-30,sent,transfer,CP_CUST_7_003,9506.38,Egypt,True,False
+TXN_000789,CUST_7,previous_90d,2026-02-03,sent,transfer,CP_CUST_7_004,5739.5,Egypt,True,False
+TXN_000790,CUST_7,previous_90d,2026-02-08,sent,transfer,CP_CUST_7_005,5452.95,Egypt,True,False
+TXN_000791,CUST_7,previous_90d,2026-02-13,sent,transfer,CP_CUST_7_006,5903.37,Egypt,True,False
+TXN_000792,CUST_7,previous_90d,2026-02-17,sent,transfer,CP_CUST_7_007,9725.94,United Arab Emirates,False,False
+TXN_000793,CUST_7,previous_90d,2026-02-22,sent,transfer,CP_CUST_7_008,8746.95,United Arab Emirates,False,False
+TXN_000794,CUST_7,previous_90d,2026-02-27,sent,transfer,CP_CUST_7_009,7007.04,United Arab Emirates,False,False
+TXN_000795,CUST_7,previous_90d,2026-03-03,sent,transfer,CP_CUST_7_010,3167.22,United Arab Emirates,False,False
+TXN_000796,CUST_7,previous_90d,2026-03-08,sent,transfer,CP_SHARED_001,5143.12,United Arab Emirates,False,False
+TXN_000797,CUST_7,previous_90d,2026-03-13,sent,transfer,CP_CUST_7_001,4367.62,United Arab Emirates,False,False
+TXN_000798,CUST_7,previous_90d,2026-03-17,sent,transfer,CP_CUST_7_002,2801.23,United Arab Emirates,False,False
+TXN_000799,CUST_7,previous_90d,2026-03-22,sent,transfer,CP_CUST_7_003,7184.77,United Arab Emirates,False,False
+TXN_000800,CUST_7,previous_90d,2026-03-27,sent,transfer,CP_CUST_7_004,7695.56,United Arab Emirates,False,False
+TXN_000801,CUST_7,previous_90d,2026-04-01,sent,transfer,CP_CUST_7_005,8358.27,United Arab Emirates,False,False
+TXN_000802,CUST_7,previous_90d,2026-04-05,sent,transfer,CP_CUST_7_006,3667.95,United Arab Emirates,False,False
+TXN_000803,CUST_7,previous_90d,2026-01-07,received,transfer,SRC_CUST_7_002,7020.39,United Arab Emirates,False,False
+TXN_000804,CUST_7,previous_90d,2026-01-13,received,transfer,SRC_CUST_7_003,6136.57,United Arab Emirates,False,False
+TXN_000805,CUST_7,previous_90d,2026-01-18,received,transfer,SRC_CUST_7_004,9244.02,United Arab Emirates,False,False
+TXN_000806,CUST_7,previous_90d,2026-01-24,received,transfer,SRC_CUST_7_005,14096.49,United Arab Emirates,False,False
+TXN_000807,CUST_7,previous_90d,2026-01-29,received,transfer,SRC_CUST_7_006,11332.96,United Arab Emirates,False,False
+TXN_000808,CUST_7,previous_90d,2026-02-04,received,transfer,SRC_CUST_7_007,13407.93,United Arab Emirates,False,False
+TXN_000809,CUST_7,previous_90d,2026-02-09,received,transfer,SRC_CUST_7_001,4577.79,United Arab Emirates,False,False
+TXN_000810,CUST_7,previous_90d,2026-02-15,received,transfer,SRC_CUST_7_002,6755.92,United Arab Emirates,False,False
+TXN_000811,CUST_7,previous_90d,2026-02-21,received,transfer,SRC_CUST_7_003,12339.19,United Arab Emirates,False,False
+TXN_000812,CUST_7,previous_90d,2026-02-26,received,transfer,SRC_CUST_7_004,7952.03,United Arab Emirates,False,False
+TXN_000813,CUST_7,previous_90d,2026-03-04,received,transfer,SRC_CUST_7_005,10735.4,United Arab Emirates,False,False
+TXN_000814,CUST_7,previous_90d,2026-03-09,received,transfer,SRC_CUST_7_006,13518.46,United Arab Emirates,False,False
+TXN_000815,CUST_7,previous_90d,2026-03-15,received,transfer,SRC_CUST_7_007,11509.63,United Arab Emirates,False,False
+TXN_000816,CUST_7,previous_90d,2026-03-20,received,transfer,SRC_CUST_7_001,7708.35,United Arab Emirates,False,False
+TXN_000817,CUST_7,previous_90d,2026-03-26,received,transfer,SRC_CUST_7_002,10094.06,United Arab Emirates,False,False
+TXN_000818,CUST_7,previous_90d,2026-04-01,received,transfer,SRC_CUST_7_003,3977.15,United Arab Emirates,False,False
+TXN_000819,CUST_7,previous_90d,2026-04-06,received,transfer,SRC_CUST_7_004,10233.66,United Arab Emirates,False,False
+TXN_000820,CUST_8,current_90d,2026-04-14,sent,cash_withdrawal,CASH_WITHDRAWAL,9000.0,United Arab Emirates,False,True
+TXN_000821,CUST_8,current_90d,2026-04-27,sent,transfer,CP_CUST_8_001,6412.33,India,True,False
+TXN_000822,CUST_8,current_90d,2026-05-10,sent,transfer,CP_CUST_8_002,7106.35,United Arab Emirates,False,False
+TXN_000823,CUST_8,current_90d,2026-05-22,sent,transfer,CP_CUST_8_001,3287.53,United Arab Emirates,False,False
+TXN_000824,CUST_8,current_90d,2026-06-04,sent,transfer,CP_CUST_8_002,4561.43,United Arab Emirates,False,False
+TXN_000825,CUST_8,current_90d,2026-06-17,sent,transfer,CP_CUST_8_001,3266.22,United Arab Emirates,False,False
+TXN_000826,CUST_8,current_90d,2026-06-30,sent,transfer,CP_CUST_8_002,2657.11,United Arab Emirates,False,False
+TXN_000827,CUST_8,current_90d,2026-07-12,sent,transfer,CP_CUST_8_001,7709.03,United Arab Emirates,False,False
+TXN_000828,CUST_8,current_90d,2026-04-07,received,transfer,SRC_CUST_8_002,4964.47,United Arab Emirates,False,False
+TXN_000829,CUST_8,current_90d,2026-04-13,received,transfer,SRC_CUST_8_003,10797.71,United Arab Emirates,False,False
+TXN_000830,CUST_8,current_90d,2026-04-19,received,transfer,SRC_CUST_8_004,9579.04,United Arab Emirates,False,False
+TXN_000831,CUST_8,current_90d,2026-04-25,received,transfer,SRC_CUST_8_005,3497.48,United Arab Emirates,False,False
+TXN_000832,CUST_8,current_90d,2026-05-01,received,transfer,SRC_CUST_8_006,11254.91,United Arab Emirates,False,False
+TXN_000833,CUST_8,current_90d,2026-05-07,received,transfer,SRC_CUST_8_007,4388.27,United Arab Emirates,False,False
+TXN_000834,CUST_8,current_90d,2026-05-13,received,transfer,SRC_CUST_8_001,7799.79,United Arab Emirates,False,False
+TXN_000835,CUST_8,current_90d,2026-05-19,received,transfer,SRC_CUST_8_002,6657.19,United Arab Emirates,False,False
+TXN_000836,CUST_8,current_90d,2026-05-25,received,transfer,SRC_CUST_8_003,6299.29,United Arab Emirates,False,False
+TXN_000837,CUST_8,current_90d,2026-05-31,received,transfer,SRC_CUST_8_004,4945.43,United Arab Emirates,False,False
+TXN_000838,CUST_8,current_90d,2026-06-06,received,transfer,SRC_CUST_8_005,8652.41,United Arab Emirates,False,False
+TXN_000839,CUST_8,current_90d,2026-06-12,received,transfer,SRC_CUST_8_006,7668.69,United Arab Emirates,False,False
+TXN_000840,CUST_8,current_90d,2026-06-18,received,transfer,SRC_CUST_8_007,8741.73,United Arab Emirates,False,False
+TXN_000841,CUST_8,current_90d,2026-06-24,received,transfer,SRC_CUST_8_001,3701.66,United Arab Emirates,False,False
+TXN_000842,CUST_8,current_90d,2026-06-30,received,transfer,SRC_CUST_8_002,10497.97,United Arab Emirates,False,False
+TXN_000843,CUST_8,current_90d,2026-07-05,received,transfer,SRC_CUST_8_003,6553.96,United Arab Emirates,False,False
+TXN_000844,CUST_8,previous_90d,2026-01-31,sent,cash_withdrawal,CASH_WITHDRAWAL,6480.0,United Arab Emirates,False,True
+TXN_000845,CUST_8,previous_90d,2026-03-02,sent,transfer,CP_CUST_8_001,5188.72,India,True,False
+TXN_000846,CUST_8,previous_90d,2026-04-01,sent,transfer,CP_CUST_8_002,10642.57,United Arab Emirates,False,False
+TXN_000847,CUST_8,previous_90d,2026-04-30,sent,transfer,CP_CUST_8_001,9368.71,United Arab Emirates,False,False
+TXN_000848,CUST_8,previous_90d,2026-01-13,received,transfer,SRC_CUST_8_002,11508.16,United Arab Emirates,False,False
+TXN_000849,CUST_8,previous_90d,2026-01-24,received,transfer,SRC_CUST_8_003,11596.71,United Arab Emirates,False,False
+TXN_000850,CUST_8,previous_90d,2026-02-04,received,transfer,SRC_CUST_8_004,11330.1,United Arab Emirates,False,False
+TXN_000851,CUST_8,previous_90d,2026-02-15,received,transfer,SRC_CUST_8_005,9592.01,United Arab Emirates,False,False
+TXN_000852,CUST_8,previous_90d,2026-02-26,received,transfer,SRC_CUST_8_006,5790.62,United Arab Emirates,False,False
+TXN_000853,CUST_8,previous_90d,2026-03-09,received,transfer,SRC_CUST_8_007,11763.41,United Arab Emirates,False,False
+TXN_000854,CUST_8,previous_90d,2026-03-20,received,transfer,SRC_CUST_8_001,3345.05,United Arab Emirates,False,False
+TXN_000855,CUST_8,previous_90d,2026-04-01,received,transfer,SRC_CUST_8_002,7620.55,United Arab Emirates,False,False
+TXN_000856,CUST_8,previous_90d,2026-04-12,received,transfer,SRC_CUST_8_003,10973.39,United Arab Emirates,False,False
+TXN_000857,CUST_9,current_90d,2026-04-04,sent,cash_withdrawal,CASH_WITHDRAWAL,12314.67,United Arab Emirates,False,True
+TXN_000858,CUST_9,current_90d,2026-04-06,sent,cash_withdrawal,CASH_WITHDRAWAL,16373.55,United Arab Emirates,False,True
+TXN_000859,CUST_9,current_90d,2026-04-08,sent,cash_withdrawal,CASH_WITHDRAWAL,25224.03,United Arab Emirates,False,True
+TXN_000860,CUST_9,current_90d,2026-04-10,sent,cash_withdrawal,CASH_WITHDRAWAL,12966.22,United Arab Emirates,False,True
+TXN_000861,CUST_9,current_90d,2026-04-12,sent,cash_withdrawal,CASH_WITHDRAWAL,24121.53,United Arab Emirates,False,True
+TXN_000862,CUST_9,current_90d,2026-04-14,sent,transfer,CP_SHARED_003,15297.16,United Arab Emirates,True,False
+TXN_000863,CUST_9,current_90d,2026-04-16,sent,transfer,CP_SHARED_005,7601.25,United Arab Emirates,True,False
+TXN_000864,CUST_9,current_90d,2026-04-18,sent,transfer,CP_CUST_9_001,19264.3,United Arab Emirates,True,False
+TXN_000865,CUST_9,current_90d,2026-04-21,sent,transfer,CP_CUST_9_002,8579.1,United Arab Emirates,True,False
+TXN_000866,CUST_9,current_90d,2026-04-23,sent,transfer,CP_CUST_9_003,10171.75,United Arab Emirates,True,False
+TXN_000867,CUST_9,current_90d,2026-04-25,sent,transfer,CP_CUST_9_004,11471.71,United Arab Emirates,True,False
+TXN_000868,CUST_9,current_90d,2026-04-27,sent,transfer,CP_CUST_9_005,20784.63,United Arab Emirates,True,False
+TXN_000869,CUST_9,current_90d,2026-04-29,sent,transfer,CP_CUST_9_006,15622.28,United Arab Emirates,True,False
+TXN_000870,CUST_9,current_90d,2026-05-01,sent,transfer,CP_CUST_9_007,18362.05,United Arab Emirates,True,False
+TXN_000871,CUST_9,current_90d,2026-05-03,sent,transfer,CP_CUST_9_008,15830.14,United Arab Emirates,True,False
+TXN_000872,CUST_9,current_90d,2026-05-05,sent,transfer,CP_CUST_9_009,8652.57,United Arab Emirates,True,False
+TXN_000873,CUST_9,current_90d,2026-05-08,sent,transfer,CP_CUST_9_010,9120.6,United Arab Emirates,True,False
+TXN_000874,CUST_9,current_90d,2026-05-10,sent,transfer,CP_CUST_9_011,19330.43,United Arab Emirates,True,False
+TXN_000875,CUST_9,current_90d,2026-05-12,sent,transfer,CP_CUST_9_012,17878.58,United Arab Emirates,True,False
+TXN_000876,CUST_9,current_90d,2026-05-14,sent,transfer,CP_CUST_9_013,19839.71,United Arab Emirates,True,False
+TXN_000877,CUST_9,current_90d,2026-05-16,sent,transfer,CP_CUST_9_014,12045.08,United Arab Emirates,False,False
+TXN_000878,CUST_9,current_90d,2026-05-18,sent,transfer,CP_CUST_9_015,13864.96,United Arab Emirates,False,False
+TXN_000879,CUST_9,current_90d,2026-05-20,sent,transfer,CP_SHARED_003,13225.66,United Arab Emirates,False,False
+TXN_000880,CUST_9,current_90d,2026-05-22,sent,transfer,CP_SHARED_005,7125.83,United Arab Emirates,False,False
+TXN_000881,CUST_9,current_90d,2026-05-24,sent,transfer,CP_CUST_9_001,17200.49,United Arab Emirates,False,False
+TXN_000882,CUST_9,current_90d,2026-05-27,sent,transfer,CP_CUST_9_002,14076.97,United Arab Emirates,False,False
+TXN_000883,CUST_9,current_90d,2026-05-29,sent,transfer,CP_CUST_9_003,18767.83,United Arab Emirates,False,False
+TXN_000884,CUST_9,current_90d,2026-05-31,sent,transfer,CP_CUST_9_004,15707.94,United Arab Emirates,False,False
+TXN_000885,CUST_9,current_90d,2026-06-02,sent,transfer,CP_CUST_9_005,7831.73,United Arab Emirates,False,False
+TXN_000886,CUST_9,current_90d,2026-06-04,sent,transfer,CP_CUST_9_006,6270.79,United Arab Emirates,False,False
+TXN_000887,CUST_9,current_90d,2026-06-06,sent,transfer,CP_CUST_9_007,10107.55,United Arab Emirates,False,False
+TXN_000888,CUST_9,current_90d,2026-06-08,sent,transfer,CP_CUST_9_008,8058.63,United Arab Emirates,False,False
+TXN_000889,CUST_9,current_90d,2026-06-10,sent,transfer,CP_CUST_9_009,10097.13,United Arab Emirates,False,False
+TXN_000890,CUST_9,current_90d,2026-06-13,sent,transfer,CP_CUST_9_010,11846.75,United Arab Emirates,False,False
+TXN_000891,CUST_9,current_90d,2026-06-15,sent,transfer,CP_CUST_9_011,15469.92,United Arab Emirates,False,False
+TXN_000892,CUST_9,current_90d,2026-06-17,sent,transfer,CP_CUST_9_012,17653.25,United Arab Emirates,False,False
+TXN_000893,CUST_9,current_90d,2026-06-19,sent,transfer,CP_CUST_9_013,11399.93,United Arab Emirates,False,False
+TXN_000894,CUST_9,current_90d,2026-06-21,sent,transfer,CP_CUST_9_014,20327.56,United Arab Emirates,False,False
+TXN_000895,CUST_9,current_90d,2026-06-23,sent,transfer,CP_CUST_9_015,20243.96,United Arab Emirates,False,False
+TXN_000896,CUST_9,current_90d,2026-06-25,sent,transfer,CP_SHARED_003,9216.3,United Arab Emirates,False,False
+TXN_000897,CUST_9,current_90d,2026-06-27,sent,transfer,CP_SHARED_005,11699.55,United Arab Emirates,False,False
+TXN_000898,CUST_9,current_90d,2026-06-30,sent,transfer,CP_CUST_9_001,9410.19,United Arab Emirates,False,False
+TXN_000899,CUST_9,current_90d,2026-07-02,sent,transfer,CP_CUST_9_002,13545.74,United Arab Emirates,False,False
+TXN_000900,CUST_9,current_90d,2026-04-04,received,transfer,SRC_CUST_9_002,30204.71,United Arab Emirates,False,False
+TXN_000901,CUST_9,current_90d,2026-04-06,received,transfer,SRC_CUST_9_003,26603.49,United Arab Emirates,False,False
+TXN_000902,CUST_9,current_90d,2026-04-09,received,transfer,SRC_CUST_9_004,14806.54,United Arab Emirates,False,False
+TXN_000903,CUST_9,current_90d,2026-04-11,received,transfer,SRC_CUST_9_005,11722.81,United Arab Emirates,False,False
+TXN_000904,CUST_9,current_90d,2026-04-13,received,transfer,SRC_CUST_9_006,29790.0,United Arab Emirates,False,False
+TXN_000905,CUST_9,current_90d,2026-04-16,received,transfer,SRC_CUST_9_007,8733.14,United Arab Emirates,False,False
+TXN_000906,CUST_9,current_90d,2026-04-18,received,transfer,SRC_CUST_9_001,22698.5,United Arab Emirates,False,False
+TXN_000907,CUST_9,current_90d,2026-04-20,received,transfer,SRC_CUST_9_002,13855.55,United Arab Emirates,False,False
+TXN_000908,CUST_9,current_90d,2026-04-23,received,transfer,SRC_CUST_9_003,11502.99,United Arab Emirates,False,False
+TXN_000909,CUST_9,current_90d,2026-04-25,received,transfer,SRC_CUST_9_004,22168.76,United Arab Emirates,False,False
+TXN_000910,CUST_9,current_90d,2026-04-27,received,transfer,SRC_CUST_9_005,28603.97,United Arab Emirates,False,False
+TXN_000911,CUST_9,current_90d,2026-04-30,received,transfer,SRC_CUST_9_006,15025.66,United Arab Emirates,False,False
+TXN_000912,CUST_9,current_90d,2026-05-02,received,transfer,SRC_CUST_9_007,22121.11,United Arab Emirates,False,False
+TXN_000913,CUST_9,current_90d,2026-05-04,received,transfer,SRC_CUST_9_001,10685.84,United Arab Emirates,False,False
+TXN_000914,CUST_9,current_90d,2026-05-07,received,transfer,SRC_CUST_9_002,28626.51,United Arab Emirates,False,False
+TXN_000915,CUST_9,current_90d,2026-05-09,received,transfer,SRC_CUST_9_003,15743.13,United Arab Emirates,False,False
+TXN_000916,CUST_9,current_90d,2026-05-11,received,transfer,SRC_CUST_9_004,12151.53,United Arab Emirates,False,False
+TXN_000917,CUST_9,current_90d,2026-05-14,received,transfer,SRC_CUST_9_005,27723.58,United Arab Emirates,False,False
+TXN_000918,CUST_9,current_90d,2026-05-16,received,transfer,SRC_CUST_9_006,26829.98,United Arab Emirates,False,False
+TXN_000919,CUST_9,current_90d,2026-05-18,received,transfer,SRC_CUST_9_007,12518.98,United Arab Emirates,False,False
+TXN_000920,CUST_9,current_90d,2026-05-21,received,transfer,SRC_CUST_9_001,11568.41,United Arab Emirates,False,False
+TXN_000921,CUST_9,current_90d,2026-05-23,received,transfer,SRC_CUST_9_002,23133.64,United Arab Emirates,False,False
+TXN_000922,CUST_9,current_90d,2026-05-25,received,transfer,SRC_CUST_9_003,20311.97,United Arab Emirates,False,False
+TXN_000923,CUST_9,current_90d,2026-05-28,received,transfer,SRC_CUST_9_004,16968.7,United Arab Emirates,False,False
+TXN_000924,CUST_9,current_90d,2026-05-30,received,transfer,SRC_CUST_9_005,21151.44,United Arab Emirates,False,False
+TXN_000925,CUST_9,current_90d,2026-06-01,received,transfer,SRC_CUST_9_006,20607.64,United Arab Emirates,False,False
+TXN_000926,CUST_9,current_90d,2026-06-04,received,transfer,SRC_CUST_9_007,15554.23,United Arab Emirates,False,False
+TXN_000927,CUST_9,current_90d,2026-06-06,received,transfer,SRC_CUST_9_001,16070.91,United Arab Emirates,False,False
+TXN_000928,CUST_9,current_90d,2026-06-08,received,transfer,SRC_CUST_9_002,11958.13,United Arab Emirates,False,False
+TXN_000929,CUST_9,current_90d,2026-06-11,received,transfer,SRC_CUST_9_003,21051.88,United Arab Emirates,False,False
+TXN_000930,CUST_9,current_90d,2026-06-13,received,transfer,SRC_CUST_9_004,27294.46,United Arab Emirates,False,False
+TXN_000931,CUST_9,current_90d,2026-06-15,received,transfer,SRC_CUST_9_005,25875.49,United Arab Emirates,False,False
+TXN_000932,CUST_9,current_90d,2026-06-18,received,transfer,SRC_CUST_9_006,26568.1,United Arab Emirates,False,False
+TXN_000933,CUST_9,current_90d,2026-06-20,received,transfer,SRC_CUST_9_007,12136.12,United Arab Emirates,False,False
+TXN_000934,CUST_9,current_90d,2026-06-22,received,transfer,SRC_CUST_9_001,25634.0,United Arab Emirates,False,False
+TXN_000935,CUST_9,current_90d,2026-06-25,received,transfer,SRC_CUST_9_002,11829.09,United Arab Emirates,False,False
+TXN_000936,CUST_9,current_90d,2026-06-27,received,transfer,SRC_CUST_9_003,16758.29,United Arab Emirates,False,False
+TXN_000937,CUST_9,current_90d,2026-06-30,received,transfer,SRC_CUST_9_004,20564.2,United Arab Emirates,False,False
+TXN_000938,CUST_9,current_90d,2026-07-02,received,transfer,SRC_CUST_9_005,14846.52,United Arab Emirates,False,False
+TXN_000939,CUST_9,previous_90d,2026-01-05,sent,cash_withdrawal,CASH_WITHDRAWAL,18794.95,United Arab Emirates,False,True
+TXN_000940,CUST_9,previous_90d,2026-01-09,sent,cash_withdrawal,CASH_WITHDRAWAL,28359.01,United Arab Emirates,False,True
+TXN_000941,CUST_9,previous_90d,2026-01-13,sent,cash_withdrawal,CASH_WITHDRAWAL,25646.04,United Arab Emirates,False,True
+TXN_000942,CUST_9,previous_90d,2026-01-16,sent,transfer,CP_SHARED_003,19278.33,United Arab Emirates,True,False
+TXN_000943,CUST_9,previous_90d,2026-01-20,sent,transfer,CP_SHARED_005,15220.45,United Arab Emirates,True,False
+TXN_000944,CUST_9,previous_90d,2026-01-24,sent,transfer,CP_CUST_9_001,11663.65,United Arab Emirates,True,False
+TXN_000945,CUST_9,previous_90d,2026-01-27,sent,transfer,CP_CUST_9_002,27837.93,United Arab Emirates,True,False
+TXN_000946,CUST_9,previous_90d,2026-01-31,sent,transfer,CP_CUST_9_003,20299.24,United Arab Emirates,True,False
+TXN_000947,CUST_9,previous_90d,2026-02-04,sent,transfer,CP_CUST_9_004,19801.52,United Arab Emirates,True,False
+TXN_000948,CUST_9,previous_90d,2026-02-08,sent,transfer,CP_CUST_9_005,22434.45,United Arab Emirates,True,False
+TXN_000949,CUST_9,previous_90d,2026-02-11,sent,transfer,CP_CUST_9_006,9018.55,United Arab Emirates,True,False
+TXN_000950,CUST_9,previous_90d,2026-02-15,sent,transfer,CP_CUST_9_007,10333.09,United Arab Emirates,True,False
+TXN_000951,CUST_9,previous_90d,2026-02-19,sent,transfer,CP_CUST_9_008,23283.73,United Arab Emirates,True,False
+TXN_000952,CUST_9,previous_90d,2026-02-22,sent,transfer,CP_CUST_9_009,30262.76,United Arab Emirates,False,False
+TXN_000953,CUST_9,previous_90d,2026-02-26,sent,transfer,CP_CUST_9_010,11805.58,United Arab Emirates,False,False
+TXN_000954,CUST_9,previous_90d,2026-03-02,sent,transfer,CP_CUST_9_011,27215.17,United Arab Emirates,False,False
+TXN_000955,CUST_9,previous_90d,2026-03-06,sent,transfer,CP_CUST_9_012,13866.35,United Arab Emirates,False,False
+TXN_000956,CUST_9,previous_90d,2026-03-09,sent,transfer,CP_CUST_9_013,18788.43,United Arab Emirates,False,False
+TXN_000957,CUST_9,previous_90d,2026-03-13,sent,transfer,CP_CUST_9_014,20982.88,United Arab Emirates,False,False
+TXN_000958,CUST_9,previous_90d,2026-03-17,sent,transfer,CP_CUST_9_015,11208.0,United Arab Emirates,False,False
+TXN_000959,CUST_9,previous_90d,2026-03-20,sent,transfer,CP_SHARED_003,19044.03,United Arab Emirates,False,False
+TXN_000960,CUST_9,previous_90d,2026-03-24,sent,transfer,CP_SHARED_005,17280.44,United Arab Emirates,False,False
+TXN_000961,CUST_9,previous_90d,2026-03-28,sent,transfer,CP_CUST_9_001,22155.91,United Arab Emirates,False,False
+TXN_000962,CUST_9,previous_90d,2026-04-01,sent,transfer,CP_CUST_9_002,30077.8,United Arab Emirates,False,False
+TXN_000963,CUST_9,previous_90d,2026-04-04,sent,transfer,CP_CUST_9_003,8541.71,United Arab Emirates,False,False
+TXN_000964,CUST_9,previous_90d,2026-01-06,received,transfer,SRC_CUST_9_002,39542.66,United Arab Emirates,False,False
+TXN_000965,CUST_9,previous_90d,2026-01-10,received,transfer,SRC_CUST_9_003,25932.93,United Arab Emirates,False,False
+TXN_000966,CUST_9,previous_90d,2026-01-14,received,transfer,SRC_CUST_9_004,18836.99,United Arab Emirates,False,False
+TXN_000967,CUST_9,previous_90d,2026-01-18,received,transfer,SRC_CUST_9_005,36761.77,United Arab Emirates,False,False
+TXN_000968,CUST_9,previous_90d,2026-01-22,received,transfer,SRC_CUST_9_006,35601.0,United Arab Emirates,False,False
+TXN_000969,CUST_9,previous_90d,2026-01-26,received,transfer,SRC_CUST_9_007,12157.11,United Arab Emirates,False,False
+TXN_000970,CUST_9,previous_90d,2026-01-30,received,transfer,SRC_CUST_9_001,21956.77,United Arab Emirates,False,False
+TXN_000971,CUST_9,previous_90d,2026-02-03,received,transfer,SRC_CUST_9_002,11861.02,United Arab Emirates,False,False
+TXN_000972,CUST_9,previous_90d,2026-02-07,received,transfer,SRC_CUST_9_003,29584.93,United Arab Emirates,False,False
+TXN_000973,CUST_9,previous_90d,2026-02-11,received,transfer,SRC_CUST_9_004,13035.48,United Arab Emirates,False,False
+TXN_000974,CUST_9,previous_90d,2026-02-15,received,transfer,SRC_CUST_9_005,31088.89,United Arab Emirates,False,False
+TXN_000975,CUST_9,previous_90d,2026-02-19,received,transfer,SRC_CUST_9_006,24506.29,United Arab Emirates,False,False
+TXN_000976,CUST_9,previous_90d,2026-02-23,received,transfer,SRC_CUST_9_007,32374.11,United Arab Emirates,False,False
+TXN_000977,CUST_9,previous_90d,2026-02-27,received,transfer,SRC_CUST_9_001,30174.68,United Arab Emirates,False,False
+TXN_000978,CUST_9,previous_90d,2026-03-03,received,transfer,SRC_CUST_9_002,12167.25,United Arab Emirates,False,False
+TXN_000979,CUST_9,previous_90d,2026-03-07,received,transfer,SRC_CUST_9_003,13844.84,United Arab Emirates,False,False
+TXN_000980,CUST_9,previous_90d,2026-03-11,received,transfer,SRC_CUST_9_004,20549.0,United Arab Emirates,False,False
+TXN_000981,CUST_9,previous_90d,2026-03-15,received,transfer,SRC_CUST_9_005,30963.03,United Arab Emirates,False,False
+TXN_000982,CUST_9,previous_90d,2026-03-19,received,transfer,SRC_CUST_9_006,32890.93,United Arab Emirates,False,False
+TXN_000983,CUST_9,previous_90d,2026-03-23,received,transfer,SRC_CUST_9_007,25985.87,United Arab Emirates,False,False
+TXN_000984,CUST_9,previous_90d,2026-03-27,received,transfer,SRC_CUST_9_001,31278.47,United Arab Emirates,False,False
+TXN_000985,CUST_9,previous_90d,2026-04-01,received,transfer,SRC_CUST_9_002,30315.42,United Arab Emirates,False,False
+TXN_000986,CUST_9,previous_90d,2026-04-05,received,transfer,SRC_CUST_9_003,40190.56,United Arab Emirates,False,False
+TXN_000987,CUST_10,current_90d,2026-04-03,sent,cash_withdrawal,CASH_WITHDRAWAL,25745.38,United Arab Emirates,False,True
+TXN_000988,CUST_10,current_90d,2026-04-04,sent,cash_withdrawal,CASH_WITHDRAWAL,30312.28,United Arab Emirates,False,True
+TXN_000989,CUST_10,current_90d,2026-04-05,sent,cash_withdrawal,CASH_WITHDRAWAL,15308.85,United Arab Emirates,False,True
+TXN_000990,CUST_10,current_90d,2026-04-06,sent,cash_withdrawal,CASH_WITHDRAWAL,11277.1,United Arab Emirates,False,True
+TXN_000991,CUST_10,current_90d,2026-04-07,sent,cash_withdrawal,CASH_WITHDRAWAL,19918.07,United Arab Emirates,False,True
+TXN_000992,CUST_10,current_90d,2026-04-08,sent,cash_withdrawal,CASH_WITHDRAWAL,13274.76,United Arab Emirates,False,True
+TXN_000993,CUST_10,current_90d,2026-04-09,sent,cash_withdrawal,CASH_WITHDRAWAL,19979.67,United Arab Emirates,False,True
+TXN_000994,CUST_10,current_90d,2026-04-10,sent,cash_withdrawal,CASH_WITHDRAWAL,27168.86,United Arab Emirates,False,True
+TXN_000995,CUST_10,current_90d,2026-04-11,sent,cash_withdrawal,CASH_WITHDRAWAL,14258.84,United Arab Emirates,False,True
+TXN_000996,CUST_10,current_90d,2026-04-12,sent,cash_withdrawal,CASH_WITHDRAWAL,29756.19,United Arab Emirates,False,True
+TXN_000997,CUST_10,current_90d,2026-04-13,sent,transfer,CP_SHARED_001,14458.14,Kenya,True,False
+TXN_000998,CUST_10,current_90d,2026-04-14,sent,transfer,CP_SHARED_004,8686.04,Kenya,True,False
+TXN_000999,CUST_10,current_90d,2026-04-15,sent,transfer,CP_SHARED_006,10552.45,Kenya,True,False
+TXN_001000,CUST_10,current_90d,2026-04-16,sent,transfer,CP_CUST_10_001,11174.82,Kenya,True,False
+TXN_001001,CUST_10,current_90d,2026-04-17,sent,transfer,CP_CUST_10_002,6113.87,Kenya,True,False
+TXN_001002,CUST_10,current_90d,2026-04-18,sent,transfer,CP_CUST_10_003,14361.42,Kenya,True,False
+TXN_001003,CUST_10,current_90d,2026-04-19,sent,transfer,CP_CUST_10_004,14282.52,Kenya,True,False
+TXN_001004,CUST_10,current_90d,2026-04-20,sent,transfer,CP_CUST_10_005,9608.32,Kenya,True,False
+TXN_001005,CUST_10,current_90d,2026-04-21,sent,transfer,CP_CUST_10_006,13432.4,Kenya,True,False
+TXN_001006,CUST_10,current_90d,2026-04-22,sent,transfer,CP_CUST_10_007,12243.9,Kenya,True,False
+TXN_001007,CUST_10,current_90d,2026-04-23,sent,transfer,CP_CUST_10_008,8935.65,Kenya,True,False
+TXN_001008,CUST_10,current_90d,2026-04-25,sent,transfer,CP_CUST_10_009,5614.59,Kenya,True,False
+TXN_001009,CUST_10,current_90d,2026-04-26,sent,transfer,CP_CUST_10_010,6111.17,Kenya,True,False
+TXN_001010,CUST_10,current_90d,2026-04-27,sent,transfer,CP_CUST_10_011,13772.84,Kenya,True,False
+TXN_001011,CUST_10,current_90d,2026-04-28,sent,transfer,CP_CUST_10_012,5669.14,Kenya,True,False
+TXN_001012,CUST_10,current_90d,2026-04-29,sent,transfer,CP_CUST_10_013,4205.35,Kenya,True,False
+TXN_001013,CUST_10,current_90d,2026-04-30,sent,transfer,CP_CUST_10_014,13126.7,Kenya,True,False
+TXN_001014,CUST_10,current_90d,2026-05-01,sent,transfer,CP_CUST_10_015,7329.4,Kenya,True,False
+TXN_001015,CUST_10,current_90d,2026-05-02,sent,transfer,CP_CUST_10_016,12274.06,Kenya,True,False
+TXN_001016,CUST_10,current_90d,2026-05-03,sent,transfer,CP_CUST_10_017,8014.98,Kenya,True,False
+TXN_001017,CUST_10,current_90d,2026-05-04,sent,transfer,CP_CUST_10_018,11656.08,Kenya,True,False
+TXN_001018,CUST_10,current_90d,2026-05-05,sent,transfer,CP_CUST_10_019,8734.31,Kenya,True,False
+TXN_001019,CUST_10,current_90d,2026-05-06,sent,transfer,CP_CUST_10_020,10895.31,Kenya,True,False
+TXN_001020,CUST_10,current_90d,2026-05-07,sent,transfer,CP_CUST_10_021,8380.64,Kenya,True,False
+TXN_001021,CUST_10,current_90d,2026-05-08,sent,transfer,CP_CUST_10_022,12218.49,Kenya,True,False
+TXN_001022,CUST_10,current_90d,2026-05-09,sent,transfer,CP_CUST_10_023,6753.56,Kenya,True,False
+TXN_001023,CUST_10,current_90d,2026-05-10,sent,transfer,CP_CUST_10_024,12451.98,Kenya,True,False
+TXN_001024,CUST_10,current_90d,2026-05-11,sent,transfer,CP_CUST_10_025,5642.59,Kenya,True,False
+TXN_001025,CUST_10,current_90d,2026-05-12,sent,transfer,CP_CUST_10_026,7497.34,Kenya,True,False
+TXN_001026,CUST_10,current_90d,2026-05-13,sent,transfer,CP_SHARED_001,8842.65,Kenya,True,False
+TXN_001027,CUST_10,current_90d,2026-05-14,sent,transfer,CP_SHARED_004,7942.54,Kenya,True,False
+TXN_001028,CUST_10,current_90d,2026-05-15,sent,transfer,CP_SHARED_006,5764.75,Kenya,True,False
+TXN_001029,CUST_10,current_90d,2026-05-17,sent,transfer,CP_CUST_10_001,12551.76,Kenya,True,False
+TXN_001030,CUST_10,current_90d,2026-05-18,sent,transfer,CP_CUST_10_002,14739.69,Kenya,True,False
+TXN_001031,CUST_10,current_90d,2026-05-19,sent,transfer,CP_CUST_10_003,12249.58,Kenya,True,False
+TXN_001032,CUST_10,current_90d,2026-05-20,sent,transfer,CP_CUST_10_004,5819.34,Kenya,True,False
+TXN_001033,CUST_10,current_90d,2026-05-21,sent,transfer,CP_CUST_10_005,8145.73,Kenya,True,False
+TXN_001034,CUST_10,current_90d,2026-05-22,sent,transfer,CP_CUST_10_006,12907.36,Kenya,True,False
+TXN_001035,CUST_10,current_90d,2026-05-23,sent,transfer,CP_CUST_10_007,13784.28,Kenya,True,False
+TXN_001036,CUST_10,current_90d,2026-05-24,sent,transfer,CP_CUST_10_008,4982.95,Kenya,True,False
+TXN_001037,CUST_10,current_90d,2026-05-25,sent,transfer,CP_CUST_10_009,10730.35,Kenya,True,False
+TXN_001038,CUST_10,current_90d,2026-05-26,sent,transfer,CP_CUST_10_010,5991.3,Kenya,True,False
+TXN_001039,CUST_10,current_90d,2026-05-27,sent,transfer,CP_CUST_10_011,14257.2,Kenya,True,False
+TXN_001040,CUST_10,current_90d,2026-05-28,sent,transfer,CP_CUST_10_012,14312.39,Kenya,True,False
+TXN_001041,CUST_10,current_90d,2026-05-29,sent,transfer,CP_CUST_10_013,8580.84,Kenya,True,False
+TXN_001042,CUST_10,current_90d,2026-05-30,sent,transfer,CP_CUST_10_014,11180.72,Kenya,True,False
+TXN_001043,CUST_10,current_90d,2026-05-31,sent,transfer,CP_CUST_10_015,9361.86,Kenya,True,False
+TXN_001044,CUST_10,current_90d,2026-06-01,sent,transfer,CP_CUST_10_016,7355.44,Kenya,True,False
+TXN_001045,CUST_10,current_90d,2026-06-02,sent,transfer,CP_CUST_10_017,14655.1,Kenya,True,False
+TXN_001046,CUST_10,current_90d,2026-06-03,sent,transfer,CP_CUST_10_018,9113.43,United Arab Emirates,False,False
+TXN_001047,CUST_10,current_90d,2026-06-04,sent,transfer,CP_CUST_10_019,8273.2,United Arab Emirates,False,False
+TXN_001048,CUST_10,current_90d,2026-06-05,sent,transfer,CP_CUST_10_020,14811.09,United Arab Emirates,False,False
+TXN_001049,CUST_10,current_90d,2026-06-06,sent,transfer,CP_CUST_10_021,4588.35,United Arab Emirates,False,False
+TXN_001050,CUST_10,current_90d,2026-06-08,sent,transfer,CP_CUST_10_022,4252.11,United Arab Emirates,False,False
+TXN_001051,CUST_10,current_90d,2026-06-09,sent,transfer,CP_CUST_10_023,11446.96,United Arab Emirates,False,False
+TXN_001052,CUST_10,current_90d,2026-06-10,sent,transfer,CP_CUST_10_024,12489.4,United Arab Emirates,False,False
+TXN_001053,CUST_10,current_90d,2026-06-11,sent,transfer,CP_CUST_10_025,7359.81,United Arab Emirates,False,False
+TXN_001054,CUST_10,current_90d,2026-06-12,sent,transfer,CP_CUST_10_026,4202.35,United Arab Emirates,False,False
+TXN_001055,CUST_10,current_90d,2026-06-13,sent,transfer,CP_SHARED_001,14427.44,United Arab Emirates,False,False
+TXN_001056,CUST_10,current_90d,2026-06-14,sent,transfer,CP_SHARED_004,11821.09,United Arab Emirates,False,False
+TXN_001057,CUST_10,current_90d,2026-06-15,sent,transfer,CP_SHARED_006,7813.57,United Arab Emirates,False,False
+TXN_001058,CUST_10,current_90d,2026-06-16,sent,transfer,CP_CUST_10_001,12177.76,United Arab Emirates,False,False
+TXN_001059,CUST_10,current_90d,2026-06-17,sent,transfer,CP_CUST_10_002,14723.52,United Arab Emirates,False,False
+TXN_001060,CUST_10,current_90d,2026-06-18,sent,transfer,CP_CUST_10_003,8637.87,United Arab Emirates,False,False
+TXN_001061,CUST_10,current_90d,2026-06-19,sent,transfer,CP_CUST_10_004,12874.92,United Arab Emirates,False,False
+TXN_001062,CUST_10,current_90d,2026-06-20,sent,transfer,CP_CUST_10_005,10763.36,United Arab Emirates,False,False
+TXN_001063,CUST_10,current_90d,2026-06-21,sent,transfer,CP_CUST_10_006,8326.86,United Arab Emirates,False,False
+TXN_001064,CUST_10,current_90d,2026-06-22,sent,transfer,CP_CUST_10_007,8853.05,United Arab Emirates,False,False
+TXN_001065,CUST_10,current_90d,2026-06-23,sent,transfer,CP_CUST_10_008,12012.45,United Arab Emirates,False,False
+TXN_001066,CUST_10,current_90d,2026-06-24,sent,transfer,CP_CUST_10_009,5991.32,United Arab Emirates,False,False
+TXN_001067,CUST_10,current_90d,2026-06-25,sent,transfer,CP_CUST_10_010,6151.46,United Arab Emirates,False,False
+TXN_001068,CUST_10,current_90d,2026-06-26,sent,transfer,CP_CUST_10_011,10321.67,United Arab Emirates,False,False
+TXN_001069,CUST_10,current_90d,2026-06-27,sent,transfer,CP_CUST_10_012,11494.14,United Arab Emirates,False,False
+TXN_001070,CUST_10,current_90d,2026-06-28,sent,transfer,CP_CUST_10_013,12080.52,United Arab Emirates,False,False
+TXN_001071,CUST_10,current_90d,2026-06-30,sent,transfer,CP_CUST_10_014,14179.08,United Arab Emirates,False,False
+TXN_001072,CUST_10,current_90d,2026-07-01,sent,transfer,CP_CUST_10_015,8459.33,United Arab Emirates,False,False
+TXN_001073,CUST_10,current_90d,2026-04-03,received,transfer,SRC_CUST_10_002,11750.59,United Arab Emirates,False,False
+TXN_001074,CUST_10,current_90d,2026-04-04,received,transfer,SRC_CUST_10_003,7563.89,United Arab Emirates,False,False
+TXN_001075,CUST_10,current_90d,2026-04-06,received,transfer,SRC_CUST_10_004,6327.21,United Arab Emirates,False,False
+TXN_001076,CUST_10,current_90d,2026-04-07,received,transfer,SRC_CUST_10_005,11685.35,United Arab Emirates,False,False
+TXN_001077,CUST_10,current_90d,2026-04-09,received,transfer,SRC_CUST_10_006,19958.66,United Arab Emirates,False,False
+TXN_001078,CUST_10,current_90d,2026-04-10,received,transfer,SRC_CUST_10_007,9322.27,United Arab Emirates,False,False
+TXN_001079,CUST_10,current_90d,2026-04-12,received,transfer,SRC_CUST_10_001,7130.14,United Arab Emirates,False,False
+TXN_001080,CUST_10,current_90d,2026-04-13,received,transfer,SRC_CUST_10_002,14356.69,United Arab Emirates,False,False
+TXN_001081,CUST_10,current_90d,2026-04-14,received,transfer,SRC_CUST_10_003,10352.88,United Arab Emirates,False,False
+TXN_001082,CUST_10,current_90d,2026-04-16,received,transfer,SRC_CUST_10_004,12766.26,United Arab Emirates,False,False
+TXN_001083,CUST_10,current_90d,2026-04-17,received,transfer,SRC_CUST_10_005,21520.51,United Arab Emirates,False,False
+TXN_001084,CUST_10,current_90d,2026-04-19,received,transfer,SRC_CUST_10_006,13908.52,United Arab Emirates,False,False
+TXN_001085,CUST_10,current_90d,2026-04-20,received,transfer,SRC_CUST_10_007,14426.28,United Arab Emirates,False,False
+TXN_001086,CUST_10,current_90d,2026-04-22,received,transfer,SRC_CUST_10_001,14965.85,United Arab Emirates,False,False
+TXN_001087,CUST_10,current_90d,2026-04-23,received,transfer,SRC_CUST_10_002,20220.76,United Arab Emirates,False,False
+TXN_001088,CUST_10,current_90d,2026-04-24,received,transfer,SRC_CUST_10_003,18358.97,United Arab Emirates,False,False
+TXN_001089,CUST_10,current_90d,2026-04-26,received,transfer,SRC_CUST_10_004,20947.35,United Arab Emirates,False,False
+TXN_001090,CUST_10,current_90d,2026-04-27,received,transfer,SRC_CUST_10_005,7242.25,United Arab Emirates,False,False
+TXN_001091,CUST_10,current_90d,2026-04-29,received,transfer,SRC_CUST_10_006,8203.55,United Arab Emirates,False,False
+TXN_001092,CUST_10,current_90d,2026-04-30,received,transfer,SRC_CUST_10_007,16028.5,United Arab Emirates,False,False
+TXN_001093,CUST_10,current_90d,2026-05-02,received,transfer,SRC_CUST_10_001,20258.64,United Arab Emirates,False,False
+TXN_001094,CUST_10,current_90d,2026-05-03,received,transfer,SRC_CUST_10_002,18927.93,United Arab Emirates,False,False
+TXN_001095,CUST_10,current_90d,2026-05-05,received,transfer,SRC_CUST_10_003,21058.75,United Arab Emirates,False,False
+TXN_001096,CUST_10,current_90d,2026-05-06,received,transfer,SRC_CUST_10_004,7661.74,United Arab Emirates,False,False
+TXN_001097,CUST_10,current_90d,2026-05-07,received,transfer,SRC_CUST_10_005,13745.45,United Arab Emirates,False,False
+TXN_001098,CUST_10,current_90d,2026-05-09,received,transfer,SRC_CUST_10_006,19389.89,United Arab Emirates,False,False
+TXN_001099,CUST_10,current_90d,2026-05-10,received,transfer,SRC_CUST_10_007,7299.27,United Arab Emirates,False,False
+TXN_001100,CUST_10,current_90d,2026-05-12,received,transfer,SRC_CUST_10_001,16306.44,United Arab Emirates,False,False
+TXN_001101,CUST_10,current_90d,2026-05-13,received,transfer,SRC_CUST_10_002,6706.74,United Arab Emirates,False,False
+TXN_001102,CUST_10,current_90d,2026-05-15,received,transfer,SRC_CUST_10_003,19450.78,United Arab Emirates,False,False
+TXN_001103,CUST_10,current_90d,2026-05-16,received,transfer,SRC_CUST_10_004,18852.35,United Arab Emirates,False,False
+TXN_001104,CUST_10,current_90d,2026-05-17,received,transfer,SRC_CUST_10_005,13873.46,United Arab Emirates,False,False
+TXN_001105,CUST_10,current_90d,2026-05-19,received,transfer,SRC_CUST_10_006,16321.23,United Arab Emirates,False,False
+TXN_001106,CUST_10,current_90d,2026-05-20,received,transfer,SRC_CUST_10_007,6627.79,United Arab Emirates,False,False
+TXN_001107,CUST_10,current_90d,2026-05-22,received,transfer,SRC_CUST_10_001,7769.47,United Arab Emirates,False,False
+TXN_001108,CUST_10,current_90d,2026-05-23,received,transfer,SRC_CUST_10_002,8603.75,United Arab Emirates,False,False
+TXN_001109,CUST_10,current_90d,2026-05-25,received,transfer,SRC_CUST_10_003,20909.43,United Arab Emirates,False,False
+TXN_001110,CUST_10,current_90d,2026-05-26,received,transfer,SRC_CUST_10_004,19831.96,United Arab Emirates,False,False
+TXN_001111,CUST_10,current_90d,2026-05-27,received,transfer,SRC_CUST_10_005,19197.61,United Arab Emirates,False,False
+TXN_001112,CUST_10,current_90d,2026-05-29,received,transfer,SRC_CUST_10_006,20523.6,United Arab Emirates,False,False
+TXN_001113,CUST_10,current_90d,2026-05-30,received,transfer,SRC_CUST_10_007,20332.06,United Arab Emirates,False,False
+TXN_001114,CUST_10,current_90d,2026-06-01,received,transfer,SRC_CUST_10_001,14702.65,United Arab Emirates,False,False
+TXN_001115,CUST_10,current_90d,2026-06-02,received,transfer,SRC_CUST_10_002,18087.37,United Arab Emirates,False,False
+TXN_001116,CUST_10,current_90d,2026-06-04,received,transfer,SRC_CUST_10_003,20798.52,United Arab Emirates,False,False
+TXN_001117,CUST_10,current_90d,2026-06-05,received,transfer,SRC_CUST_10_004,21534.56,United Arab Emirates,False,False
+TXN_001118,CUST_10,current_90d,2026-06-07,received,transfer,SRC_CUST_10_005,7811.44,United Arab Emirates,False,False
+TXN_001119,CUST_10,current_90d,2026-06-08,received,transfer,SRC_CUST_10_006,16410.91,United Arab Emirates,False,False
+TXN_001120,CUST_10,current_90d,2026-06-09,received,transfer,SRC_CUST_10_007,13209.3,United Arab Emirates,False,False
+TXN_001121,CUST_10,current_90d,2026-06-11,received,transfer,SRC_CUST_10_001,10206.27,United Arab Emirates,False,False
+TXN_001122,CUST_10,current_90d,2026-06-12,received,transfer,SRC_CUST_10_002,9851.53,United Arab Emirates,False,False
+TXN_001123,CUST_10,current_90d,2026-06-14,received,transfer,SRC_CUST_10_003,16431.06,United Arab Emirates,False,False
+TXN_001124,CUST_10,current_90d,2026-06-15,received,transfer,SRC_CUST_10_004,15356.28,United Arab Emirates,False,False
+TXN_001125,CUST_10,current_90d,2026-06-17,received,transfer,SRC_CUST_10_005,6430.79,United Arab Emirates,False,False
+TXN_001126,CUST_10,current_90d,2026-06-18,received,transfer,SRC_CUST_10_006,19034.35,United Arab Emirates,False,False
+TXN_001127,CUST_10,current_90d,2026-06-19,received,transfer,SRC_CUST_10_007,12848.59,United Arab Emirates,False,False
+TXN_001128,CUST_10,current_90d,2026-06-21,received,transfer,SRC_CUST_10_001,7167.05,United Arab Emirates,False,False
+TXN_001129,CUST_10,current_90d,2026-06-22,received,transfer,SRC_CUST_10_002,16453.61,United Arab Emirates,False,False
+TXN_001130,CUST_10,current_90d,2026-06-24,received,transfer,SRC_CUST_10_003,11744.86,United Arab Emirates,False,False
+TXN_001131,CUST_10,current_90d,2026-06-25,received,transfer,SRC_CUST_10_004,18811.59,United Arab Emirates,False,False
+TXN_001132,CUST_10,current_90d,2026-06-27,received,transfer,SRC_CUST_10_005,14862.02,United Arab Emirates,False,False
+TXN_001133,CUST_10,current_90d,2026-06-28,received,transfer,SRC_CUST_10_006,7383.99,United Arab Emirates,False,False
+TXN_001134,CUST_10,current_90d,2026-06-30,received,transfer,SRC_CUST_10_007,19137.81,United Arab Emirates,False,False
+TXN_001135,CUST_10,current_90d,2026-07-01,received,transfer,SRC_CUST_10_001,12040.63,United Arab Emirates,False,False
+TXN_001136,CUST_10,previous_90d,2026-01-03,sent,cash_withdrawal,CASH_WITHDRAWAL,10415.8,United Arab Emirates,False,True
+TXN_001137,CUST_10,previous_90d,2026-01-05,sent,cash_withdrawal,CASH_WITHDRAWAL,11579.11,United Arab Emirates,False,True
+TXN_001138,CUST_10,previous_90d,2026-01-07,sent,cash_withdrawal,CASH_WITHDRAWAL,19865.45,United Arab Emirates,False,True
+TXN_001139,CUST_10,previous_90d,2026-01-09,sent,cash_withdrawal,CASH_WITHDRAWAL,18233.4,United Arab Emirates,False,True
+TXN_001140,CUST_10,previous_90d,2026-01-10,sent,cash_withdrawal,CASH_WITHDRAWAL,13676.05,United Arab Emirates,False,True
+TXN_001141,CUST_10,previous_90d,2026-01-12,sent,cash_withdrawal,CASH_WITHDRAWAL,25590.19,United Arab Emirates,False,True
+TXN_001142,CUST_10,previous_90d,2026-01-14,sent,transfer,CP_SHARED_001,4619.36,Kenya,True,False
+TXN_001143,CUST_10,previous_90d,2026-01-16,sent,transfer,CP_SHARED_004,11383.5,Kenya,True,False
+TXN_001144,CUST_10,previous_90d,2026-01-18,sent,transfer,CP_SHARED_006,8426.76,Kenya,True,False
+TXN_001145,CUST_10,previous_90d,2026-01-19,sent,transfer,CP_CUST_10_001,5328.65,Kenya,True,False
+TXN_001146,CUST_10,previous_90d,2026-01-21,sent,transfer,CP_CUST_10_002,11084.31,Kenya,True,False
+TXN_001147,CUST_10,previous_90d,2026-01-23,sent,transfer,CP_CUST_10_003,10547.8,Kenya,True,False
+TXN_001148,CUST_10,previous_90d,2026-01-25,sent,transfer,CP_CUST_10_004,6505.69,Kenya,True,False
+TXN_001149,CUST_10,previous_90d,2026-01-26,sent,transfer,CP_CUST_10_005,6407.82,Kenya,True,False
+TXN_001150,CUST_10,previous_90d,2026-01-28,sent,transfer,CP_CUST_10_006,5298.12,Kenya,True,False
+TXN_001151,CUST_10,previous_90d,2026-01-30,sent,transfer,CP_CUST_10_007,8704.87,Kenya,True,False
+TXN_001152,CUST_10,previous_90d,2026-02-01,sent,transfer,CP_CUST_10_008,7497.43,Kenya,True,False
+TXN_001153,CUST_10,previous_90d,2026-02-03,sent,transfer,CP_CUST_10_009,8232.81,Kenya,True,False
+TXN_001154,CUST_10,previous_90d,2026-02-04,sent,transfer,CP_CUST_10_010,9497.9,Kenya,True,False
+TXN_001155,CUST_10,previous_90d,2026-02-06,sent,transfer,CP_CUST_10_011,6174.54,Kenya,True,False
+TXN_001156,CUST_10,previous_90d,2026-02-08,sent,transfer,CP_CUST_10_012,7080.86,Kenya,True,False
+TXN_001157,CUST_10,previous_90d,2026-02-10,sent,transfer,CP_CUST_10_013,6612.64,Kenya,True,False
+TXN_001158,CUST_10,previous_90d,2026-02-11,sent,transfer,CP_CUST_10_014,11718.0,Kenya,True,False
+TXN_001159,CUST_10,previous_90d,2026-02-13,sent,transfer,CP_CUST_10_015,3480.36,Kenya,True,False
+TXN_001160,CUST_10,previous_90d,2026-02-15,sent,transfer,CP_CUST_10_016,11034.32,Kenya,True,False
+TXN_001161,CUST_10,previous_90d,2026-02-17,sent,transfer,CP_CUST_10_017,6184.11,Kenya,True,False
+TXN_001162,CUST_10,previous_90d,2026-02-19,sent,transfer,CP_CUST_10_018,6757.13,Kenya,True,False
+TXN_001163,CUST_10,previous_90d,2026-02-20,sent,transfer,CP_CUST_10_019,5639.71,Kenya,True,False
+TXN_001164,CUST_10,previous_90d,2026-02-22,sent,transfer,CP_CUST_10_020,4305.79,Kenya,True,False
+TXN_001165,CUST_10,previous_90d,2026-02-24,sent,transfer,CP_CUST_10_021,5034.25,Kenya,True,False
+TXN_001166,CUST_10,previous_90d,2026-02-26,sent,transfer,CP_CUST_10_022,9073.97,Kenya,True,False
+TXN_001167,CUST_10,previous_90d,2026-02-27,sent,transfer,CP_CUST_10_023,4999.51,Kenya,True,False
+TXN_001168,CUST_10,previous_90d,2026-03-01,sent,transfer,CP_CUST_10_024,8075.23,Kenya,True,False
+TXN_001169,CUST_10,previous_90d,2026-03-03,sent,transfer,CP_CUST_10_025,11911.42,Kenya,True,False
+TXN_001170,CUST_10,previous_90d,2026-03-05,sent,transfer,CP_CUST_10_026,8538.75,Kenya,True,False
+TXN_001171,CUST_10,previous_90d,2026-03-07,sent,transfer,CP_SHARED_001,8600.41,Kenya,True,False
+TXN_001172,CUST_10,previous_90d,2026-03-08,sent,transfer,CP_SHARED_004,11746.79,Kenya,True,False
+TXN_001173,CUST_10,previous_90d,2026-03-10,sent,transfer,CP_SHARED_006,11020.39,United Arab Emirates,False,False
+TXN_001174,CUST_10,previous_90d,2026-03-12,sent,transfer,CP_CUST_10_001,3926.93,United Arab Emirates,False,False
+TXN_001175,CUST_10,previous_90d,2026-03-14,sent,transfer,CP_CUST_10_002,10926.74,United Arab Emirates,False,False
+TXN_001176,CUST_10,previous_90d,2026-03-15,sent,transfer,CP_CUST_10_003,5907.23,United Arab Emirates,False,False
+TXN_001177,CUST_10,previous_90d,2026-03-17,sent,transfer,CP_CUST_10_004,6065.05,United Arab Emirates,False,False
+TXN_001178,CUST_10,previous_90d,2026-03-19,sent,transfer,CP_CUST_10_005,6448.55,United Arab Emirates,False,False
+TXN_001179,CUST_10,previous_90d,2026-03-21,sent,transfer,CP_CUST_10_006,11770.98,United Arab Emirates,False,False
+TXN_001180,CUST_10,previous_90d,2026-03-23,sent,transfer,CP_CUST_10_007,8050.41,United Arab Emirates,False,False
+TXN_001181,CUST_10,previous_90d,2026-03-24,sent,transfer,CP_CUST_10_008,11226.92,United Arab Emirates,False,False
+TXN_001182,CUST_10,previous_90d,2026-03-26,sent,transfer,CP_CUST_10_009,10579.32,United Arab Emirates,False,False
+TXN_001183,CUST_10,previous_90d,2026-03-28,sent,transfer,CP_CUST_10_010,9448.78,United Arab Emirates,False,False
+TXN_001184,CUST_10,previous_90d,2026-03-30,sent,transfer,CP_CUST_10_011,5956.58,United Arab Emirates,False,False
+TXN_001185,CUST_10,previous_90d,2026-04-01,sent,transfer,CP_CUST_10_012,10784.3,United Arab Emirates,False,False
+TXN_001186,CUST_10,previous_90d,2026-04-02,sent,transfer,CP_CUST_10_013,10265.01,United Arab Emirates,False,False
+TXN_001187,CUST_10,previous_90d,2026-01-04,received,transfer,SRC_CUST_10_002,15375.39,United Arab Emirates,False,False
+TXN_001188,CUST_10,previous_90d,2026-01-06,received,transfer,SRC_CUST_10_003,9701.31,United Arab Emirates,False,False
+TXN_001189,CUST_10,previous_90d,2026-01-09,received,transfer,SRC_CUST_10_004,15423.49,United Arab Emirates,False,False
+TXN_001190,CUST_10,previous_90d,2026-01-11,received,transfer,SRC_CUST_10_005,12548.89,United Arab Emirates,False,False
+TXN_001191,CUST_10,previous_90d,2026-01-14,received,transfer,SRC_CUST_10_006,19727.51,United Arab Emirates,False,False
+TXN_001192,CUST_10,previous_90d,2026-01-16,received,transfer,SRC_CUST_10_007,6127.45,United Arab Emirates,False,False
+TXN_001193,CUST_10,previous_90d,2026-01-19,received,transfer,SRC_CUST_10_001,6965.67,United Arab Emirates,False,False
+TXN_001194,CUST_10,previous_90d,2026-01-21,received,transfer,SRC_CUST_10_002,6472.8,United Arab Emirates,False,False
+TXN_001195,CUST_10,previous_90d,2026-01-24,received,transfer,SRC_CUST_10_003,15575.75,United Arab Emirates,False,False
+TXN_001196,CUST_10,previous_90d,2026-01-26,received,transfer,SRC_CUST_10_004,13468.74,United Arab Emirates,False,False
+TXN_001197,CUST_10,previous_90d,2026-01-29,received,transfer,SRC_CUST_10_005,13553.93,United Arab Emirates,False,False
+TXN_001198,CUST_10,previous_90d,2026-01-31,received,transfer,SRC_CUST_10_006,6375.9,United Arab Emirates,False,False
+TXN_001199,CUST_10,previous_90d,2026-02-03,received,transfer,SRC_CUST_10_007,9224.13,United Arab Emirates,False,False
+TXN_001200,CUST_10,previous_90d,2026-02-05,received,transfer,SRC_CUST_10_001,15252.29,United Arab Emirates,False,False
+TXN_001201,CUST_10,previous_90d,2026-02-08,received,transfer,SRC_CUST_10_002,6390.28,United Arab Emirates,False,False
+TXN_001202,CUST_10,previous_90d,2026-02-10,received,transfer,SRC_CUST_10_003,15596.33,United Arab Emirates,False,False
+TXN_001203,CUST_10,previous_90d,2026-02-13,received,transfer,SRC_CUST_10_004,9742.18,United Arab Emirates,False,False
+TXN_001204,CUST_10,previous_90d,2026-02-15,received,transfer,SRC_CUST_10_005,12055.07,United Arab Emirates,False,False
+TXN_001205,CUST_10,previous_90d,2026-02-17,received,transfer,SRC_CUST_10_006,9149.31,United Arab Emirates,False,False
+TXN_001206,CUST_10,previous_90d,2026-02-20,received,transfer,SRC_CUST_10_007,18387.12,United Arab Emirates,False,False
+TXN_001207,CUST_10,previous_90d,2026-02-22,received,transfer,SRC_CUST_10_001,10363.14,United Arab Emirates,False,False
+TXN_001208,CUST_10,previous_90d,2026-02-25,received,transfer,SRC_CUST_10_002,10571.66,United Arab Emirates,False,False
+TXN_001209,CUST_10,previous_90d,2026-02-27,received,transfer,SRC_CUST_10_003,9677.29,United Arab Emirates,False,False
+TXN_001210,CUST_10,previous_90d,2026-03-02,received,transfer,SRC_CUST_10_004,10737.96,United Arab Emirates,False,False
+TXN_001211,CUST_10,previous_90d,2026-03-04,received,transfer,SRC_CUST_10_005,9798.97,United Arab Emirates,False,False
+TXN_001212,CUST_10,previous_90d,2026-03-07,received,transfer,SRC_CUST_10_006,5824.03,United Arab Emirates,False,False
+TXN_001213,CUST_10,previous_90d,2026-03-09,received,transfer,SRC_CUST_10_007,10415.29,United Arab Emirates,False,False
+TXN_001214,CUST_10,previous_90d,2026-03-12,received,transfer,SRC_CUST_10_001,14857.82,United Arab Emirates,False,False
+TXN_001215,CUST_10,previous_90d,2026-03-14,received,transfer,SRC_CUST_10_002,12037.07,United Arab Emirates,False,False
+TXN_001216,CUST_10,previous_90d,2026-03-17,received,transfer,SRC_CUST_10_003,7859.94,United Arab Emirates,False,False
+TXN_001217,CUST_10,previous_90d,2026-03-19,received,transfer,SRC_CUST_10_004,12186.58,United Arab Emirates,False,False
+TXN_001218,CUST_10,previous_90d,2026-03-22,received,transfer,SRC_CUST_10_005,17386.66,United Arab Emirates,False,False
+TXN_001219,CUST_10,previous_90d,2026-03-24,received,transfer,SRC_CUST_10_006,14271.4,United Arab Emirates,False,False
+TXN_001220,CUST_10,previous_90d,2026-03-27,received,transfer,SRC_CUST_10_007,11686.22,United Arab Emirates,False,False
+TXN_001221,CUST_10,previous_90d,2026-03-29,received,transfer,SRC_CUST_10_001,8755.66,United Arab Emirates,False,False
+TXN_001222,CUST_10,previous_90d,2026-04-01,received,transfer,SRC_CUST_10_002,17150.76,United Arab Emirates,False,False
+TXN_001223,CUST_10,previous_90d,2026-04-03,received,transfer,SRC_CUST_10_003,11786.01,United Arab Emirates,False,False

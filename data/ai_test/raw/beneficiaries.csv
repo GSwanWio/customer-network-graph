@@ -1,0 +1,143 @@
+beneficiary_id,customer_id,counterparty_id,beneficiary_created_date,beneficiary_country,beneficiary_type,active_90d
+BEN_CUST_1_001,CUST_1,CP_SHARED_001,2026-06-24,United Arab Emirates,business,True
+BEN_CUST_1_002,CUST_1,CP_SHARED_002,2026-06-18,United Arab Emirates,business,True
+BEN_CUST_1_003,CUST_1,CP_SHARED_003,2026-06-12,United Arab Emirates,business,True
+BEN_CUST_1_004,CUST_1,CP_SHARED_004,2026-04-29,United Arab Emirates,business,True
+BEN_CUST_1_005,CUST_1,CP_CUST_1_001,2026-05-06,United Arab Emirates,business,True
+BEN_CUST_1_006,CUST_1,CP_CUST_1_002,2026-05-13,United Arab Emirates,business,True
+BEN_CUST_1_007,CUST_1,CP_CUST_1_003,2026-05-19,United Arab Emirates,business,True
+BEN_CUST_1_008,CUST_1,CP_CUST_1_004,2026-05-26,United Arab Emirates,business,True
+BEN_CUST_1_009,CUST_1,CP_CUST_1_005,2026-06-02,United Arab Emirates,business,True
+BEN_CUST_1_010,CUST_1,CP_CUST_1_006,2026-06-09,United Arab Emirates,business,False
+BEN_CUST_1_011,CUST_1,CP_CUST_1_007,2026-06-16,United Arab Emirates,business,False
+BEN_CUST_1_012,CUST_1,CP_CUST_1_008,2026-06-23,United Arab Emirates,business,False
+BEN_CUST_1_013,CUST_1,CP_CUST_1_009,2026-06-30,United Arab Emirates,business,False
+BEN_CUST_1_014,CUST_1,CP_CUST_1_010,2026-07-06,United Arab Emirates,business,False
+BEN_CUST_2_001,CUST_2,CP_SHARED_002,2026-06-24,India,personal,True
+BEN_CUST_2_002,CUST_2,CP_CUST_2_001,2026-06-18,India,personal,True
+BEN_CUST_2_003,CUST_2,CP_CUST_2_002,2026-06-12,India,personal,True
+BEN_CUST_2_004,CUST_2,CP_CUST_2_003,2026-06-12,India,personal,True
+BEN_CUST_2_005,CUST_2,CP_CUST_2_004,2026-06-30,India,personal,False
+BEN_CUST_2_006,CUST_2,CP_CUST_2_005,2026-07-17,India,personal,False
+BEN_CUST_3_001,CUST_3,CP_SHARED_001,2026-06-24,Pakistan,business,True
+BEN_CUST_3_002,CUST_3,CP_SHARED_005,2026-06-18,Pakistan,business,True
+BEN_CUST_3_003,CUST_3,CP_CUST_3_001,2026-06-12,Pakistan,business,True
+BEN_CUST_3_004,CUST_3,CP_CUST_3_002,2026-04-19,Pakistan,business,True
+BEN_CUST_3_005,CUST_3,CP_CUST_3_003,2026-04-24,Pakistan,business,True
+BEN_CUST_3_006,CUST_3,CP_CUST_3_004,2026-04-28,Pakistan,business,True
+BEN_CUST_3_007,CUST_3,CP_CUST_3_005,2026-05-03,Pakistan,business,True
+BEN_CUST_3_008,CUST_3,CP_CUST_3_006,2026-05-07,Pakistan,business,True
+BEN_CUST_3_009,CUST_3,CP_CUST_3_007,2026-05-12,Pakistan,business,True
+BEN_CUST_3_010,CUST_3,CP_CUST_3_008,2026-05-16,Pakistan,business,True
+BEN_CUST_3_011,CUST_3,CP_CUST_3_009,2026-05-20,Pakistan,business,True
+BEN_CUST_3_012,CUST_3,CP_CUST_3_010,2026-05-25,Pakistan,business,True
+BEN_CUST_3_013,CUST_3,CP_CUST_3_011,2026-05-29,Pakistan,business,True
+BEN_CUST_3_014,CUST_3,CP_CUST_3_012,2026-06-03,Pakistan,business,True
+BEN_CUST_3_015,CUST_3,CP_CUST_3_013,2026-06-07,Pakistan,business,True
+BEN_CUST_3_016,CUST_3,CP_CUST_3_014,2026-06-12,Pakistan,business,True
+BEN_CUST_3_017,CUST_3,CP_CUST_3_015,2026-06-16,Pakistan,business,False
+BEN_CUST_3_018,CUST_3,CP_CUST_3_016,2026-06-21,Pakistan,business,False
+BEN_CUST_3_019,CUST_3,CP_CUST_3_017,2026-06-25,Pakistan,business,False
+BEN_CUST_3_020,CUST_3,CP_CUST_3_018,2026-06-30,Pakistan,business,False
+BEN_CUST_3_021,CUST_3,CP_CUST_3_019,2026-07-04,Pakistan,business,False
+BEN_CUST_4_001,CUST_4,CP_SHARED_002,2026-06-24,United Arab Emirates,personal,True
+BEN_CUST_4_002,CUST_4,CP_CUST_4_001,2026-06-18,United Arab Emirates,personal,True
+BEN_CUST_4_003,CUST_4,CP_CUST_4_002,2026-06-12,United Arab Emirates,personal,True
+BEN_CUST_4_004,CUST_4,CP_CUST_4_003,2026-06-30,United Arab Emirates,personal,False
+BEN_CUST_4_005,CUST_4,CP_CUST_4_004,2026-07-22,United Arab Emirates,personal,False
+BEN_CUST_5_001,CUST_5,CP_SHARED_001,2026-06-24,Nigeria,business,True
+BEN_CUST_5_002,CUST_5,CP_SHARED_004,2026-06-18,Nigeria,business,True
+BEN_CUST_5_003,CUST_5,CP_SHARED_006,2026-06-12,Nigeria,business,True
+BEN_CUST_5_004,CUST_5,CP_CUST_5_001,2026-04-12,Nigeria,business,True
+BEN_CUST_5_005,CUST_5,CP_CUST_5_002,2026-04-15,Nigeria,business,True
+BEN_CUST_5_006,CUST_5,CP_CUST_5_003,2026-04-18,Nigeria,business,True
+BEN_CUST_5_007,CUST_5,CP_CUST_5_004,2026-04-20,Nigeria,business,True
+BEN_CUST_5_008,CUST_5,CP_CUST_5_005,2026-04-23,Nigeria,business,True
+BEN_CUST_5_009,CUST_5,CP_CUST_5_006,2026-04-26,Nigeria,business,True
+BEN_CUST_5_010,CUST_5,CP_CUST_5_007,2026-04-28,Nigeria,business,True
+BEN_CUST_5_011,CUST_5,CP_CUST_5_008,2026-05-01,Nigeria,business,True
+BEN_CUST_5_012,CUST_5,CP_CUST_5_009,2026-05-04,Nigeria,business,True
+BEN_CUST_5_013,CUST_5,CP_CUST_5_010,2026-05-07,Nigeria,business,True
+BEN_CUST_5_014,CUST_5,CP_CUST_5_011,2026-05-09,Nigeria,business,True
+BEN_CUST_5_015,CUST_5,CP_CUST_5_012,2026-05-12,Nigeria,business,True
+BEN_CUST_5_016,CUST_5,CP_CUST_5_013,2026-05-15,Nigeria,business,True
+BEN_CUST_5_017,CUST_5,CP_CUST_5_014,2026-05-17,Nigeria,business,True
+BEN_CUST_5_018,CUST_5,CP_CUST_5_015,2026-05-20,Nigeria,business,True
+BEN_CUST_5_019,CUST_5,CP_CUST_5_016,2026-05-23,Nigeria,business,True
+BEN_CUST_5_020,CUST_5,CP_CUST_5_017,2026-05-25,Nigeria,business,True
+BEN_CUST_5_021,CUST_5,CP_CUST_5_018,2026-05-28,Nigeria,business,True
+BEN_CUST_5_022,CUST_5,CP_CUST_5_019,2026-05-31,Nigeria,business,True
+BEN_CUST_5_023,CUST_5,CP_CUST_5_020,2026-06-03,Nigeria,business,True
+BEN_CUST_5_024,CUST_5,CP_CUST_5_021,2026-06-05,Nigeria,business,True
+BEN_CUST_5_025,CUST_5,CP_CUST_5_022,2026-06-08,Nigeria,business,False
+BEN_CUST_5_026,CUST_5,CP_CUST_5_023,2026-06-11,Nigeria,business,False
+BEN_CUST_5_027,CUST_5,CP_CUST_5_024,2026-06-13,Nigeria,business,False
+BEN_CUST_5_028,CUST_5,CP_CUST_5_025,2026-06-16,Nigeria,business,False
+BEN_CUST_5_029,CUST_5,CP_CUST_5_026,2026-06-19,Nigeria,business,False
+BEN_CUST_5_030,CUST_5,CP_CUST_5_027,2026-06-21,Nigeria,business,False
+BEN_CUST_5_031,CUST_5,CP_CUST_5_028,2026-06-24,Nigeria,business,False
+BEN_CUST_5_032,CUST_5,CP_CUST_5_029,2026-06-27,Nigeria,business,False
+BEN_CUST_5_033,CUST_5,CP_CUST_5_030,2026-06-30,Nigeria,business,False
+BEN_CUST_5_034,CUST_5,CP_CUST_5_031,2026-07-02,Nigeria,business,False
+BEN_CUST_6_001,CUST_6,CP_CUST_6_001,2026-06-24,United Arab Emirates,personal,True
+BEN_CUST_6_002,CUST_6,CP_CUST_6_002,2026-06-18,United Arab Emirates,personal,True
+BEN_CUST_6_003,CUST_6,CP_CUST_6_003,2026-06-12,United Arab Emirates,personal,False
+BEN_CUST_7_001,CUST_7,CP_SHARED_001,2026-06-24,Egypt,personal,True
+BEN_CUST_7_002,CUST_7,CP_CUST_7_001,2026-06-18,Egypt,personal,True
+BEN_CUST_7_003,CUST_7,CP_CUST_7_002,2026-06-12,Egypt,personal,True
+BEN_CUST_7_004,CUST_7,CP_CUST_7_003,2026-05-07,Egypt,personal,True
+BEN_CUST_7_005,CUST_7,CP_CUST_7_004,2026-05-16,Egypt,personal,True
+BEN_CUST_7_006,CUST_7,CP_CUST_7_005,2026-05-25,Egypt,personal,True
+BEN_CUST_7_007,CUST_7,CP_CUST_7_006,2026-06-03,Egypt,personal,True
+BEN_CUST_7_008,CUST_7,CP_CUST_7_007,2026-06-12,Egypt,personal,True
+BEN_CUST_7_009,CUST_7,CP_CUST_7_008,2026-06-21,Egypt,personal,False
+BEN_CUST_7_010,CUST_7,CP_CUST_7_009,2026-06-30,Egypt,personal,False
+BEN_CUST_7_011,CUST_7,CP_CUST_7_010,2026-07-08,Egypt,personal,False
+BEN_CUST_8_001,CUST_8,CP_CUST_8_001,2026-06-24,India,personal,True
+BEN_CUST_8_002,CUST_8,CP_CUST_8_002,2026-06-18,India,personal,False
+BEN_CUST_9_001,CUST_9,CP_SHARED_003,2026-06-24,United Arab Emirates,business,True
+BEN_CUST_9_002,CUST_9,CP_SHARED_005,2026-06-18,United Arab Emirates,business,True
+BEN_CUST_9_003,CUST_9,CP_CUST_9_001,2026-06-12,United Arab Emirates,business,True
+BEN_CUST_9_004,CUST_9,CP_CUST_9_002,2026-04-24,United Arab Emirates,business,True
+BEN_CUST_9_005,CUST_9,CP_CUST_9_003,2026-04-29,United Arab Emirates,business,True
+BEN_CUST_9_006,CUST_9,CP_CUST_9_004,2026-05-05,United Arab Emirates,business,True
+BEN_CUST_9_007,CUST_9,CP_CUST_9_005,2026-05-10,United Arab Emirates,business,True
+BEN_CUST_9_008,CUST_9,CP_CUST_9_006,2026-05-16,United Arab Emirates,business,True
+BEN_CUST_9_009,CUST_9,CP_CUST_9_007,2026-05-22,United Arab Emirates,business,True
+BEN_CUST_9_010,CUST_9,CP_CUST_9_008,2026-05-27,United Arab Emirates,business,True
+BEN_CUST_9_011,CUST_9,CP_CUST_9_009,2026-06-02,United Arab Emirates,business,True
+BEN_CUST_9_012,CUST_9,CP_CUST_9_010,2026-06-07,United Arab Emirates,business,True
+BEN_CUST_9_013,CUST_9,CP_CUST_9_011,2026-06-13,United Arab Emirates,business,False
+BEN_CUST_9_014,CUST_9,CP_CUST_9_012,2026-06-18,United Arab Emirates,business,False
+BEN_CUST_9_015,CUST_9,CP_CUST_9_013,2026-06-24,United Arab Emirates,business,False
+BEN_CUST_9_016,CUST_9,CP_CUST_9_014,2026-06-30,United Arab Emirates,business,False
+BEN_CUST_9_017,CUST_9,CP_CUST_9_015,2026-07-05,United Arab Emirates,business,False
+BEN_CUST_10_001,CUST_10,CP_SHARED_001,2026-06-24,Kenya,business,True
+BEN_CUST_10_002,CUST_10,CP_SHARED_004,2026-06-18,Kenya,business,True
+BEN_CUST_10_003,CUST_10,CP_SHARED_006,2026-06-12,Kenya,business,True
+BEN_CUST_10_004,CUST_10,CP_CUST_10_001,2026-04-14,Kenya,business,True
+BEN_CUST_10_005,CUST_10,CP_CUST_10_002,2026-04-17,Kenya,business,True
+BEN_CUST_10_006,CUST_10,CP_CUST_10_003,2026-04-21,Kenya,business,True
+BEN_CUST_10_007,CUST_10,CP_CUST_10_004,2026-04-24,Kenya,business,True
+BEN_CUST_10_008,CUST_10,CP_CUST_10_005,2026-04-27,Kenya,business,True
+BEN_CUST_10_009,CUST_10,CP_CUST_10_006,2026-04-30,Kenya,business,True
+BEN_CUST_10_010,CUST_10,CP_CUST_10_007,2026-05-03,Kenya,business,True
+BEN_CUST_10_011,CUST_10,CP_CUST_10_008,2026-05-06,Kenya,business,True
+BEN_CUST_10_012,CUST_10,CP_CUST_10_009,2026-05-10,Kenya,business,True
+BEN_CUST_10_013,CUST_10,CP_CUST_10_010,2026-05-13,Kenya,business,True
+BEN_CUST_10_014,CUST_10,CP_CUST_10_011,2026-05-16,Kenya,business,True
+BEN_CUST_10_015,CUST_10,CP_CUST_10_012,2026-05-19,Kenya,business,True
+BEN_CUST_10_016,CUST_10,CP_CUST_10_013,2026-05-22,Kenya,business,True
+BEN_CUST_10_017,CUST_10,CP_CUST_10_014,2026-05-26,Kenya,business,True
+BEN_CUST_10_018,CUST_10,CP_CUST_10_015,2026-05-29,Kenya,business,True
+BEN_CUST_10_019,CUST_10,CP_CUST_10_016,2026-06-01,Kenya,business,True
+BEN_CUST_10_020,CUST_10,CP_CUST_10_017,2026-06-04,Kenya,business,True
+BEN_CUST_10_021,CUST_10,CP_CUST_10_018,2026-06-07,Kenya,business,True
+BEN_CUST_10_022,CUST_10,CP_CUST_10_019,2026-06-10,Kenya,business,False
+BEN_CUST_10_023,CUST_10,CP_CUST_10_020,2026-06-14,Kenya,business,False
+BEN_CUST_10_024,CUST_10,CP_CUST_10_021,2026-06-17,Kenya,business,False
+BEN_CUST_10_025,CUST_10,CP_CUST_10_022,2026-06-20,Kenya,business,False
+BEN_CUST_10_026,CUST_10,CP_CUST_10_023,2026-06-23,Kenya,business,False
+BEN_CUST_10_027,CUST_10,CP_CUST_10_024,2026-06-26,Kenya,business,False
+BEN_CUST_10_028,CUST_10,CP_CUST_10_025,2026-06-30,Kenya,business,False
+BEN_CUST_10_029,CUST_10,CP_CUST_10_026,2026-07-03,Kenya,business,False
